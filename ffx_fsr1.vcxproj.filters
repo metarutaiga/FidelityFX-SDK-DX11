@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="gpu">
+      <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gpu\fsr1">
+      <UniqueIdentifier>{83de9604-b57f-4f78-8a3a-0e8d3b748a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host">
+      <UniqueIdentifier>{57149e49-524a-4f7c-88cb-7f21c050a28b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends">
+      <UniqueIdentifier>{92ebecfe-210a-4b62-8211-4eb92d024d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends\dx12">
+      <UniqueIdentifier>{b0374e72-3e64-4920-ae2c-572951acff12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends\blob_accessors">
+      <UniqueIdentifier>{31f5323f-92f3-44d2-bda9-7d29933ffffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends\dx11">
+      <UniqueIdentifier>{a3b073fe-158e-49cd-8e86-ebc992f01d5d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gpu\ffx_common_types.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\ffx_core.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\ffx_core_gpu_common.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\ffx_core_gpu_common_half.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\ffx_core_hlsl.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\ffx_core_portability.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\fsr1\ffx_fsr1.h">
+      <Filter>gpu\fsr1</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\fsr1\ffx_fsr1_callbacks_glsl.h">
+      <Filter>gpu\fsr1</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\fsr1\ffx_fsr1_callbacks_hlsl.h">
+      <Filter>gpu\fsr1</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\fsr1\ffx_fsr1_easu.h">
+      <Filter>gpu\fsr1</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\fsr1\ffx_fsr1_rcas.h">
+      <Filter>gpu\fsr1</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\fsr1\ffx_fsr1_resources.h">
+      <Filter>gpu\fsr1</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ffx_assert.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ffx_error.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ffx_fsr1.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ffx_fsr1_private.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ffx_interface.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ffx_object_management.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ffx_types.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ffx_util.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\backends\dx12\ffx_dx12.h">
+      <Filter>host\backends\dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="host\backends\ffx_shader_blobs.h">
+      <Filter>host\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="host\backends\blob_accessors\ffx_fsr1_shaderblobs.h">
+      <Filter>host\backends\blob_accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="host\backends\dx11\ffx_dx11.h">
+      <Filter>host\backends\dx11</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="host\ffx_assert.cpp">
+      <Filter>host</Filter>
+    </ClCompile>
+    <ClCompile Include="host\ffx_fsr1.cpp">
+      <Filter>host</Filter>
+    </ClCompile>
+    <ClCompile Include="host\ffx_object_management.cpp">
+      <Filter>host</Filter>
+    </ClCompile>
+    <ClCompile Include="host\backends\dx12\ffx_dx12.cpp">
+      <Filter>host\backends\dx12</Filter>
+    </ClCompile>
+    <ClCompile Include="host\backends\ffx_shader_blobs.cpp">
+      <Filter>host\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="host\backends\blob_accessors\ffx_fsr1_shaderblobs.cpp">
+      <Filter>host\backends\blob_accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp">
+      <Filter>host\backends\dx11</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="host\backends\ffx_fsr1_easu_pass.hlsl">
+      <Filter>host\backends</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\ffx_fsr1_rcas_pass.hlsl">
+      <Filter>host\backends</Filter>
+    </FxCompile>
+    <FxCompile Include="ffx_fsr1_easu_pass_16bit_permutations.hlsl" />
+    <FxCompile Include="ffx_fsr1_easu_pass_permutations.hlsl" />
+    <FxCompile Include="ffx_fsr1_rcas_pass_16bit_permutations.hlsl" />
+    <FxCompile Include="ffx_fsr1_rcas_pass_permutations.hlsl" />
+  </ItemGroup>
+</Project>
