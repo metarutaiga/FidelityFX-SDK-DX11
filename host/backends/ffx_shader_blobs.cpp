@@ -24,6 +24,9 @@
 
 #if defined(FFX_FSR) || defined(FFX_ALL)
 #include "blob_accessors/ffx_fsr2_shaderblobs.h"
+#endif // #if defined(FFX_FSR) || defined(FFX_ALL)
+
+#if defined(FFX_FSR) || defined(FFX_FSR1) || defined(FFX_ALL)
 #include "blob_accessors/ffx_fsr1_shaderblobs.h"
 #endif // #if defined(FFX_FSR) || defined(FFX_ALL)
 
@@ -89,7 +92,9 @@ FfxErrorCode ffxGetPermutationBlobByIndex(
 #if defined(FFX_FSR) || defined(FFX_ALL)
     case FFX_EFFECT_FSR2:
         return fsr2GetPermutationBlobByIndex((FfxFsr2Pass)passId, permutationOptions, outBlob);
+#endif // #if defined(FFX_FSR) || defined(FFX_ALL)
 
+#if defined(FFX_FSR) || defined(FFX_FSR1) || defined(FFX_ALL)
     case FFX_EFFECT_FSR1:
         return fsr1GetPermutationBlobByIndex((FfxFsr1Pass)passId, permutationOptions, outBlob);
 #endif // #if defined(FFX_FSR) || defined(FFX_ALL)
@@ -170,7 +175,9 @@ switch (effectId)
 #if defined(FFX_FSR) || defined(FFX_ALL)
     case FFX_EFFECT_FSR2:
         return fsr2IsWave64(permutationOptions, isWave64);
+#endif // #if defined(FFX_FSR) || defined(FFX_ALL)
 
+#if defined(FFX_FSR) || defined(FFX_FSR1) || defined(FFX_ALL)
     case FFX_EFFECT_FSR1:
         return fsr1IsWave64(permutationOptions, isWave64);
 #endif // #if defined(FFX_FSR) || defined(FFX_ALL)

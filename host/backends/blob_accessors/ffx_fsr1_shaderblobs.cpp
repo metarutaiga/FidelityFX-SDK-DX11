@@ -73,3 +73,9 @@ FfxErrorCode fsr1GetPermutationBlobByIndex(
     memset(&outBlob, 0, sizeof(FfxShaderBlob));
     return FFX_OK;
 }
+
+FfxErrorCode fsr1IsWave64(uint32_t permutationOptions, bool& isWave64)
+{
+    isWave64 = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_FORCE_WAVE64);
+    return FFX_OK;
+}

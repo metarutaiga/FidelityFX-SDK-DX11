@@ -685,16 +685,26 @@ FfxErrorCode CreateResourceDX11(
 
             bool requestArrayView = FFX_CONTAINS_FLAG(backendResource->resourceDescription.usage, FFX_RESOURCE_USAGE_ARRAYVIEW);
 
-            switch (backendResource->resourceDescription.type) {
+            D3D11_RESOURCE_DIMENSION resourceDimension = D3D11_RESOURCE_DIMENSION(0);
+            dx11Resource->GetType(&resourceDimension);
 
-            case FFX_RESOURCE_TYPE_BUFFER:
+            D3D11_BUFFER_DESC dx11BufferDesc = {};
+            D3D11_TEXTURE1D_DESC dx11Texture1DDesc = {};
+            D3D11_TEXTURE2D_DESC dx11Texture2DDesc = {};
+            D3D11_TEXTURE3D_DESC dx11Texture3DDesc = {};
+
+            switch (resourceDimension) {
+
+            case D3D11_RESOURCE_DIMENSION_BUFFER:
+                reinterpret_cast<ID3D11Buffer*>(dx11Resource)->GetDesc(&dx11BufferDesc);
                 dx11UavDescription.Format = convertFormatUav(DXGI_FORMAT_UNKNOWN);
                 dx11SrvDescription.Format = convertFormatUav(DXGI_FORMAT_UNKNOWN);
                 dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
                 dx11SrvDescription.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
                 break;
 
-            case FFX_RESOURCE_TYPE_TEXTURE1D:
+            case D3D11_RESOURCE_DIMENSION_TEXTURE1D:
+                reinterpret_cast<ID3D11Texture1D*>(dx11Resource)->GetDesc(&dx11Texture1DDescription);
                 dx11UavDescription.Format = convertFormatUav(dx11Texture1DDescription.Format);
                 dx11SrvDescription.Format = convertFormatUav(dx11Texture1DDescription.Format);
                 if (dx11Texture1DDescription.ArraySize > 1 || requestArrayView)
@@ -721,7 +731,8 @@ FfxErrorCode CreateResourceDX11(
                 }
                 break;
 
-            case FFX_RESOURCE_TYPE_TEXTURE2D:
+            case D3D11_RESOURCE_DIMENSION_TEXTURE2D:
+                reinterpret_cast<ID3D11Texture2D*>(dx11Resource)->GetDesc(&dx11Texture2DDescription);
                 dx11UavDescription.Format = convertFormatUav(dx11Texture2DDescription.Format);
                 dx11SrvDescription.Format = convertFormatUav(dx11Texture2DDescription.Format);
                 if (dx11Texture2DDescription.ArraySize > 1 || requestArrayView)
@@ -748,7 +759,8 @@ FfxErrorCode CreateResourceDX11(
                 }
                 break;
 
-            case FFX_RESOURCE_TYPE_TEXTURE3D:
+            case D3D11_RESOURCE_DIMENSION_TEXTURE3D:
+                reinterpret_cast<ID3D11Texture3D*>(dx11Resource)->GetDesc(&dx11Texture3DDescription);
                 dx11UavDescription.Format = convertFormatUav(dx11Texture3DDescription.Format);
                 dx11SrvDescription.Format = convertFormatUav(dx11Texture3DDescription.Format);
                 dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE3D;
@@ -761,7 +773,7 @@ FfxErrorCode CreateResourceDX11(
                 break;
             }
 
-            if (backendResource->resourceDescription.type == FFX_RESOURCE_TYPE_BUFFER) {
+            if (resourceDimension == D3D11_RESOURCE_DIMENSION_BUFFER) {
 
                 // UAV
                 if (dx11BufferDescription.BindFlags & D3D11_BIND_UNORDERED_ACCESS) {
@@ -796,7 +808,6 @@ FfxErrorCode CreateResourceDX11(
 
                         dx11Device->CreateUnorderedAccessView(dx11Resource, &dx11UavDescription, &backendResource->uavPtr[currentMipIndex]);
                     }
-
                 }
             }
         }
@@ -913,10 +924,7 @@ FfxErrorCode RegisterResourceDX11(
         switch (resourceDimension) {
 
         case D3D11_RESOURCE_DIMENSION_BUFFER:
-        {
-            ID3D11Buffer* dx11Buffer = (ID3D11Buffer*)dx11Resource;
-            dx11Buffer->GetDesc(&dx11BufferDesc);
-
+            reinterpret_cast<ID3D11Buffer*>(dx11Resource)->GetDesc(&dx11BufferDesc);
             dx11UavDescription.Format = convertFormatUav(DXGI_FORMAT_UNKNOWN);
             dx11SrvDescription.Format = convertFormatSrv(DXGI_FORMAT_UNKNOWN);
             dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
@@ -926,13 +934,9 @@ FfxErrorCode RegisterResourceDX11(
             backendResource->resourceDescription.stride = inFfxResource->description.stride;
             backendResource->resourceDescription.alignment = 0;
             break;
-        }
 
         case D3D11_RESOURCE_DIMENSION_TEXTURE1D:
-        {
-            ID3D11Texture1D* dx11Texture1D = (ID3D11Texture1D*)dx11Resource;
-            dx11Texture1D->GetDesc(&dx11Texture1DDesc);
-
+            reinterpret_cast<ID3D11Texture1D*>(dx11Resource)->GetDesc(&dx11Texture1DDesc);
             dx11UavDescription.Format = convertFormatUav(dx11Texture1DDesc.Format);
             dx11SrvDescription.Format = convertFormatSrv(dx11Texture1DDesc.Format);
             if (dx11Texture1DDesc.ArraySize > 1 || requestArrayView)
@@ -964,13 +968,9 @@ FfxErrorCode RegisterResourceDX11(
             backendResource->resourceDescription.mipCount = inFfxResource->description.mipCount;
             backendResource->resourceDescription.depth = inFfxResource->description.depth;
             break;
-        }
 
         case D3D11_RESOURCE_DIMENSION_TEXTURE2D:
-        {
-            ID3D11Texture2D* dx11Texture2D = (ID3D11Texture2D*)dx11Resource;
-            dx11Texture2D->GetDesc(&dx11Texture2DDesc);
-
+            reinterpret_cast<ID3D11Texture2D*>(dx11Resource)->GetDesc(&dx11Texture2DDesc);
             dx11UavDescription.Format = convertFormatUav(dx11Texture2DDesc.Format);
             dx11SrvDescription.Format = convertFormatSrv(dx11Texture2DDesc.Format);
             if (dx11Texture2DDesc.ArraySize > 1 || requestArrayView)
@@ -1003,13 +1003,9 @@ FfxErrorCode RegisterResourceDX11(
             backendResource->resourceDescription.mipCount = inFfxResource->description.mipCount;
             backendResource->resourceDescription.depth = inFfxResource->description.depth;
             break;
-        }
 
         case D3D11_RESOURCE_DIMENSION_TEXTURE3D:
-        {
-            ID3D11Texture3D* dx11Texture3D = (ID3D11Texture3D*)dx11Resource;
-            dx11Texture3D->GetDesc(&dx11Texture3DDesc);
-
+            reinterpret_cast<ID3D11Texture3D*>(dx11Resource)->GetDesc(&dx11Texture3DDesc);
             dx11UavDescription.Format = convertFormatUav(dx11Texture3DDesc.Format);
             dx11SrvDescription.Format = convertFormatSrv(dx11Texture3DDesc.Format);
             dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE3D;
@@ -1024,17 +1020,12 @@ FfxErrorCode RegisterResourceDX11(
             backendResource->resourceDescription.mipCount = inFfxResource->description.mipCount;
             backendResource->resourceDescription.depth = inFfxResource->description.depth;
             break;
-        }
 
         default:
             break;
         }
 
         if (resourceDimension == D3D11_RESOURCE_DIMENSION_BUFFER) {
-
-            D3D11_BUFFER_DESC dx11BufferDesc = {};
-            ID3D11Buffer* dx11Buffer = (ID3D11Buffer*)dx11Resource;
-            dx11Buffer->GetDesc(&dx11BufferDesc);
 
             // UAV
             if (dx11BufferDesc.BindFlags & D3D11_BIND_UNORDERED_ACCESS) {
@@ -1085,7 +1076,6 @@ FfxErrorCode RegisterResourceDX11(
 
                     dx11Device->CreateUnorderedAccessView(dx11Resource, &dx11UavDescription, &backendResource->uavPtr[currentMipIndex]);
                 }
-
             }
         }
     }
@@ -1322,13 +1312,28 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
 
                 for (uint32_t uavEntry = 0; uavEntry < job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].bindCount; ++uavEntry, ++currentUAVResource)
                 {
+                    // source: UAV of resource to bind
+                    const uint32_t resourceIndex = job->computeJobDescriptor.uavTextures[currentUAVResource].internalIndex;
+                    ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[currentUAVResource];
 
+                    // where to bind it
+                    const uint32_t currentUavResourceIndex = job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].slotIndex + uavEntry;
+
+                    dx11DeviceContext->CSSetUnorderedAccessViews(currentUavResourceIndex, 1, &uavPtr, nullptr);
                 }
             }
 
             // Set Buffer UAVs
             for (uint32_t currentPipelineUavIndex = 0; currentPipelineUavIndex < job->computeJobDescriptor.pipeline.uavBufferCount; ++currentPipelineUavIndex) {
 
+                // source: UAV of buffer to bind
+                const uint32_t resourceIndex = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].internalIndex;
+                ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[0];
+
+                // where to bind it
+                const uint32_t currentUavResourceIndex = job->computeJobDescriptor.pipeline.uavBufferBindings[currentPipelineUavIndex].slotIndex;
+
+                dx11DeviceContext->CSSetUnorderedAccessViews(currentUavResourceIndex, 1, &uavPtr, nullptr);
             }
         }
     }
@@ -1361,6 +1366,10 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                     if (job->computeJobDescriptor.srvTextures[currPipelineSrvIndex].internalIndex == 0)
                         break;
 
+                    // source: SRV of resource to bind
+                    const uint32_t resourceIndex = job->computeJobDescriptor.srvTextures[currPipelineSrvIndex].internalIndex;
+                    ID3D11ShaderResourceView* srvPtr = backendContext->pResources[resourceIndex].srvPtr;
+
                     // Where to bind it
                     uint32_t currentSrvResourceIndex;
                     if (bindNum >= 1)
@@ -1371,13 +1380,22 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                     {
                         currentSrvResourceIndex = job->computeJobDescriptor.pipeline.srvTextureBindings[currPipelineSrvIndex].slotIndex;
                     }
+
+                    dx11DeviceContext->CSSetShaderResources(currentSrvResourceIndex, 1, &srvPtr);
                 }
             }
 
             // Set Buffer SRVs
             for (uint32_t currentPipelineSrvIndex = 0; currentPipelineSrvIndex < job->computeJobDescriptor.pipeline.srvBufferCount; ++currentPipelineSrvIndex)
             {
+                // source: SRV of buffer to bind
+                const uint32_t resourceIndex = job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].internalIndex;
+                ID3D11ShaderResourceView* srvPtr = backendContext->pResources[resourceIndex].srvPtr;
 
+                // where to bind it
+                const uint32_t currentSrvResourceIndex = job->computeJobDescriptor.pipeline.srvBufferBindings[currentPipelineSrvIndex].slotIndex;
+
+                dx11DeviceContext->CSSetShaderResources(currentSrvResourceIndex, 1, &srvPtr);
             }
         }
     }
@@ -1394,6 +1412,11 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
 
             if (backendContext->constantBufferOffset + size >= backendContext->constantBufferSize)
                 backendContext->constantBufferOffset = 0;
+
+            void* pBuffer = (void*)((uint8_t*)(backendContext->constantBufferMem) + backendContext->constantBufferOffset);
+            memcpy(pBuffer, job->computeJobDescriptor.cbs[currentRootConstantIndex].data, job->computeJobDescriptor.cbs[currentRootConstantIndex].num32BitEntries * sizeof(uint32_t));
+
+            dx11DeviceContext->CSSetConstantBuffers(0, 1, &backendContext->constantBufferResource);
 
             // update the offset
             backendContext->constantBufferOffset += size;
