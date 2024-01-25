@@ -64,7 +64,7 @@ typedef struct BackendContext_DX11 {
     } Resource;
 
     ID3D11Device*           device = nullptr;
-    ID3D11DeviceContext*    deviceContext = nullptr;
+    ID3D11DeviceContext1*   deviceContext = nullptr;
 
     FfxGpuJobDescription*   pGpuJobs;
     uint32_t                gpuJobCount;
@@ -156,7 +156,7 @@ FfxErrorCode ffxGetInterfaceDX11(
     return FFX_OK;
 }
 
-FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext* deviceContext)
+FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext1* deviceContext)
 {
     FFX_ASSERT(NULL != deviceContext);
     return reinterpret_cast<FfxCommandList>(deviceContext);
@@ -165,7 +165,7 @@ FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext* deviceContext)
 // register a DX11 resource to the backend
 FfxResource ffxGetResourceDX11(ID3D11Resource* dx11Resource,
     FfxResourceDescription                     ffxResDescription,
-    wchar_t* ffxResName,
+    wchar_t const*                             ffxResName,
     FfxResourceStates                          state /*=FFX_RESOURCE_STATE_COMPUTE_READ*/)
 {
     FfxResource resource = {};
@@ -414,7 +414,14 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxUInt32*
 
             dx11Device->AddRef();
             backendContext->device = dx11Device;
-            dx11Device->GetImmediateContext(&backendContext->deviceContext);
+
+            ID3D11DeviceContext* dx11DeviceContext = nullptr;
+            dx11Device->GetImmediateContext(&dx11DeviceContext);
+            dx11DeviceContext->QueryInterface(IID_PPV_ARGS(&backendContext->deviceContext));
+            dx11DeviceContext->Release();
+
+            if (backendContext->deviceContext == nullptr)
+                return FFX_ERROR_NULL_DEVICE;
         }
 
         // Map all of our pointers
@@ -624,6 +631,7 @@ FfxErrorCode CreateResourceDX11(
         dx11Texture2DDescription.MipLevels = createResourceDescription->resourceDescription.mipCount;
         dx11Texture2DDescription.Usage = D3D11_USAGE_DEFAULT;
         dx11Texture2DDescription.BindFlags = ffxGetDX11BindFlags(backendResource->resourceDescription.usage);
+        dx11Texture2DDescription.SampleDesc.Count = 1;
         break;
 
     case FFX_RESOURCE_TYPE_TEXTURE3D:
@@ -1283,8 +1291,11 @@ FfxErrorCode ScheduleGpuJobDX11(
     return FFX_OK;
 }
 
-static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
+static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext1* dx11DeviceContext)
 {
+    uint32_t minimumUav = UINT32_MAX;
+    uint32_t maximumUav = 0;
+
     // bind texture & buffer UAVs (note the binding order here MUST match the root signature mapping order from CreatePipeline!)
     {
         // Set a baseline minimal value
@@ -1320,6 +1331,9 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                     const uint32_t currentUavResourceIndex = job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].slotIndex + uavEntry;
 
                     dx11DeviceContext->CSSetUnorderedAccessViews(currentUavResourceIndex, 1, &uavPtr, nullptr);
+
+                    minimumUav = minimumUav < currentUavResourceIndex ? minimumUav : currentUavResourceIndex;
+                    maximumUav = maximumUav > currentUavResourceIndex ? maximumUav : currentUavResourceIndex;
                 }
             }
 
@@ -1334,6 +1348,9 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                 const uint32_t currentUavResourceIndex = job->computeJobDescriptor.pipeline.uavBufferBindings[currentPipelineUavIndex].slotIndex;
 
                 dx11DeviceContext->CSSetUnorderedAccessViews(currentUavResourceIndex, 1, &uavPtr, nullptr);
+
+                minimumUav = minimumUav < currentUavResourceIndex ? minimumUav : currentUavResourceIndex;
+                maximumUav = maximumUav > currentUavResourceIndex ? maximumUav : currentUavResourceIndex;
             }
         }
     }
@@ -1416,7 +1433,10 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
             void* pBuffer = (void*)((uint8_t*)(backendContext->constantBufferMem) + backendContext->constantBufferOffset);
             memcpy(pBuffer, job->computeJobDescriptor.cbs[currentRootConstantIndex].data, job->computeJobDescriptor.cbs[currentRootConstantIndex].num32BitEntries * sizeof(uint32_t));
 
-            dx11DeviceContext->CSSetConstantBuffers(0, 1, &backendContext->constantBufferResource);
+            uint32_t first = backendContext->constantBufferOffset / sizeof(FfxFloat32x4);
+            uint32_t num = size / sizeof(FfxFloat32x4);
+
+            dx11DeviceContext->CSSetConstantBuffers1(0, 1, &backendContext->constantBufferResource, &first, &num);
 
             // update the offset
             backendContext->constantBufferOffset += size;
@@ -1426,10 +1446,18 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
     // Dispatch
     dx11DeviceContext->Dispatch(job->computeJobDescriptor.dimensions[0], job->computeJobDescriptor.dimensions[1], job->computeJobDescriptor.dimensions[2]);
 
+    // Clear UAVs
+    static ID3D11UnorderedAccessView* const empty[D3D11_1_UAV_SLOT_COUNT] = {};
+    if (minimumUav <= maximumUav) {
+
+        uint32_t count = maximumUav - minimumUav + 1;
+        dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, count, empty, nullptr);
+    }
+
     return FFX_OK;
 }
 
-static FfxErrorCode executeGpuJobCopy(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
+static FfxErrorCode executeGpuJobCopy(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext1* dx11DeviceContext)
 {
     ID3D11Resource* dx11ResourceSrc = getDX11ResourcePtr(backendContext, job->copyJobDescriptor.src.internalIndex);
     ID3D11Resource* dx11ResourceDst = getDX11ResourcePtr(backendContext, job->copyJobDescriptor.dst.internalIndex);
@@ -1439,7 +1467,7 @@ static FfxErrorCode executeGpuJobCopy(BackendContext_DX11* backendContext, FfxGp
     return FFX_OK;
 }
 
-static FfxErrorCode executeGpuJobClearFloat(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
+static FfxErrorCode executeGpuJobClearFloat(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext1* dx11DeviceContext)
 {
     uint32_t idx = job->clearJobDescriptor.target.internalIndex;
     BackendContext_DX11::Resource ffxResource = backendContext->pResources[idx];
@@ -1464,7 +1492,7 @@ FfxErrorCode ExecuteGpuJobsDX11(
 
         FfxGpuJobDescription* GpuJob = &backendContext->pGpuJobs[currentGpuJobIndex];
         ID3D11Device* dx11Device = backendContext->device;
-        ID3D11DeviceContext* dx11DeviceContext = backendContext->deviceContext;
+        ID3D11DeviceContext1* dx11DeviceContext = backendContext->deviceContext;
 
         switch (GpuJob->jobType) {
 

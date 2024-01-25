@@ -79,7 +79,7 @@ typedef enum FfxFsr1Pass
     FFX_FSR1_PASS_EASU_RCAS = 1,    ///< A pass which upscales the color buffer in preparation for rcas
     FFX_FSR1_PASS_RCAS = 2,         ///< A pass which performs rcas sharpening on the upscaled image.
     
-    FFX_FSR1_PASS_COUNT             ///< The number of passes performed by FSR2.
+    FFX_FSR1_PASS_COUNT             ///< The number of passes performed by FSR1.
 } FfxFsr1Pass;
 
 /// An enumeration of all the quality modes supported by FidelityFX Super

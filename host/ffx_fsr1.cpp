@@ -396,7 +396,7 @@ FfxErrorCode ffxFsr1ContextDispatch(FfxFsr1Context* context, const FfxFsr1Dispat
         contextPrivate->device,
         FFX_ERROR_NULL_DEVICE);
 
-    // dispatch the FSR2 passes.
+    // dispatch the FSR1 passes.
     const FfxErrorCode errorCode = fsr1Dispatch(contextPrivate, dispatchDescription);
     return errorCode;
 }

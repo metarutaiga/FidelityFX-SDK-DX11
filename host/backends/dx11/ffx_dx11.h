@@ -27,7 +27,7 @@
 
 #pragma once
 
-#include <d3d11.h>
+#include <d3d11_1.h>
 #include <host/ffx_interface.h>
 
 #if defined(__cplusplus)
@@ -76,7 +76,7 @@ FFX_API FfxErrorCode ffxGetInterfaceDX11(
     size_t scratchBufferSize, 
     size_t maxContexts);
 
-/// Create a <c><i>FfxCommandList</i></c> from a <c><i>ID3D11DeviceContext</i></c>.
+/// Create a <c><i>FfxCommandList</i></c> from a <c><i>ID3D11DeviceContext1</i></c>.
 ///
 /// @param [in] deviceContext               A pointer to the DirectX11 device context.
 ///
@@ -84,7 +84,7 @@ FFX_API FfxErrorCode ffxGetInterfaceDX11(
 /// An abstract FidelityFX command list.
 ///
 /// @ingroup DX11Backend
-FFX_API FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext* deviceContext);
+FFX_API FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext1* deviceContext);
 
 /// Fetch a <c><i>FfxResource</i></c> from a <c><i>GPUResource</i></c>.
 ///
@@ -99,7 +99,7 @@ FFX_API FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext* deviceContext)
 /// @ingroup DX11Backend
 FFX_API FfxResource ffxGetResourceDX11(ID3D11Resource* dx11Resource,
     FfxResourceDescription       ffxResDescription,
-    wchar_t* ffxResName,
+    wchar_t const*               ffxResName,
     FfxResourceStates            state = FFX_RESOURCE_STATE_COMPUTE_READ);
 
 #if defined(__cplusplus)
