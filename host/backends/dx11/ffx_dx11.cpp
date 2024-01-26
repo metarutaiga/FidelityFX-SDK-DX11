@@ -545,6 +545,12 @@ FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32
             DestroyResourceDX11(backendInterface, internalResource);
         }
     }
+    for (int32_t currentResourceIndex = effectContextId * FFX_MAX_RESOURCE_COUNT; currentResourceIndex < effectContextId * FFX_MAX_RESOURCE_COUNT + FFX_MAX_RESOURCE_COUNT; ++currentResourceIndex) {
+        if (backendContext->pResources[currentResourceIndex].resourcePtr) {
+            FfxResourceInternal internalResource = { currentResourceIndex };
+            DestroyResourceDX11(backendInterface, internalResource);
+        }
+    }
 
     // Free up for use by another context
     effectContext.nextStaticResource = 0;
@@ -904,7 +910,11 @@ FfxErrorCode RegisterResourceDX11(
         return FFX_OK;
     }
 
+    DestroyResourceDX11(backendInterface, *outFfxResourceInternal);
+
     backendResource->resourcePtr = dx11Resource;
+    if (backendResource->resourcePtr)
+        backendResource->resourcePtr->AddRef();
 
 #ifdef _DEBUG
     const wchar_t* name = inFfxResource->name;
