@@ -20,6 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#define INITGUID
+
 #include <host/ffx_interface.h>
 #include <host/ffx_util.h>
 #include <host/ffx_assert.h>
@@ -47,7 +49,7 @@ FfxErrorCode ExecuteGpuJobsDX11(FfxInterface* backendInterface, FfxCommandList c
 
 // To track parallel effect context usage
 static uint32_t s_BackendRefCount = 0;
-static size_t   s_MaxEffectContexts = 0;
+static uint32_t s_MaxEffectContexts = 0;
 
 typedef struct BackendContext_DX11 {
 
@@ -64,15 +66,16 @@ typedef struct BackendContext_DX11 {
     } Resource;
 
     ID3D11Device*           device = nullptr;
-    ID3D11DeviceContext1*   deviceContext = nullptr;
+    ID3D11DeviceContext*    deviceContext = nullptr;
+    ID3D11DeviceContext1*   deviceContext1 = nullptr;
 
     FfxGpuJobDescription*   pGpuJobs;
     uint32_t                gpuJobCount;
 
-    void*                   constantBufferMem;
-    ID3D11Buffer*           constantBufferResource;
-    uint32_t                constantBufferSize;
-    uint32_t                constantBufferOffset;
+    void*                   constantBufferMem[FFX_MAX_NUM_CONST_BUFFERS];
+    ID3D11Buffer*           constantBufferResource[FFX_MAX_NUM_CONST_BUFFERS];
+    uint32_t                constantBufferSize[FFX_MAX_NUM_CONST_BUFFERS];
+    uint32_t                constantBufferOffset[FFX_MAX_NUM_CONST_BUFFERS];
 
     typedef struct alignas(32) EffectContext {
 
@@ -151,12 +154,12 @@ FfxErrorCode ffxGetInterfaceDX11(
     backendInterface->device = device;
 
     // Assign the max number of contexts we'll be using
-    s_MaxEffectContexts = maxContexts;
+    s_MaxEffectContexts = static_cast<uint32_t>(maxContexts);
 
     return FFX_OK;
 }
 
-FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext1* deviceContext)
+FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext* deviceContext)
 {
     FFX_ASSERT(NULL != deviceContext);
     return reinterpret_cast<FfxCommandList>(deviceContext);
@@ -180,6 +183,14 @@ FfxResource ffxGetResourceDX11(ID3D11Resource* dx11Resource,
 #endif
 
     return resource;
+}
+
+static void SetNameDX11(ID3D11DeviceChild* resource, wchar_t const* name)
+{
+    if (resource)
+    {
+        resource->SetPrivateData(WKPDID_D3DDebugObjectNameW, static_cast<UINT>(wcslen(name)), name);
+    }
 }
 
 static void TIF(HRESULT result)
@@ -415,13 +426,8 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxUInt32*
             dx11Device->AddRef();
             backendContext->device = dx11Device;
 
-            ID3D11DeviceContext* dx11DeviceContext = nullptr;
-            dx11Device->GetImmediateContext(&dx11DeviceContext);
-            dx11DeviceContext->QueryInterface(IID_PPV_ARGS(&backendContext->deviceContext));
-            dx11DeviceContext->Release();
-
-            if (backendContext->deviceContext == nullptr)
-                return FFX_ERROR_NULL_DEVICE;
+            dx11Device->GetImmediateContext(&backendContext->deviceContext);
+            backendContext->deviceContext->QueryInterface(IID_PPV_ARGS(&backendContext->deviceContext1));
         }
 
         // Map all of our pointers
@@ -443,32 +449,36 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxUInt32*
         // Map the effect contexts
         backendContext->pEffectContexts = reinterpret_cast<BackendContext_DX11::EffectContext*>(pMem);
         memset(backendContext->pEffectContexts, 0, contextArraySize);
+    }
+
+    // Direct3D 11.1
+    if (!s_BackendRefCount && backendContext->deviceContext1 != NULL) {
 
         // create dynamic ring buffer for constant uploads
-        backendContext->constantBufferSize = FFX_ALIGN_UP(FFX_MAX_CONST_SIZE, 256) *
+        backendContext->constantBufferSize[0] = FFX_ALIGN_UP(FFX_MAX_CONST_SIZE, 256) *
             s_MaxEffectContexts * FFX_MAX_PASS_COUNT * FFX_MAX_QUEUED_FRAMES; // Size aligned to 256
 
         D3D11_BUFFER_DESC constDesc = {};
-        constDesc.ByteWidth = backendContext->constantBufferSize;
+        constDesc.ByteWidth = backendContext->constantBufferSize[0];
         constDesc.Usage = D3D11_USAGE_DYNAMIC;
         constDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
         constDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-        TIF(dx11Device->CreateBuffer(&constDesc, nullptr, &backendContext->constantBufferResource));
-//      backendContext->constantBufferResource->SetName(L"FFX_DX11_DynamicRingBuffer");
+        TIF(dx11Device->CreateBuffer(&constDesc, nullptr, &backendContext->constantBufferResource[0]));
+        SetNameDX11(backendContext->constantBufferResource[0], L"FFX_DX11_DynamicRingBuffer");
 
         // map it
         D3D11_MAPPED_SUBRESOURCE mappedSubresource = {};
-        TIF(backendContext->deviceContext->Map(backendContext->constantBufferResource, 0, 
+        TIF(backendContext->deviceContext->Map(backendContext->constantBufferResource[0], 0,
             D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappedSubresource));
-        backendContext->constantBufferMem = mappedSubresource.pData;
-        backendContext->constantBufferOffset = 0;
+        backendContext->constantBufferMem[0] = mappedSubresource.pData;
+        backendContext->constantBufferOffset[0] = 0;
     }
 
     // Increment the ref count
     ++s_BackendRefCount;
 
     // Get an available context id
-    for (size_t i = 0; i < s_MaxEffectContexts; ++i) {
+    for (uint32_t i = 0; i < s_MaxEffectContexts; ++i) {
         if (!backendContext->pEffectContexts[i].active) {
             *effectContextId = i;
 
@@ -538,16 +548,16 @@ FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32
 
     // Delete any resources allocated by this context
     BackendContext_DX11::EffectContext& effectContext = backendContext->pEffectContexts[effectContextId];
-    for (int32_t currentStaticResourceIndex = effectContextId * FFX_MAX_RESOURCE_COUNT; currentStaticResourceIndex < effectContext.nextStaticResource; ++currentStaticResourceIndex) {
+    for (uint32_t currentStaticResourceIndex = effectContextId * FFX_MAX_RESOURCE_COUNT; currentStaticResourceIndex < effectContext.nextStaticResource; ++currentStaticResourceIndex) {
         if (backendContext->pResources[currentStaticResourceIndex].resourcePtr) {
             FFX_ASSERT_MESSAGE(false, "FFXInterface: DX11: SDK Resource was not destroyed prior to destroying the backend context. There is a resource leak.");
-            FfxResourceInternal internalResource = { currentStaticResourceIndex };
+            FfxResourceInternal internalResource = { static_cast<int32_t>(currentStaticResourceIndex) };
             DestroyResourceDX11(backendInterface, internalResource);
         }
     }
-    for (int32_t currentResourceIndex = effectContextId * FFX_MAX_RESOURCE_COUNT; currentResourceIndex < effectContextId * FFX_MAX_RESOURCE_COUNT + FFX_MAX_RESOURCE_COUNT; ++currentResourceIndex) {
+    for (uint32_t currentResourceIndex = effectContextId * FFX_MAX_RESOURCE_COUNT; currentResourceIndex < effectContextId * FFX_MAX_RESOURCE_COUNT + FFX_MAX_RESOURCE_COUNT; ++currentResourceIndex) {
         if (backendContext->pResources[currentResourceIndex].resourcePtr) {
-            FfxResourceInternal internalResource = { currentResourceIndex };
+            FfxResourceInternal internalResource = { static_cast<int32_t>(currentResourceIndex) };
             DestroyResourceDX11(backendInterface, internalResource);
         }
     }
@@ -562,12 +572,22 @@ FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32
     if (!s_BackendRefCount) {
 
         // release constant buffer pool
-        backendContext->deviceContext->Unmap(backendContext->constantBufferResource, 0);
-        backendContext->constantBufferResource->Release();
-        backendContext->constantBufferMem = nullptr;
-        backendContext->constantBufferOffset = 0;
-        backendContext->constantBufferSize = 0;
+        for (size_t i = 0; i < FFX_MAX_NUM_CONST_BUFFERS; ++i) {
 
+            if (backendContext->constantBufferResource[i] != NULL) {
+                backendContext->deviceContext->Unmap(backendContext->constantBufferResource[i], 0);
+                backendContext->constantBufferResource[i]->Release();
+                backendContext->constantBufferResource[i] = NULL;
+                backendContext->constantBufferMem[i] = nullptr;
+                backendContext->constantBufferOffset[i] = 0;
+                backendContext->constantBufferSize[i] = 0;
+            }
+        }
+
+        if (backendContext->deviceContext1 != NULL) {
+            backendContext->deviceContext1->Release();
+            backendContext->deviceContext1 = NULL;
+        }
         if (backendContext->deviceContext != NULL) {
             backendContext->deviceContext->Release();
             backendContext->deviceContext = NULL;
@@ -685,7 +705,7 @@ FfxErrorCode CreateResourceDX11(
             break;
         }
 
-//      dx11Resource->SetName(createResourceDescription->name);
+        SetNameDX11(dx11Resource, createResourceDescription->name);
         backendResource->resourcePtr = dx11Resource;
 
 #ifdef _DEBUG
@@ -1245,7 +1265,7 @@ FfxErrorCode CreatePipelineDX11(
         return FFX_ERROR_BACKEND_API_ERROR;
 
     // Set the pipeline name
-//  reinterpret_cast<ID3D11ComputeShader*>(outPipeline->pipeline)->SetName(pipelineDescription->name);
+    SetNameDX11(reinterpret_cast<ID3D11ComputeShader*>(outPipeline->pipeline), pipelineDescription->name);
 
     return FFX_OK;
 }
@@ -1301,7 +1321,7 @@ FfxErrorCode ScheduleGpuJobDX11(
     return FFX_OK;
 }
 
-static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext1* dx11DeviceContext)
+static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
 {
     uint32_t minimumUav = UINT32_MAX;
     uint32_t maximumUav = 0;
@@ -1437,19 +1457,55 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
 
             uint32_t size = FFX_ALIGN_UP(job->computeJobDescriptor.cbs[currentRootConstantIndex].num32BitEntries * sizeof(uint32_t), 256);
 
-            if (backendContext->constantBufferOffset + size >= backendContext->constantBufferSize)
-                backendContext->constantBufferOffset = 0;
+            // Direct3D 11.0
+            if (backendContext->deviceContext1 == NULL) {
 
-            void* pBuffer = (void*)((uint8_t*)(backendContext->constantBufferMem) + backendContext->constantBufferOffset);
+                if (backendContext->constantBufferSize[currentRootConstantIndex] < size) {
+
+                    if (backendContext->constantBufferResource[currentRootConstantIndex] != NULL) {
+                        backendContext->constantBufferResource[currentRootConstantIndex]->Release();
+                        backendContext->constantBufferResource[currentRootConstantIndex] = NULL;
+                    }
+                    backendContext->constantBufferSize[currentRootConstantIndex] = size;
+
+                    D3D11_BUFFER_DESC constDesc = {};
+                    constDesc.ByteWidth = size;
+                    constDesc.Usage = D3D11_USAGE_DYNAMIC;
+                    constDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+                    constDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+                    TIF(dx11Device->CreateBuffer(&constDesc, nullptr, &backendContext->constantBufferResource[currentRootConstantIndex]));
+                    SetNameDX11(backendContext->constantBufferResource[currentRootConstantIndex], L"FFX_DX11_ConstantBuffer");
+                }
+
+                if (backendContext->constantBufferResource[currentRootConstantIndex] != NULL) {
+
+                    D3D11_MAPPED_SUBRESOURCE mappedSubresource = {};
+                    TIF(backendContext->deviceContext->Map(backendContext->constantBufferResource[currentRootConstantIndex], 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubresource));
+
+                    if (mappedSubresource.pData) {
+                        memcpy(mappedSubresource.pData, job->computeJobDescriptor.cbs[currentRootConstantIndex].data, job->computeJobDescriptor.cbs[currentRootConstantIndex].num32BitEntries * sizeof(uint32_t));
+                        backendContext->deviceContext->Unmap(backendContext->constantBufferResource[currentRootConstantIndex], 0);
+                    }
+
+                    dx11DeviceContext->CSSetConstantBuffers(currentRootConstantIndex, 1, &backendContext->constantBufferResource[currentRootConstantIndex]);
+                }
+
+                continue;
+            }
+
+            if (backendContext->constantBufferOffset[0] + size >= backendContext->constantBufferSize[0])
+                backendContext->constantBufferOffset[0] = 0;
+
+            void* pBuffer = (void*)((uint8_t*)(backendContext->constantBufferMem[0]) + backendContext->constantBufferOffset[0]);
             memcpy(pBuffer, job->computeJobDescriptor.cbs[currentRootConstantIndex].data, job->computeJobDescriptor.cbs[currentRootConstantIndex].num32BitEntries * sizeof(uint32_t));
 
-            uint32_t first = backendContext->constantBufferOffset / sizeof(FfxFloat32x4);
+            uint32_t first = backendContext->constantBufferOffset[0] / sizeof(FfxFloat32x4);
             uint32_t num = size / sizeof(FfxFloat32x4);
 
-            dx11DeviceContext->CSSetConstantBuffers1(0, 1, &backendContext->constantBufferResource, &first, &num);
+            backendContext->deviceContext1->CSSetConstantBuffers1(currentRootConstantIndex, 1, &backendContext->constantBufferResource[0], &first, &num);
 
             // update the offset
-            backendContext->constantBufferOffset += size;
+            backendContext->constantBufferOffset[0] += size;
         }
     }
 
@@ -1467,7 +1523,7 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
     return FFX_OK;
 }
 
-static FfxErrorCode executeGpuJobCopy(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext1* dx11DeviceContext)
+static FfxErrorCode executeGpuJobCopy(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
 {
     ID3D11Resource* dx11ResourceSrc = getDX11ResourcePtr(backendContext, job->copyJobDescriptor.src.internalIndex);
     ID3D11Resource* dx11ResourceDst = getDX11ResourcePtr(backendContext, job->copyJobDescriptor.dst.internalIndex);
@@ -1477,7 +1533,7 @@ static FfxErrorCode executeGpuJobCopy(BackendContext_DX11* backendContext, FfxGp
     return FFX_OK;
 }
 
-static FfxErrorCode executeGpuJobClearFloat(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext1* dx11DeviceContext)
+static FfxErrorCode executeGpuJobClearFloat(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
 {
     uint32_t idx = job->clearJobDescriptor.target.internalIndex;
     BackendContext_DX11::Resource ffxResource = backendContext->pResources[idx];
@@ -1502,7 +1558,7 @@ FfxErrorCode ExecuteGpuJobsDX11(
 
         FfxGpuJobDescription* GpuJob = &backendContext->pGpuJobs[currentGpuJobIndex];
         ID3D11Device* dx11Device = backendContext->device;
-        ID3D11DeviceContext1* dx11DeviceContext = backendContext->deviceContext;
+        ID3D11DeviceContext* dx11DeviceContext = backendContext->deviceContext;
 
         switch (GpuJob->jobType) {
 

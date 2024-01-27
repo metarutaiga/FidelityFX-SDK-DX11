@@ -84,7 +84,7 @@ FFX_API FfxErrorCode ffxGetInterfaceDX11(
 /// An abstract FidelityFX command list.
 ///
 /// @ingroup DX11Backend
-FFX_API FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext1* deviceContext);
+FFX_API FfxCommandList ffxGetCommandListDX11(ID3D11DeviceContext* deviceContext);
 
 /// Fetch a <c><i>FfxResource</i></c> from a <c><i>GPUResource</i></c>.
 ///
