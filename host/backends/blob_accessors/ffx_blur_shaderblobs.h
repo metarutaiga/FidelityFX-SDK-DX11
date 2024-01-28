@@ -23,21 +23,21 @@
 #pragma once
 
 #include "../ffx_shader_blobs.h"
-#include <host/components/fsr1/ffx_fsr1.h>
+#include <host/components/blur/ffx_blur.h>
 #include <stdint.h>
 
 #if defined(__cplusplus)
 extern "C" {
 #endif // #if defined(__cplusplus)
 
-// Get a HLSL shader blob for the specified pass and permutation index.
-FfxErrorCode fsr1GetPermutationBlobByIndex(
-    FfxFsr1Pass passId,
+// Get a DX12 shader blob for the specified pass and permutation index.
+FfxErrorCode blurGetPermutationBlobByIndex(
+    FfxBlurPass passId,
     uint32_t permutationOptions,
     FfxShaderBlob* outBlob);
 
 // Check is Wave64 is requested on this permutation
-FfxErrorCode fsr1IsWave64(uint32_t permutationOptions, bool& isWave64);
+FfxErrorCode blurIsWave64(uint32_t permutationOptions, bool& isWave64);
 
 #if defined(__cplusplus)
 }

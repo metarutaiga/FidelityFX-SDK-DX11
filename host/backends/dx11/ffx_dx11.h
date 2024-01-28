@@ -76,7 +76,7 @@ FFX_API FfxErrorCode ffxGetInterfaceDX11(
     size_t scratchBufferSize, 
     size_t maxContexts);
 
-/// Create a <c><i>FfxCommandList</i></c> from a <c><i>ID3D11DeviceContext1</i></c>.
+/// Create a <c><i>FfxCommandList</i></c> from a <c><i>ID3D11DeviceContext</i></c>.
 ///
 /// @param [in] deviceContext               A pointer to the DirectX11 device context.
 ///

@@ -21,33 +21,33 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3900f52e-2608-4159-af77-5b648efe61b8}</ProjectGuid>
-    <RootNamespace>ffx_fsr1</RootNamespace>
+    <ProjectGuid>{8A1AE7B3-1A76-4E87-BDFE-04E0258EC52D}</ProjectGuid>
+    <RootNamespace>ffx</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>ffx_fsr1</ProjectName>
+    <ProjectName>ffx</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -74,32 +74,30 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)_$(Platform)</TargetName>
     <MultiProcFXC>true</MultiProcFXC>
-    <OutDir>bin\$(Configuration)\</OutDir>
+    <OutDir>lib\$(Configuration)\</OutDir>
     <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>$(ProjectName)_$(Platform)</TargetName>
     <MultiProcFXC>true</MultiProcFXC>
-    <OutDir>bin\$(Configuration)\</OutDir>
+    <OutDir>lib\$(Configuration)\</OutDir>
     <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>bin\$(Configuration)\</OutDir>
+    <OutDir>lib\$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)_$(Platform)</TargetName>
     <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
-    <MultiProcFXC>true</MultiProcFXC>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>bin\$(Configuration)\</OutDir>
+    <OutDir>lib\$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)_$(Platform)</TargetName>
     <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
-    <MultiProcFXC>true</MultiProcFXC>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>FFX_FSR1;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -109,15 +107,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <FxCompile>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <EntryPointName>%(Filename)</EntryPointName>
-      <ShaderType>Compute</ShaderType>
-      <ShaderModel>5.0</ShaderModel>
-      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
-      <ObjectFileOutput />
-      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
-    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -125,7 +114,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>FFX_FSR1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -137,21 +126,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <FxCompile>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <EntryPointName>%(Filename)</EntryPointName>
-      <ShaderType>Compute</ShaderType>
-      <ShaderModel>5.0</ShaderModel>
-      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
-      <ObjectFileOutput />
-      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
-    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>FFX_FSR1;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -168,7 +148,6 @@
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
       <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -177,7 +156,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>FFX_FSR1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -196,76 +175,27 @@
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
       <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="gpu\fsr1\ffx_fsr1.h" />
-    <ClInclude Include="gpu\fsr1\ffx_fsr1_callbacks_glsl.h" />
-    <ClInclude Include="gpu\fsr1\ffx_fsr1_callbacks_hlsl.h" />
-    <ClInclude Include="gpu\fsr1\ffx_fsr1_easu.h" />
-    <ClInclude Include="gpu\fsr1\ffx_fsr1_rcas.h" />
-    <ClInclude Include="gpu\fsr1\ffx_fsr1_resources.h" />
-    <ClInclude Include="host\backends\blob_accessors\ffx_fsr1_shaderblobs.h" />
-    <ClInclude Include="host\backends\ffx_shader_blobs.h" />
-    <ClInclude Include="host\components\fsr1\ffx_fsr1.h" />
-    <ClInclude Include="host\components\fsr1\ffx_fsr1_private.h" />
+    <ClInclude Include="gpu\ffx_common_types.h" />
+    <ClInclude Include="gpu\ffx_core.h" />
+    <ClInclude Include="gpu\ffx_core_gpu_common.h" />
+    <ClInclude Include="gpu\ffx_core_gpu_common_half.h" />
+    <ClInclude Include="gpu\ffx_core_hlsl.h" />
+    <ClInclude Include="gpu\ffx_core_portability.h" />
+    <ClInclude Include="host\backends\dx11\ffx_dx11.h" />
+    <ClInclude Include="host\ffx_assert.h" />
+    <ClInclude Include="host\ffx_error.h" />
+    <ClInclude Include="host\ffx_interface.h" />
+    <ClInclude Include="host\ffx_object_management.h" />
+    <ClInclude Include="host\ffx_types.h" />
+    <ClInclude Include="host\ffx_util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="host\backends\blob_accessors\ffx_fsr1_shaderblobs.cpp" />
-    <ClCompile Include="host\backends\ffx_shader_blobs.cpp" />
-    <ClCompile Include="host\components\fsr1\ffx_fsr1.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_1_1.hlsl" />
-    <FxCompile Include="host\backends\hlsl\fsr1\ffx_fsr1_easu_pass.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="host\backends\hlsl\fsr1\ffx_fsr1_rcas_pass.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="ffx.vcxproj">
-      <Project>{8a1ae7b3-1a76-4e87-bdfe-04e0258ec52d}</Project>
-    </ProjectReference>
+    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp" />
+    <ClCompile Include="host\ffx_assert.cpp" />
+    <ClCompile Include="host\ffx_object_management.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
