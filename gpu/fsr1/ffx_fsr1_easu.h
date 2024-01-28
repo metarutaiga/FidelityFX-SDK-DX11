@@ -21,7 +21,9 @@
 // THE SOFTWARE.
 
 #define GROUP_SIZE  8
-#define FSR_RCAS_DENOISE 1
+#if FFX_FSR1_OPTION_RCAS_DENOISE
+    #define FSR_RCAS_DENOISE 1
+#endif
 
 #include "ffx_core.h"
 

@@ -82,100 +82,196 @@
     <FxCompile Include="host\backends\hlsl\fsr1\ffx_fsr1_rcas_pass.hlsl">
       <Filter>host\backends\hlsl\fsr1</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_1_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_0_0_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_0_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_0_0_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_0_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_0_1_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_1_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_0_1_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_1_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_1_0_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_0_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_1_0_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_0_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_1_1_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_1_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_0_1_1_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_1_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_0_0_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_0_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_0_0_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_0_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_0_1_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_1_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_0_1_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_1_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_1_0_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_0_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_1_0_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_0_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_1_1_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_1_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_16bit_permutations_1_1_1_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_1_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_0_0_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_0_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_0_0_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_0_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_0_1_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_1_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_0_1_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_1_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_1_0_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_0_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_1_0_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_0_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_1_1_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_1_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_0_1_1_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_1_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_0_0_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_0_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_0_0_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_0_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_0_1_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_1_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_0_1_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_1_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_1_0_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_0_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_1_0_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_0_1.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_1_1_0.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_1_0.hlsl">
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_easu_pass_permutations_1_1_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_0_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_0_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_0_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_0_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_1_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_1_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_1_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_0_1_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_0_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_0_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_0_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_0_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_1_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_1_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_1_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_16bit_permutations_1_1_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_0_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_0_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_0_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_0_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_1_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_1_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_1_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_0_1_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_0_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_0_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_0_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_0_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_1_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_1_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_1_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_fsr1_rcas_pass_permutations_1_1_1_1.hlsl">
       <Filter>host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
   </ItemGroup>

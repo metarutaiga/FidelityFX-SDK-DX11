@@ -34,9 +34,10 @@ typedef enum Fs1ShaderPermutationOptions
 {
     FSR1_SHADER_PERMUTATION_APPLY_RCAS              = (1 << 0),  ///< RCAS will be applied, outputs to correct intermediary target
     FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA  = (1 << 1),  ///< Compile RCAS to pass through the input alpha value
-    FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS        = (1 << 2),  ///< Handle necessary conversions for SRGB formats (de-gamma in and gamma out)
-    FSR1_SHADER_PERMUTATION_FORCE_WAVE64            = (1 << 3),  ///< doesn't map to a define, selects different table
-    FSR1_SHADER_PERMUTATION_ALLOW_FP16              = (1 << 4),  ///< Enables fast math computations where possible
+    FSR1_SHADER_PERMUTATION_RCAS_DENOISE            = (1 << 2),  ///< Compile RCAS to denoise
+    FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS        = (1 << 3),  ///< Handle necessary conversions for SRGB formats (de-gamma in and gamma out)
+    FSR1_SHADER_PERMUTATION_FORCE_WAVE64            = (1 << 4),  ///< doesn't map to a define, selects different table
+    FSR1_SHADER_PERMUTATION_ALLOW_FP16              = (1 << 5),  ///< Enables fast math computations where possible
 } Fs1ShaderPermutationOptions;
 
 // Constants for FSR1 dispatches. Must be kept in sync with cbFSR1 in ffx_fsr1_callbacks_hlsl.h

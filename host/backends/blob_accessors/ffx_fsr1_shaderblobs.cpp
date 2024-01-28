@@ -34,9 +34,10 @@
 
 static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
-    int FFX_FSR1_OPTION_APPLY_RCAS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_APPLY_RCAS);
-    int FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA);
-    int FFX_FSR1_OPTION_SRGB_CONVERSIONS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS);
+    int APPLY_RCAS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_APPLY_RCAS);
+    int RCAS_PASSTHROUGH_ALPHA = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA);
+    int RCAS_DENOISE = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_DENOISE);    
+    int SRGB_CONVERSIONS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS);
 
     // Name                                 Type  Format         Dim      HLSL Bind  Count
     // ------------------------------ ---------- ------- ----------- -------------- ------
@@ -58,10 +59,10 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
     static const uint32_t boundSamplerCounts[] = { 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[FFX_FSR1_OPTION_APPLY_RCAS][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA].data
-                : g_ffx_fsr1_easu_pass_permutations[FFX_FSR1_OPTION_APPLY_RCAS][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA].data,
-        is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[FFX_FSR1_OPTION_APPLY_RCAS][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA].size
-                : g_ffx_fsr1_easu_pass_permutations[FFX_FSR1_OPTION_APPLY_RCAS][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA].size,
+        is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data
+                : g_ffx_fsr1_easu_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data,
+        is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size
+                : g_ffx_fsr1_easu_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size,
         1,
         1,
         1,
@@ -94,9 +95,10 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
 
 static FfxShaderBlob fsr1GetRcasPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
-    int FFX_FSR1_OPTION_APPLY_RCAS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_APPLY_RCAS);
-    int FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA);
-    int FFX_FSR1_OPTION_SRGB_CONVERSIONS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS);
+    int APPLY_RCAS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_APPLY_RCAS);
+    int RCAS_PASSTHROUGH_ALPHA = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA);
+    int RCAS_DENOISE = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_DENOISE);
+    int SRGB_CONVERSIONS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS);
 
     // Name                                 Type  Format         Dim      HLSL Bind  Count
     // ------------------------------ ---------- ------- ----------- -------------- ------
@@ -114,10 +116,10 @@ static FfxShaderBlob fsr1GetRcasPassPermutationBlobByIndex(uint32_t permutationO
     static const uint32_t boundUAVTextureCounts[] = { 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_fsr1_rcas_pass_16bit_permutations[FFX_FSR1_OPTION_APPLY_RCAS][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA].data
-                : g_ffx_fsr1_rcas_pass_permutations[FFX_FSR1_OPTION_APPLY_RCAS][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA].data,
-        is16bit ? g_ffx_fsr1_rcas_pass_16bit_permutations[FFX_FSR1_OPTION_APPLY_RCAS][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA].size
-                : g_ffx_fsr1_rcas_pass_permutations[FFX_FSR1_OPTION_APPLY_RCAS][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA][FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA].size,
+        is16bit ? g_ffx_fsr1_rcas_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data
+                : g_ffx_fsr1_rcas_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data,
+        is16bit ? g_ffx_fsr1_rcas_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size
+                : g_ffx_fsr1_rcas_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size,
         1,
         1,
         1,

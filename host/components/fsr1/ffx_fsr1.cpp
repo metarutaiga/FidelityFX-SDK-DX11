@@ -109,6 +109,7 @@ static uint32_t getPipelinePermutationFlags(uint32_t contextFlags, FfxFsr1Pass p
     // work out what permutation to load.
     uint32_t flags = 0;
     flags |= (contextFlags & FFX_FSR1_RCAS_PASSTHROUGH_ALPHA) ? FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA : 0;
+    flags |= (contextFlags & FFX_FSR1_RCAS_DENOISE) ? FSR1_SHADER_PERMUTATION_RCAS_DENOISE : 0;
     flags |= (contextFlags & FFX_FSR1_ENABLE_SRGB_CONVERSIONS) ? FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS : 0;
     flags |= (passId != FFX_FSR1_PASS_EASU) ? FSR1_SHADER_PERMUTATION_APPLY_RCAS : 0;
     flags |= (force64) ? FSR1_SHADER_PERMUTATION_FORCE_WAVE64 : 0;

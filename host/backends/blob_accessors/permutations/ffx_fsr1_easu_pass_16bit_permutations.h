@@ -22,34 +22,66 @@
 
 typedef unsigned char BYTE;
 
-#include "ffx_fsr1_easu_pass_16bit_permutations_0_0_0.h"
-#include "ffx_fsr1_easu_pass_16bit_permutations_0_0_1.h"
-#include "ffx_fsr1_easu_pass_16bit_permutations_0_1_0.h"
-#include "ffx_fsr1_easu_pass_16bit_permutations_0_1_1.h"
-#include "ffx_fsr1_easu_pass_16bit_permutations_1_0_0.h"
-#include "ffx_fsr1_easu_pass_16bit_permutations_1_0_1.h"
-#include "ffx_fsr1_easu_pass_16bit_permutations_1_1_0.h"
-#include "ffx_fsr1_easu_pass_16bit_permutations_1_1_1.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_0_0_0_0.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_0_0_0_1.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_0_0_1_0.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_0_0_1_1.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_0_1_0_0.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_0_1_0_1.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_0_1_1_0.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_0_1_1_1.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_1_0_0_0.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_1_0_0_1.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_1_0_1_0.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_1_0_1_1.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_1_1_0_0.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_1_1_0_1.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_1_1_1_0.h"
+#include "ffx_fsr1_easu_pass_16bit_permutations_1_1_1_1.h"
 
-static const struct { const uint8_t* data; uint32_t size; } g_ffx_fsr1_easu_pass_16bit_permutations[2][2][2] = {
+static const struct { const uint8_t* data; uint32_t size; } g_ffx_fsr1_easu_pass_16bit_permutations[2][2][2][2] = {
     {
         {
-            { g_ffx_fsr1_easu_pass_16bit_permutations_0_0_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_0_0) },
-            { g_ffx_fsr1_easu_pass_16bit_permutations_0_0_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_0_1) },
+            {
+                { g_ffx_fsr1_easu_pass_16bit_permutations_0_0_0_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_0_0_0) },
+                { g_ffx_fsr1_easu_pass_16bit_permutations_0_0_0_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_0_0_1) },
+            },
+            {
+                { g_ffx_fsr1_easu_pass_16bit_permutations_0_0_1_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_0_1_0) },
+                { g_ffx_fsr1_easu_pass_16bit_permutations_0_0_1_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_0_1_1) },
+            },
         },
         {
-            { g_ffx_fsr1_easu_pass_16bit_permutations_0_1_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_1_0) },
-            { g_ffx_fsr1_easu_pass_16bit_permutations_0_1_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_1_1) },
+            {
+                { g_ffx_fsr1_easu_pass_16bit_permutations_0_1_0_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_1_0_0) },
+                { g_ffx_fsr1_easu_pass_16bit_permutations_0_1_0_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_1_0_1) },
+            },
+            {
+                { g_ffx_fsr1_easu_pass_16bit_permutations_0_1_1_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_1_1_0) },
+                { g_ffx_fsr1_easu_pass_16bit_permutations_0_1_1_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_0_1_1_1) },
+            },
         },
     },
     {
         {
-            { g_ffx_fsr1_easu_pass_16bit_permutations_1_0_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_0_0) },
-            { g_ffx_fsr1_easu_pass_16bit_permutations_1_0_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_0_1) },
+            {
+                { g_ffx_fsr1_easu_pass_16bit_permutations_1_0_0_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_0_0_0) },
+                { g_ffx_fsr1_easu_pass_16bit_permutations_1_0_0_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_0_0_1) },
+            },
+            {
+                { g_ffx_fsr1_easu_pass_16bit_permutations_1_0_1_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_0_1_0) },
+                { g_ffx_fsr1_easu_pass_16bit_permutations_1_0_1_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_0_1_1) },
+            },
         },
         {
-            { g_ffx_fsr1_easu_pass_16bit_permutations_1_1_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_1_0) },
-            { g_ffx_fsr1_easu_pass_16bit_permutations_1_1_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_1_1) },
+            {
+                { g_ffx_fsr1_easu_pass_16bit_permutations_1_1_0_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_1_0_0) },
+                { g_ffx_fsr1_easu_pass_16bit_permutations_1_1_0_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_1_0_1) },
+            },
+            {
+                { g_ffx_fsr1_easu_pass_16bit_permutations_1_1_1_0, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_1_1_0) },
+                { g_ffx_fsr1_easu_pass_16bit_permutations_1_1_1_1, sizeof(g_ffx_fsr1_easu_pass_16bit_permutations_1_1_1_1) },
+            },
         },
     },
 };
