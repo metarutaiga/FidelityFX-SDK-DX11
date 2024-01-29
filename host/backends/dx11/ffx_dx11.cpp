@@ -740,7 +740,7 @@ FfxErrorCode GetDeviceCapabilitiesDX11(FfxInterface* backendInterface, FfxDevice
     D3D11_FEATURE_DATA_SHADER_MIN_PRECISION_SUPPORT d3d11Options = {};
     if (SUCCEEDED(dx11Device->CheckFeatureSupport(D3D11_FEATURE_SHADER_MIN_PRECISION_SUPPORT, &d3d11Options, sizeof(d3d11Options)))) {
 
-        deviceCapabilities->fp16Supported = (d3d11Options.PixelShaderMinPrecision != 0);
+        deviceCapabilities->fp16Supported = (d3d11Options.AllOtherShaderStagesMinPrecision != 0);
     }
 
     return FFX_OK;
@@ -1088,7 +1088,7 @@ FfxErrorCode DestroyResourceDX11(
 
     BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
     BackendContext_DX11::EffectContext& effectContext = backendContext->pEffectContexts[effectContextId];
-    if ((resource.internalIndex >= int32_t(effectContextId * FFX_MAX_RESOURCE_COUNT)) && (resource.internalIndex < int32_t(effectContext.nextStaticResource))) {
+    if ((resource.internalIndex >= int32_t(effectContextId * FFX_MAX_RESOURCE_COUNT)) && (resource.internalIndex < int32_t(effectContextId * FFX_MAX_RESOURCE_COUNT + FFX_MAX_RESOURCE_COUNT))) {
 
         if (backendContext->pResources[resource.internalIndex].srvPtr) {
             backendContext->pResources[resource.internalIndex].srvPtr->Release();
