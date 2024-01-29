@@ -28,6 +28,7 @@
 #include <host/backends/dx11/ffx_dx11.h>
 #include <host/backends/ffx_shader_blobs.h>
 #include <codecvt>  // convert string to wstring
+#include <mutex>
 
 // DX11 prototypes for functions in the backend interface
 FfxUInt32 GetSDKVersionDX11(FfxInterface* backendInterface);
@@ -47,10 +48,6 @@ FfxErrorCode ExecuteGpuJobsDX11(FfxInterface* backendInterface, FfxCommandList c
 
 #define FFX_MAX_RESOURCE_IDENTIFIER_COUNT   (128)
 
-// To track parallel effect context usage
-static uint32_t s_BackendRefCount = 0;
-static uint32_t s_MaxEffectContexts = 0;
-
 typedef struct BackendContext_DX11 {
 
     // store for resources and resourceViews
@@ -65,6 +62,9 @@ typedef struct BackendContext_DX11 {
         ID3D11UnorderedAccessView*  uavPtr[16];
     } Resource;
 
+    uint32_t refCount;
+    uint32_t maxEffectContexts;
+
     ID3D11Device*           device = nullptr;
     ID3D11DeviceContext*    deviceContext = nullptr;
     ID3D11DeviceContext1*   deviceContext1 = nullptr;
@@ -76,6 +76,7 @@ typedef struct BackendContext_DX11 {
     ID3D11Buffer*           constantBufferResource[FFX_MAX_NUM_CONST_BUFFERS];
     uint32_t                constantBufferSize[FFX_MAX_NUM_CONST_BUFFERS];
     uint32_t                constantBufferOffset[FFX_MAX_NUM_CONST_BUFFERS];
+    std::mutex              constantBufferMutex;
 
     typedef struct alignas(32) EffectContext {
 
@@ -116,11 +117,8 @@ FfxErrorCode ffxGetInterfaceDX11(
     FfxDevice device,
     void* scratchBuffer,
     size_t scratchBufferSize,
-    size_t maxContexts) {
+    uint32_t maxContexts) {
 
-    FFX_RETURN_ON_ERROR(
-        !s_BackendRefCount,
-        FFX_ERROR_BACKEND_API_ERROR);
     FFX_RETURN_ON_ERROR(
         backendInterface,
         FFX_ERROR_INVALID_POINTER);
@@ -142,19 +140,30 @@ FfxErrorCode ffxGetInterfaceDX11(
     backendInterface->fpUnregisterResources = UnregisterResourcesDX11;
     backendInterface->fpGetResourceDescription = GetResourceDescriptorDX11;
     backendInterface->fpCreatePipeline = CreatePipelineDX11;
+    backendInterface->fpGetPermutationBlobByIndex = ffxGetPermutationBlobByIndex;
     backendInterface->fpDestroyPipeline = DestroyPipelineDX11;
     backendInterface->fpScheduleGpuJob = ScheduleGpuJobDX11;
     backendInterface->fpExecuteGpuJobs = ExecuteGpuJobsDX11;
+    backendInterface->fpSwapChainConfigureFrameGeneration = nullptr;
 
     // Memory assignments
     backendInterface->scratchBuffer = scratchBuffer;
     backendInterface->scratchBufferSize = scratchBufferSize;
 
+    BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
+
+    FFX_RETURN_ON_ERROR(
+        !backendContext->refCount,
+        FFX_ERROR_BACKEND_API_ERROR);
+
+    // Clear everything out
+    memset(backendContext, 0, sizeof(*backendContext));
+
     // Set the device
     backendInterface->device = device;
 
     // Assign the max number of contexts we'll be using
-    s_MaxEffectContexts = static_cast<uint32_t>(maxContexts);
+    backendContext->maxEffectContexts = maxContexts;
 
     return FFX_OK;
 }
@@ -172,7 +181,7 @@ FfxResource ffxGetResourceDX11(ID3D11Resource* dx11Resource,
     FfxResourceStates                          state /*=FFX_RESOURCE_STATE_COMPUTE_READ*/)
 {
     FfxResource resource = {};
-    resource.resource = reinterpret_cast<void*>(dx11Resource);
+    resource.resource    = reinterpret_cast<void*>(const_cast<ID3D11Resource*>(dx11Resource));
     resource.state = state;
     resource.description = ffxResDescription;
 
@@ -277,6 +286,12 @@ static DXGI_FORMAT convertFormatSrv(DXGI_FORMAT format)
     case DXGI_FORMAT_D16_UNORM:
         return DXGI_FORMAT_R16_UNORM;
 
+        // Handle Color
+    case DXGI_FORMAT_B8G8R8A8_TYPELESS:
+        return DXGI_FORMAT_B8G8R8A8_UNORM;
+    case DXGI_FORMAT_R8G8B8A8_TYPELESS:
+        return DXGI_FORMAT_R8G8B8A8_UNORM;
+
         // Colors can map as is
     default:
         return format;
@@ -287,43 +302,53 @@ DXGI_FORMAT ffxGetDX11FormatFromSurfaceFormat(FfxSurfaceFormat surfaceFormat)
 {
     switch (surfaceFormat) {
 
-        case(FFX_SURFACE_FORMAT_R32G32B32A32_TYPELESS):
+        case (FFX_SURFACE_FORMAT_R32G32B32A32_TYPELESS):
             return DXGI_FORMAT_R32G32B32A32_TYPELESS;
-        case(FFX_SURFACE_FORMAT_R32G32B32A32_FLOAT):
+        case (FFX_SURFACE_FORMAT_R32G32B32A32_FLOAT):
             return DXGI_FORMAT_R32G32B32A32_FLOAT;
-        case(FFX_SURFACE_FORMAT_R16G16B16A16_FLOAT):
+        case (FFX_SURFACE_FORMAT_R16G16B16A16_FLOAT):
             return DXGI_FORMAT_R16G16B16A16_FLOAT;
-        case(FFX_SURFACE_FORMAT_R32G32_FLOAT):
+        case (FFX_SURFACE_FORMAT_R32G32_FLOAT):
             return DXGI_FORMAT_R32G32_FLOAT;
-        case(FFX_SURFACE_FORMAT_R32_UINT):
+        case (FFX_SURFACE_FORMAT_R32_UINT):
             return DXGI_FORMAT_R32_UINT;
-        case(FFX_SURFACE_FORMAT_R8G8B8A8_TYPELESS):
+        case(FFX_SURFACE_FORMAT_R10G10B10A2_UNORM):
+            return DXGI_FORMAT_R10G10B10A2_UNORM;
+        case (FFX_SURFACE_FORMAT_R8G8B8A8_TYPELESS):
             return DXGI_FORMAT_R8G8B8A8_TYPELESS;
-        case(FFX_SURFACE_FORMAT_R8G8B8A8_UNORM):
+        case (FFX_SURFACE_FORMAT_R8G8B8A8_UNORM):
             return DXGI_FORMAT_R8G8B8A8_UNORM;
-        case(FFX_SURFACE_FORMAT_R8G8B8A8_SNORM):
+        case (FFX_SURFACE_FORMAT_R8G8B8A8_SRGB):
+            return DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+        case (FFX_SURFACE_FORMAT_R8G8B8A8_SNORM):
             return DXGI_FORMAT_R8G8B8A8_SNORM;
-        case(FFX_SURFACE_FORMAT_R11G11B10_FLOAT):
+        case (FFX_SURFACE_FORMAT_R11G11B10_FLOAT):
             return DXGI_FORMAT_R11G11B10_FLOAT;
-        case(FFX_SURFACE_FORMAT_R16G16_FLOAT):
+        case (FFX_SURFACE_FORMAT_R16G16_FLOAT):
             return DXGI_FORMAT_R16G16_FLOAT;
-        case(FFX_SURFACE_FORMAT_R16G16_UINT):
+        case (FFX_SURFACE_FORMAT_R16G16_UINT):
             return DXGI_FORMAT_R16G16_UINT;
-        case(FFX_SURFACE_FORMAT_R16_FLOAT):
+        case (FFX_SURFACE_FORMAT_R16G16_SINT):
+            return DXGI_FORMAT_R16G16_SINT;
+        case (FFX_SURFACE_FORMAT_R16_FLOAT):
             return DXGI_FORMAT_R16_FLOAT;
-        case(FFX_SURFACE_FORMAT_R16_UINT):
+        case (FFX_SURFACE_FORMAT_R16_UINT):
             return DXGI_FORMAT_R16_UINT;
-        case(FFX_SURFACE_FORMAT_R16_UNORM):
+        case (FFX_SURFACE_FORMAT_R16_UNORM):
             return DXGI_FORMAT_R16_UNORM;
-        case(FFX_SURFACE_FORMAT_R16_SNORM):
+        case (FFX_SURFACE_FORMAT_R16_SNORM):
             return DXGI_FORMAT_R16_SNORM;
-        case(FFX_SURFACE_FORMAT_R8_UNORM):
+        case (FFX_SURFACE_FORMAT_R8_UNORM):
             return DXGI_FORMAT_R8_UNORM;
-        case(FFX_SURFACE_FORMAT_R8G8_UNORM):
+        case (FFX_SURFACE_FORMAT_R8_UINT):
+            return DXGI_FORMAT_R8_UINT;
+        case (FFX_SURFACE_FORMAT_R8G8_UINT):
+            return DXGI_FORMAT_R8G8_UINT;
+        case (FFX_SURFACE_FORMAT_R8G8_UNORM):
             return DXGI_FORMAT_R8G8_UNORM;
-        case(FFX_SURFACE_FORMAT_R32_FLOAT):
+        case (FFX_SURFACE_FORMAT_R32_FLOAT):
             return DXGI_FORMAT_R32_FLOAT;
-        case(FFX_SURFACE_FORMAT_UNKNOWN):
+        case (FFX_SURFACE_FORMAT_UNKNOWN):
             return DXGI_FORMAT_UNKNOWN;
 
         default:
@@ -348,45 +373,225 @@ FfxSurfaceFormat ffxGetSurfaceFormatDX11(DXGI_FORMAT format)
             return FFX_SURFACE_FORMAT_R32G32B32A32_TYPELESS;
         case(DXGI_FORMAT_R32G32B32A32_FLOAT):
             return FFX_SURFACE_FORMAT_R32G32B32A32_FLOAT;
+        case DXGI_FORMAT_R32G32B32A32_UINT:
+            return FFX_SURFACE_FORMAT_R32G32B32A32_UINT;
+        //case DXGI_FORMAT_R32G32B32A32_SINT:
+        //case DXGI_FORMAT_R32G32B32_TYPELESS:
+        //case DXGI_FORMAT_R32G32B32_FLOAT:
+        //case DXGI_FORMAT_R32G32B32_UINT:
+        //case DXGI_FORMAT_R32G32B32_SINT:
+
+        case DXGI_FORMAT_R16G16B16A16_TYPELESS:
         case(DXGI_FORMAT_R16G16B16A16_FLOAT):
             return FFX_SURFACE_FORMAT_R16G16B16A16_FLOAT;
-        case(DXGI_FORMAT_R32G32_FLOAT):
+        //case DXGI_FORMAT_R16G16B16A16_UNORM:
+        //case DXGI_FORMAT_R16G16B16A16_UINT:
+        //case DXGI_FORMAT_R16G16B16A16_SNORM:
+        //case DXGI_FORMAT_R16G16B16A16_SINT:
+
+        case DXGI_FORMAT_R32G32_TYPELESS:
+        case DXGI_FORMAT_R32G32_FLOAT:
             return FFX_SURFACE_FORMAT_R32G32_FLOAT;
-        case(DXGI_FORMAT_R32_UINT):
+        //case DXGI_FORMAT_R32G32_FLOAT:
+        //case DXGI_FORMAT_R32G32_UINT:
+        //case DXGI_FORMAT_R32G32_SINT:
+
+        case DXGI_FORMAT_R32G8X24_TYPELESS:
+        case DXGI_FORMAT_D32_FLOAT_S8X24_UINT:
+        case DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS:
+            return FFX_SURFACE_FORMAT_R32_FLOAT;
+
+        case DXGI_FORMAT_R24G8_TYPELESS:
+        case DXGI_FORMAT_D24_UNORM_S8_UINT:
+        case DXGI_FORMAT_R24_UNORM_X8_TYPELESS:
             return FFX_SURFACE_FORMAT_R32_UINT;
+
+        case DXGI_FORMAT_X32_TYPELESS_G8X24_UINT:
+        case DXGI_FORMAT_X24_TYPELESS_G8_UINT:
+            return FFX_SURFACE_FORMAT_R8_UINT;
+
+        case DXGI_FORMAT_R10G10B10A2_TYPELESS:
+        case DXGI_FORMAT_R10G10B10A2_UNORM:
+            return FFX_SURFACE_FORMAT_R10G10B10A2_UNORM;
+        //case DXGI_FORMAT_R10G10B10A2_UINT:
+        
+        case (DXGI_FORMAT_R11G11B10_FLOAT):
+            return FFX_SURFACE_FORMAT_R11G11B10_FLOAT;
+
+        case (DXGI_FORMAT_R8G8B8A8_TYPELESS):
+            return FFX_SURFACE_FORMAT_R8G8B8A8_TYPELESS;
+        case (DXGI_FORMAT_R8G8B8A8_UNORM):
+            return FFX_SURFACE_FORMAT_R8G8B8A8_UNORM;
+        case (DXGI_FORMAT_R8G8B8A8_UNORM_SRGB):
+            return FFX_SURFACE_FORMAT_R8G8B8A8_SRGB;
+        //case DXGI_FORMAT_R8G8B8A8_UINT:
+        case DXGI_FORMAT_R8G8B8A8_SNORM:
+            return FFX_SURFACE_FORMAT_R8G8B8A8_SNORM;
+
+        case DXGI_FORMAT_R16G16_TYPELESS:
+        case (DXGI_FORMAT_R16G16_FLOAT):
+            return FFX_SURFACE_FORMAT_R16G16_FLOAT;
+        //case DXGI_FORMAT_R16G16_UNORM:
+        case (DXGI_FORMAT_R16G16_UINT):
+            return FFX_SURFACE_FORMAT_R16G16_UINT;
+        //case DXGI_FORMAT_R16G16_SNORM
+        //case DXGI_FORMAT_R16G16_SINT 
+
+        //case DXGI_FORMAT_R32_SINT:
+        case DXGI_FORMAT_R32_UINT:
+            return FFX_SURFACE_FORMAT_R32_UINT;
+        case DXGI_FORMAT_R32_TYPELESS:
         case(DXGI_FORMAT_D32_FLOAT):
         case(DXGI_FORMAT_R32_FLOAT):
             return FFX_SURFACE_FORMAT_R32_FLOAT;
-        case(DXGI_FORMAT_R8G8B8A8_TYPELESS):
-            return FFX_SURFACE_FORMAT_R8G8B8A8_TYPELESS;
-        case(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB):
-            return FFX_SURFACE_FORMAT_R8G8B8A8_SRGB;
-        case(DXGI_FORMAT_R8G8B8A8_UNORM):
-            return FFX_SURFACE_FORMAT_R8G8B8A8_UNORM;
-        case(DXGI_FORMAT_R11G11B10_FLOAT):
-            return FFX_SURFACE_FORMAT_R11G11B10_FLOAT;
-        case(DXGI_FORMAT_R16G16_FLOAT):
-            return FFX_SURFACE_FORMAT_R16G16_FLOAT;
-        case(DXGI_FORMAT_R16G16_UINT):
-            return FFX_SURFACE_FORMAT_R16G16_UINT;
-        case(DXGI_FORMAT_R16_FLOAT):
+
+        case DXGI_FORMAT_R8G8_TYPELESS:
+        case (DXGI_FORMAT_R8G8_UINT):
+            return FFX_SURFACE_FORMAT_R8G8_UINT;
+        //case DXGI_FORMAT_R8G8_UNORM:
+        //case DXGI_FORMAT_R8G8_SNORM:
+        //case DXGI_FORMAT_R8G8_SINT:
+
+        case DXGI_FORMAT_R16_TYPELESS:
+        case (DXGI_FORMAT_R16_FLOAT):
             return FFX_SURFACE_FORMAT_R16_FLOAT;
-        case(DXGI_FORMAT_R16_UINT):
+        case (DXGI_FORMAT_R16_UINT):
             return FFX_SURFACE_FORMAT_R16_UINT;
-        case(DXGI_FORMAT_R16_UNORM):
+        case DXGI_FORMAT_D16_UNORM:
+        case (DXGI_FORMAT_R16_UNORM):
             return FFX_SURFACE_FORMAT_R16_UNORM;
-        case(DXGI_FORMAT_R16_SNORM):
+        case (DXGI_FORMAT_R16_SNORM):
             return FFX_SURFACE_FORMAT_R16_SNORM;
-        case(DXGI_FORMAT_R8_UNORM):
+        //case DXGI_FORMAT_R16_SINT:
+
+        case DXGI_FORMAT_R8_TYPELESS:
+        case DXGI_FORMAT_R8_UNORM:
+        case DXGI_FORMAT_A8_UNORM:
             return FFX_SURFACE_FORMAT_R8_UNORM;
-        case(DXGI_FORMAT_R8_UINT):
+        case DXGI_FORMAT_R8_UINT:
             return FFX_SURFACE_FORMAT_R8_UINT;
+        //case DXGI_FORMAT_R8_SNORM:
+        //case DXGI_FORMAT_R8_SINT:
+        //case DXGI_FORMAT_R1_UNORM:
+
         case(DXGI_FORMAT_UNKNOWN):
             return FFX_SURFACE_FORMAT_UNKNOWN;
         default:
             FFX_ASSERT_MESSAGE(false, "Format not yet supported");
             return FFX_SURFACE_FORMAT_UNKNOWN;
     }
+}
+
+bool IsDepthDX11(DXGI_FORMAT format)
+{
+    return (format == DXGI_FORMAT_D16_UNORM) || 
+           (format == DXGI_FORMAT_D32_FLOAT) || 
+           (format == DXGI_FORMAT_D24_UNORM_S8_UINT) ||
+           (format == DXGI_FORMAT_D32_FLOAT_S8X24_UINT);
+}
+
+FfxResourceDescription GetFfxResourceDescriptionDX11(ID3D11Resource* pResource)
+{
+    FfxResourceDescription resourceDescription = {};
+
+    // This is valid
+    if (!pResource)
+        return resourceDescription;
+
+    if (pResource)
+    {
+        D3D11_RESOURCE_DIMENSION dimension = {};
+        pResource->GetType(&dimension);
+        
+        if (dimension == D3D11_RESOURCE_DIMENSION_BUFFER)
+        {
+            D3D11_BUFFER_DESC desc = {};
+            reinterpret_cast<ID3D11Buffer*>(pResource)->GetDesc(&desc);
+
+            resourceDescription.flags  = FFX_RESOURCE_FLAGS_NONE;
+            resourceDescription.usage  = FFX_RESOURCE_USAGE_UAV;
+            resourceDescription.width  = desc.ByteWidth;
+            resourceDescription.height = 1;
+            resourceDescription.format = ffxGetSurfaceFormatDX11(DXGI_FORMAT_UNKNOWN);
+
+            // What should we initialize this to?? No case for this yet
+            resourceDescription.depth    = 0;
+            resourceDescription.mipCount = 0;
+
+            // Set the type
+            resourceDescription.type = FFX_RESOURCE_TYPE_BUFFER;
+        }
+        else
+        {
+            // Set flags properly for resource registration
+            resourceDescription.flags = FFX_RESOURCE_FLAGS_NONE;
+
+            switch (dimension)
+            {
+            case D3D11_RESOURCE_DIMENSION_TEXTURE1D:
+            {
+                D3D11_TEXTURE1D_DESC desc = {};
+                reinterpret_cast<ID3D11Texture1D*>(pResource)->GetDesc(&desc);
+
+                resourceDescription.type = FFX_RESOURCE_TYPE_TEXTURE1D;
+                resourceDescription.usage = IsDepthDX11(desc.Format) ? FFX_RESOURCE_USAGE_DEPTHTARGET : FFX_RESOURCE_USAGE_READ_ONLY;
+                if ((desc.BindFlags & D3D11_BIND_UNORDERED_ACCESS) == D3D11_BIND_UNORDERED_ACCESS)
+                    resourceDescription.usage = (FfxResourceUsage)(resourceDescription.usage | FFX_RESOURCE_USAGE_UAV);
+
+                resourceDescription.width = desc.Width;
+                resourceDescription.height = 1;
+                resourceDescription.depth = 1;
+                resourceDescription.mipCount = desc.MipLevels;
+                resourceDescription.format = ffxGetSurfaceFormatDX11(desc.Format);
+                break;
+            }
+            case D3D11_RESOURCE_DIMENSION_TEXTURE2D:
+            {
+                D3D11_TEXTURE2D_DESC desc = {};
+                reinterpret_cast<ID3D11Texture2D*>(pResource)->GetDesc(&desc);
+
+                if (desc.ArraySize == 1)
+                    resourceDescription.type = FFX_RESOURCE_TYPE_TEXTURE2D;
+                else if (desc.ArraySize == 6)
+                    resourceDescription.type = FFX_RESOURCE_TYPE_TEXTURE_CUBE;
+                else
+                    resourceDescription.type = FFX_RESOURCE_TYPE_TEXTURE2D;
+                resourceDescription.usage = IsDepthDX11(desc.Format) ? FFX_RESOURCE_USAGE_DEPTHTARGET : FFX_RESOURCE_USAGE_READ_ONLY;
+                if ((desc.BindFlags & D3D11_BIND_UNORDERED_ACCESS) == D3D11_BIND_UNORDERED_ACCESS)
+                    resourceDescription.usage = (FfxResourceUsage)(resourceDescription.usage | FFX_RESOURCE_USAGE_UAV);
+
+                resourceDescription.width = desc.Width;
+                resourceDescription.height = desc.Height;
+                resourceDescription.depth = desc.ArraySize;
+                resourceDescription.mipCount = desc.MipLevels;
+                resourceDescription.format = ffxGetSurfaceFormatDX11(desc.Format);
+                break;
+            }
+            case D3D11_RESOURCE_DIMENSION_TEXTURE3D:
+            {
+                D3D11_TEXTURE3D_DESC desc = {};
+                reinterpret_cast<ID3D11Texture3D*>(pResource)->GetDesc(&desc);
+
+                resourceDescription.type = FFX_RESOURCE_TYPE_TEXTURE3D;
+                resourceDescription.usage = IsDepthDX11(desc.Format) ? FFX_RESOURCE_USAGE_DEPTHTARGET : FFX_RESOURCE_USAGE_READ_ONLY;
+                if ((desc.BindFlags & D3D11_BIND_UNORDERED_ACCESS) == D3D11_BIND_UNORDERED_ACCESS)
+                    resourceDescription.usage = (FfxResourceUsage)(resourceDescription.usage | FFX_RESOURCE_USAGE_UAV);
+
+                resourceDescription.width = desc.Width;
+                resourceDescription.height = desc.Height;
+                resourceDescription.depth = desc.Depth;
+                resourceDescription.mipCount = desc.MipLevels;
+                resourceDescription.format = ffxGetSurfaceFormatDX11(desc.Format);
+                break;
+            }
+            default:
+                FFX_ASSERT_MESSAGE(false, "FFXInterface: Cauldron: Unsupported texture dimension requested. Please implement.");
+                break;
+            }
+        }
+    }
+
+    return resourceDescription;
 }
 
 ID3D11Resource* getDX11ResourcePtr(BackendContext_DX11* backendContext, int32_t resourceIndex)
@@ -416,10 +621,9 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxUInt32*
     BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
 
     // Set things up if this is the first invocation
-    if (!s_BackendRefCount) {
+    if (!backendContext->refCount) {
 
-        // Clear everything out
-        memset(backendContext, 0, sizeof(*backendContext));
+        new (&backendContext->constantBufferMutex) std::mutex();
 
         if (dx11Device != NULL) {
 
@@ -431,9 +635,9 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxUInt32*
         }
 
         // Map all of our pointers
-        uint32_t gpuJobDescArraySize = FFX_ALIGN_UP(s_MaxEffectContexts * FFX_MAX_GPU_JOBS * sizeof(FfxGpuJobDescription), sizeof(uint32_t));
-        uint32_t resourceArraySize = FFX_ALIGN_UP(s_MaxEffectContexts * FFX_MAX_RESOURCE_COUNT * sizeof(BackendContext_DX11::Resource), sizeof(uint64_t));
-        uint32_t contextArraySize = FFX_ALIGN_UP(s_MaxEffectContexts * sizeof(BackendContext_DX11::EffectContext), sizeof(uint32_t));
+        uint32_t gpuJobDescArraySize = FFX_ALIGN_UP(backendContext->maxEffectContexts * FFX_MAX_GPU_JOBS * sizeof(FfxGpuJobDescription), sizeof(uint32_t));
+        uint32_t resourceArraySize = FFX_ALIGN_UP(backendContext->maxEffectContexts * FFX_MAX_RESOURCE_COUNT * sizeof(BackendContext_DX11::Resource), sizeof(uint64_t));
+        uint32_t contextArraySize = FFX_ALIGN_UP(backendContext->maxEffectContexts * sizeof(BackendContext_DX11::EffectContext), sizeof(uint32_t));
         uint8_t* pMem = (uint8_t*)((BackendContext_DX11*)(backendContext + 1));
 
         // Map gpu job array
@@ -452,11 +656,13 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxUInt32*
     }
 
     // Direct3D 11.1
-    if (!s_BackendRefCount && backendContext->deviceContext1 != NULL) {
+    if (!backendContext->refCount && backendContext->deviceContext1 != NULL) {
+
+        std::lock_guard<std::mutex> cbLock{ backendContext->constantBufferMutex };
 
         // create dynamic ring buffer for constant uploads
         backendContext->constantBufferSize[0] = FFX_ALIGN_UP(FFX_MAX_CONST_SIZE, 256) *
-            s_MaxEffectContexts * FFX_MAX_PASS_COUNT * FFX_MAX_QUEUED_FRAMES; // Size aligned to 256
+            backendContext->maxEffectContexts * FFX_MAX_PASS_COUNT * FFX_MAX_QUEUED_FRAMES; // Size aligned to 256
 
         D3D11_BUFFER_DESC constDesc = {};
         constDesc.ByteWidth = backendContext->constantBufferSize[0];
@@ -475,10 +681,10 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxUInt32*
     }
 
     // Increment the ref count
-    ++s_BackendRefCount;
+    ++backendContext->refCount;
 
     // Get an available context id
-    for (uint32_t i = 0; i < s_MaxEffectContexts; ++i) {
+    for (uint32_t i = 0; i < backendContext->maxEffectContexts; ++i) {
         if (!backendContext->pEffectContexts[i].active) {
             *effectContextId = i;
 
@@ -545,6 +751,7 @@ FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32
 {
     FFX_ASSERT(NULL != backendInterface);
     BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
+    FFX_ASSERT(backendContext->refCount > 0);
 
     // Delete any resources allocated by this context
     BackendContext_DX11::EffectContext& effectContext = backendContext->pEffectContexts[effectContextId];
@@ -567,9 +774,9 @@ FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32
     effectContext.active = false;
 
     // Decrement ref count
-    --s_BackendRefCount;
+    --backendContext->refCount;
 
-    if (!s_BackendRefCount) {
+    if (!backendContext->refCount) {
 
         // release constant buffer pool
         for (size_t i = 0; i < FFX_MAX_NUM_CONST_BUFFERS; ++i) {
@@ -904,6 +1111,54 @@ FfxErrorCode DestroyResourceDX11(
     return FFX_ERROR_OUT_OF_RANGE;
 }
 
+DXGI_FORMAT patchDxgiFormatWithFfxUsage(DXGI_FORMAT dxResFmt, FfxSurfaceFormat ffxFmt)
+{
+    DXGI_FORMAT fromFfx = ffxGetDX11FormatFromSurfaceFormat(ffxFmt);
+    DXGI_FORMAT fmt = dxResFmt;
+
+    switch (fmt)
+    {
+    // fixup typeless formats with what is passed in the ffxSurfaceFormat
+    case DXGI_FORMAT_UNKNOWN:
+    case DXGI_FORMAT_R32G32B32A32_TYPELESS:
+    case DXGI_FORMAT_R32G32B32_TYPELESS:
+    case DXGI_FORMAT_R16G16B16A16_TYPELESS:
+    case DXGI_FORMAT_R32G32_TYPELESS:
+    case DXGI_FORMAT_R10G10B10A2_TYPELESS:
+    case DXGI_FORMAT_R16G16_TYPELESS:
+    case DXGI_FORMAT_R32_TYPELESS:
+    case DXGI_FORMAT_R8G8_TYPELESS:
+    case DXGI_FORMAT_R16_TYPELESS:
+    case DXGI_FORMAT_R8_TYPELESS:
+    case DXGI_FORMAT_R8G8B8A8_TYPELESS:
+        return fromFfx;
+
+    // fixup RGBA8 with SRGB flag passed in the ffxSurfaceFormat
+    case DXGI_FORMAT_R8G8B8A8_UNORM:
+    case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
+        return fromFfx;
+    
+    // fixup depth formats as ffxGetDX12FormatFromSurfaceFormat will result in wrong format
+    case DXGI_FORMAT_D32_FLOAT:
+        return DXGI_FORMAT_R32_FLOAT;
+
+    case DXGI_FORMAT_R32G8X24_TYPELESS:
+    case DXGI_FORMAT_D32_FLOAT_S8X24_UINT:
+        return DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS;
+
+    case DXGI_FORMAT_R24G8_TYPELESS:
+    case DXGI_FORMAT_D24_UNORM_S8_UINT:
+        return DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
+
+    case DXGI_FORMAT_D16_UNORM:
+        return DXGI_FORMAT_R16_UNORM;
+
+    default:
+        break;
+    }
+    return fmt;
+}
+
 FfxErrorCode RegisterResourceDX11(
     FfxInterface* backendInterface,
     const FfxResource* inFfxResource,
@@ -955,6 +1210,9 @@ FfxErrorCode RegisterResourceDX11(
         D3D11_UNORDERED_ACCESS_VIEW_DESC dx11UavDescription = {};
         D3D11_SHADER_RESOURCE_VIEW_DESC dx11SrvDescription = {};
 
+        // we still want to respect the format provided in the description for SRGB or TYPELESS resources
+        DXGI_FORMAT descFormat = {};
+
         bool requestArrayView = FFX_CONTAINS_FLAG(inFfxResource->description.usage, FFX_RESOURCE_USAGE_ARRAYVIEW);
 
         D3D11_RESOURCE_DIMENSION resourceDimension = D3D11_RESOURCE_DIMENSION(0);
@@ -969,8 +1227,9 @@ FfxErrorCode RegisterResourceDX11(
 
         case D3D11_RESOURCE_DIMENSION_BUFFER:
             reinterpret_cast<ID3D11Buffer*>(dx11Resource)->GetDesc(&dx11BufferDesc);
-            dx11UavDescription.Format = convertFormatUav(DXGI_FORMAT_UNKNOWN);
-            dx11SrvDescription.Format = convertFormatSrv(DXGI_FORMAT_UNKNOWN);
+            descFormat = patchDxgiFormatWithFfxUsage(DXGI_FORMAT_UNKNOWN, inFfxResource->description.format);
+            dx11UavDescription.Format = convertFormatUav(descFormat);
+            dx11SrvDescription.Format = convertFormatSrv(descFormat);
             dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
             dx11SrvDescription.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
             backendResource->resourceDescription.type = FFX_RESOURCE_TYPE_BUFFER;
@@ -981,8 +1240,9 @@ FfxErrorCode RegisterResourceDX11(
 
         case D3D11_RESOURCE_DIMENSION_TEXTURE1D:
             reinterpret_cast<ID3D11Texture1D*>(dx11Resource)->GetDesc(&dx11Texture1DDesc);
-            dx11UavDescription.Format = convertFormatUav(dx11Texture1DDesc.Format);
-            dx11SrvDescription.Format = convertFormatSrv(dx11Texture1DDesc.Format);
+            descFormat = patchDxgiFormatWithFfxUsage(dx11Texture1DDesc.Format, inFfxResource->description.format);
+            dx11UavDescription.Format = convertFormatUav(descFormat);
+            dx11SrvDescription.Format = convertFormatSrv(descFormat);
             if (dx11Texture1DDesc.ArraySize > 1 || requestArrayView)
             {
                 dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE1DARRAY;
@@ -1015,8 +1275,9 @@ FfxErrorCode RegisterResourceDX11(
 
         case D3D11_RESOURCE_DIMENSION_TEXTURE2D:
             reinterpret_cast<ID3D11Texture2D*>(dx11Resource)->GetDesc(&dx11Texture2DDesc);
-            dx11UavDescription.Format = convertFormatUav(dx11Texture2DDesc.Format);
-            dx11SrvDescription.Format = convertFormatSrv(dx11Texture2DDesc.Format);
+            descFormat = patchDxgiFormatWithFfxUsage(dx11Texture2DDesc.Format, inFfxResource->description.format);
+            dx11UavDescription.Format = convertFormatUav(descFormat);
+            dx11SrvDescription.Format = convertFormatSrv(descFormat);
             if (dx11Texture2DDesc.ArraySize > 1 || requestArrayView)
             {
                 dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE2DARRAY;
@@ -1050,8 +1311,9 @@ FfxErrorCode RegisterResourceDX11(
 
         case D3D11_RESOURCE_DIMENSION_TEXTURE3D:
             reinterpret_cast<ID3D11Texture3D*>(dx11Resource)->GetDesc(&dx11Texture3DDesc);
-            dx11UavDescription.Format = convertFormatUav(dx11Texture3DDesc.Format);
-            dx11SrvDescription.Format = convertFormatSrv(dx11Texture3DDesc.Format);
+            descFormat = patchDxgiFormatWithFfxUsage(dx11Texture3DDesc.Format, inFfxResource->description.format);
+            dx11UavDescription.Format = convertFormatUav(descFormat);
+            dx11SrvDescription.Format = convertFormatSrv(descFormat);
             dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE3D;
             dx11SrvDescription.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE3D;
             dx11SrvDescription.Texture3D.MipLevels = dx11Texture3DDesc.MipLevels;
@@ -1136,6 +1398,7 @@ FfxResource GetResourceDX11(FfxInterface* backendInterface, FfxResourceInternal 
 
     FfxResource resource = {};
     resource.resource = resource.resource = reinterpret_cast<void*>(backendContext->pResources[inResource.internalIndex].resourcePtr);
+    resource.state = FFX_RESOURCE_STATE_COMMON;
     resource.description = ffxResDescription;
 
 #ifdef _DEBUG
@@ -1465,6 +1728,7 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
 
     // copy data to constant buffer and bind
     {
+        std::lock_guard<std::mutex> cbLock{ backendContext->constantBufferMutex };
         for (uint32_t currentRootConstantIndex = 0; currentRootConstantIndex < job->computeJobDescriptor.pipeline.constCount; ++currentRootConstantIndex) {
 
             uint32_t size = FFX_ALIGN_UP(job->computeJobDescriptor.cbs[currentRootConstantIndex].num32BitEntries * sizeof(uint32_t), 256);
