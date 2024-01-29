@@ -1,24 +1,24 @@
 // This file is part of the FidelityFX SDK.
-//
-// Copyright (C) 2023 Advanced Micro Devices, Inc.
+// 
+// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files(the “Software”), to deal
+// of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions :
-// 
+// furnished to do so, subject to the following conditions:
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 
 #include <string.h>     // for memset
 #include <stdlib.h>     // for _countof
@@ -27,7 +27,7 @@
 #include <host/components/fsr1/ffx_fsr1.h>
 #include <gpu/ffx_core.h>
 #include <gpu/fsr1/ffx_fsr1.h>
-#include "host/ffx_object_management.h"
+#include <host/ffx_object_management.h>
 
 #include "ffx_fsr1_private.h"
 
@@ -109,7 +109,6 @@ static uint32_t getPipelinePermutationFlags(uint32_t contextFlags, FfxFsr1Pass p
     // work out what permutation to load.
     uint32_t flags = 0;
     flags |= (contextFlags & FFX_FSR1_RCAS_PASSTHROUGH_ALPHA) ? FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA : 0;
-    flags |= (contextFlags & FFX_FSR1_RCAS_DENOISE) ? FSR1_SHADER_PERMUTATION_RCAS_DENOISE : 0;
     flags |= (contextFlags & FFX_FSR1_ENABLE_SRGB_CONVERSIONS) ? FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS : 0;
     flags |= (passId != FFX_FSR1_PASS_EASU) ? FSR1_SHADER_PERMUTATION_APPLY_RCAS : 0;
     flags |= (force64) ? FSR1_SHADER_PERMUTATION_FORCE_WAVE64 : 0;
@@ -324,7 +323,7 @@ static FfxErrorCode fsr1Release(FfxFsr1Context_Private* context)
     context->srvResources[FFX_FSR1_RESOURCE_IDENTIFIER_UPSCALED_OUTPUT] = { FFX_FSR1_RESOURCE_IDENTIFIER_NULL };
 
     // Release internal resource
-    ffxSafeReleaseResource(&context->contextDescription.backendInterface, context->srvResources[FFX_FSR1_RESOURCE_IDENTIFIER_INTERNAL_UPSCALED_COLOR]);
+    ffxSafeReleaseResource(&context->contextDescription.backendInterface, context->srvResources[FFX_FSR1_RESOURCE_IDENTIFIER_INTERNAL_UPSCALED_COLOR], context->effectContextId);
 
     // Destroy the context
     context->contextDescription.backendInterface.fpDestroyBackendContext(&context->contextDescription.backendInterface, context->effectContextId);

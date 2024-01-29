@@ -35,7 +35,7 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxUInt32*
 FfxErrorCode GetDeviceCapabilitiesDX11(FfxInterface* backendInterface, FfxDeviceCapabilities* deviceCapabilities);
 FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32 effectContextId);
 FfxErrorCode CreateResourceDX11(FfxInterface* backendInterface, const FfxCreateResourceDescription* desc, FfxUInt32 effectContextId, FfxResourceInternal* outTexture);
-FfxErrorCode DestroyResourceDX11(FfxInterface* backendInterface, FfxResourceInternal resource);
+FfxErrorCode DestroyResourceDX11(FfxInterface* backendInterface, FfxResourceInternal resource, FfxUInt32 effectContextId);
 FfxErrorCode RegisterResourceDX11(FfxInterface* backendInterface, const FfxResource* inResource, FfxUInt32 effectContextId, FfxResourceInternal* outResourceInternal);
 FfxResource GetResourceDX11(FfxInterface* backendInterface, FfxResourceInternal resource);
 FfxErrorCode UnregisterResourcesDX11(FfxInterface* backendInterface, FfxCommandList commandList, FfxUInt32 effectContextId);
@@ -552,13 +552,13 @@ FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32
         if (backendContext->pResources[currentStaticResourceIndex].resourcePtr) {
             FFX_ASSERT_MESSAGE(false, "FFXInterface: DX11: SDK Resource was not destroyed prior to destroying the backend context. There is a resource leak.");
             FfxResourceInternal internalResource = { static_cast<int32_t>(currentStaticResourceIndex) };
-            DestroyResourceDX11(backendInterface, internalResource);
+            DestroyResourceDX11(backendInterface, internalResource, effectContextId);
         }
     }
     for (uint32_t currentResourceIndex = effectContextId * FFX_MAX_RESOURCE_COUNT; currentResourceIndex < effectContextId * FFX_MAX_RESOURCE_COUNT + FFX_MAX_RESOURCE_COUNT; ++currentResourceIndex) {
         if (backendContext->pResources[currentResourceIndex].resourcePtr) {
             FfxResourceInternal internalResource = { static_cast<int32_t>(currentResourceIndex) };
-            DestroyResourceDX11(backendInterface, internalResource);
+            DestroyResourceDX11(backendInterface, internalResource, effectContextId);
         }
     }
 
@@ -874,28 +874,34 @@ FfxErrorCode CreateResourceDX11(
 
 FfxErrorCode DestroyResourceDX11(
     FfxInterface* backendInterface,
-    FfxResourceInternal resource)
+    FfxResourceInternal resource,
+    FfxUInt32 effectContextId)
 {
     FFX_ASSERT(NULL != backendInterface);
 
     BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
+    BackendContext_DX11::EffectContext& effectContext = backendContext->pEffectContexts[effectContextId];
+    if ((resource.internalIndex >= int32_t(effectContextId * FFX_MAX_RESOURCE_COUNT)) && (resource.internalIndex < int32_t(effectContext.nextStaticResource))) {
 
-    if (backendContext->pResources[resource.internalIndex].srvPtr) {
-        backendContext->pResources[resource.internalIndex].srvPtr->Release();
-        backendContext->pResources[resource.internalIndex].srvPtr = nullptr;
-    }
-    for (int32_t currentMipIndex = 0; currentMipIndex < 16; ++currentMipIndex) {
-        if (backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex]) {
-            backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex]->Release();
-            backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex] = nullptr;
+        if (backendContext->pResources[resource.internalIndex].srvPtr) {
+            backendContext->pResources[resource.internalIndex].srvPtr->Release();
+            backendContext->pResources[resource.internalIndex].srvPtr = nullptr;
         }
-    }
-    if (backendContext->pResources[resource.internalIndex].resourcePtr) {
-        backendContext->pResources[resource.internalIndex].resourcePtr->Release();
-        backendContext->pResources[resource.internalIndex].resourcePtr = nullptr;
+        for (int32_t currentMipIndex = 0; currentMipIndex < 16; ++currentMipIndex) {
+            if (backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex]) {
+                backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex]->Release();
+                backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex] = nullptr;
+            }
+        }
+        if (backendContext->pResources[resource.internalIndex].resourcePtr) {
+            backendContext->pResources[resource.internalIndex].resourcePtr->Release();
+            backendContext->pResources[resource.internalIndex].resourcePtr = nullptr;
+        }
+
+        return FFX_OK;
     }
 
-    return FFX_OK;
+    return FFX_ERROR_OUT_OF_RANGE;
 }
 
 FfxErrorCode RegisterResourceDX11(
@@ -930,7 +936,7 @@ FfxErrorCode RegisterResourceDX11(
         return FFX_OK;
     }
 
-    DestroyResourceDX11(backendInterface, *outFfxResourceInternal);
+    DestroyResourceDX11(backendInterface, *outFfxResourceInternal, effectContextId);
 
     backendResource->resourcePtr = dx11Resource;
     if (backendResource->resourcePtr)
@@ -1210,63 +1216,69 @@ FfxErrorCode CreatePipelineDX11(
     BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
     ID3D11Device* dx11Device = backendContext->device;
 
-    FfxShaderBlob shaderBlob = { };
-    ffxGetPermutationBlobByIndex(effect, pass, permutationOptions, &shaderBlob);
-    FFX_ASSERT(shaderBlob.data && shaderBlob.size);
-
-    // Only set the command signature if this is setup as an indirect workload
-    outPipeline->cmdSignature = nullptr;
-
-    // populate the pass.
-    outPipeline->srvTextureCount = shaderBlob.srvTextureCount;
-    outPipeline->uavTextureCount = shaderBlob.uavTextureCount;
-    outPipeline->srvBufferCount  = shaderBlob.srvBufferCount;
-    outPipeline->uavBufferCount  = shaderBlob.uavBufferCount;
-
-    // Todo when needed
-    //outPipeline->samplerCount      = shaderBlob.samplerCount;
-    //outPipeline->rtAccelStructCount= shaderBlob.rtAccelStructCount;
-
-    outPipeline->constCount = shaderBlob.cbvCount;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    for (uint32_t srvIndex = 0; srvIndex < outPipeline->srvTextureCount; ++srvIndex)
+    if (pipelineDescription->stage == FfxBindStage(FFX_BIND_VERTEX_SHADER_STAGE | FFX_BIND_PIXEL_SHADER_STAGE))
     {
-        outPipeline->srvTextureBindings[srvIndex].slotIndex = shaderBlob.boundSRVTextures[srvIndex];
-        outPipeline->srvTextureBindings[srvIndex].bindCount = shaderBlob.boundSRVTextureCounts[srvIndex];
-        wcscpy_s(outPipeline->srvTextureBindings[srvIndex].name, converter.from_bytes(shaderBlob.boundSRVTextureNames[srvIndex]).c_str());
-    }
-    for (uint32_t uavIndex = 0; uavIndex < outPipeline->uavTextureCount; ++uavIndex)
-    {
-        outPipeline->uavTextureBindings[uavIndex].slotIndex = shaderBlob.boundUAVTextures[uavIndex];
-        outPipeline->uavTextureBindings[uavIndex].bindCount = shaderBlob.boundUAVTextureCounts[uavIndex];
-        wcscpy_s(outPipeline->uavTextureBindings[uavIndex].name, converter.from_bytes(shaderBlob.boundUAVTextureNames[uavIndex]).c_str());
-    }
-    for (uint32_t srvIndex = 0; srvIndex < outPipeline->srvBufferCount; ++srvIndex)
-    {
-        outPipeline->srvBufferBindings[srvIndex].slotIndex = shaderBlob.boundSRVBuffers[srvIndex];
-        outPipeline->srvBufferBindings[srvIndex].bindCount = shaderBlob.boundSRVBufferCounts[srvIndex];
-        wcscpy_s(outPipeline->srvBufferBindings[srvIndex].name, converter.from_bytes(shaderBlob.boundSRVBufferNames[srvIndex]).c_str());
-    }
-    for (uint32_t uavIndex = 0; uavIndex < outPipeline->uavBufferCount; ++uavIndex)
-    {
-        outPipeline->uavBufferBindings[uavIndex].slotIndex = shaderBlob.boundUAVBuffers[uavIndex];
-        outPipeline->uavBufferBindings[uavIndex].bindCount = shaderBlob.boundUAVBufferCounts[uavIndex];
-        wcscpy_s(outPipeline->uavBufferBindings[uavIndex].name, converter.from_bytes(shaderBlob.boundUAVBufferNames[uavIndex]).c_str());
-    }
-    for (uint32_t cbIndex = 0; cbIndex < outPipeline->constCount; ++cbIndex)
-    {
-        outPipeline->constantBufferBindings[cbIndex].slotIndex = shaderBlob.boundConstantBuffers[cbIndex];
-        outPipeline->constantBufferBindings[cbIndex].bindCount = shaderBlob.boundConstantBufferCounts[cbIndex];
-        wcscpy_s(outPipeline->constantBufferBindings[cbIndex].name, converter.from_bytes(shaderBlob.boundConstantBufferNames[cbIndex]).c_str());
-    }
-
-    // create the PSO
-    if (FAILED(dx11Device->CreateComputeShader(shaderBlob.data, shaderBlob.size, nullptr, (ID3D11ComputeShader**)&outPipeline->pipeline)))
         return FFX_ERROR_BACKEND_API_ERROR;
+    }
+    else
+    {
+        FfxShaderBlob shaderBlob = { };
+        ffxGetPermutationBlobByIndex(effect, pass, FFX_BIND_COMPUTE_SHADER_STAGE, permutationOptions, &shaderBlob);
+        FFX_ASSERT(shaderBlob.data && shaderBlob.size);
 
-    // Set the pipeline name
-    SetNameDX11(reinterpret_cast<ID3D11ComputeShader*>(outPipeline->pipeline), pipelineDescription->name);
+        // Only set the command signature if this is setup as an indirect workload
+        outPipeline->cmdSignature = nullptr;
 
+        // populate the pass.
+        outPipeline->srvTextureCount = shaderBlob.srvTextureCount;
+        outPipeline->uavTextureCount = shaderBlob.uavTextureCount;
+        outPipeline->srvBufferCount = shaderBlob.srvBufferCount;
+        outPipeline->uavBufferCount = shaderBlob.uavBufferCount;
+
+        // Todo when needed
+        //outPipeline->samplerCount      = shaderBlob.samplerCount;
+        //outPipeline->rtAccelStructCount= shaderBlob.rtAccelStructCount;
+
+        outPipeline->constCount = shaderBlob.cbvCount;
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+        for (uint32_t srvIndex = 0; srvIndex < outPipeline->srvTextureCount; ++srvIndex)
+        {
+            outPipeline->srvTextureBindings[srvIndex].slotIndex = shaderBlob.boundSRVTextures[srvIndex];
+            outPipeline->srvTextureBindings[srvIndex].bindCount = shaderBlob.boundSRVTextureCounts[srvIndex];
+            wcscpy_s(outPipeline->srvTextureBindings[srvIndex].name, converter.from_bytes(shaderBlob.boundSRVTextureNames[srvIndex]).c_str());
+        }
+        for (uint32_t uavIndex = 0; uavIndex < outPipeline->uavTextureCount; ++uavIndex)
+        {
+            outPipeline->uavTextureBindings[uavIndex].slotIndex = shaderBlob.boundUAVTextures[uavIndex];
+            outPipeline->uavTextureBindings[uavIndex].bindCount = shaderBlob.boundUAVTextureCounts[uavIndex];
+            wcscpy_s(outPipeline->uavTextureBindings[uavIndex].name, converter.from_bytes(shaderBlob.boundUAVTextureNames[uavIndex]).c_str());
+        }
+        for (uint32_t srvIndex = 0; srvIndex < outPipeline->srvBufferCount; ++srvIndex)
+        {
+            outPipeline->srvBufferBindings[srvIndex].slotIndex = shaderBlob.boundSRVBuffers[srvIndex];
+            outPipeline->srvBufferBindings[srvIndex].bindCount = shaderBlob.boundSRVBufferCounts[srvIndex];
+            wcscpy_s(outPipeline->srvBufferBindings[srvIndex].name, converter.from_bytes(shaderBlob.boundSRVBufferNames[srvIndex]).c_str());
+        }
+        for (uint32_t uavIndex = 0; uavIndex < outPipeline->uavBufferCount; ++uavIndex)
+        {
+            outPipeline->uavBufferBindings[uavIndex].slotIndex = shaderBlob.boundUAVBuffers[uavIndex];
+            outPipeline->uavBufferBindings[uavIndex].bindCount = shaderBlob.boundUAVBufferCounts[uavIndex];
+            wcscpy_s(outPipeline->uavBufferBindings[uavIndex].name, converter.from_bytes(shaderBlob.boundUAVBufferNames[uavIndex]).c_str());
+        }
+        for (uint32_t cbIndex = 0; cbIndex < outPipeline->constCount; ++cbIndex)
+        {
+            outPipeline->constantBufferBindings[cbIndex].slotIndex = shaderBlob.boundConstantBuffers[cbIndex];
+            outPipeline->constantBufferBindings[cbIndex].bindCount = shaderBlob.boundConstantBufferCounts[cbIndex];
+            wcscpy_s(outPipeline->constantBufferBindings[cbIndex].name, converter.from_bytes(shaderBlob.boundConstantBufferNames[cbIndex]).c_str());
+        }
+
+        // create the PSO
+        if (FAILED(dx11Device->CreateComputeShader(shaderBlob.data, shaderBlob.size, nullptr, (ID3D11ComputeShader**)&outPipeline->pipeline)))
+            return FFX_ERROR_BACKEND_API_ERROR;
+
+        // Set the pipeline name
+        SetNameDX11(reinterpret_cast<ID3D11ComputeShader*>(outPipeline->pipeline), pipelineDescription->name);
+    }
     return FFX_OK;
 }
 
