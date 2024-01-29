@@ -357,6 +357,54 @@ DXGI_FORMAT ffxGetDX11FormatFromSurfaceFormat(FfxSurfaceFormat surfaceFormat)
     }
 }
 
+DXGI_FORMAT patchDxgiFormatWithFfxUsage(DXGI_FORMAT dxResFmt, FfxSurfaceFormat ffxFmt)
+{
+    DXGI_FORMAT fromFfx = ffxGetDX11FormatFromSurfaceFormat(ffxFmt);
+    DXGI_FORMAT fmt = dxResFmt;
+
+    switch (fmt)
+    {
+    // fixup typeless formats with what is passed in the ffxSurfaceFormat
+    case DXGI_FORMAT_UNKNOWN:
+    case DXGI_FORMAT_R32G32B32A32_TYPELESS:
+    case DXGI_FORMAT_R32G32B32_TYPELESS:
+    case DXGI_FORMAT_R16G16B16A16_TYPELESS:
+    case DXGI_FORMAT_R32G32_TYPELESS:
+    case DXGI_FORMAT_R10G10B10A2_TYPELESS:
+    case DXGI_FORMAT_R16G16_TYPELESS:
+    case DXGI_FORMAT_R32_TYPELESS:
+    case DXGI_FORMAT_R8G8_TYPELESS:
+    case DXGI_FORMAT_R16_TYPELESS:
+    case DXGI_FORMAT_R8_TYPELESS:
+    case DXGI_FORMAT_R8G8B8A8_TYPELESS:
+        return fromFfx;
+
+    // fixup RGBA8 with SRGB flag passed in the ffxSurfaceFormat
+    case DXGI_FORMAT_R8G8B8A8_UNORM:
+    case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
+        return fromFfx;
+    
+    // fixup depth formats as ffxGetDX12FormatFromSurfaceFormat will result in wrong format
+    case DXGI_FORMAT_D32_FLOAT:
+        return DXGI_FORMAT_R32_FLOAT;
+
+    case DXGI_FORMAT_R32G8X24_TYPELESS:
+    case DXGI_FORMAT_D32_FLOAT_S8X24_UINT:
+        return DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS;
+
+    case DXGI_FORMAT_R24G8_TYPELESS:
+    case DXGI_FORMAT_D24_UNORM_S8_UINT:
+        return DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
+
+    case DXGI_FORMAT_D16_UNORM:
+        return DXGI_FORMAT_R16_UNORM;
+
+    default:
+        break;
+    }
+    return fmt;
+}
+
 D3D11_BIND_FLAG ffxGetDX11BindFlags(FfxResourceUsage flags)
 {
     int dx11ResourceFlags = D3D11_BIND_SHADER_RESOURCE;
@@ -924,6 +972,9 @@ FfxErrorCode CreateResourceDX11(
             D3D11_UNORDERED_ACCESS_VIEW_DESC dx11UavDescription = {};
             D3D11_SHADER_RESOURCE_VIEW_DESC dx11SrvDescription = {};
 
+            // we still want to respect the format provided in the description for SRGB or TYPELESS resources
+            DXGI_FORMAT descFormat = {};
+
             bool requestArrayView = FFX_CONTAINS_FLAG(backendResource->resourceDescription.usage, FFX_RESOURCE_USAGE_ARRAYVIEW);
 
             D3D11_RESOURCE_DIMENSION resourceDimension = D3D11_RESOURCE_DIMENSION(0);
@@ -938,16 +989,18 @@ FfxErrorCode CreateResourceDX11(
 
             case D3D11_RESOURCE_DIMENSION_BUFFER:
                 reinterpret_cast<ID3D11Buffer*>(dx11Resource)->GetDesc(&dx11BufferDesc);
-                dx11UavDescription.Format = convertFormatUav(DXGI_FORMAT_UNKNOWN);
-                dx11SrvDescription.Format = convertFormatUav(DXGI_FORMAT_UNKNOWN);
+                descFormat = patchDxgiFormatWithFfxUsage(DXGI_FORMAT_UNKNOWN, backendResource->resourceDescription.format);
+                dx11UavDescription.Format = convertFormatUav(descFormat);
+                dx11SrvDescription.Format = convertFormatUav(descFormat);
                 dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
                 dx11SrvDescription.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
                 break;
 
             case D3D11_RESOURCE_DIMENSION_TEXTURE1D:
                 reinterpret_cast<ID3D11Texture1D*>(dx11Resource)->GetDesc(&dx11Texture1DDescription);
-                dx11UavDescription.Format = convertFormatUav(dx11Texture1DDescription.Format);
-                dx11SrvDescription.Format = convertFormatUav(dx11Texture1DDescription.Format);
+                descFormat = patchDxgiFormatWithFfxUsage(dx11Texture1DDescription.Format, backendResource->resourceDescription.format);
+                dx11UavDescription.Format = convertFormatUav(descFormat);
+                dx11SrvDescription.Format = convertFormatUav(descFormat);
                 if (dx11Texture1DDescription.ArraySize > 1 || requestArrayView)
                 {
                     dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE1DARRAY;
@@ -974,8 +1027,9 @@ FfxErrorCode CreateResourceDX11(
 
             case D3D11_RESOURCE_DIMENSION_TEXTURE2D:
                 reinterpret_cast<ID3D11Texture2D*>(dx11Resource)->GetDesc(&dx11Texture2DDescription);
-                dx11UavDescription.Format = convertFormatUav(dx11Texture2DDescription.Format);
-                dx11SrvDescription.Format = convertFormatUav(dx11Texture2DDescription.Format);
+                descFormat = patchDxgiFormatWithFfxUsage(dx11Texture2DDescription.Format, backendResource->resourceDescription.format);
+                dx11UavDescription.Format = convertFormatUav(descFormat);
+                dx11SrvDescription.Format = convertFormatUav(descFormat);
                 if (dx11Texture2DDescription.ArraySize > 1 || requestArrayView)
                 {
                     dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE2DARRAY;
@@ -1002,8 +1056,9 @@ FfxErrorCode CreateResourceDX11(
 
             case D3D11_RESOURCE_DIMENSION_TEXTURE3D:
                 reinterpret_cast<ID3D11Texture3D*>(dx11Resource)->GetDesc(&dx11Texture3DDescription);
-                dx11UavDescription.Format = convertFormatUav(dx11Texture3DDescription.Format);
-                dx11SrvDescription.Format = convertFormatUav(dx11Texture3DDescription.Format);
+                descFormat = patchDxgiFormatWithFfxUsage(dx11Texture3DDescription.Format, backendResource->resourceDescription.format);
+                dx11UavDescription.Format = convertFormatUav(descFormat);
+                dx11SrvDescription.Format = convertFormatUav(descFormat);
                 dx11UavDescription.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE3D;
                 dx11SrvDescription.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE3D;
                 dx11SrvDescription.Texture3D.MipLevels = dx11Texture3DDescription.MipLevels;
@@ -1109,54 +1164,6 @@ FfxErrorCode DestroyResourceDX11(
     }
 
     return FFX_ERROR_OUT_OF_RANGE;
-}
-
-DXGI_FORMAT patchDxgiFormatWithFfxUsage(DXGI_FORMAT dxResFmt, FfxSurfaceFormat ffxFmt)
-{
-    DXGI_FORMAT fromFfx = ffxGetDX11FormatFromSurfaceFormat(ffxFmt);
-    DXGI_FORMAT fmt = dxResFmt;
-
-    switch (fmt)
-    {
-    // fixup typeless formats with what is passed in the ffxSurfaceFormat
-    case DXGI_FORMAT_UNKNOWN:
-    case DXGI_FORMAT_R32G32B32A32_TYPELESS:
-    case DXGI_FORMAT_R32G32B32_TYPELESS:
-    case DXGI_FORMAT_R16G16B16A16_TYPELESS:
-    case DXGI_FORMAT_R32G32_TYPELESS:
-    case DXGI_FORMAT_R10G10B10A2_TYPELESS:
-    case DXGI_FORMAT_R16G16_TYPELESS:
-    case DXGI_FORMAT_R32_TYPELESS:
-    case DXGI_FORMAT_R8G8_TYPELESS:
-    case DXGI_FORMAT_R16_TYPELESS:
-    case DXGI_FORMAT_R8_TYPELESS:
-    case DXGI_FORMAT_R8G8B8A8_TYPELESS:
-        return fromFfx;
-
-    // fixup RGBA8 with SRGB flag passed in the ffxSurfaceFormat
-    case DXGI_FORMAT_R8G8B8A8_UNORM:
-    case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
-        return fromFfx;
-    
-    // fixup depth formats as ffxGetDX12FormatFromSurfaceFormat will result in wrong format
-    case DXGI_FORMAT_D32_FLOAT:
-        return DXGI_FORMAT_R32_FLOAT;
-
-    case DXGI_FORMAT_R32G8X24_TYPELESS:
-    case DXGI_FORMAT_D32_FLOAT_S8X24_UINT:
-        return DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS;
-
-    case DXGI_FORMAT_R24G8_TYPELESS:
-    case DXGI_FORMAT_D24_UNORM_S8_UINT:
-        return DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
-
-    case DXGI_FORMAT_D16_UNORM:
-        return DXGI_FORMAT_R16_UNORM;
-
-    default:
-        break;
-    }
-    return fmt;
 }
 
 FfxErrorCode RegisterResourceDX11(
