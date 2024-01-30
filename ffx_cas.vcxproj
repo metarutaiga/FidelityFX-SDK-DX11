@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7AC47E16-B581-4542-AC4E-006699B8EEF0}</ProjectGuid>
+    <RootNamespace>ffx_cas</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ffx_cas</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)_$(Platform)</TargetName>
+    <MultiProcFXC>true</MultiProcFXC>
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>$(ProjectName)_$(Platform)</TargetName>
+    <MultiProcFXC>true</MultiProcFXC>
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)_$(Platform)</TargetName>
+    <MultiProcFXC>true</MultiProcFXC>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)_$(Platform)</TargetName>
+    <MultiProcFXC>true</MultiProcFXC>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>FFX_CAS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EntryPointName>%(Filename)</EntryPointName>
+      <ShaderType>Compute</ShaderType>
+      <ShaderModel>5.0</ShaderModel>
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput />
+      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
+    </FxCompile>
+    <PreBuildEvent>
+      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+ffx_cas_sharpen_pass_permutations.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>FFX_CAS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EntryPointName>%(Filename)</EntryPointName>
+      <ShaderType>Compute</ShaderType>
+      <ShaderModel>5.0</ShaderModel>
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput />
+      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
+    </FxCompile>
+    <PreBuildEvent>
+      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+ffx_cas_sharpen_pass_permutations.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>FFX_CAS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>Compute</ShaderType>
+      <EntryPointName>%(Filename)</EntryPointName>
+      <ObjectFileOutput />
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
+      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
+    </FxCompile>
+    <PreBuildEvent>
+      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+ffx_cas_sharpen_pass_permutations.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>FFX_CAS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>Compute</ShaderType>
+      <EntryPointName>%(Filename)</EntryPointName>
+      <ObjectFileOutput />
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
+      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
+    </FxCompile>
+    <PreBuildEvent>
+      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+ffx_cas_sharpen_pass_permutations.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="gpu\cas\ffx_cas.h" />
+    <ClInclude Include="gpu\cas\ffx_cas_callbacks_glsl.h" />
+    <ClInclude Include="gpu\cas\ffx_cas_callbacks_hlsl.h" />
+    <ClInclude Include="gpu\cas\ffx_cas_resources.h" />
+    <ClInclude Include="gpu\cas\ffx_cas_sharpen.h" />
+    <ClInclude Include="host\backends\blob_accessors\ffx_cas_shaderblobs.h" />
+    <ClInclude Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations.h" />
+    <ClInclude Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations.h" />
+    <ClInclude Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_0_0.h" />
+    <ClInclude Include="host\backends\ffx_shader_blobs.h" />
+    <ClInclude Include="host\components\cas\ffx_cas.h" />
+    <ClInclude Include="host\components\cas\ffx_cas_private.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="host\backends\blob_accessors\ffx_cas_shaderblobs.cpp" />
+    <ClCompile Include="host\backends\ffx_shader_blobs.cpp" />
+    <ClCompile Include="host\components\cas\ffx_cas.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ffx.vcxproj">
+      <Project>{8a1ae7b3-1a76-4e87-bdfe-04e0258ec52d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_0_0.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_0_1.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_0_2.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_0_3.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_0_4.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_1_0.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_1_1.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_1_2.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_1_3.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_16bit_permutations_1_4.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_0_0.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_0_1.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_0_2.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_0_3.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_0_4.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_1_0.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_1_1.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_1_2.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_1_3.hlsl" />
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_cas_sharpen_pass_permutations_1_4.hlsl" />
+    <FxCompile Include="host\backends\hlsl\cas\ffx_cas_sharpen_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
