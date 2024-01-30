@@ -31,6 +31,9 @@
     <Filter Include="host\backends\blob_accessors\permutations">
       <UniqueIdentifier>{a0a55f4d-5a21-48f0-90b4-40a60683a09f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="host\backends\dx11">
+      <UniqueIdentifier>{b18297d3-41f8-4019-a27b-ddf574e7189d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gpu\fsr1\ffx_fsr1.h">
@@ -63,6 +66,9 @@
     <ClInclude Include="host\components\fsr1\ffx_fsr1_private.h">
       <Filter>host\components\fsr1</Filter>
     </ClInclude>
+    <ClInclude Include="host\backends\dx11\ffx_dx11.h">
+      <Filter>host\backends\dx11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="host\backends\ffx_shader_blobs.cpp">
@@ -73,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="host\components\fsr1\ffx_fsr1.cpp">
       <Filter>host\components\fsr1</Filter>
+    </ClCompile>
+    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp">
+      <Filter>host\backends\dx11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

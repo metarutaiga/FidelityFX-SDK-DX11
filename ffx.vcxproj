@@ -148,7 +148,6 @@
     <ClInclude Include="gpu\ffx_core_gpu_common_half.h" />
     <ClInclude Include="gpu\ffx_core_hlsl.h" />
     <ClInclude Include="gpu\ffx_core_portability.h" />
-    <ClInclude Include="host\backends\dx11\ffx_dx11.h" />
     <ClInclude Include="host\ffx_assert.h" />
     <ClInclude Include="host\ffx_error.h" />
     <ClInclude Include="host\ffx_interface.h" />
@@ -157,7 +156,6 @@
     <ClInclude Include="host\ffx_util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp" />
     <ClCompile Include="host\ffx_assert.cpp" />
     <ClCompile Include="host\ffx_object_management.cpp" />
   </ItemGroup>

@@ -31,6 +31,9 @@
     <Filter Include="host\backends\blob_accessors\permutations">
       <UniqueIdentifier>{ea351e25-93b5-48d7-add2-a3ab026f01ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="host\backends\dx11">
+      <UniqueIdentifier>{3361412a-2552-4bd4-bf5a-888bd54b6aba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="host\backends\ffx_shader_blobs.h">
@@ -60,6 +63,9 @@
     <ClInclude Include="host\backends\blob_accessors\ffx_blur_shaderblobs.h">
       <Filter>host\backends\blob_accessors</Filter>
     </ClInclude>
+    <ClInclude Include="host\backends\dx11\ffx_dx11.h">
+      <Filter>host\backends\dx11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="host\backends\ffx_shader_blobs.cpp">
@@ -70,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="host\backends\blob_accessors\ffx_blur_shaderblobs.cpp">
       <Filter>host\backends\blob_accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp">
+      <Filter>host\backends\dx11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

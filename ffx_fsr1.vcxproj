@@ -219,12 +219,14 @@ ffx_fsr1_pass_permutations.bat</Command>
     <ClInclude Include="gpu\fsr1\ffx_fsr1_rcas.h" />
     <ClInclude Include="gpu\fsr1\ffx_fsr1_resources.h" />
     <ClInclude Include="host\backends\blob_accessors\ffx_fsr1_shaderblobs.h" />
+    <ClInclude Include="host\backends\dx11\ffx_dx11.h" />
     <ClInclude Include="host\backends\ffx_shader_blobs.h" />
     <ClInclude Include="host\components\fsr1\ffx_fsr1.h" />
     <ClInclude Include="host\components\fsr1\ffx_fsr1_private.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="host\backends\blob_accessors\ffx_fsr1_shaderblobs.cpp" />
+    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp" />
     <ClCompile Include="host\backends\ffx_shader_blobs.cpp" />
     <ClCompile Include="host\components\fsr1\ffx_fsr1.cpp" />
   </ItemGroup>

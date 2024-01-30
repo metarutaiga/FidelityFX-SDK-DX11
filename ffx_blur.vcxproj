@@ -218,12 +218,14 @@ ffx_blur_pass_permutations.bat</Command>
     <ClInclude Include="gpu\blur\ffx_blur_callbacks_hlsl.h" />
     <ClInclude Include="gpu\blur\ffx_blur_resources.h" />
     <ClInclude Include="host\backends\blob_accessors\ffx_blur_shaderblobs.h" />
+    <ClInclude Include="host\backends\dx11\ffx_dx11.h" />
     <ClInclude Include="host\backends\ffx_shader_blobs.h" />
     <ClInclude Include="host\components\blur\ffx_blur.h" />
     <ClInclude Include="host\components\blur\ffx_blur_private.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="host\backends\blob_accessors\ffx_blur_shaderblobs.cpp" />
+    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp" />
     <ClCompile Include="host\backends\ffx_shader_blobs.cpp" />
     <ClCompile Include="host\components\blur\ffx_blur.cpp" />
   </ItemGroup>

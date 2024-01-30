@@ -7,12 +7,6 @@
     <Filter Include="host">
       <UniqueIdentifier>{57149e49-524a-4f7c-88cb-7f21c050a28b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\backends">
-      <UniqueIdentifier>{92ebecfe-210a-4b62-8211-4eb92d024d8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="host\backends\dx11">
-      <UniqueIdentifier>{a3b073fe-158e-49cd-8e86-ebc992f01d5d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gpu\ffx_common_types.h">
@@ -51,9 +45,6 @@
     <ClInclude Include="host\ffx_util.h">
       <Filter>host</Filter>
     </ClInclude>
-    <ClInclude Include="host\backends\dx11\ffx_dx11.h">
-      <Filter>host\backends\dx11</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="host\ffx_assert.cpp">
@@ -61,9 +52,6 @@
     </ClCompile>
     <ClCompile Include="host\ffx_object_management.cpp">
       <Filter>host</Filter>
-    </ClCompile>
-    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp">
-      <Filter>host\backends\dx11</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
