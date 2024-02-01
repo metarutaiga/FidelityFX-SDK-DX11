@@ -1799,10 +1799,10 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
         }
     }
 
-    // Dispatch
+    // dispatch
     dx11DeviceContext->Dispatch(job->computeJobDescriptor.dimensions[0], job->computeJobDescriptor.dimensions[1], job->computeJobDescriptor.dimensions[2]);
 
-    // Clear UAVs
+    // unbind UAVs
     static ID3D11UnorderedAccessView* const emptyUAVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
     if (minimumUav <= maximumUav) {
 
@@ -1810,7 +1810,7 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
         dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, count, emptyUAVs, nullptr);
     }
 
-    // Clear SRVs
+    // unbind SRVs
     static ID3D11ShaderResourceView* const emptySRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
     if (minimumSrv <= maximumSrv) {
 
