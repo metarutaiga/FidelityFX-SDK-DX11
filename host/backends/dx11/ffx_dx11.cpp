@@ -1605,10 +1605,9 @@ FfxErrorCode ScheduleGpuJobDX11(
 
 static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
 {
+    // bind texture & buffer UAVs (note the binding order here MUST match the root signature mapping order from CreatePipeline!)
     uint32_t minimumUav = UINT32_MAX;
     uint32_t maximumUav = 0;
-
-    // bind texture & buffer UAVs (note the binding order here MUST match the root signature mapping order from CreatePipeline!)
     {
         // Set a baseline minimal value
         uint32_t maximumUavIndex = job->computeJobDescriptor.pipeline.uavTextureCount + job->computeJobDescriptor.pipeline.uavBufferCount;
@@ -1668,6 +1667,8 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
     }
 
     // bind texture & buffer SRVs
+    uint32_t minimumSrv = UINT32_MAX;
+    uint32_t maximumSrv = 0;
     {
         // Set a baseline minimal value
         // Textures
@@ -1711,6 +1712,9 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                     }
 
                     dx11DeviceContext->CSSetShaderResources(currentSrvResourceIndex, 1, &srvPtr);
+
+                    minimumSrv = minimumSrv < currentSrvResourceIndex ? minimumSrv : currentSrvResourceIndex;
+                    maximumSrv = maximumSrv > currentSrvResourceIndex ? maximumSrv : currentSrvResourceIndex;
                 }
             }
 
@@ -1725,6 +1729,9 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                 const uint32_t currentSrvResourceIndex = job->computeJobDescriptor.pipeline.srvBufferBindings[currentPipelineSrvIndex].slotIndex;
 
                 dx11DeviceContext->CSSetShaderResources(currentSrvResourceIndex, 1, &srvPtr);
+
+                minimumSrv = minimumSrv < currentSrvResourceIndex ? minimumSrv : currentSrvResourceIndex;
+                maximumSrv = maximumSrv > currentSrvResourceIndex ? maximumSrv : currentSrvResourceIndex;
             }
         }
     }
@@ -1796,11 +1803,19 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
     dx11DeviceContext->Dispatch(job->computeJobDescriptor.dimensions[0], job->computeJobDescriptor.dimensions[1], job->computeJobDescriptor.dimensions[2]);
 
     // Clear UAVs
-    static ID3D11UnorderedAccessView* const empty[D3D11_1_UAV_SLOT_COUNT] = {};
+    static ID3D11UnorderedAccessView* const emptyUAVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
     if (minimumUav <= maximumUav) {
 
         uint32_t count = maximumUav - minimumUav + 1;
-        dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, count, empty, nullptr);
+        dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, count, emptyUAVs, nullptr);
+    }
+
+    // Clear SRVs
+    static ID3D11ShaderResourceView* const emptySRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
+    if (minimumSrv <= maximumSrv) {
+
+        uint32_t count = maximumSrv - minimumSrv + 1;
+        dx11DeviceContext->CSSetShaderResources(minimumSrv, count, emptySRVs);
     }
 
     return FFX_OK;
