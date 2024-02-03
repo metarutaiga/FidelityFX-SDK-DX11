@@ -34,6 +34,14 @@
 #include "blob_accessors/ffx_fsr1_shaderblobs.h"
 #endif // #if defined(FFX_FSR1) || defined(FFX_ALL)
 
+#if defined(FFX_FSR2) || defined(FFX_ALL)
+#include "blob_accessors/ffx_fsr2_shaderblobs.h"
+#endif // #if defined(FFX_FSR2) || defined(FFX_ALL)
+
+#if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
+#include "blob_accessors/ffx_fsr3upscaler_shaderblobs.h"
+#endif // #if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
+
 #if defined(FFX_SPD) || defined(FFX_ALL)
 #include "blob_accessors/ffx_spd_shaderblobs.h"
 #endif // #if defined(FFX_SPD) || defined(FFX_ALL)
@@ -108,6 +116,21 @@ FfxErrorCode ffxGetPermutationBlobByIndex(
             return opticalflowGetPermutationBlobByIndex((FfxOpticalflowPass)passId, permutationOptions, outBlob);
     #endif
 #endif // #if defined(FFX_FSR) || defined(FFX_ALL)
+
+#if defined(FFX_FSR1) || defined(FFX_ALL)
+    case FFX_EFFECT_FSR1:
+        return fsr1GetPermutationBlobByIndex((FfxFsr1Pass)passId, permutationOptions, outBlob);
+#endif // #if defined(FFX_FSR1) || defined(FFX_ALL)
+
+#if defined(FFX_FSR2) || defined(FFX_ALL)
+    case FFX_EFFECT_FSR2:
+        return fsr2GetPermutationBlobByIndex((FfxFsr2Pass)passId, permutationOptions, outBlob);
+#endif // #if defined(FFX_FSR2) || defined(FFX_ALL)
+
+#if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
+    case FFX_EFFECT_FSR3UPSCALER:
+        return fsr3UpscalerGetPermutationBlobByIndex((FfxFsr3UpscalerPass)passId, permutationOptions, outBlob);
+#endif // #if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
 
 #if defined(FFX_SPD) || defined(FFX_ALL)
     case FFX_EFFECT_SPD:
@@ -189,6 +212,16 @@ switch (effectId)
     case FFX_EFFECT_FSR1:
         return fsr1IsWave64(permutationOptions, isWave64);
 #endif // #if defined(FFX_FSR) || defined(FFX_ALL)
+
+#if defined(FFX_FSR1) || defined(FFX_ALL)
+    case FFX_EFFECT_FSR1:
+        return fsr1IsWave64(permutationOptions, isWave64);
+#endif // #if defined(FFX_FSR1) || defined(FFX_ALL)
+
+#if defined(FFX_FSR2) || defined(FFX_ALL)
+    case FFX_EFFECT_FSR1:
+        return fsr2IsWave64(permutationOptions, isWave64);
+#endif // #if defined(FFX_FSR2) || defined(FFX_ALL)
 
 #if defined(FFX_SPD) || defined(FFX_ALL)
     case FFX_EFFECT_SPD:
