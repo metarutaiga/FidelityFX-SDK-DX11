@@ -58,7 +58,7 @@ static FfxShaderBlob fsr3UpscalerGetDepthClipPassPermutationBlobByIndex(uint32_t
     // s_LinearClamp                             sampler      NA          NA             s1      1 
     // r_reconstructed_previous_nearest_depth    texture    uint          2d             t0      1 
     // r_dilated_motion_vectors                  texture  float2          2d             t1      1 
-    // r_dilatedDepth                            texture   float          2d             t2      1 
+    // r_dilated_depth                           texture   float          2d             t2      1 
     // r_reactive_mask                           texture   float          2d             t3      1 
     // r_transparency_and_composition_mask       texture   float          2d             t4      1 
     // r_previous_dilated_motion_vectors         texture  float2          2d             t5      1 
@@ -67,11 +67,11 @@ static FfxShaderBlob fsr3UpscalerGetDepthClipPassPermutationBlobByIndex(uint32_t
     // r_input_exposure                          texture  float2          2d             t9      1 
     // rw_dilated_reactive_masks                     UAV  unorm2          2d             u0      1 
     // rw_prepared_input_color                       UAV  float4          2d             u1      1 
-    // cbFSR2                                    cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbFSR2" };
+    // cbFSR3Upscaler                            cbuffer      NA          NA            cb0      1 
+    static const char* boundConstantBufferNames[] = { "cbFSR3Upscaler" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_reconstructed_previous_nearest_depth", "r_dilated_motion_vectors", "r_dilatedDepth", "r_reactive_mask", "r_transparency_and_composition_mask", "r_previous_dilated_motion_vectors", "r_input_motion_vectors", "r_input_color_jittered", "r_input_exposure" };
+    static const char* boundSRVTextureNames[] = { "r_reconstructed_previous_nearest_depth", "r_dilated_motion_vectors", "r_dilated_depth", "r_reactive_mask", "r_transparency_and_composition_mask", "r_previous_dilated_motion_vectors", "r_input_motion_vectors", "r_input_color_jittered", "r_input_exposure" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5, 6, 7, 9 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
     static const char* boundUAVTextureNames[] = { "rw_dilated_reactive_masks", "rw_prepared_input_color" };
@@ -124,16 +124,16 @@ static FfxShaderBlob fsr3UpscalerGetReconstructPreviousDepthPassPermutationBlobB
     // r_input_exposure                           texture  float2          2d             t3      1 
     // rw_reconstructed_previous_nearest_depth        UAV    uint          2d             u0      1 
     // rw_dilated_motion_vectors                      UAV  float2          2d             u1      1 
-    // rw_dilatedDepth                                UAV   float          2d             u2      1 
+    // rw_dilated_depth                               UAV   float          2d             u2      1 
     // rw_lock_input_luma                             UAV   float          2d             u3      1 
-    // cbFSR2                                     cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbFSR2" };
+    // cbFSR3Upscaler                             cbuffer      NA          NA            cb0      1 
+    static const char* boundConstantBufferNames[] = { "cbFSR3Upscaler" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
     static const char* boundSRVTextureNames[] = { "r_input_motion_vectors", "r_input_depth", "r_input_color_jittered","r_input_exposure" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1 };
-    static const char* boundUAVTextureNames[] = { "rw_reconstructed_previous_nearest_depth", "rw_dilated_motion_vectors", "rw_dilatedDepth", "rw_lock_input_luma" };
+    static const char* boundUAVTextureNames[] = { "rw_reconstructed_previous_nearest_depth", "rw_dilated_motion_vectors", "rw_dilated_depth", "rw_lock_input_luma" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1 };
 
@@ -174,21 +174,20 @@ static FfxShaderBlob fsr3UpscalerGetLockPassPermutationBlobByIndex(uint32_t perm
 
     // Resource Bindings:
     //
-    // Name                                          Type  Format         Dim      HLSL Bind  Count
-    // --------------------------------------- ---------- ------- ----------- -------------- ------
-    // r_lock_input_luma                          texture   float          2d             t0      1 
-    // rw_new_locks                                   UAV   unorm          2d             u0      1 
-    // rw_reconstructed_previous_nearest_depth        UAV    uint          2d             u1      1 
-    // cbFSR2                                     cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbFSR2" };
+    // Name                                 Type  Format         Dim      HLSL Bind  Count
+    // ------------------------------ ---------- ------- ----------- -------------- ------
+    // r_lock_input_luma                 texture   float          2d             t0      1 
+    // rw_new_locks                          UAV   unorm          2d             u0      1 
+    // cbFSR3Upscaler                    cbuffer      NA          NA            cb0      1 
+    static const char* boundConstantBufferNames[] = { "cbFSR3Upscaler" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
     static const char* boundSRVTextureNames[] = { "r_lock_input_luma" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
-    static const char* boundUAVTextureNames[] = { "rw_new_locks", "rw_reconstructed_previous_nearest_depth" };
-    static const uint32_t boundUAVTextures[] = { 0, 1 };
-    static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
+    static const char* boundUAVTextureNames[] = { "rw_new_locks" };
+    static const uint32_t boundUAVTextures[] = { 0 };
+    static const uint32_t boundUAVTextureCounts[] = { 1 };
 
     FfxShaderBlob blob = {
         is16bit ? ffx_fsr3upscaler_lock_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -243,8 +242,8 @@ static FfxShaderBlob fsr3UpscalerGetAccumulatePassPermutationBlobByIndex(uint32_
     // rw_upscaled_output                    UAV  float4          2d             u2      1 
     // rw_new_locks                          UAV   unorm          2d             u3      1 
     // rw_luma_history                       UAV  float4          2d             u4      1 
-    // cbFSR2                            cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbFSR2" };
+    // cbFSR3Upscaler                    cbuffer      NA          NA            cb0      1 
+    static const char* boundConstantBufferNames[] = { "cbFSR3Upscaler" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
     static const char* boundSRVTextureNames[] = { "r_input_exposure", "r_dilated_reactive_masks", "r_input_motion_vectors", "r_internal_upscaled_color", "r_lock_status", "r_prepared_input_color", "r_imgMips", "r_luma_history" };
@@ -296,9 +295,9 @@ static FfxShaderBlob fsr3UpscalerGetRCASPassPermutationBlobByIndex(uint32_t perm
     // r_input_exposure                  texture  float2          2d             t0      1 
     // r_rcas_input                      texture  float4          2d             t1      1 
     // rw_upscaled_output                    UAV  float4          2d             u0      1 
-    // cbFSR2                            cbuffer      NA          NA            cb0      1 
+    // cbFSR3Upscaler                    cbuffer      NA          NA            cb0      1 
     // cbRCAS                            cbuffer      NA          NA            cb1      1 
-    static const char* boundConstantBufferNames[] = { "cbFSR2", "cbRCAS" };
+    static const char* boundConstantBufferNames[] = { "cbFSR3Upscaler", "cbRCAS" };
     static const uint32_t boundConstantBuffers[] = { 0, 1 };
     static const uint32_t boundConstantBufferCounts[] = { 1, 1 };
     static const char* boundSRVTextureNames[] = { "r_input_exposure", "r_rcas_input" };
@@ -353,9 +352,9 @@ static FfxShaderBlob fsr3UpscalerGetComputeLuminancePyramidPassPermutationBlobBy
     // rw_img_mip_shading_change             UAV   float          2d             u1      1 
     // rw_img_mip_5                          UAV   float          2d             u2      1 
     // rw_auto_exposure                      UAV  float2          2d             u3      1 
-    // cbFSR2                            cbuffer      NA          NA            cb0      1 
+    // cbFSR3Upscaler                    cbuffer      NA          NA            cb0      1 
     // cbSPD                             cbuffer      NA          NA            cb1      1 
-    static const char* boundConstantBufferNames[] = { "cbFSR2", "cbSPD" };
+    static const char* boundConstantBufferNames[] = { "cbFSR3Upscaler", "cbSPD" };
     static const uint32_t boundConstantBuffers[] = { 0, 1 };
     static const uint32_t boundConstantBufferCounts[] = { 1, 1 };
     static const char* boundSRVTextureNames[] = { "r_input_color_jittered" };
