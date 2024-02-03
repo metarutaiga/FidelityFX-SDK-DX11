@@ -54,9 +54,6 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
     static const char* boundUAVTextureNames[] = { "rw_upscaled_output" };
     static const uint32_t boundUAVTextures[] = { 1 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
-    static const char* boundSamplerNames[] = { "s_LinearClamp" };
-    static const uint32_t boundSamplers[] = { 0 };
-    static const uint32_t boundSamplerCounts[] = { 1 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data
@@ -79,15 +76,6 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        nullptr,
-        nullptr,
-        nullptr,
-        nullptr,
-        nullptr,
-        nullptr,
-        boundSamplerNames,
-        boundSamplers,
-        boundSamplerCounts,
     };
 
     return blob;

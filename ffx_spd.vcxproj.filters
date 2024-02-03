@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="gpu">
+      <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host">
+      <UniqueIdentifier>{57149e49-524a-4f7c-88cb-7f21c050a28b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends">
+      <UniqueIdentifier>{92ebecfe-210a-4b62-8211-4eb92d024d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends\blob_accessors">
+      <UniqueIdentifier>{31f5323f-92f3-44d2-bda9-7d29933ffffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends\hlsl">
+      <UniqueIdentifier>{e72a8aa7-a1fd-48df-abad-ed0bde3d2148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends\hlsl\spd">
+      <UniqueIdentifier>{90968b67-f85e-4084-a8d8-a1b422e33e3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\components">
+      <UniqueIdentifier>{fea07f60-e530-4173-b1e7-d76dff7298be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\components\spd">
+      <UniqueIdentifier>{b2c8e6a8-3e11-4507-b648-00a5c7492bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gpu\spd">
+      <UniqueIdentifier>{2f58ea1e-d0af-4b9a-87a5-c88a3ff9579a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends\blob_accessors\permutations">
+      <UniqueIdentifier>{ea351e25-93b5-48d7-add2-a3ab026f01ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="host\backends\dx11">
+      <UniqueIdentifier>{32fffe53-140f-4ebe-836e-c43e19a2cdc8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="host\backends\ffx_shader_blobs.h">
+      <Filter>host\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="host\components\spd\ffx_spd_private.h">
+      <Filter>host\components\spd</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\spd\ffx_spd.h">
+      <Filter>gpu\spd</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\spd\ffx_spd_callbacks_glsl.h">
+      <Filter>gpu\spd</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\spd\ffx_spd_callbacks_hlsl.h">
+      <Filter>gpu\spd</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\spd\ffx_spd_resources.h">
+      <Filter>gpu\spd</Filter>
+    </ClInclude>
+    <ClInclude Include="host\components\spd\ffx_spd.h">
+      <Filter>host\components\spd</Filter>
+    </ClInclude>
+    <ClInclude Include="host\backends\blob_accessors\ffx_spd_shaderblobs.h">
+      <Filter>host\backends\blob_accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\spd\ffx_spd_sharpen.h">
+      <Filter>gpu\spd</Filter>
+    </ClInclude>
+    <ClInclude Include="host\backends\dx11\ffx_dx11.h">
+      <Filter>host\backends\dx11</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="host\backends\ffx_shader_blobs.cpp">
+      <Filter>host\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="host\components\spd\ffx_spd.cpp">
+      <Filter>host\components\spd</Filter>
+    </ClCompile>
+    <ClCompile Include="host\backends\blob_accessors\ffx_spd_shaderblobs.cpp">
+      <Filter>host\backends\blob_accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp">
+      <Filter>host\backends\dx11</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="host\backends\hlsl\spd\ffx_spd_sharpen_pass.hlsl">
+      <Filter>host\backends\hlsl\spd</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_2.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_2.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_2.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_2.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_2.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_2.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_2.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_0.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_1.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_2.hlsl">
+      <Filter>host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
