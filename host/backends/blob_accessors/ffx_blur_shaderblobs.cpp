@@ -32,39 +32,39 @@
 static FfxShaderBlob blurGetBlurPassPermutationBlobByKernelSize(
     uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
-    int FFX_BLUR_OPTION_KERNEL_PERMUTATION;
-    if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_KERNEL_0))
-        FFX_BLUR_OPTION_KERNEL_PERMUTATION = 0;
-    else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_KERNEL_1))
-        FFX_BLUR_OPTION_KERNEL_PERMUTATION = 1;
-    else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_KERNEL_2))
-        FFX_BLUR_OPTION_KERNEL_PERMUTATION = 2;
-    else
-        FFX_ASSERT_FAIL("Unknown kernel permutation.");
-
-    int FFX_BLUR_OPTION_KERNEL_DIMENSION;
+    int KERNEL_DIMENSION;
     if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_3x3_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 0;
+        KERNEL_DIMENSION = 0;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_5x5_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 1;
+        KERNEL_DIMENSION = 1;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_7x7_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 2;
+        KERNEL_DIMENSION = 2;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_9x9_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 3;
+        KERNEL_DIMENSION = 3;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_11x11_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 4;
+        KERNEL_DIMENSION = 4;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_13x13_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 5;
+        KERNEL_DIMENSION = 5;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_15x15_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 6;
+        KERNEL_DIMENSION = 6;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_17x17_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 7;
+        KERNEL_DIMENSION = 7;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_19x19_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 8;
+        KERNEL_DIMENSION = 8;
     else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_21x21_KERNEL))
-        FFX_BLUR_OPTION_KERNEL_DIMENSION = 9;
+        KERNEL_DIMENSION = 9;
     else
         FFX_ASSERT_FAIL("Unknown kernel size permutation.");
+
+    int KERNEL_PERMUTATION;
+    if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_KERNEL_0))
+        KERNEL_PERMUTATION = 0;
+    else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_KERNEL_1))
+        KERNEL_PERMUTATION = 1;
+    else if (FFX_CONTAINS_FLAG(permutationOptions, BLUR_SHADER_PERMUTATION_KERNEL_2))
+        KERNEL_PERMUTATION = 2;
+    else
+        FFX_ASSERT_FAIL("Unknown kernel permutation.");
 
     // Name                                 Type  Format         Dim      HLSL Bind  Count
     // ------------------------------ ---------- ------- ----------- -------------- ------
@@ -82,10 +82,10 @@ static FfxShaderBlob blurGetBlurPassPermutationBlobByKernelSize(
     static const uint32_t boundUAVTextureCounts[] = { 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_blur_pass_16bit_permutations[FFX_BLUR_OPTION_KERNEL_DIMENSION][FFX_BLUR_OPTION_KERNEL_PERMUTATION].data
-                : g_ffx_blur_pass_permutations[FFX_BLUR_OPTION_KERNEL_DIMENSION][FFX_BLUR_OPTION_KERNEL_PERMUTATION].data,
-        is16bit ? g_ffx_blur_pass_16bit_permutations[FFX_BLUR_OPTION_KERNEL_DIMENSION][FFX_BLUR_OPTION_KERNEL_PERMUTATION].size
-                : g_ffx_blur_pass_permutations[FFX_BLUR_OPTION_KERNEL_DIMENSION][FFX_BLUR_OPTION_KERNEL_PERMUTATION].size,
+        is16bit ? g_ffx_blur_pass_16bit_permutations[KERNEL_DIMENSION][KERNEL_PERMUTATION].data
+                : g_ffx_blur_pass_permutations[KERNEL_DIMENSION][KERNEL_PERMUTATION].data,
+        is16bit ? g_ffx_blur_pass_16bit_permutations[KERNEL_DIMENSION][KERNEL_PERMUTATION].size
+                : g_ffx_blur_pass_permutations[KERNEL_DIMENSION][KERNEL_PERMUTATION].size,
         1,
         1,
         1,

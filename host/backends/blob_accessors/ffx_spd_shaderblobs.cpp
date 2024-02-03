@@ -33,7 +33,7 @@ static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permuta
 {
     int LINEAR_SAMPLE = FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_LINEAR_SAMPLE);
     int WAVE_INTEROP_LDS = FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_WAVE_INTEROP_LDS);
-    int DOWNSAMPLE_FILTER;
+    int DOWNSAMPLE_FILTER = 0;
     if (FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_DOWNSAMPLE_FILTER_MEAN))
         DOWNSAMPLE_FILTER = 0;
     else if (FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_DOWNSAMPLE_FILTER_MIN))
@@ -62,15 +62,12 @@ static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permuta
     // rw_input_downsample_src_mips[11]        UAV  float4     2darray            u13      1 
     // rw_input_downsample_src_mips[12]        UAV  float4     2darray            u14      1 
     // cbSPD                               cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbCAS" };
+    static const char* boundConstantBufferNames[] = { "cbSPD" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_input_color" };
-    static const uint32_t boundSRVTextures[] = { 0 };
-    static const uint32_t boundSRVTextureCounts[] = { 1 };
-    static const char* boundUAVTextureNames[] = { "rw_output_color" };
-    static const uint32_t boundUAVTextures[] = { 0 };
-    static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const char* boundUAVTextureNames[] = { "rw_internal_global_atomic", "rw_input_downsample_src_mid_mip", "rw_input_downsample_src_mips" };
+    static const uint32_t boundUAVTextures[] = { 0, 1, 2 };
+    static const uint32_t boundUAVTextureCounts[] = { 1, 1, 13 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_spd_downsample_pass_16bit_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].data
@@ -78,7 +75,7 @@ static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permuta
         is16bit ? g_ffx_spd_downsample_pass_16bit_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].size
                 : g_ffx_spd_downsample_pass_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].size,
         1,
-        1,
+        0,
         1,
         0,
         0,
@@ -87,9 +84,9 @@ static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permuta
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        boundSRVTextureNames,
-        boundSRVTextures,
-        boundSRVTextureCounts,
+        nullptr,
+        nullptr,
+        nullptr,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,

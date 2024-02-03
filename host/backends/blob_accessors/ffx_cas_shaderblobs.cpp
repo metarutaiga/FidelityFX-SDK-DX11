@@ -32,18 +32,18 @@
 
 static FfxShaderBlob casGetSharpenPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
-    int FFX_CAS_OPTION_SHARPEN_ONLY = FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_SHARPEN_ONLY);
-    int FFX_CAS_COLOR_SPACE_CONVERSION;
+    int SHARPEN_ONLY = FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_SHARPEN_ONLY);
+    int SPACE_CONVERSION = 0;
     if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_LINEAR))
-        FFX_CAS_COLOR_SPACE_CONVERSION = 0;
+        SPACE_CONVERSION = 0;
     else if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_GAMMA20))
-        FFX_CAS_COLOR_SPACE_CONVERSION = 1;
+        SPACE_CONVERSION = 1;
     else if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_GAMMA22))
-        FFX_CAS_COLOR_SPACE_CONVERSION = 2;
+        SPACE_CONVERSION = 2;
     else if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_SRGB_OUTPUT))
-        FFX_CAS_COLOR_SPACE_CONVERSION = 3;
+        SPACE_CONVERSION = 3;
     else if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_SRGB_INPUT_OUTPUT))
-        FFX_CAS_COLOR_SPACE_CONVERSION = 4;
+        SPACE_CONVERSION = 4;
     else
         FFX_ASSERT_FAIL("Unknown color-space permutation.");
 
@@ -63,10 +63,10 @@ static FfxShaderBlob casGetSharpenPassPermutationBlobByIndex(uint32_t permutatio
     static const uint32_t boundUAVTextureCounts[] = { 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_cas_sharpen_pass_16bit_permutations[FFX_CAS_OPTION_SHARPEN_ONLY][FFX_CAS_COLOR_SPACE_CONVERSION].data
-                : g_ffx_cas_sharpen_pass_permutations[FFX_CAS_OPTION_SHARPEN_ONLY][FFX_CAS_COLOR_SPACE_CONVERSION].data,
-        is16bit ? g_ffx_cas_sharpen_pass_16bit_permutations[FFX_CAS_OPTION_SHARPEN_ONLY][FFX_CAS_COLOR_SPACE_CONVERSION].size
-                : g_ffx_cas_sharpen_pass_permutations[FFX_CAS_OPTION_SHARPEN_ONLY][FFX_CAS_COLOR_SPACE_CONVERSION].size,
+        is16bit ? g_ffx_cas_sharpen_pass_16bit_permutations[SHARPEN_ONLY][SPACE_CONVERSION].data
+                : g_ffx_cas_sharpen_pass_permutations[SHARPEN_ONLY][SPACE_CONVERSION].data,
+        is16bit ? g_ffx_cas_sharpen_pass_16bit_permutations[SHARPEN_ONLY][SPACE_CONVERSION].size
+                : g_ffx_cas_sharpen_pass_permutations[SHARPEN_ONLY][SPACE_CONVERSION].size,
         1,
         1,
         1,
