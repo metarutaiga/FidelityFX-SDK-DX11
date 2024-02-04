@@ -5,5 +5,5 @@ temp/
 Win32/
 x64/
 *.vcxproj.user
-host/backends/blob_accessors/permutations/*_*.h
-host/backends/blob_accessors/permutations/*_*.hlsl
+host/backends/blob_accessors/permutations/*_?.h
+host/backends/blob_accessors/permutations/*_?.hlsl
