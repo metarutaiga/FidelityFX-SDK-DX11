@@ -1,24 +1,24 @@
 // This file is part of the FidelityFX SDK.
-//
-// Copyright © 2023 Advanced Micro Devices, Inc.
-//
+// 
+// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+// 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files(the “Software”), to deal
+// of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions :
-//
+// furnished to do so, subject to the following conditions:
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 
 #define INITGUID
 
@@ -1636,7 +1636,7 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                 {
                     // source: UAV of resource to bind
                     const uint32_t resourceIndex = job->computeJobDescriptor.uavTextures[currentUAVResource].internalIndex;
-                    ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[currentUAVResource];
+                    ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[0];
 
                     // where to bind it
                     const uint32_t currentUavResourceIndex = job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].slotIndex + uavEntry;
@@ -1803,7 +1803,7 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
     dx11DeviceContext->Dispatch(job->computeJobDescriptor.dimensions[0], job->computeJobDescriptor.dimensions[1], job->computeJobDescriptor.dimensions[2]);
 
     // unbind UAVs
-    static ID3D11UnorderedAccessView* const emptyUAVs[FFX_MAX_NUM_UAVS] = {};
+    static ID3D11UnorderedAccessView* const emptyUAVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
     if (minimumUav <= maximumUav) {
 
         uint32_t count = maximumUav - minimumUav + 1;
@@ -1811,7 +1811,7 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
     }
 
     // unbind SRVs
-    static ID3D11ShaderResourceView* const emptySRVs[FFX_MAX_NUM_SRVS] = {};
+    static ID3D11ShaderResourceView* const emptySRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
     if (minimumSrv <= maximumSrv) {
 
         uint32_t count = maximumSrv - minimumSrv + 1;

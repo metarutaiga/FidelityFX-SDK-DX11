@@ -148,7 +148,7 @@ FfxErrorCode fsr1GetPermutationBlobByIndex(
             if (passId == FFX_FSR1_PASS_EASU_RCAS)
             {
                 static const char* boundUAVTextureNames[] = { "rw_internal_upscaled_color" };
-                blob.boundUAVBufferNames = boundUAVTextureNames;
+                outBlob->boundUAVTextureNames = boundUAVTextureNames;
             }
 
             return FFX_OK;
