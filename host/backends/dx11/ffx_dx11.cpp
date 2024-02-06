@@ -838,6 +838,7 @@ FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32
                 backendContext->constantBufferSize[i] = 0;
             }
         }
+        backendContext->gpuJobCount = 0;
 
         if (backendContext->deviceContext1 != NULL) {
             backendContext->deviceContext1->Release();
@@ -937,23 +938,36 @@ FfxErrorCode CreateResourceDX11(
     }
     else {
 
+        D3D11_SUBRESOURCE_DATA dx11SubResourceData = {};
+        D3D11_SUBRESOURCE_DATA* pSubResourceData = nullptr;
+        if (createResourceDescription->initData) {
+            pSubResourceData = &dx11SubResourceData;
+            pSubResourceData->pSysMem = createResourceDescription->initData;
+            pSubResourceData->SysMemPitch = createResourceDescription->initDataSize;
+            pSubResourceData->SysMemSlicePitch = createResourceDescription->initDataSize;
+        }
+
         switch (createResourceDescription->resourceDescription.type) {
 
         case FFX_RESOURCE_TYPE_BUFFER:
-            TIF(dx11Device->CreateBuffer(&dx11BufferDescription, nullptr, (ID3D11Buffer**)&dx11Resource));
+            TIF(dx11Device->CreateBuffer(&dx11BufferDescription, pSubResourceData, (ID3D11Buffer**)&dx11Resource));
             break;
 
         case FFX_RESOURCE_TYPE_TEXTURE1D:
-            TIF(dx11Device->CreateTexture1D(&dx11Texture1DDescription, nullptr, (ID3D11Texture1D**)&dx11Resource));
+            TIF(dx11Device->CreateTexture1D(&dx11Texture1DDescription, pSubResourceData, (ID3D11Texture1D**)&dx11Resource));
             break;
 
         case FFX_RESOURCE_TYPE_TEXTURE_CUBE:
         case FFX_RESOURCE_TYPE_TEXTURE2D:
-            TIF(dx11Device->CreateTexture2D(&dx11Texture2DDescription, nullptr, (ID3D11Texture2D**)&dx11Resource));
+            dx11SubResourceData.SysMemPitch /= dx11Texture2DDescription.Height;
+            TIF(dx11Device->CreateTexture2D(&dx11Texture2DDescription, pSubResourceData, (ID3D11Texture2D**)&dx11Resource));
             break;
 
         case FFX_RESOURCE_TYPE_TEXTURE3D:
-            TIF(dx11Device->CreateTexture3D(&dx11Texture3DDescription, nullptr, (ID3D11Texture3D**)&dx11Resource));
+            dx11SubResourceData.SysMemPitch /= dx11Texture3DDescription.Height;
+            dx11SubResourceData.SysMemPitch /= dx11Texture3DDescription.Depth;
+            dx11SubResourceData.SysMemSlicePitch /= dx11Texture3DDescription.Depth;
+            TIF(dx11Device->CreateTexture3D(&dx11Texture3DDescription, pSubResourceData, (ID3D11Texture3D**)&dx11Resource));
             break;
 
         default:
@@ -1106,28 +1120,6 @@ FfxErrorCode CreateResourceDX11(
                     }
                 }
             }
-        }
-
-        // create upload resource and upload job
-        if (createResourceDescription->initData) {
-
-            FfxResourceInternal copySrc;
-            FfxCreateResourceDescription uploadDescription = { *createResourceDescription };
-            uploadDescription.heapType = FFX_HEAP_TYPE_UPLOAD;
-            uploadDescription.resourceDescription.usage = FFX_RESOURCE_USAGE_READ_ONLY;
-            uploadDescription.initalState = FFX_RESOURCE_STATE_GENERIC_READ;
-
-            backendInterface->fpCreateResource(backendInterface, &uploadDescription, effectContextId, &copySrc);
-
-            // setup the upload job
-            FfxGpuJobDescription copyJob = {
-
-                FFX_GPU_JOB_COPY
-            };
-            copyJob.copyJobDescriptor.src = copySrc;
-            copyJob.copyJobDescriptor.dst = *outTexture;
-
-            backendInterface->fpScheduleGpuJob(backendInterface, &copyJob);
         }
     }
 
