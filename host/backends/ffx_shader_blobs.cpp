@@ -42,6 +42,10 @@
 #include "blob_accessors/ffx_fsr3upscaler_shaderblobs.h"
 #endif // #if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
 
+#if defined(FFX_FRAMEINTERPOLATION) || defined(FFX_ALL)
+#include "blob_accessors/ffx_frameinterpolation_shaderblobs.h"
+#endif // #if defined(FFX_FRAMEINTERPOLATION) || defined(FFX_ALL)
+
 #if defined(FFX_SPD) || defined(FFX_ALL)
 #include "blob_accessors/ffx_spd_shaderblobs.h"
 #endif // #if defined(FFX_SPD) || defined(FFX_ALL)
@@ -131,6 +135,11 @@ FfxErrorCode ffxGetPermutationBlobByIndex(
     case FFX_EFFECT_FSR3UPSCALER:
         return fsr3UpscalerGetPermutationBlobByIndex((FfxFsr3UpscalerPass)passId, permutationOptions, outBlob);
 #endif // #if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
+
+#if defined(FFX_FRAMEINTERPOLATION) || defined(FFX_ALL)
+    case FFX_EFFECT_FRAMEINTERPOLATION:
+        return frameInterpolationGetPermutationBlobByIndex((FfxFrameInterpolationPass)passId, stageId, permutationOptions, outBlob);
+#endif // #if defined(FFX_FRAMEINTERPOLATION) || defined(FFX_ALL)
 
 #if defined(FFX_SPD) || defined(FFX_ALL)
     case FFX_EFFECT_SPD:

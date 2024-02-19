@@ -15,7 +15,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffx_fsr2", "ffx_fsr2.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffx_spd", "ffx_spd.vcxproj", "{C63139D2-8D69-47BC-9D82-2A8A22104057}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffx_fsr3scaler", "ffx_fsr3upscaler.vcxproj", "{19482933-95D9-4654-8206-70B9D7E9C593}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffx_fsr3upscaler", "ffx_fsr3upscaler.vcxproj", "{19482933-95D9-4654-8206-70B9D7E9C593}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffx_frameinterpolation", "ffx_frameinterpolation.vcxproj", "{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{19482933-95D9-4654-8206-70B9D7E9C593}.Release|x64.Build.0 = Release|x64
 		{19482933-95D9-4654-8206-70B9D7E9C593}.Release|x86.ActiveCfg = Release|Win32
 		{19482933-95D9-4654-8206-70B9D7E9C593}.Release|x86.Build.0 = Release|Win32
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}.Debug|x64.ActiveCfg = Debug|x64
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}.Debug|x64.Build.0 = Debug|x64
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}.Debug|x86.ActiveCfg = Debug|Win32
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}.Debug|x86.Build.0 = Debug|Win32
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}.Release|x64.ActiveCfg = Release|x64
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}.Release|x64.Build.0 = Release|x64
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}.Release|x86.ActiveCfg = Release|Win32
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
