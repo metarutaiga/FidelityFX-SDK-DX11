@@ -46,6 +46,7 @@ echo #define FFX_CAS_OPTION_SHARPEN_ONLY %2 >>%file%
 echo #define FFX_CAS_COLOR_SPACE_CONVERSION %3 >>%file%
 echo.>>%file%
 echo #include "../../hlsl/cas/ffx_cas_sharpen_pass.hlsl">>%file%
+goto :eof
 
 :header
 setlocal
