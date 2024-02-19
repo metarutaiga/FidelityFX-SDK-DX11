@@ -79,10 +79,10 @@ static FfxShaderBlob fsr3UpscalerGetDepthClipPassPermutationBlobByIndex(uint32_t
     static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? ffx_fsr3upscaler_depth_clip_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
-                : ffx_fsr3upscaler_depth_clip_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
-        is16bit ? ffx_fsr3upscaler_depth_clip_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
-                : ffx_fsr3upscaler_depth_clip_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
+        is16bit ? g_ffx_fsr3upscaler_depth_clip_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                : g_ffx_fsr3upscaler_depth_clip_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
+        is16bit ? g_ffx_fsr3upscaler_depth_clip_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                : g_ffx_fsr3upscaler_depth_clip_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
         1,
         1,
         1,
@@ -138,10 +138,10 @@ static FfxShaderBlob fsr3UpscalerGetReconstructPreviousDepthPassPermutationBlobB
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? ffx_fsr3upscaler_reconstruct_previous_depth_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
-                : ffx_fsr3upscaler_reconstruct_previous_depth_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
-        is16bit ? ffx_fsr3upscaler_reconstruct_previous_depth_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
-                : ffx_fsr3upscaler_reconstruct_previous_depth_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
+        is16bit ? g_ffx_fsr3upscaler_reconstruct_previous_depth_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                : g_ffx_fsr3upscaler_reconstruct_previous_depth_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
+        is16bit ? g_ffx_fsr3upscaler_reconstruct_previous_depth_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                : g_ffx_fsr3upscaler_reconstruct_previous_depth_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
         1,
         1,
         1,
@@ -190,10 +190,10 @@ static FfxShaderBlob fsr3UpscalerGetLockPassPermutationBlobByIndex(uint32_t perm
     static const uint32_t boundUAVTextureCounts[] = { 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? ffx_fsr3upscaler_lock_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
-                : ffx_fsr3upscaler_lock_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
-        is16bit ? ffx_fsr3upscaler_lock_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
-                : ffx_fsr3upscaler_lock_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
+        is16bit ? g_ffx_fsr3upscaler_lock_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                : g_ffx_fsr3upscaler_lock_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
+        is16bit ? g_ffx_fsr3upscaler_lock_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                : g_ffx_fsr3upscaler_lock_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
         1,
         1,
         1,
@@ -254,10 +254,10 @@ static FfxShaderBlob fsr3UpscalerGetAccumulatePassPermutationBlobByIndex(uint32_
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1, 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? ffx_fsr3upscaler_accumulate_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
-                : ffx_fsr3upscaler_accumulate_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
-        is16bit ? ffx_fsr3upscaler_accumulate_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
-                : ffx_fsr3upscaler_accumulate_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
+        is16bit ? g_ffx_fsr3upscaler_accumulate_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                : g_ffx_fsr3upscaler_accumulate_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
+        is16bit ? g_ffx_fsr3upscaler_accumulate_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                : g_ffx_fsr3upscaler_accumulate_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
         1,
         1,
         1,
@@ -308,10 +308,10 @@ static FfxShaderBlob fsr3UpscalerGetRCASPassPermutationBlobByIndex(uint32_t perm
     static const uint32_t boundUAVTextureCounts[] = { 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? ffx_fsr3upscaler_rcas_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
-                : ffx_fsr3upscaler_rcas_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
-        is16bit ? ffx_fsr3upscaler_rcas_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
-                : ffx_fsr3upscaler_rcas_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
+        is16bit ? g_ffx_fsr3upscaler_rcas_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                : g_ffx_fsr3upscaler_rcas_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
+        is16bit ? g_ffx_fsr3upscaler_rcas_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                : g_ffx_fsr3upscaler_rcas_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
         1,
         1,
         1,
@@ -365,10 +365,10 @@ static FfxShaderBlob fsr3UpscalerGetComputeLuminancePyramidPassPermutationBlobBy
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? ffx_fsr3upscaler_compute_luminance_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
-                : ffx_fsr3upscaler_compute_luminance_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
-        is16bit ? ffx_fsr3upscaler_compute_luminance_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
-                : ffx_fsr3upscaler_compute_luminance_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
+        is16bit ? g_ffx_fsr3upscaler_compute_luminance_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                : g_ffx_fsr3upscaler_compute_luminance_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
+        is16bit ? g_ffx_fsr3upscaler_compute_luminance_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                : g_ffx_fsr3upscaler_compute_luminance_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
         1,
         1,
         1,
@@ -420,10 +420,10 @@ static FfxShaderBlob fsr3UpscalerGetAutogenReactivePassPermutationBlobByIndex(
     static const uint32_t boundUAVTextureCounts[] = { 1 };
 
     FfxShaderBlob blob = {
-        is16bit ? ffx_fsr3upscaler_autogen_reactive_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
-                : ffx_fsr3upscaler_autogen_reactive_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
-        is16bit ? ffx_fsr3upscaler_autogen_reactive_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
-                : ffx_fsr3upscaler_autogen_reactive_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
+        is16bit ? g_ffx_fsr3upscaler_autogen_reactive_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                : g_ffx_fsr3upscaler_autogen_reactive_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
+        is16bit ? g_ffx_fsr3upscaler_autogen_reactive_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                : g_ffx_fsr3upscaler_autogen_reactive_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
         1,
         1,
         1,
