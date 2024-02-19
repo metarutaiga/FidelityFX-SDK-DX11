@@ -102,7 +102,6 @@ static FfxShaderBlob fsr3UpscalerGetDepthClipPassPermutationBlobByIndex(uint32_t
     };
 
     return blob;
-
 }
 
 static FfxShaderBlob fsr3UpscalerGetReconstructPreviousDepthPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)

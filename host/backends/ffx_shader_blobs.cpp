@@ -46,6 +46,10 @@
 #include "blob_accessors/ffx_frameinterpolation_shaderblobs.h"
 #endif // #if defined(FFX_FRAMEINTERPOLATION) || defined(FFX_ALL)
 
+#if defined(FFX_OPTICALFLOW) || defined(FFX_ALL)
+#include "blob_accessors/ffx_opticalflow_shaderblobs.h"
+#endif // #if defined(FFX_OPTICALFLOW) || defined(FFX_ALL)
+
 #if defined(FFX_SPD) || defined(FFX_ALL)
 #include "blob_accessors/ffx_spd_shaderblobs.h"
 #endif // #if defined(FFX_SPD) || defined(FFX_ALL)
@@ -140,6 +144,11 @@ FfxErrorCode ffxGetPermutationBlobByIndex(
     case FFX_EFFECT_FRAMEINTERPOLATION:
         return frameInterpolationGetPermutationBlobByIndex((FfxFrameInterpolationPass)passId, stageId, permutationOptions, outBlob);
 #endif // #if defined(FFX_FRAMEINTERPOLATION) || defined(FFX_ALL)
+
+#if defined(FFX_OPTICALFLOW) || defined(FFX_ALL)
+    case FFX_EFFECT_OPTICALFLOW:
+        return opticalflowGetPermutationBlobByIndex((FfxOpticalflowPass)passId, permutationOptions, outBlob);
+#endif // #if defined(FFX_OPTICALFLOW) || defined(FFX_ALL)
 
 #if defined(FFX_SPD) || defined(FFX_ALL)
     case FFX_EFFECT_SPD:

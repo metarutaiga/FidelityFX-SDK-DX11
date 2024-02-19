@@ -20,11 +20,15 @@ rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM
 rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 rem THE SOFTWARE.
 
-for %%a in (_compute_game_vector_field_inpainting_pyramid_,_compute_inpainting_pyramid_,_debug_view_,_disocclusion_mask_,_game_motion_vector_field_,_inpainting_,_optical_flow_vector_field_,_,_reconstruct_previous_depth_,_setup_) do (
-  for %%b in (_,_16bit_) do (
-    call :header %%a %%b
-    for %%c in (0,1) do (
-      call :hlsl %%a %%b %%c
+for %%a in (_prepare_luma_,_compute_luminance_pyramid_,_generate_scd_histogram_,_compute_scd_divergence_,_compute_optical_flow_advanced_,_filter_optical_flow_,_scale_optical_flow_advanced_) do (
+  for %%b in (pass,pass_v5) do (
+    if exist ../../hlsl/opticalflow/ffx_opticalflow%%a%%b.hlsl (
+      for %%c in (_,_16bit_) do (
+        call :header %%a %%b %%c
+        for %%d in (0,1) do (
+          call :hlsl %%a %%b %%c %%d
+        )
+      )
     )
   )
 )
@@ -32,32 +36,26 @@ goto :eof
 
 :hlsl
 setlocal
-set file=ffx_frameinterpolation%1pass%2permutations_%3.hlsl
+set file=ffx_opticalflow%1%2%3permutations_%4.hlsl
 if exist %file% goto :eof
 echo %file%
 
 call ffx_license.bat %file%
 echo #define FFX_GPU 1 >>%file%
-if /i %2==_ echo #define FFX_HALF 0 >>%file%
-if /i %2==_16bit_ echo #define FFX_HALF 1 >>%file%
+if /i %3==_ echo #define FFX_HALF 0 >>%file%
+if /i %3==_16bit_ echo #define FFX_HALF 1 >>%file%
 echo #define FFX_HLSL 1 >>%file%
 echo.>>%file%
 echo #define FFX_SPD_NO_WAVE_OPERATIONS >>%file%
 echo.>>%file%
-echo #define FFX_FRAMEINTERPOLATION_OPTION_UPSAMPLE_SAMPLERS_USE_DATA_HALF 0 >>%file%
-echo #define FFX_FRAMEINTERPOLATION_OPTION_ACCUMULATE_SAMPLERS_USE_DATA_HALF 0 >>%file%
-echo #define FFX_FRAMEINTERPOLATION_OPTION_REPROJECT_SAMPLERS_USE_DATA_HALF 1 >>%file%
-echo #define FFX_FRAMEINTERPOLATION_OPTION_POSTPROCESSLOCKSTATUS_SAMPLERS_USE_DATA_HALF 0 >>%file%
-echo #define FFX_FRAMEINTERPOLATION_OPTION_UPSAMPLE_USE_LANCZOS_TYPE 2 >>%file%
+echo #define FFX_OPTICALFLOW_OPTION_HDR_COLOR_INPUT %4 >>%file%
 echo.>>%file%
-echo #define FFX_FRAMEINTERPOLATION_OPTION_INVERTED_DEPTH %3 >>%file%
-echo.>>%file%
-echo #include "../../hlsl/frameinterpolation/ffx_frameinterpolation%1pass.hlsl">>%file%
+echo #include "../../hlsl/opticalflow/ffx_opticalflow%1%2.hlsl">>%file%
 goto :eof
 
 :header
 setlocal
-set file=ffx_frameinterpolation%1pass%2permutations.h
+set file=ffx_opticalflow%1%2%3permutations.h
 if exist %file% goto :eof
 echo %file%
 
@@ -65,13 +63,13 @@ call ffx_license.bat %file%
 echo typedef unsigned char BYTE;>>%file%
 echo.>>%file%
 for %%c in (0,1) do (
-  echo #include "ffx_frameinterpolation%1pass%2permutations_%%c.h">>%file%
+  echo #include "ffx_opticalflow%1%2%3permutations_%%c.h">>%file%
 )
 echo.>>%file%
-echo static const struct { const uint8_t* data; uint32_t size; } g_ffx_frameinterpolation%1pass%2permutations[2] = {>>%file%
+echo static const struct { const uint8_t* data; uint32_t size; } g_ffx_opticalflow%1%2%3permutations[2] = {>>%file%
 for %%c in (0,1) do (
   echo     {>>%file%
-  echo         g_ffx_frameinterpolation%1pass%2permutations_%%c, sizeof^(g_ffx_frameinterpolation%1pass%2permutations_%%c^)>>%file%
+  echo         g_ffx_opticalflow%1%2%3permutations_%%c, sizeof^(g_ffx_opticalflow%1%2%3permutations_%%c^)>>%file%
   echo     },>>%file%
 )
 echo };>>%file%
