@@ -41,7 +41,6 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
 
     // Name                                 Type  Format         Dim      HLSL Bind  Count
     // ------------------------------ ---------- ------- ----------- -------------- ------
-    // s_LinearClamp                     sampler      NA          NA             s0      1 
     // r_input_color                     texture  float4          2d             t0      1 
     // rw_upscaled_output                    UAV  float4          2d             u1      1 
     // cbFSR1                            cbuffer      NA          NA            cb0      1 
@@ -60,12 +59,12 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
                 : g_ffx_fsr1_easu_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data,
         is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size
                 : g_ffx_fsr1_easu_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
-        1,
+        0,
         0,
         boundConstantBufferNames,
         boundConstantBuffers,
@@ -108,9 +107,9 @@ static FfxShaderBlob fsr1GetRcasPassPermutationBlobByIndex(uint32_t permutationO
                 : g_ffx_fsr1_rcas_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data,
         is16bit ? g_ffx_fsr1_rcas_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size
                 : g_ffx_fsr1_rcas_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
         0,

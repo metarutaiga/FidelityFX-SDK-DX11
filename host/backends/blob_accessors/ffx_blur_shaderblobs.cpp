@@ -86,9 +86,9 @@ static FfxShaderBlob blurGetBlurPassPermutationBlobByKernelSize(
                 : g_ffx_blur_pass_permutations[KERNEL_DIMENSION][KERNEL_PERMUTATION].data,
         is16bit ? g_ffx_blur_pass_16bit_permutations[KERNEL_DIMENSION][KERNEL_PERMUTATION].size
                 : g_ffx_blur_pass_permutations[KERNEL_DIMENSION][KERNEL_PERMUTATION].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
         0,

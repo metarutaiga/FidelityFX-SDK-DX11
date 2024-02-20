@@ -74,9 +74,9 @@ static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permuta
                 : g_ffx_spd_downsample_pass_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].data,
         is16bit ? g_ffx_spd_downsample_pass_16bit_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].size
                 : g_ffx_spd_downsample_pass_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].size,
-        1,
+        __crt_countof(boundConstantBufferNames),
         0,
-        1,
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
         0,

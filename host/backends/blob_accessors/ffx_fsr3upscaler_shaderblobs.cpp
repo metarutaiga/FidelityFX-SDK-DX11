@@ -55,7 +55,6 @@ static FfxShaderBlob fsr3UpscalerGetDepthClipPassPermutationBlobByIndex(uint32_t
     //
     // Name                                         Type  Format         Dim      HLSL Bind  Count
     // -------------------------------------- ---------- ------- ----------- -------------- ------
-    // s_LinearClamp                             sampler      NA          NA             s1      1 
     // r_reconstructed_previous_nearest_depth    texture    uint          2d             t0      1 
     // r_dilated_motion_vectors                  texture  float2          2d             t1      1 
     // r_dilated_depth                           texture   float          2d             t2      1 
@@ -83,12 +82,12 @@ static FfxShaderBlob fsr3UpscalerGetDepthClipPassPermutationBlobByIndex(uint32_t
                 : g_ffx_fsr3upscaler_depth_clip_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
         is16bit ? g_ffx_fsr3upscaler_depth_clip_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                 : g_ffx_fsr3upscaler_depth_clip_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
-        1,
+        0,
         0,
         boundConstantBufferNames,
         boundConstantBuffers,
@@ -141,12 +140,12 @@ static FfxShaderBlob fsr3UpscalerGetReconstructPreviousDepthPassPermutationBlobB
                 : g_ffx_fsr3upscaler_reconstruct_previous_depth_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
         is16bit ? g_ffx_fsr3upscaler_reconstruct_previous_depth_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                 : g_ffx_fsr3upscaler_reconstruct_previous_depth_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
-        1,
+        0,
         0,
         boundConstantBufferNames,
         boundConstantBuffers,
@@ -193,12 +192,12 @@ static FfxShaderBlob fsr3UpscalerGetLockPassPermutationBlobByIndex(uint32_t perm
                 : g_ffx_fsr3upscaler_lock_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
         is16bit ? g_ffx_fsr3upscaler_lock_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                 : g_ffx_fsr3upscaler_lock_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
-        1,
+        0,
         0,
         boundConstantBufferNames,
         boundConstantBuffers,
@@ -227,7 +226,6 @@ static FfxShaderBlob fsr3UpscalerGetAccumulatePassPermutationBlobByIndex(uint32_
     //
     // Name                                 Type  Format         Dim      HLSL Bind  Count
     // ------------------------------ ---------- ------- ----------- -------------- ------
-    // s_LinearClamp                     sampler      NA          NA             s1      1 
     // r_input_exposure                  texture  float2          2d             t0      1 
     // r_dilated_reactive_masks          texture  unorm2          2d             t1      1 
     // r_input_motion_vectors            texture  float4          2d             t2      1 
@@ -257,12 +255,12 @@ static FfxShaderBlob fsr3UpscalerGetAccumulatePassPermutationBlobByIndex(uint32_
                 : g_ffx_fsr3upscaler_accumulate_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
         is16bit ? g_ffx_fsr3upscaler_accumulate_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                 : g_ffx_fsr3upscaler_accumulate_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
-        1,
+        0,
         0,
         boundConstantBufferNames,
         boundConstantBuffers,
@@ -311,12 +309,12 @@ static FfxShaderBlob fsr3UpscalerGetRCASPassPermutationBlobByIndex(uint32_t perm
                 : g_ffx_fsr3upscaler_rcas_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
         is16bit ? g_ffx_fsr3upscaler_rcas_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                 : g_ffx_fsr3upscaler_rcas_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
-        1,
+        0,
         0,
         boundConstantBufferNames,
         boundConstantBuffers,
@@ -345,7 +343,6 @@ static FfxShaderBlob fsr3UpscalerGetComputeLuminancePyramidPassPermutationBlobBy
     //
     // Name                                 Type  Format         Dim      HLSL Bind  Count
     // ------------------------------ ---------- ------- ----------- -------------- ------
-    // s_LinearClamp                     sampler      NA          NA             s1      1 
     // r_input_color_jittered            texture  float4          2d             t0      1 
     // rw_spd_global_atomic                  UAV    uint          2d             u0      1 
     // rw_img_mip_shading_change             UAV   float          2d             u1      1 
@@ -368,12 +365,12 @@ static FfxShaderBlob fsr3UpscalerGetComputeLuminancePyramidPassPermutationBlobBy
                 : g_ffx_fsr3upscaler_compute_luminance_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
         is16bit ? g_ffx_fsr3upscaler_compute_luminance_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                 : g_ffx_fsr3upscaler_compute_luminance_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
-        1,
+        0,
         0,
         boundConstantBufferNames,
         boundConstantBuffers,
@@ -423,12 +420,12 @@ static FfxShaderBlob fsr3UpscalerGetAutogenReactivePassPermutationBlobByIndex(
                 : g_ffx_fsr3upscaler_autogen_reactive_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data,
         is16bit ? g_ffx_fsr3upscaler_autogen_reactive_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                 : g_ffx_fsr3upscaler_autogen_reactive_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size,
-        1,
-        1,
-        1,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
         0,
         0,
-        1,
+        0,
         0,
         boundConstantBufferNames,
         boundConstantBuffers,
