@@ -38,6 +38,12 @@
 #include "blob_accessors/ffx_fsr2_shaderblobs.h"
 #endif // #if defined(FFX_FSR2) || defined(FFX_ALL)
 
+#if defined(FFX_FSR3) || defined(FFX_ALL)
+#include "blob_accessors/ffx_fsr3upscaler_shaderblobs.h"
+#include "blob_accessors/ffx_frameinterpolation_shaderblobs.h"
+#include "blob_accessors/ffx_opticalflow_shaderblobs.h"
+#endif // #if defined(FFX_FSR3) || defined(FFX_ALL)
+
 #if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
 #include "blob_accessors/ffx_fsr3upscaler_shaderblobs.h"
 #endif // #if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
@@ -134,6 +140,15 @@ FfxErrorCode ffxGetPermutationBlobByIndex(
     case FFX_EFFECT_FSR2:
         return fsr2GetPermutationBlobByIndex((FfxFsr2Pass)passId, permutationOptions, outBlob);
 #endif // #if defined(FFX_FSR2) || defined(FFX_ALL)
+
+#if defined(FFX_FSR3) || defined(FFX_ALL)
+    case FFX_EFFECT_FSR3UPSCALER:
+        return fsr3UpscalerGetPermutationBlobByIndex((FfxFsr3UpscalerPass)passId, permutationOptions, outBlob);
+    case FFX_EFFECT_FRAMEINTERPOLATION:
+        return frameInterpolationGetPermutationBlobByIndex((FfxFrameInterpolationPass)passId, stageId, permutationOptions, outBlob);
+    case FFX_EFFECT_OPTICALFLOW:
+        return opticalflowGetPermutationBlobByIndex((FfxOpticalflowPass)passId, permutationOptions, outBlob);
+#endif // #if defined(FFX_FSR3) || defined(FFX_ALL)
 
 #if defined(FFX_FSR3UPSCALER) || defined(FFX_ALL)
     case FFX_EFFECT_FSR3UPSCALER:
@@ -237,7 +252,7 @@ switch (effectId)
 #endif // #if defined(FFX_FSR1) || defined(FFX_ALL)
 
 #if defined(FFX_FSR2) || defined(FFX_ALL)
-    case FFX_EFFECT_FSR1:
+    case FFX_EFFECT_FSR2:
         return fsr2IsWave64(permutationOptions, isWave64);
 #endif // #if defined(FFX_FSR2) || defined(FFX_ALL)
 
