@@ -49,6 +49,14 @@ FfxUInt32 BlockSad64(FfxUInt32 blockSadSum, FfxInt32 iLocalIndex, FfxInt32 iLane
     {
         blockSadSum = 0u;
     }
+#if __SHADER_TARGET_MAJOR < 6
+    FfxInt32 waveId = iLocalIndex >> 5u;
+    FfxInt32 original;
+    InterlockedAdd(sWaveSad[waveId], blockSadSum, original);
+    FFX_GROUP_MEMORY_BARRIER();
+    blockSadSum += original;
+    blockSadSum += sWaveSad[waveId ^ 1];
+#else
     blockSadSum = WaveActiveSum(blockSadSum);
 
     if (WaveGetLaneCount() == 32)
@@ -61,7 +69,7 @@ FfxUInt32 BlockSad64(FfxUInt32 blockSadSum, FfxInt32 iLocalIndex, FfxInt32 iLane
         FFX_GROUP_MEMORY_BARRIER();
         blockSadSum += sWaveSad[waveId ^ 1];
     }
-
+#endif
     return blockSadSum;
 }
 
@@ -70,6 +78,14 @@ FfxUInt32 SadMapMinReduction256(FfxInt32x2 iSearchId, FfxInt32 iLocalIndex)
     FfxUInt32 min01 = ffxMin(sadMapBuffer[0][iSearchId.y][iSearchId.x], sadMapBuffer[1][iSearchId.y][iSearchId.x]);
     FfxUInt32 min23 = ffxMin(sadMapBuffer[2][iSearchId.y][iSearchId.x], sadMapBuffer[3][iSearchId.y][iSearchId.x]);
     FfxUInt32 min0123 = ffxMin(min01, min23);
+#if __SHADER_TARGET_MAJOR < 6
+    FfxInt32 waveId = iLocalIndex >> 5u;
+    FfxInt32 original;
+    InterlockedMin(sWaveSad[waveId], min0123, original);
+    FFX_GROUP_MEMORY_BARRIER();
+    min0123 = ffxMin(min0123, original);
+    min0123 = ffxMin(min0123, sWaveMin[waveId ^ 1]);
+#else
     min0123 = WaveActiveMin(min0123);
 
     if (WaveGetLaneCount() == 32)
@@ -83,7 +99,7 @@ FfxUInt32 SadMapMinReduction256(FfxInt32x2 iSearchId, FfxInt32 iLocalIndex)
         FFX_GROUP_MEMORY_BARRIER();
         min0123 = ffxMin(min0123, sWaveMin[waveId ^ 1]);
     }
-
+#endif
     return min0123;
 }
 
@@ -189,6 +205,12 @@ void PrepareSadMap(FfxInt32x2 iSearchId, FfxUInt32x4 qsad)
     sadMapBuffer[1][iSearchId.y][iSearchId.x] = (qsad.y << 16) | EncodeSearchCoord(FfxInt32x2(iSearchId.x * 4 + 1, iSearchId.y));
     sadMapBuffer[2][iSearchId.y][iSearchId.x] = (qsad.z << 16) | EncodeSearchCoord(FfxInt32x2(iSearchId.x * 4 + 2, iSearchId.y));
     sadMapBuffer[3][iSearchId.y][iSearchId.x] = (qsad.w << 16) | EncodeSearchCoord(FfxInt32x2(iSearchId.x * 4 + 3, iSearchId.y));
+#if __SHADER_TARGET_MAJOR < 6
+    sWaveSad[0] = 0;
+    sWaveSad[1] = 0;
+    sWaveMin[0] = 4294967295;
+    sWaveMin[1] = 4294967295;
+#endif
     FFX_GROUP_MEMORY_BARRIER();
 }
 
@@ -215,7 +237,7 @@ void ComputeOpticalFlowAdvanced(FfxInt32x2 iGlobalId, FfxInt32x2 iLocalId, FfxIn
 
     if (IsSceneChanged())
     {
-        if ((iSearchId.y & 0b111) == 0 && (iSearchId.x & 0b1) == 0)
+        if ((iSearchId.y & 7) == 0 && (iSearchId.x & 1) == 0)
         {
             StoreOpticalFlow(currentOFPos, FfxInt32x2(0, 0));
         }
@@ -248,7 +270,7 @@ void ComputeOpticalFlowAdvanced(FfxInt32x2 iGlobalId, FfxInt32x2 iLocalId, FfxIn
 
             if (iLaneToBlockId == blockId.y * 2 + blockId.x)
             {
-                pixels[iSearchId.y & 0b111][iSearchId.x & 0b1] = packedLuma_4blocks;
+                pixels[iSearchId.y & 7][iSearchId.x & 1] = packedLuma_4blocks;
             }
 
             LoadSearchBuffer(iLocalIndex, pixelGroupOffset + blockId * 8 + currentVector);
