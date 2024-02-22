@@ -270,7 +270,7 @@ static FfxShaderBlob FrameInterpolationGetDisocclusionMaskPermutationBlobByIndex
     static const uint32_t boundConstantBufferCounts[] = { 1 };
     static const char* boundSRVTextureNames[] = { "r_game_motion_vector_field_x", "r_game_motion_vector_field_y", "r_reconstructed_depth_previous_frame", "r_dilated_depth", "r_reconstructed_depth_interpolated_frame", "r_inpainting_pyramid" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5 };
-    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1 };
     static const char* boundUAVTextureNames[] = { "rw_disocclusion_mask" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
@@ -550,7 +550,7 @@ static FfxShaderBlob FrameInterpolationGetDebugViewPassPermutationBlobByIndex(ui
     static const uint32_t boundConstantBufferCounts[] = { 1 };
     static const char* boundSRVTextureNames[] = { "r_game_motion_vector_field_x", "r_game_motion_vector_field_y", "r_optical_flow_motion_vector_field_x", "r_optical_flow_motion_vector_field_y", "r_disocclusion_mask", "r_present_backbuffer", "r_inpainting_pyramid", "r_current_interpolation_source" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1 };
     static const char* boundUAVTextureNames[] = { "rw_output" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };

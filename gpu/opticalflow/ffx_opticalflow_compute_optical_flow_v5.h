@@ -51,11 +51,9 @@ FfxUInt32 BlockSad64(FfxUInt32 blockSadSum, FfxInt32 iLocalIndex, FfxInt32 iLane
     }
 #if __SHADER_TARGET_MAJOR < 6
     FfxInt32 waveId = iLocalIndex >> 5u;
-    FfxInt32 original;
-    InterlockedAdd(sWaveSad[waveId], blockSadSum, original);
+    InterlockedAdd(sWaveSad[waveId], blockSadSum);
     FFX_GROUP_MEMORY_BARRIER();
-    blockSadSum += original;
-    blockSadSum += sWaveSad[waveId ^ 1];
+    blockSadSum = sWaveSad[waveId] + sWaveSad[waveId ^ 1];
 #else
     blockSadSum = WaveActiveSum(blockSadSum);
 
@@ -80,11 +78,9 @@ FfxUInt32 SadMapMinReduction256(FfxInt32x2 iSearchId, FfxInt32 iLocalIndex)
     FfxUInt32 min0123 = ffxMin(min01, min23);
 #if __SHADER_TARGET_MAJOR < 6
     FfxInt32 waveId = iLocalIndex >> 5u;
-    FfxInt32 original;
-    InterlockedMin(sWaveSad[waveId], min0123, original);
+    InterlockedMin(sWaveSad[waveId], min0123);
     FFX_GROUP_MEMORY_BARRIER();
-    min0123 = ffxMin(min0123, original);
-    min0123 = ffxMin(min0123, sWaveMin[waveId ^ 1]);
+    min0123 = ffxMin(sWaveMin[waveId], sWaveMin[waveId ^ 1]);
 #else
     min0123 = WaveActiveMin(min0123);
 

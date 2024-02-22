@@ -144,7 +144,7 @@ FfxErrorCode ffxGetInterfaceDX11(
     backendInterface->fpDestroyPipeline = DestroyPipelineDX11;
     backendInterface->fpScheduleGpuJob = ScheduleGpuJobDX11;
     backendInterface->fpExecuteGpuJobs = ExecuteGpuJobsDX11;
-    backendInterface->fpSwapChainConfigureFrameGeneration = nullptr;
+    backendInterface->fpSwapChainConfigureFrameGeneration = [](FfxFrameGenerationConfig const*) -> FfxErrorCode { return FFX_OK; };
 
     // Memory assignments
     backendInterface->scratchBuffer = scratchBuffer;
@@ -1110,9 +1110,9 @@ FfxErrorCode CreateResourceDX11(
                     dx11Texture2DDescription.BindFlags & D3D11_BIND_UNORDERED_ACCESS ||
                     dx11Texture3DDescription.BindFlags & D3D11_BIND_UNORDERED_ACCESS) {
 
-                    const int32_t uavDescriptorCount = backendResource->resourceDescription.mipCount;
+                    const int32_t mipLevels = FFX_MAXIMUM(FFX_MAXIMUM(dx11Texture1DDescription.MipLevels, dx11Texture2DDescription.MipLevels), dx11Texture3DDescription.MipLevels);
 
-                    for (int32_t currentMipIndex = 0; currentMipIndex < uavDescriptorCount; ++currentMipIndex) {
+                    for (int32_t currentMipIndex = 0; currentMipIndex < mipLevels; ++currentMipIndex) {
 
                         dx11UavDescription.Texture2D.MipSlice = currentMipIndex;
 
@@ -1628,7 +1628,8 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                 {
                     // source: UAV of resource to bind
                     const uint32_t resourceIndex = job->computeJobDescriptor.uavTextures[currentUAVResource].internalIndex;
-                    ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[0];
+                    const uint32_t uavIndex = job->computeJobDescriptor.uavTextureMips[currentUAVResource];
+                    ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[uavIndex];
 
                     // where to bind it
                     const uint32_t currentUavResourceIndex = job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].slotIndex + uavEntry;
@@ -1828,7 +1829,12 @@ static FfxErrorCode executeGpuJobClearFloat(BackendContext_DX11* backendContext,
     uint32_t idx = job->clearJobDescriptor.target.internalIndex;
     BackendContext_DX11::Resource ffxResource = backendContext->pResources[idx];
 
-    dx11DeviceContext->ClearUnorderedAccessViewFloat(ffxResource.uavPtr[0], job->clearJobDescriptor.color);
+    uint32_t clearColorAsUint[4];
+    clearColorAsUint[0] = reinterpret_cast<uint32_t&> (job->clearJobDescriptor.color[0]);
+    clearColorAsUint[1] = reinterpret_cast<uint32_t&> (job->clearJobDescriptor.color[1]);
+    clearColorAsUint[2] = reinterpret_cast<uint32_t&> (job->clearJobDescriptor.color[2]);
+    clearColorAsUint[3] = reinterpret_cast<uint32_t&> (job->clearJobDescriptor.color[3]);
+    dx11DeviceContext->ClearUnorderedAccessViewUint(ffxResource.uavPtr[0], clearColorAsUint);
 
     return FFX_OK;
 }

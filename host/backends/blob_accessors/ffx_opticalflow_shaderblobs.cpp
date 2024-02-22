@@ -236,21 +236,27 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
     //
     // Name                                 Type  Format         Dim      HLSL Bind  Count
     // ------------------------------ ---------- ------- ----------- -------------- ------
-    // r_optical_flow_previous           texture   sint2          2d             t0      1 
+    // r_optical_flow_input              texture    uint          2d             t0      1 
+    // r_optical_flow_previous_input     texture    uint          2d             t1      1 
     // rw_optical_flow                       UAV   sint2          2d             u0      1 
-    static const char* boundSRVTextureNames[] = { "r_optical_flow_previous" };
-    static const uint32_t boundSRVTextures[] = { 0 };
-    static const uint32_t boundSRVTextureCounts[] = { 1 };
-    static const char* boundUAVTextureNames[] = { "rw_optical_flow" };
-    static const uint32_t boundUAVTextures[] = { 0 };
-    static const uint32_t boundUAVTextureCounts[] = { 1 };
+    // rw_optical_flow_scd_output            UAV    uint          2d             u1      1 
+    // cbOF                              cbuffer      NA          NA            cb0      1 
+    static const char* boundConstantBufferNames[] = { "cbOF" };
+    static const uint32_t boundConstantBuffers[] = { 0 };
+    static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const char* boundSRVTextureNames[] = { "r_optical_flow_input", "r_optical_flow_previous_input" };
+    static const uint32_t boundSRVTextures[] = { 0, 1 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1 };
+    static const char* boundUAVTextureNames[] = { "rw_optical_flow", "rw_optical_flow_scd_output" };
+    static const uint32_t boundUAVTextures[] = { 0, 1 };
+    static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
                 : g_ffx_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].data,
         is16bit ? g_ffx_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].size
                 : g_ffx_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].size,
-        0,
+        __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
         0,
@@ -259,7 +265,9 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
         0,
         nullptr,
         nullptr,
-        nullptr,
+        boundConstantBufferNames,
+        boundConstantBuffers,
+        boundConstantBufferCounts,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
