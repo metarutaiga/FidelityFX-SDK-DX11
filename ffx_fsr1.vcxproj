@@ -119,7 +119,7 @@
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
-ffx_fsr1_pass_permutations.bat</Command>
+call ffx_fsr1_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,7 +150,7 @@ ffx_fsr1_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
-ffx_fsr1_pass_permutations.bat</Command>
+call ffx_fsr1_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -177,7 +177,7 @@ ffx_fsr1_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
-ffx_fsr1_pass_permutations.bat</Command>
+call ffx_fsr1_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -208,7 +208,7 @@ ffx_fsr1_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
-ffx_fsr1_pass_permutations.bat</Command>
+call ffx_fsr1_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

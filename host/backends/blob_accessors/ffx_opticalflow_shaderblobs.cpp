@@ -263,8 +263,6 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
         0,
         0,
         0,
-        nullptr,
-        nullptr,
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,

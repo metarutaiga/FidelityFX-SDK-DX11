@@ -119,9 +119,9 @@
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
-ffx_fsr3upscaler_pass_permutations.bat
-ffx_frameinterpolation_pass_permutations.bat
-ffx_opticalflow_pass_permutations.bat</Command>
+call ffx_fsr3upscaler_pass_permutations.bat
+call ffx_frameinterpolation_pass_permutations.bat
+call ffx_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,9 +152,9 @@ ffx_opticalflow_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
-ffx_fsr3upscaler_pass_permutations.bat
-ffx_frameinterpolation_pass_permutations.bat
-ffx_opticalflow_pass_permutations.bat</Command>
+call ffx_fsr3upscaler_pass_permutations.bat
+call ffx_frameinterpolation_pass_permutations.bat
+call ffx_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -181,9 +181,9 @@ ffx_opticalflow_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
-ffx_fsr3upscaler_pass_permutations.bat
-ffx_frameinterpolation_pass_permutations.bat
-ffx_opticalflow_pass_permutations.bat</Command>
+call ffx_fsr3upscaler_pass_permutations.bat
+call ffx_frameinterpolation_pass_permutations.bat
+call ffx_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -214,9 +214,9 @@ ffx_opticalflow_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
-ffx_fsr3upscaler_pass_permutations.bat
-ffx_frameinterpolation_pass_permutations.bat
-ffx_opticalflow_pass_permutations.bat</Command>
+call ffx_fsr3upscaler_pass_permutations.bat
+call ffx_frameinterpolation_pass_permutations.bat
+call ffx_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
