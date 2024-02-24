@@ -115,7 +115,7 @@
       <ShaderModel>5.0</ShaderModel>
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
       <ObjectFileOutput />
-      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>FFX_HLSL_SM=50;CS=%(Filename);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
@@ -146,7 +146,7 @@ call ffx_blur_pass_permutations.bat</Command>
       <ShaderModel>5.0</ShaderModel>
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
       <ObjectFileOutput />
-      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>FFX_HLSL_SM=50;CS=%(Filename);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
@@ -173,7 +173,7 @@ call ffx_blur_pass_permutations.bat</Command>
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
       <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>FFX_HLSL_SM=50;CS=%(Filename);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
@@ -204,7 +204,7 @@ call ffx_blur_pass_permutations.bat</Command>
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
       <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>FFX_HLSL_SM=50;CS=%(Filename);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
