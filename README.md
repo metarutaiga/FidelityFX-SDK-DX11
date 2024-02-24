@@ -1,4 +1,20 @@
 ﻿FidelifyFX for DX11
+===
+
+Task
+---
+- [x] Support for Shader Model 5.0
+- [ ] 16bit RCAS for FSR2
+- [ ] 16bit RCAS for FSR3 Upscaler
+- [ ] 16bit SPD for FSR2
+- [ ] 16bit SPD for FSR3 Frame Interpolation
+- [ ] 16bit SPD for FSR3 Optical Flow
+- [ ] 16bit SPD for FSR3 Upscaler
+- [ ] AMD Wave Reduction
+- [ ] Intel Wave Reduction
+- [ ] NVIDIA Wave Reduction
+
+Patch
 ---
 FidelityFX\gpu\ffx_core_hlsl.h
 ```diff
