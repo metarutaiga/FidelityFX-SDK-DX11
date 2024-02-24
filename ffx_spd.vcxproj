@@ -101,7 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_SPD;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -109,7 +109,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <FxCompile>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EntryPointName>%(Filename)</EntryPointName>
       <ShaderType>Compute</ShaderType>
       <ShaderModel>5.0</ShaderModel>
@@ -118,7 +118,7 @@
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_spd_downsample_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -130,7 +130,7 @@ call ffx_spd_downsample_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_SPD;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -140,7 +140,7 @@ call ffx_spd_downsample_pass_permutations.bat</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <FxCompile>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EntryPointName>%(Filename)</EntryPointName>
       <ShaderType>Compute</ShaderType>
       <ShaderModel>5.0</ShaderModel>
@@ -149,7 +149,7 @@ call ffx_spd_downsample_pass_permutations.bat</Command>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_spd_downsample_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -159,7 +159,7 @@ call ffx_spd_downsample_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_SPD;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -172,11 +172,11 @@ call ffx_spd_downsample_pass_permutations.bat</Command>
       <EntryPointName>%(Filename)</EntryPointName>
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_spd_downsample_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -188,7 +188,7 @@ call ffx_spd_downsample_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_SPD;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -203,31 +203,31 @@ call ffx_spd_downsample_pass_permutations.bat</Command>
       <EntryPointName>%(Filename)</EntryPointName>
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_spd_downsample_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="gpu\spd\ffx_spd.h" />
-    <ClInclude Include="gpu\spd\ffx_spd_callbacks_glsl.h" />
-    <ClInclude Include="gpu\spd\ffx_spd_callbacks_hlsl.h" />
-    <ClInclude Include="gpu\spd\ffx_spd_resources.h" />
-    <ClInclude Include="gpu\spd\ffx_spd_sharpen.h" />
-    <ClInclude Include="host\backends\blob_accessors\ffx_spd_shaderblobs.h" />
-    <ClInclude Include="host\backends\dx11\ffx_dx11.h" />
-    <ClInclude Include="host\backends\ffx_shader_blobs.h" />
-    <ClInclude Include="host\components\spd\ffx_spd.h" />
-    <ClInclude Include="host\components\spd\ffx_spd_private.h" />
+    <ClInclude Include="FidelityFX\gpu\spd\ffx_spd.h" />
+    <ClInclude Include="FidelityFX\gpu\spd\ffx_spd_callbacks_glsl.h" />
+    <ClInclude Include="FidelityFX\gpu\spd\ffx_spd_callbacks_hlsl.h" />
+    <ClInclude Include="FidelityFX\gpu\spd\ffx_spd_resources.h" />
+    <ClInclude Include="FidelityFX\gpu\spd\ffx_spd_sharpen.h" />
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_spd_shaderblobs.h" />
+    <ClInclude Include="FidelityFX\host\backends\dx11\ffx_dx11.h" />
+    <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h" />
+    <ClInclude Include="FidelityFX\host\components\spd\ffx_spd_private.h" />
+    <ClInclude Include="FidelityFX\host\ffx_spd.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="host\backends\blob_accessors\ffx_spd_shaderblobs.cpp" />
-    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp" />
-    <ClCompile Include="host\backends\ffx_shader_blobs.cpp" />
-    <ClCompile Include="host\components\spd\ffx_spd.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_spd_shaderblobs.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\dx11\ffx_dx11.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\ffx_shader_blobs.cpp" />
+    <ClCompile Include="FidelityFX\host\components\spd\ffx_spd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ffx.vcxproj">
@@ -235,31 +235,31 @@ call ffx_spd_downsample_pass_permutations.bat</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_2.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_2.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_2.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_2.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_2.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_2.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_2.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_2.hlsl" />
-    <FxCompile Include="host\backends\hlsl\spd\ffx_spd_sharpen_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_0_2.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_0_1_2.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_0_2.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_16bit_permutations_1_1_2.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_0_2.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_0_1_2.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_0_2.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_spd_downsample_pass_permutations_1_1_2.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\hlsl\spd\ffx_spd_sharpen_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

@@ -101,7 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_OPTICALFLOW;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -109,7 +109,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <FxCompile>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EntryPointName>%(Filename)</EntryPointName>
       <ShaderType>Compute</ShaderType>
       <ShaderModel>5.0</ShaderModel>
@@ -118,7 +118,7 @@
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -130,7 +130,7 @@ call ffx_opticalflow_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_OPTICALFLOW;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -140,7 +140,7 @@ call ffx_opticalflow_pass_permutations.bat</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <FxCompile>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EntryPointName>%(Filename)</EntryPointName>
       <ShaderType>Compute</ShaderType>
       <ShaderModel>5.0</ShaderModel>
@@ -149,7 +149,7 @@ call ffx_opticalflow_pass_permutations.bat</Command>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -159,7 +159,7 @@ call ffx_opticalflow_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_OPTICALFLOW;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -172,11 +172,11 @@ call ffx_opticalflow_pass_permutations.bat</Command>
       <EntryPointName>%(Filename)</EntryPointName>
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -188,7 +188,7 @@ call ffx_opticalflow_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_OPTICALFLOW;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -203,36 +203,36 @@ call ffx_opticalflow_pass_permutations.bat</Command>
       <EntryPointName>%(Filename)</EntryPointName>
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_callbacks_hlsl.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_common.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_compute_luminance_pyramid.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_compute_optical_flow_v5.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_compute_scd_divergence.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_filter_optical_flow_v5.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_generate_scd_histogram.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_prepare_luma.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_resources.h" />
-    <ClInclude Include="gpu\opticalflow\ffx_opticalflow_scale_optical_flow_advanced_v5.h" />
-    <ClInclude Include="host\backends\blob_accessors\ffx_opticalflow_shaderblobs.h" />
-    <ClInclude Include="host\backends\dx11\ffx_dx11.h" />
-    <ClInclude Include="host\backends\ffx_shader_blobs.h" />
-    <ClInclude Include="host\components\opticalflow\ffx_opticalflow.h" />
-    <ClInclude Include="host\components\opticalflow\ffx_opticalflow_private.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_callbacks_hlsl.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_common.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_luminance_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_optical_flow_v5.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_scd_divergence.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_filter_optical_flow_v5.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_generate_scd_histogram.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_prepare_luma.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_resources.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_scale_optical_flow_advanced_v5.h" />
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_opticalflow_shaderblobs.h" />
+    <ClInclude Include="FidelityFX\host\backends\dx11\ffx_dx11.h" />
+    <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h" />
+    <ClInclude Include="FidelityFX\host\components\opticalflow\ffx_opticalflow_private.h" />
+    <ClInclude Include="FidelityFX\host\ffx_opticalflow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="host\backends\blob_accessors\ffx_opticalflow_shaderblobs.cpp" />
-    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp" />
-    <ClCompile Include="host\backends\ffx_shader_blobs.cpp" />
-    <ClCompile Include="host\components\opticalflow\ffx_opticalflow.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_opticalflow_shaderblobs.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\dx11\ffx_dx11.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\ffx_shader_blobs.cpp" />
+    <ClCompile Include="FidelityFX\host\components\opticalflow\ffx_opticalflow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ffx.vcxproj">
@@ -240,71 +240,71 @@ call ffx_opticalflow_pass_permutations.bat</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_luminance_pyramid_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_luminance_pyramid_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_scd_divergence_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_scd_divergence_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_scd_divergence_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_compute_scd_divergence_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_filter_optical_flow_pass_v5_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_filter_optical_flow_pass_v5_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_filter_optical_flow_pass_v5_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_filter_optical_flow_pass_v5_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_generate_scd_histogram_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_generate_scd_histogram_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_generate_scd_histogram_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_generate_scd_histogram_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_prepare_luma_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_prepare_luma_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_prepare_luma_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_prepare_luma_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\hlsl\opticalflow\ffx_opticalflow_compute_luminance_pyramid_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_luminance_pyramid_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_luminance_pyramid_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_scd_divergence_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_scd_divergence_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_scd_divergence_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_compute_scd_divergence_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_filter_optical_flow_pass_v5_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_filter_optical_flow_pass_v5_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_filter_optical_flow_pass_v5_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_filter_optical_flow_pass_v5_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_generate_scd_histogram_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_generate_scd_histogram_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_generate_scd_histogram_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_generate_scd_histogram_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_prepare_luma_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_prepare_luma_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_prepare_luma_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_prepare_luma_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_luminance_pyramid_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\opticalflow\ffx_opticalflow_compute_optical_flow_advanced_pass_v5.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_optical_flow_advanced_pass_v5.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\opticalflow\ffx_opticalflow_compute_scd_divergence_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_scd_divergence_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\opticalflow\ffx_opticalflow_filter_optical_flow_pass_v5.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_filter_optical_flow_pass_v5.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\opticalflow\ffx_opticalflow_generate_scd_histogram_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_generate_scd_histogram_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\opticalflow\ffx_opticalflow_prepare_luma_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_prepare_luma_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\opticalflow\ffx_opticalflow_scale_optical_flow_advanced_pass_v5.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_scale_optical_flow_advanced_pass_v5.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

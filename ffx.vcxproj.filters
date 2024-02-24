@@ -1,57 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="gpu">
+    <Filter Include="FidelityFX">
+      <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu">
       <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host">
+    <Filter Include="FidelityFX\host">
       <UniqueIdentifier>{57149e49-524a-4f7c-88cb-7f21c050a28b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\shared">
+      <UniqueIdentifier>{54f75513-5a1d-4a2d-8f22-455eb3e5a967}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gpu\ffx_common_types.h">
-      <Filter>gpu</Filter>
+    <ClInclude Include="FidelityFX\gpu\ffx_common_types.h">
+      <Filter>FidelityFX\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\ffx_core.h">
-      <Filter>gpu</Filter>
+    <ClInclude Include="FidelityFX\gpu\ffx_core.h">
+      <Filter>FidelityFX\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\ffx_core_gpu_common.h">
-      <Filter>gpu</Filter>
+    <ClInclude Include="FidelityFX\gpu\ffx_core_gpu_common.h">
+      <Filter>FidelityFX\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\ffx_core_gpu_common_half.h">
-      <Filter>gpu</Filter>
+    <ClInclude Include="FidelityFX\gpu\ffx_core_gpu_common_half.h">
+      <Filter>FidelityFX\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\ffx_core_hlsl.h">
-      <Filter>gpu</Filter>
+    <ClInclude Include="FidelityFX\gpu\ffx_core_hlsl.h">
+      <Filter>FidelityFX\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\ffx_core_portability.h">
-      <Filter>gpu</Filter>
+    <ClInclude Include="FidelityFX\gpu\ffx_core_portability.h">
+      <Filter>FidelityFX\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="host\ffx_assert.h">
-      <Filter>host</Filter>
+    <ClInclude Include="FidelityFX\host\ffx_assert.h">
+      <Filter>FidelityFX\host</Filter>
     </ClInclude>
-    <ClInclude Include="host\ffx_error.h">
-      <Filter>host</Filter>
+    <ClInclude Include="FidelityFX\host\ffx_error.h">
+      <Filter>FidelityFX\host</Filter>
     </ClInclude>
-    <ClInclude Include="host\ffx_interface.h">
-      <Filter>host</Filter>
+    <ClInclude Include="FidelityFX\host\ffx_interface.h">
+      <Filter>FidelityFX\host</Filter>
     </ClInclude>
-    <ClInclude Include="host\ffx_object_management.h">
-      <Filter>host</Filter>
+    <ClInclude Include="FidelityFX\host\ffx_types.h">
+      <Filter>FidelityFX\host</Filter>
     </ClInclude>
-    <ClInclude Include="host\ffx_types.h">
-      <Filter>host</Filter>
+    <ClInclude Include="FidelityFX\host\ffx_util.h">
+      <Filter>FidelityFX\host</Filter>
     </ClInclude>
-    <ClInclude Include="host\ffx_util.h">
-      <Filter>host</Filter>
+    <ClInclude Include="FidelityFX\host\shared\ffx_object_management.h">
+      <Filter>FidelityFX\host\shared</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="host\ffx_assert.cpp">
-      <Filter>host</Filter>
+    <ClCompile Include="FidelityFX\host\shared\ffx_assert.cpp">
+      <Filter>FidelityFX\host\shared</Filter>
     </ClCompile>
-    <ClCompile Include="host\ffx_object_management.cpp">
-      <Filter>host</Filter>
+    <ClCompile Include="FidelityFX\host\shared\ffx_object_management.cpp">
+      <Filter>FidelityFX\host\shared</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

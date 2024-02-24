@@ -1,269 +1,272 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="gpu">
+    <Filter Include="FidelityFX">
+      <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu">
       <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host">
+    <Filter Include="FidelityFX\host">
       <UniqueIdentifier>{57149e49-524a-4f7c-88cb-7f21c050a28b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\backends">
+    <Filter Include="FidelityFX\host\backends">
       <UniqueIdentifier>{92ebecfe-210a-4b62-8211-4eb92d024d8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\backends\blob_accessors">
+    <Filter Include="FidelityFX\host\backends\blob_accessors">
       <UniqueIdentifier>{31f5323f-92f3-44d2-bda9-7d29933ffffd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\backends\hlsl">
+    <Filter Include="FidelityFX\host\backends\hlsl">
       <UniqueIdentifier>{e72a8aa7-a1fd-48df-abad-ed0bde3d2148}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\backends\hlsl\blur">
+    <Filter Include="FidelityFX\host\backends\hlsl\blur">
       <UniqueIdentifier>{90968b67-f85e-4084-a8d8-a1b422e33e3f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\components">
+    <Filter Include="FidelityFX\host\components">
       <UniqueIdentifier>{fea07f60-e530-4173-b1e7-d76dff7298be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\components\blur">
+    <Filter Include="FidelityFX\host\components\blur">
       <UniqueIdentifier>{b2c8e6a8-3e11-4507-b648-00a5c7492bb3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="gpu\blur">
+    <Filter Include="FidelityFX\gpu\blur">
       <UniqueIdentifier>{2f58ea1e-d0af-4b9a-87a5-c88a3ff9579a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\backends\blob_accessors\permutations">
+    <Filter Include="FidelityFX\host\backends\blob_accessors\permutations">
       <UniqueIdentifier>{ea351e25-93b5-48d7-add2-a3ab026f01ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host\backends\dx11">
+    <Filter Include="FidelityFX\host\backends\dx11">
       <UniqueIdentifier>{3361412a-2552-4bd4-bf5a-888bd54b6aba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="host\backends\ffx_shader_blobs.h">
-      <Filter>host\backends</Filter>
+    <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h">
+      <Filter>FidelityFX\host\backends</Filter>
     </ClInclude>
-    <ClInclude Include="host\components\blur\ffx_blur_private.h">
-      <Filter>host\components\blur</Filter>
+    <ClInclude Include="FidelityFX\host\components\blur\ffx_blur_private.h">
+      <Filter>FidelityFX\host\components\blur</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\blur\ffx_blur.h">
-      <Filter>gpu\blur</Filter>
+    <ClInclude Include="FidelityFX\gpu\blur\ffx_blur.h">
+      <Filter>FidelityFX\gpu\blur</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\blur\ffx_blur_blur.h">
-      <Filter>gpu\blur</Filter>
+    <ClInclude Include="FidelityFX\gpu\blur\ffx_blur_blur.h">
+      <Filter>FidelityFX\gpu\blur</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\blur\ffx_blur_callbacks_glsl.h">
-      <Filter>gpu\blur</Filter>
+    <ClInclude Include="FidelityFX\gpu\blur\ffx_blur_callbacks_glsl.h">
+      <Filter>FidelityFX\gpu\blur</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\blur\ffx_blur_callbacks_hlsl.h">
-      <Filter>gpu\blur</Filter>
+    <ClInclude Include="FidelityFX\gpu\blur\ffx_blur_callbacks_hlsl.h">
+      <Filter>FidelityFX\gpu\blur</Filter>
     </ClInclude>
-    <ClInclude Include="gpu\blur\ffx_blur_resources.h">
-      <Filter>gpu\blur</Filter>
+    <ClInclude Include="FidelityFX\gpu\blur\ffx_blur_resources.h">
+      <Filter>FidelityFX\gpu\blur</Filter>
     </ClInclude>
-    <ClInclude Include="host\components\blur\ffx_blur.h">
-      <Filter>host\components\blur</Filter>
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_blur_shaderblobs.h">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
     </ClInclude>
-    <ClInclude Include="host\backends\blob_accessors\ffx_blur_shaderblobs.h">
-      <Filter>host\backends\blob_accessors</Filter>
+    <ClInclude Include="FidelityFX\host\backends\dx11\ffx_dx11.h">
+      <Filter>FidelityFX\host\backends\dx11</Filter>
     </ClInclude>
-    <ClInclude Include="host\backends\dx11\ffx_dx11.h">
-      <Filter>host\backends\dx11</Filter>
+    <ClInclude Include="FidelityFX\host\ffx_blur.h">
+      <Filter>FidelityFX\host</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="host\backends\ffx_shader_blobs.cpp">
-      <Filter>host\backends</Filter>
+    <ClCompile Include="FidelityFX\host\backends\ffx_shader_blobs.cpp">
+      <Filter>FidelityFX\host\backends</Filter>
     </ClCompile>
-    <ClCompile Include="host\components\blur\ffx_blur.cpp">
-      <Filter>host\components\blur</Filter>
+    <ClCompile Include="FidelityFX\host\components\blur\ffx_blur.cpp">
+      <Filter>FidelityFX\host\components\blur</Filter>
     </ClCompile>
-    <ClCompile Include="host\backends\blob_accessors\ffx_blur_shaderblobs.cpp">
-      <Filter>host\backends\blob_accessors</Filter>
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_blur_shaderblobs.cpp">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
     </ClCompile>
-    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp">
-      <Filter>host\backends\dx11</Filter>
+    <ClCompile Include="FidelityFX\host\backends\dx11\ffx_dx11.cpp">
+      <Filter>FidelityFX\host\backends\dx11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="host\backends\hlsl\blur\ffx_blur_pass.hlsl">
-      <Filter>host\backends\hlsl\blur</Filter>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\blur\ffx_blur_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\blur</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_3_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_3_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_3_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_3_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_3_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_3_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_5_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_5_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_5_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_5_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_5_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_5_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_7_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_7_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_7_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_7_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_7_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_7_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_9_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_9_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_9_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_9_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_9_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_9_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_11_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_11_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_11_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_11_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_11_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_11_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_13_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_13_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_13_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_13_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_13_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_13_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_15_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_15_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_15_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_15_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_15_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_15_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_17_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_17_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_17_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_17_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_17_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_17_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_19_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_19_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_19_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_19_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_19_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_19_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_21_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_21_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_21_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_21_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_21_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_16bit_permutations_21_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_3_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_3_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_3_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_3_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_3_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_3_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_5_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_5_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_5_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_5_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_5_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_5_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_7_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_7_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_7_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_7_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_7_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_7_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_9_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_9_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_9_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_9_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_9_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_9_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_11_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_11_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_11_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_11_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_11_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_11_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_13_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_13_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_13_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_13_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_13_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_13_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_15_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_15_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_15_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_15_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_15_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_15_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_17_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_17_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_17_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_17_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_17_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_17_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_19_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_19_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_19_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_19_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_19_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_19_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_21_0.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_21_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_21_1.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_21_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_21_2.hlsl">
-      <Filter>host\backends\blob_accessors\permutations</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_blur_pass_permutations_21_2.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

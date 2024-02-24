@@ -5,5 +5,5 @@ temp/
 Win32/
 x64/
 *.vcxproj.user
-host/backends/blob_accessors/permutations/*.h
-host/backends/blob_accessors/permutations/*.hlsl
+FidelityFX/host/backends/blob_accessors/permutations/*.h
+FidelityFX/host/backends/blob_accessors/permutations/*.hlsl

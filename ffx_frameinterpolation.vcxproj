@@ -101,7 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_FRAMEINTERPOLATION;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -109,7 +109,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <FxCompile>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EntryPointName>%(Filename)</EntryPointName>
       <ShaderType>Compute</ShaderType>
       <ShaderModel>5.0</ShaderModel>
@@ -118,7 +118,7 @@
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_frameinterpolation_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -130,7 +130,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_FRAMEINTERPOLATION;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -140,7 +140,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <FxCompile>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EntryPointName>%(Filename)</EntryPointName>
       <ShaderType>Compute</ShaderType>
       <ShaderModel>5.0</ShaderModel>
@@ -149,7 +149,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_frameinterpolation_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -159,7 +159,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_FRAMEINTERPOLATION;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -172,11 +172,11 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <EntryPointName>%(Filename)</EntryPointName>
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_frameinterpolation_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -188,7 +188,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>FFX_FRAMEINTERPOLATION;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -203,39 +203,39 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <EntryPointName>%(Filename)</EntryPointName>
       <ObjectFileOutput />
       <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
-      <AdditionalIncludeDirectories>gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-DCS=%(Filename) %(AdditionalOptions)</AdditionalOptions>
     </FxCompile>
     <PreBuildEvent>
-      <Command>cd $(ProjectDir)host\backends\blob_accessors\permutations
+      <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
 call ffx_frameinterpolation_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_callbacks_hlsl.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_common.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_compute_inpainting_pyramid.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_debug_view.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_disocclusion_mask.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_inpainting.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_resources.h" />
-    <ClInclude Include="gpu\frameinterpolation\ffx_frameinterpolation_setup.h" />
-    <ClInclude Include="host\backends\blob_accessors\ffx_frameinterpolation_shaderblobs.h" />
-    <ClInclude Include="host\backends\dx11\ffx_dx11.h" />
-    <ClInclude Include="host\backends\ffx_shader_blobs.h" />
-    <ClInclude Include="host\components\frameinterpolation\ffx_frameinterpolation.h" />
-    <ClInclude Include="host\components\frameinterpolation\ffx_frameinterpolation_private.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_callbacks_hlsl.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_common.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_compute_inpainting_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_debug_view.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_disocclusion_mask.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_inpainting.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_resources.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_setup.h" />
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_frameinterpolation_shaderblobs.h" />
+    <ClInclude Include="FidelityFX\host\backends\dx11\ffx_dx11.h" />
+    <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h" />
+    <ClInclude Include="FidelityFX\host\components\frameinterpolation\ffx_frameinterpolation_private.h" />
+    <ClInclude Include="FidelityFX\host\ffx_frameinterpolation.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="host\backends\blob_accessors\ffx_frameinterpolation_shaderblobs.cpp" />
-    <ClCompile Include="host\backends\dx11\ffx_dx11.cpp" />
-    <ClCompile Include="host\backends\ffx_shader_blobs.cpp" />
-    <ClCompile Include="host\components\frameinterpolation\ffx_frameinterpolation.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_frameinterpolation_shaderblobs.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\dx11\ffx_dx11.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\ffx_shader_blobs.cpp" />
+    <ClCompile Include="FidelityFX\host\components\frameinterpolation\ffx_frameinterpolation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ffx.vcxproj">
@@ -243,101 +243,101 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_0.hlsl" />
-    <FxCompile Include="host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_1.hlsl" />
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_inpainting_pyramid_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_inpainting_pyramid_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_debug_view_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_debug_view_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_disocclusion_mask_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_disocclusion_mask_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_inpainting_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_inpainting_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_setup_pass.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_setup_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
