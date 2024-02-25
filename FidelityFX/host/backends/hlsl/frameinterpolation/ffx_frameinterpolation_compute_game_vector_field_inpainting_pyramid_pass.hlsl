@@ -40,11 +40,6 @@
 
 #define FFX_FRAMEINTERPOLATION_BIND_CB_FRAMEINTERPOLATION                       0
 
-#ifdef FFX_HALF
-    #undef FFX_HALF
-    #define FFX_HALF 0
-#endif
-
 #include "frameinterpolation/ffx_frameinterpolation_callbacks_hlsl.h"
 #include "frameinterpolation/ffx_frameinterpolation_common.h"
 
