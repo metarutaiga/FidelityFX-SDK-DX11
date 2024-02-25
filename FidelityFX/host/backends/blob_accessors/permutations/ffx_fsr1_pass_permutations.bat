@@ -26,9 +26,7 @@ for %%a in (_easu_,_rcas_) do (
     for %%c in (0,1) do (
       for %%d in (0,1) do (
         for %%e in (0,1) do (
-          for %%f in (0,1) do (
-            call :hlsl %%a %%b %%c %%d %%e %%f
-          )
+          call :hlsl %%a %%b %%c %%d %%e
         )
       )
     )
@@ -38,7 +36,7 @@ goto :eof
 
 :hlsl
 setlocal
-set file=ffx_fsr1%1pass%2permutations_%3_%4_%5_%6.hlsl
+set file=ffx_fsr1%1pass%2permutations_%3_%4_%5.hlsl
 if exist %file% goto :eof
 echo %file%
 
@@ -50,8 +48,7 @@ echo #define FFX_HLSL 1 >>%file%
 echo.>>%file%
 echo #define FFX_FSR1_OPTION_APPLY_RCAS %3 >>%file%
 echo #define FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA %4 >>%file%
-echo #define FFX_FSR1_OPTION_RCAS_DENOISE %5 >>%file%
-echo #define FFX_FSR1_OPTION_SRGB_CONVERSIONS %6 >>%file%
+echo #define FFX_FSR1_OPTION_SRGB_CONVERSIONS %5 >>%file%
 echo.>>%file%
 echo #include "../../hlsl/fsr1/ffx_fsr1%1pass.hlsl">>%file%
 goto :eof
@@ -68,25 +65,19 @@ echo.>>%file%
 for %%c in (0,1) do (
   for %%d in (0,1) do (
     for %%e in (0,1) do (
-      for %%f in (0,1) do (
-        echo #include "ffx_fsr1%1pass%2permutations_%%c_%%d_%%e_%%f.h">>%file%
-      )
+      echo #include "ffx_fsr1%1pass%2permutations_%%c_%%d_%%e.h">>%file%
     )
   )
 )
 echo.>>%file%
-echo static const struct { const uint8_t* data; uint32_t size; } g_ffx_fsr1%1pass%2permutations[2][2][2][2] = {>>%file%
+echo static const struct { const uint8_t* data; uint32_t size; } g_ffx_fsr1%1pass%2permutations[2][2][2] = {>>%file%
 for %%c in (0,1) do (
   echo     {>>%file%
   for %%d in (0,1) do (
     echo         {>>%file%
     for %%e in (0,1) do (
       echo             {>>%file%
-      for %%f in (0,1) do (
-        echo                 {>>%file%
-        echo                     g_ffx_fsr1%1pass%2permutations_%%c_%%d_%%e_%%f, sizeof^(g_ffx_fsr1%1pass%2permutations_%%c_%%d_%%e_%%f^)>>%file%
-        echo                 },>>%file%
-      )
+      echo                 g_ffx_fsr1%1pass%2permutations_%%c_%%d_%%e, sizeof^(g_ffx_fsr1%1pass%2permutations_%%c_%%d_%%e^)>>%file%
       echo             },>>%file%
     )
     echo         },>>%file%

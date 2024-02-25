@@ -21,9 +21,7 @@
 
 
 #define GROUP_SIZE  8
-#if FFX_FSR1_OPTION_RCAS_DENOISE
-    #define FSR_RCAS_DENOISE 1
-#endif
+#define FSR_RCAS_DENOISE 1
 
 #include "ffx_core.h"
 
