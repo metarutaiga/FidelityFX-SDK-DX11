@@ -500,6 +500,17 @@ FfxFloat32x3 PrepareRgb(FfxFloat32x3 fRgb, FfxFloat32 fExposure, FfxFloat32 fPre
 
     return fRgb;
 }
+#if FFX_HALF
+FfxFloat16x3 PrepareRgb(FfxFloat16x3 fRgb, FfxFloat16 fExposure, FfxFloat16 fPreExposure)
+{
+    fRgb /= fPreExposure;
+    fRgb *= fExposure;
+
+    fRgb = clamp(fRgb, FFX_MIN16_F(0.0f), FFX_MIN16_F(FSR3UPSCALER_FP16_MAX));
+
+    return fRgb;
+}
+#endif
 
 FfxFloat32x3 UnprepareRgb(FfxFloat32x3 fRgb, FfxFloat32 fExposure)
 {
@@ -508,6 +519,15 @@ FfxFloat32x3 UnprepareRgb(FfxFloat32x3 fRgb, FfxFloat32 fExposure)
 
     return fRgb;
 }
+#if FFX_HALF
+FfxFloat16x3 UnprepareRgb(FfxFloat16x3 fRgb, FfxFloat16 fExposure)
+{
+    fRgb /= fExposure;
+    fRgb *= PreExposure();
+
+    return fRgb;
+}
+#endif
 
 
 struct BilinearSamplingData

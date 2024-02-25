@@ -30,23 +30,41 @@ void WriteUpscaledOutput(FFX_MIN16_U2 iPxHrPos, FfxFloat32x3 fUpscaledColor)
     StoreUpscaledOutput(FFX_MIN16_I2(iPxHrPos), fUpscaledColor);
 }
 
-#define FSR_RCAS_F 1
-FfxFloat32x4 FsrRcasLoadF(FfxInt32x2 p)
-{
-    FfxFloat32x4 fColor = LoadRCAS_Input(p);
+#if FFX_HALF
+    #define FSR_RCAS_H 1
+    FfxFloat16x4 FsrRcasLoadH(FfxInt16x2 p)
+    {
+        FfxFloat16x4 fColor = LoadRCAS_Input(p);
 
-    fColor.rgb = PrepareRgb(fColor.rgb, Exposure(), PreExposure());
+        fColor.rgb = PrepareRgb(fColor.rgb, Exposure(), PreExposure());
 
-    return fColor;
-}
-void FsrRcasInputF(inout FfxFloat32 r, inout FfxFloat32 g, inout FfxFloat32 b) {}
+        return fColor;
+    }
+    void FsrRcasInputH(inout FfxFloat16 r, inout FfxFloat16 g, inout FfxFloat16 b) {}
+#else
+    #define FSR_RCAS_F 1
+    FfxFloat32x4 FsrRcasLoadF(FfxInt32x2 p)
+    {
+        FfxFloat32x4 fColor = LoadRCAS_Input(p);
+
+        fColor.rgb = PrepareRgb(fColor.rgb, Exposure(), PreExposure());
+
+        return fColor;
+    }
+    void FsrRcasInputF(inout FfxFloat32 r, inout FfxFloat32 g, inout FfxFloat32 b) {}
+#endif
 
 #include "fsr1/ffx_fsr1.h"
 
 void CurrFilter(FFX_MIN16_U2 pos)
 {
+#if FFX_HALF
+    FfxFloat16x3 c;
+    FsrRcasH(c.r, c.g, c.b, pos, RCASConfig());
+#else
     FfxFloat32x3 c;
     FsrRcasF(c.r, c.g, c.b, pos, RCASConfig());
+#endif
 
     c = UnprepareRgb(c, Exposure());
 

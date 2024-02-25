@@ -4,8 +4,8 @@
 Task
 ---
 - [x] Support for Shader Model 5.0
-- [ ] 16bit RCAS for FSR2
-- [ ] 16bit RCAS for FSR3 Upscaler
+- [x] 16bit RCAS for FSR2
+- [x] 16bit RCAS for FSR3 Upscaler
 - [ ] 16bit SPD for FSR2
 - [ ] 16bit SPD for FSR3 Frame Interpolation
 - [ ] 16bit SPD for FSR3 Optical Flow
