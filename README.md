@@ -81,7 +81,7 @@ FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_optical_flow_v5.h
 ```diff
 +#if FFX_HLSL_SM < 60
 +    FfxInt32 waveId = iLocalIndex >> 5u;
-+    FFX_ATOMIC_MIN(sWaveSad[waveId], min0123);
++    FFX_ATOMIC_MIN(sWaveMin[waveId], min0123);
 +    FFX_GROUP_MEMORY_BARRIER();
 +    min0123 = ffxMin(sWaveMin[waveId], sWaveMin[waveId ^ 1]);
 +#else

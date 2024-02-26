@@ -79,7 +79,7 @@ FfxUInt32 SadMapMinReduction256(FfxInt32x2 iSearchId, FfxInt32 iLocalIndex)
     FfxUInt32 min0123 = ffxMin(min01, min23);
 #if FFX_HLSL_SM < 60
     FfxInt32 waveId = iLocalIndex >> 5u;
-    FFX_ATOMIC_MIN(sWaveSad[waveId], min0123);
+    FFX_ATOMIC_MIN(sWaveMin[waveId], min0123);
     FFX_GROUP_MEMORY_BARRIER();
     min0123 = ffxMin(sWaveMin[waveId], sWaveMin[waveId ^ 1]);
 #else
