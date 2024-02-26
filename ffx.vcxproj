@@ -142,6 +142,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DXBC\md5.h" />
     <ClInclude Include="FidelityFX\gpu\ffx_common_types.h" />
     <ClInclude Include="FidelityFX\gpu\ffx_core.h" />
     <ClInclude Include="FidelityFX\gpu\ffx_core_gpu_common.h" />
@@ -156,6 +157,8 @@
     <ClInclude Include="FidelityFX\host\shared\ffx_object_management.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DXBC\DXBCChecksum.c" />
+    <ClCompile Include="DXBC\md5.c" />
     <ClCompile Include="FidelityFX\host\shared\ffx_assert.cpp" />
     <ClCompile Include="FidelityFX\host\shared\ffx_object_management.cpp" />
   </ItemGroup>

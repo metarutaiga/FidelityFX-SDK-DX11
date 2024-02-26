@@ -13,6 +13,9 @@
     <Filter Include="FidelityFX\host\shared">
       <UniqueIdentifier>{54f75513-5a1d-4a2d-8f22-455eb3e5a967}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DXBC">
+      <UniqueIdentifier>{dbfc65ed-7d34-4de2-94d6-32a1fa85bca6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FidelityFX\gpu\ffx_common_types.h">
@@ -51,6 +54,9 @@
     <ClInclude Include="FidelityFX\host\shared\ffx_object_management.h">
       <Filter>FidelityFX\host\shared</Filter>
     </ClInclude>
+    <ClInclude Include="DXBC\md5.h">
+      <Filter>DXBC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FidelityFX\host\shared\ffx_assert.cpp">
@@ -58,6 +64,12 @@
     </ClCompile>
     <ClCompile Include="FidelityFX\host\shared\ffx_object_management.cpp">
       <Filter>FidelityFX\host\shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DXBC\DXBCChecksum.c">
+      <Filter>DXBC</Filter>
+    </ClCompile>
+    <ClCompile Include="DXBC\md5.c">
+      <Filter>DXBC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

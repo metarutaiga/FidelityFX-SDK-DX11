@@ -4,6 +4,7 @@
 Task
 ---
 - [x] Support for Shader Model 5.0
+- [x] Patch GroupMemoryBarrier to GroupMemoryBarrierWithGroupSync
 - [x] 16bit RCAS for FSR2
 - [x] 16bit RCAS for FSR3 Upscaler
 - [x] 16bit SPD for FSR3 Frame Interpolation
