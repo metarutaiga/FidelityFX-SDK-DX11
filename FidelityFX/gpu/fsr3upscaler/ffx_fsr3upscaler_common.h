@@ -346,6 +346,7 @@ FfxFloat32 GetMaxDistanceInMeters()
 #endif
 }
 
+
 struct BilinearSamplingData
 {
     FfxInt32x2 iOffsets[4];
