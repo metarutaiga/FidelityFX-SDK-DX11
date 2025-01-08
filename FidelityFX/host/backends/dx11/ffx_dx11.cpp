@@ -34,7 +34,7 @@ extern "C" void CalculateDXBCChecksum(const DWORD* pData, DWORD dwSize, DWORD dw
 
 // DX11 prototypes for functions in the backend interface
 FfxUInt32 GetSDKVersionDX11(FfxInterface* backendInterface);
-FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffectBindlessConfig* bindlessConfig, FfxUInt32* effectContextId);
+FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect effect, FfxEffectBindlessConfig* bindlessConfig, FfxUInt32* effectContextId);
 FfxErrorCode GetDeviceCapabilitiesDX11(FfxInterface* backendInterface, FfxDeviceCapabilities* deviceCapabilities);
 FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32 effectContextId);
 FfxErrorCode CreateResourceDX11(FfxInterface* backendInterface, const FfxCreateResourceDescription* desc, FfxUInt32 effectContextId, FfxResourceInternal* outTexture);
@@ -659,7 +659,7 @@ FfxUInt32 GetSDKVersionDX11(FfxInterface* backendInterface)
 }
 
 // initialize the DX11 backend
-FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffectBindlessConfig* bindlessConfig, FfxUInt32* effectContextId)
+FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect effect, FfxEffectBindlessConfig* bindlessConfig, FfxUInt32* effectContextId)
 {
     FFX_ASSERT(NULL != backendInterface);
     FFX_ASSERT(NULL != backendInterface->device);
