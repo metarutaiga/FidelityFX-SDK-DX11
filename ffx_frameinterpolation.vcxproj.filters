@@ -93,6 +93,12 @@
     <ClInclude Include="FidelityFX\host\ffx_frameinterpolation.h">
       <Filter>FidelityFX\host</Filter>
     </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_callbacks_glsl.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_dilated_velocity_and_previous_depth.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FidelityFX\host\backends\ffx_shader_blobs.cpp">
@@ -257,6 +263,18 @@
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
   </ItemGroup>

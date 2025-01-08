@@ -95,12 +95,15 @@ static FfxShaderBlob fsr2GetTcrAutogenPassPermutationBlobByIndex(uint32_t permut
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -156,12 +159,15 @@ static FfxShaderBlob fsr2GetDepthClipPassPermutationBlobByIndex(uint32_t permuta
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -214,12 +220,15 @@ static FfxShaderBlob fsr2GetReconstructPreviousDepthPassPermutationBlobByIndex(u
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -267,12 +276,15 @@ static FfxShaderBlob fsr2GetLockPassPermutationBlobByIndex(uint32_t permutationO
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -330,12 +342,15 @@ static FfxShaderBlob fsr2GetAccumulatePassPermutationBlobByIndex(uint32_t permut
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -384,12 +399,15 @@ static FfxShaderBlob fsr2GetRCASPassPermutationBlobByIndex(uint32_t permutationO
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -440,12 +458,15 @@ static FfxShaderBlob fsr2GetComputeLuminancePyramidPassPermutationBlobByIndex(ui
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -495,12 +516,15 @@ static FfxShaderBlob fsr2GetAutogenReactivePassPermutationBlobByIndex(
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;

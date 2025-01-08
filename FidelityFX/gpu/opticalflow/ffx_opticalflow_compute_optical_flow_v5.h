@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 
 #ifndef FFX_OPTICALFLOW_COMPUTE_OPTICAL_FLOW_V5_H
 #define FFX_OPTICALFLOW_COMPUTE_OPTICAL_FLOW_V5_H
@@ -52,19 +52,19 @@ FfxUInt32 BlockSad64(FfxUInt32 blockSadSum, FfxInt32 iLocalIndex, FfxInt32 iLane
 #if FFX_HLSL_SM < 60
     FfxInt32 waveId = iLocalIndex >> 5u;
     FFX_ATOMIC_ADD(sWaveSad[waveId], blockSadSum);
-    FFX_GROUP_MEMORY_BARRIER();
+    FFX_GROUP_MEMORY_BARRIER;
     blockSadSum = sWaveSad[waveId] + sWaveSad[waveId ^ 1];
 #else
-    blockSadSum = WaveActiveSum(blockSadSum);
+    blockSadSum = ffxWaveSum(blockSadSum);
 
-    if (WaveGetLaneCount() == 32)
+    if (ffxWaveLaneCount() == 32)
     {
         FfxInt32 waveId = iLocalIndex >> 5u;
-        if (WaveIsFirstLane())
+        if (ffxWaveIsFirstLane())
         {
             sWaveSad[waveId] = blockSadSum;
         }
-        FFX_GROUP_MEMORY_BARRIER();
+        FFX_GROUP_MEMORY_BARRIER;
         blockSadSum += sWaveSad[waveId ^ 1];
     }
 #endif
@@ -80,20 +80,20 @@ FfxUInt32 SadMapMinReduction256(FfxInt32x2 iSearchId, FfxInt32 iLocalIndex)
 #if FFX_HLSL_SM < 60
     FfxInt32 waveId = iLocalIndex >> 5u;
     FFX_ATOMIC_MIN(sWaveMin[waveId], min0123);
-    FFX_GROUP_MEMORY_BARRIER();
+    FFX_GROUP_MEMORY_BARRIER;
     min0123 = ffxMin(sWaveMin[waveId], sWaveMin[waveId ^ 1]);
 #else
-    min0123 = WaveActiveMin(min0123);
+    min0123 = ffxWaveMin(min0123);
 
-    if (WaveGetLaneCount() == 32)
+    if (ffxWaveLaneCount() == 32)
     {
         FfxInt32 waveId = iLocalIndex >> 5u;
 
-        if (WaveIsFirstLane())
+        if (ffxWaveIsFirstLane())
         {
             sWaveMin[waveId] = min0123;
         }
-        FFX_GROUP_MEMORY_BARRIER();
+        FFX_GROUP_MEMORY_BARRIER;
         min0123 = ffxMin(min0123, sWaveMin[waveId ^ 1]);
     }
 #endif
@@ -114,7 +114,7 @@ void LoadSearchBuffer(FfxInt32 iLocalIndex, FfxInt32x2 iPxPosShifted)
         FfxInt32 y = baseY + idy;
         searchBuffer[0][id] = LoadSecondImagePackedLuma(FfxInt32x2(x, y));
     }
-    FFX_GROUP_MEMORY_BARRIER();
+    FFX_GROUP_MEMORY_BARRIER;
 }
 
 FfxUInt32x4 CalculateQSads2(FfxInt32x2 iSearchId)
@@ -175,7 +175,7 @@ FfxUInt32x2 abs_2(FfxInt32x2 val)
 FfxUInt32 EncodeSearchCoord(FfxInt32x2 coord)
 {
 #if FFX_OPTICALFLOW_FIX_TOP_LEFT_BIAS == 1
-    uint2 absCoord = abs_2(coord - 8);
+    FfxUInt32x2 absCoord = FfxUInt32x2(abs_2(coord - 8));
     return FfxUInt32(absCoord.y << 12) | FfxUInt32(absCoord.x << 8) | FfxUInt32(coord.y << 4) | FfxUInt32(coord.x);
 #else //FFX_OPTICALFLOW_FIX_TOP_LEFT_BIAS == 1
     return FfxUInt32(coord.y << 8) | FfxUInt32(coord.x);
@@ -209,7 +209,7 @@ void PrepareSadMap(FfxInt32x2 iSearchId, FfxUInt32x4 qsad)
     sWaveMin[0] = 0xffffffffu;
     sWaveMin[1] = 0xffffffffu;
 #endif
-    FFX_GROUP_MEMORY_BARRIER();
+    FFX_GROUP_MEMORY_BARRIER;
 }
 
 

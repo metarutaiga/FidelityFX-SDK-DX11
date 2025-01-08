@@ -213,6 +213,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_callbacks_glsl.h" />
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_callbacks_hlsl.h" />
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_common.h" />
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid.h" />
@@ -222,6 +223,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field.h" />
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_inpainting.h" />
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_dilated_velocity_and_previous_depth.h" />
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth.h" />
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_resources.h" />
     <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_setup.h" />
@@ -275,6 +277,10 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_1.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_0.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_1.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_0.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_1.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_0.hlsl" />

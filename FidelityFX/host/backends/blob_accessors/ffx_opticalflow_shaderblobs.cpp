@@ -81,12 +81,15 @@ static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByI
         nullptr,
         nullptr,
         nullptr,
+        0,
         nullptr,
         nullptr,
         nullptr,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -123,12 +126,15 @@ static FfxShaderBlob opticalflowGetComputeScdDivergencePassPermutationBlobByInde
         nullptr,
         nullptr,
         nullptr,
+        0,
         nullptr,
         nullptr,
         nullptr,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -170,12 +176,15 @@ static FfxShaderBlob opticalflowGetGenerateScdHistogramPassPermutationBlobByInde
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -217,12 +226,15 @@ static FfxShaderBlob opticalflowGetPrepareLumaPassPermutationBlobByIndex(uint32_
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -266,12 +278,15 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -309,12 +324,15 @@ static FfxShaderBlob opticalflowGetFilterOpticalFlowPassV5PermutationBlobByIndex
         nullptr,
         nullptr,
         nullptr,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -359,12 +377,15 @@ static FfxShaderBlob opticalflowGetScaleOpticalFlowAdvancedPassV5PermutationBlob
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;

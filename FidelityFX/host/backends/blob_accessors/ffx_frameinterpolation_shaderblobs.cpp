@@ -32,6 +32,7 @@
 #include "permutations/ffx_frameinterpolation_optical_flow_vector_field_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_Compute_Game_Vector_Field_Inpainting_Pyramid_pass_permutations.h"
+#include "permutations/ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_Compute_Inpainting_Pyramid_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_Inpainting_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_debug_view_pass_permutations.h"
@@ -43,11 +44,65 @@
 #include "permutations/ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_Compute_Game_Vector_Field_Inpainting_Pyramid_pass_16bit_permutations.h"
+#include "permutations/ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_Compute_Inpainting_Pyramid_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_Inpainting_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_debug_view_pass_16bit_permutations.h"
 
 #include <string.h> // for memset
+
+static FfxShaderBlob FrameInterpolationGetReconstructAndDilatePermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
+{
+    bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
+
+    // Resource Bindings:
+    //
+    // Name                                        Type  Format         Dim      HLSL Bind  Count
+    // ------------------------------------- ---------- ------- ----------- -------------- ------
+    // r_input_motion_vectors                   texture  float4          2d             t0      1 
+    // r_input_depth                            texture   float          2d             t1      1 
+    // rw_reconstructed_depth_previous_frame        UAV    uint          2d             u0      1 
+    // rw_dilated_motion_vectors                    UAV  float2          2d             u1      1 
+    // rw_dilated_depth                             UAV   float          2d             u2      1 
+    // cbFI                                     cbuffer      NA          NA            cb0      1 
+    static const char* boundConstantBufferNames[] = { "cbFI" };
+    static const uint32_t boundConstantBuffers[] = { 0 };
+    static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const char* boundSRVTextureNames[] = { "r_input_motion_vectors", "r_input_depth" };
+    static const uint32_t boundSRVTextures[] = { 0, 1 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1 };
+    static const char* boundUAVTextureNames[] = { "rw_reconstructed_depth_previous_frame", "rw_dilated_motion_vectors", "rw_dilated_depth" };
+    static const uint32_t boundUAVTextures[] = { 0, 1, 2 };
+    static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1 };
+
+    FfxShaderBlob blob = {
+        is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_setup_pass_permutations[INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_setup_pass_permutations[INVERTED_DEPTH].size,
+        __crt_countof(boundConstantBufferNames),
+        __crt_countof(boundSRVTextureNames),
+        __crt_countof(boundUAVTextureNames),
+        0,
+        0,
+        0,
+        0,
+        boundConstantBufferNames,
+        boundConstantBuffers,
+        boundConstantBufferCounts,
+        0,
+        boundSRVTextureNames,
+        boundSRVTextures,
+        boundSRVTextureCounts,
+        0,
+        boundUAVTextureNames,
+        boundUAVTextures,
+        boundUAVTextureCounts,
+        0,
+    };
+
+    return blob;
+}
 
 static FfxShaderBlob FrameInterpolationGetSetupPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
@@ -90,12 +145,15 @@ static FfxShaderBlob FrameInterpolationGetSetupPermutationBlobByIndex(uint32_t p
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -140,12 +198,15 @@ static FfxShaderBlob FrameInterpolationGetGameMotionVectorFieldPermutationBlobBy
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -190,12 +251,15 @@ static FfxShaderBlob FrameInterpolationGetOpticalFlowVectorFieldPermutationBlobB
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -238,12 +302,15 @@ static FfxShaderBlob FrameInterpolationGetReconstructPrevDepthPermutationBlobByI
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -290,12 +357,15 @@ static FfxShaderBlob FrameInterpolationGetDisocclusionMaskPermutationBlobByIndex
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -350,12 +420,15 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -405,12 +478,15 @@ static FfxShaderBlob FrameInterpolationGetFiPassPermutationBlobByIndex(uint32_t 
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -466,12 +542,15 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -516,12 +595,15 @@ static FfxShaderBlob FrameInterpolationGetInpaintingPassPermutationBlobByIndex(u
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -570,12 +652,15 @@ static FfxShaderBlob FrameInterpolationGetDebugViewPassPermutationBlobByIndex(ui
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -590,6 +675,13 @@ FfxErrorCode frameInterpolationGetPermutationBlobByIndex(FfxFrameInterpolationPa
     bool is16bit  = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_ALLOW_FP16);
 
     switch (passId) {
+
+        case FFX_FRAMEINTERPOLATION_PASS_RECONSTRUCT_AND_DILATE:
+        {
+            FfxShaderBlob blob = FrameInterpolationGetReconstructAndDilatePermutationBlobByIndex(permutationOptions, isWave64, is16bit);
+            memcpy(outBlob, &blob, sizeof(FfxShaderBlob));
+            return FFX_OK;
+        }
 
         case FFX_FRAMEINTERPOLATION_PASS_SETUP:
         {

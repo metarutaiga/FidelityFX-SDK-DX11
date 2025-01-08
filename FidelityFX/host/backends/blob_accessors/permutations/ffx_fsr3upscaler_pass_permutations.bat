@@ -20,7 +20,7 @@ rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM
 rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 rem THE SOFTWARE.
 
-for %%a in (_accumulate_,_autogen_reactive_,_compute_luminance_pyramid_,_depth_clip_,_lock_,_rcas_,_reconstruct_previous_depth_) do (
+for %%a in (_accumulate_,_autogen_reactive_,_debug_view_,_luma_instability_,_luma_pyramid_,_prepare_inputs_,_prepare_reactivity_,_rcas_,_shading_change_,_shading_change_pyramid_) do (
   for %%b in (_,_16bit_) do (
     call :header %%a %%b
     for %%c in (0,1) do (

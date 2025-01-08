@@ -68,12 +68,15 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;
@@ -115,12 +118,15 @@ static FfxShaderBlob fsr1GetRcasPassPermutationBlobByIndex(uint32_t permutationO
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;

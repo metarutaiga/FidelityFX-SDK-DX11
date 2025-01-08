@@ -96,12 +96,15 @@ static FfxShaderBlob blurGetBlurPassPermutationBlobByKernelSize(
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;

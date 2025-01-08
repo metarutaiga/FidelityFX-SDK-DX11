@@ -84,12 +84,15 @@ static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permuta
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
+        0,
         nullptr,
         nullptr,
         nullptr,
+        0,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
+        0,
     };
 
     return blob;

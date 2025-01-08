@@ -20,7 +20,7 @@ rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM
 rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 rem THE SOFTWARE.
 
-for %%a in (_compute_game_vector_field_inpainting_pyramid_,_compute_inpainting_pyramid_,_debug_view_,_disocclusion_mask_,_game_motion_vector_field_,_inpainting_,_optical_flow_vector_field_,_,_reconstruct_previous_depth_,_setup_) do (
+for %%a in (_compute_game_vector_field_inpainting_pyramid_,_compute_inpainting_pyramid_,_debug_view_,_disocclusion_mask_,_game_motion_vector_field_,_inpainting_,_optical_flow_vector_field_,_,_reconstruct_and_dilate_,_reconstruct_previous_depth_,_setup_) do (
   for %%b in (_,_16bit_) do (
     call :header %%a %%b
     for %%c in (0,1) do (
