@@ -891,7 +891,6 @@ typedef struct FfxResourceBinding
     uint32_t    slotIndex;                      ///< The slot into which to bind the resource
     uint32_t    arrayIndex;                     ///< The resource offset for mip/array access
     uint32_t    resourceIdentifier;             ///< A unique resource identifier representing an internal resource index
-    uint32_t    bindCount;
     wchar_t     name[FFX_RESOURCE_NAME_SIZE];   ///< A debug name to help track the resource binding
 }FfxResourceBinding;
 

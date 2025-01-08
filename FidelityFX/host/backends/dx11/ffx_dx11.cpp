@@ -34,6 +34,7 @@ extern "C" void CalculateDXBCChecksum(const DWORD* pData, DWORD dwSize, DWORD dw
 
 // DX11 prototypes for functions in the backend interface
 FfxUInt32 GetSDKVersionDX11(FfxInterface* backendInterface);
+FfxErrorCode GetEffectGpuMemoryUsageDX11(FfxInterface* backendInterface, FfxUInt32 effectContextId, FfxEffectMemoryUsage* outVramUsage);
 FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect effect, FfxEffectBindlessConfig* bindlessConfig, FfxUInt32* effectContextId);
 FfxErrorCode GetDeviceCapabilitiesDX11(FfxInterface* backendInterface, FfxDeviceCapabilities* deviceCapabilities);
 FfxErrorCode DestroyBackendContextDX11(FfxInterface* backendInterface, FfxUInt32 effectContextId);
@@ -43,6 +44,7 @@ FfxErrorCode RegisterResourceDX11(FfxInterface* backendInterface, const FfxResou
 FfxResource GetResourceDX11(FfxInterface* backendInterface, FfxResourceInternal resource);
 FfxErrorCode UnregisterResourcesDX11(FfxInterface* backendInterface, FfxCommandList commandList, FfxUInt32 effectContextId);
 FfxResourceDescription GetResourceDescriptorDX11(FfxInterface* backendInterface, FfxResourceInternal resource);
+FfxErrorCode StageConstantBufferDataDX11(FfxInterface* backendInterface, void* data, FfxUInt32 size, FfxConstantBuffer* constantBuffer);
 FfxErrorCode CreatePipelineDX11(FfxInterface* backendInterface, FfxEffect effect, FfxPass passId, uint32_t permutationOptions, const FfxPipelineDescription*  desc, FfxUInt32 effectContextId, FfxPipelineState* outPass);
 FfxErrorCode DestroyPipelineDX11(FfxInterface* backendInterface, FfxPipelineState* pipeline, FfxUInt32 effectContextId);
 FfxErrorCode ScheduleGpuJobDX11(FfxInterface* backendInterface, const FfxGpuJobDescription* job);
@@ -89,6 +91,9 @@ typedef struct BackendContext_DX11 {
         // Usage
         bool                active;
 
+        // VRAM usage
+        FfxEffectMemoryUsage vramUsage;
+
     } EffectContext;
 
     // Resource holder
@@ -132,21 +137,31 @@ FfxErrorCode ffxGetInterfaceDX11(
         FFX_ERROR_INSUFFICIENT_MEMORY);
 
     backendInterface->fpGetSDKVersion = GetSDKVersionDX11;
+    backendInterface->fpGetEffectGpuMemoryUsage = GetEffectGpuMemoryUsageDX11;
     backendInterface->fpCreateBackendContext = CreateBackendContextDX11;
     backendInterface->fpGetDeviceCapabilities = GetDeviceCapabilitiesDX11;
     backendInterface->fpDestroyBackendContext = DestroyBackendContextDX11;
     backendInterface->fpCreateResource = CreateResourceDX11;
     backendInterface->fpDestroyResource = DestroyResourceDX11;
+    backendInterface->fpMapResource;
+    backendInterface->fpUnmapResource;
     backendInterface->fpGetResource = GetResourceDX11;
     backendInterface->fpRegisterResource = RegisterResourceDX11;
     backendInterface->fpUnregisterResources = UnregisterResourcesDX11;
+    backendInterface->fpRegisterStaticResource;
     backendInterface->fpGetResourceDescription = GetResourceDescriptorDX11;
+    backendInterface->fpStageConstantBufferDataFunc = StageConstantBufferDataDX11;
     backendInterface->fpCreatePipeline = CreatePipelineDX11;
     backendInterface->fpGetPermutationBlobByIndex = ffxGetPermutationBlobByIndex;
     backendInterface->fpDestroyPipeline = DestroyPipelineDX11;
     backendInterface->fpScheduleGpuJob = ScheduleGpuJobDX11;
     backendInterface->fpExecuteGpuJobs = ExecuteGpuJobsDX11;
+    backendInterface->fpBreadcrumbsAllocBlock;
+    backendInterface->fpBreadcrumbsFreeBlock;
+    backendInterface->fpBreadcrumbsWrite;
+    backendInterface->fpBreadcrumbsPrintDeviceInfo;
     backendInterface->fpSwapChainConfigureFrameGeneration = [](FfxFrameGenerationConfig const*) -> FfxErrorCode { return FFX_OK; };
+    backendInterface->fpRegisterConstantBufferAllocator;
 
     // Memory assignments
     backendInterface->scratchBuffer = scratchBuffer;
@@ -658,6 +673,26 @@ FfxUInt32 GetSDKVersionDX11(FfxInterface* backendInterface)
     return FFX_SDK_MAKE_VERSION(FFX_SDK_VERSION_MAJOR, FFX_SDK_VERSION_MINOR, FFX_SDK_VERSION_PATCH);
 }
 
+uint64_t GetResourceGpuMemorySizeDX11(ID3D11Resource* resource)
+{
+    uint64_t      size = 0;
+
+    return size;
+}
+
+FfxErrorCode GetEffectGpuMemoryUsageDX11(FfxInterface* backendInterface, FfxUInt32 effectContextId, FfxEffectMemoryUsage* outVramUsage)
+{
+    FFX_ASSERT(NULL != backendInterface);
+    FFX_ASSERT(NULL != outVramUsage);
+
+    BackendContext_DX11*                backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
+    BackendContext_DX11::EffectContext& effectContext  = backendContext->pEffectContexts[effectContextId];
+
+    *outVramUsage = effectContext.vramUsage;
+
+    return FFX_OK;
+}
+
 // initialize the DX11 backend
 FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect effect, FfxEffectBindlessConfig* bindlessConfig, FfxUInt32* effectContextId)
 {
@@ -870,11 +905,14 @@ FfxErrorCode CreateResourceDX11(
     FFX_ASSERT(NULL != backendInterface);
     FFX_ASSERT(NULL != createResourceDescription);
     FFX_ASSERT(NULL != outTexture);
+    FFX_ASSERT_MESSAGE(createResourceDescription->initData.type != FFX_RESOURCE_INIT_DATA_TYPE_INVALID,
+                       "InitData type cannot be FFX_RESOURCE_INIT_DATA_TYPE_INVALID. Please explicitly specify the resource initialization type.");
 
     BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
     BackendContext_DX11::EffectContext& effectContext = backendContext->pEffectContexts[effectContextId];
     ID3D11Device* dx11Device = backendContext->device;
 
+    uint64_t resourceSize = 0;
     FFX_ASSERT(NULL != dx11Device);
 
     FFX_ASSERT(effectContext.nextStaticResource + 1 < effectContext.nextDynamicResource);
@@ -942,7 +980,7 @@ FfxErrorCode CreateResourceDX11(
 
         D3D11_SUBRESOURCE_DATA dx11SubResourceData = {};
         D3D11_SUBRESOURCE_DATA* pSubResourceData = nullptr;
-        if (createResourceDescription->initData.buffer) {
+        if (createResourceDescription->initData.type != FFX_RESOURCE_INIT_DATA_TYPE_UNINITIALIZED) {
             pSubResourceData = &dx11SubResourceData;
             pSubResourceData->pSysMem = createResourceDescription->initData.buffer;
             pSubResourceData->SysMemPitch = createResourceDescription->initData.size;
@@ -975,6 +1013,8 @@ FfxErrorCode CreateResourceDX11(
         default:
             break;
         }
+
+        resourceSize = GetResourceGpuMemorySizeDX11(dx11Resource);
 
         SetNameDX11(dx11Resource, createResourceDescription->name);
         backendResource->resourcePtr = dx11Resource;
@@ -1125,6 +1165,12 @@ FfxErrorCode CreateResourceDX11(
         }
     }
 
+    effectContext.vramUsage.totalUsageInBytes += resourceSize;
+    if ((createResourceDescription->resourceDescription.flags & FFX_RESOURCE_FLAGS_ALIASABLE) == FFX_RESOURCE_FLAGS_ALIASABLE)
+    {
+        effectContext.vramUsage.aliasableUsageInBytes += resourceSize;
+    }
+
     return FFX_OK;
 }
 
@@ -1150,6 +1196,16 @@ FfxErrorCode DestroyResourceDX11(
             }
         }
         if (backendContext->pResources[resource.internalIndex].resourcePtr) {
+
+            uint64_t resourceSize = GetResourceGpuMemorySizeDX11(backendContext->pResources[resource.internalIndex].resourcePtr);
+
+            // update effect memory usage
+            effectContext.vramUsage.totalUsageInBytes -= resourceSize;
+            if ((backendContext->pResources[resource.internalIndex].resourceDescription.flags & FFX_RESOURCE_FLAGS_ALIASABLE) == FFX_RESOURCE_FLAGS_ALIASABLE)
+            {
+                effectContext.vramUsage.aliasableUsageInBytes -= resourceSize;
+            }
+
             backendContext->pResources[resource.internalIndex].resourcePtr->Release();
             backendContext->pResources[resource.internalIndex].resourcePtr = nullptr;
         }
@@ -1444,6 +1500,14 @@ FfxResourceDescription GetResourceDescriptorDX11(
     return resourceDescription;
 }
 
+FfxErrorCode StageConstantBufferDataDX11(FfxInterface* backendInterface, void* data, FfxUInt32 size, FfxConstantBuffer* constantBuffer)
+{
+    FFX_ASSERT(NULL != backendInterface);
+    BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
+
+    return FFX_OK;
+}
+
 D3D11_TEXTURE_ADDRESS_MODE FfxGetAddressModeDX11(const FfxAddressMode& addressMode)
 {
     switch (addressMode)
@@ -1484,97 +1548,207 @@ FfxErrorCode CreatePipelineDX11(
     {
         return FFX_ERROR_BACKEND_API_ERROR;
     }
-    else
+
+    FfxShaderBlob shaderBlob = { };
+    ffxGetPermutationBlobByIndex(effect, pass, FFX_BIND_COMPUTE_SHADER_STAGE, permutationOptions, &shaderBlob);
+    FFX_ASSERT(shaderBlob.data && shaderBlob.size);
+
+    int32_t staticTextureSrvCount = 0;
+    int32_t staticBufferSrvCount = 0;
+    int32_t staticTextureUavCount = 0;
+    int32_t staticBufferUavCount = 0;
+
+    int32_t staticTextureSrvSpace = -1;
+    int32_t staticBufferSrvSpace = -1;
+    int32_t staticTextureUavSpace = -1;
+    int32_t staticBufferUavSpace = -1;
+
+    // Only set the command signature if this is setup as an indirect workload
+    outPipeline->cmdSignature = nullptr;
+
+    uint32_t flattenedSrvTextureCount = 0;
+
+    for (uint32_t srvIndex = 0; srvIndex < shaderBlob.srvTextureCount; ++srvIndex)
     {
-        FfxShaderBlob shaderBlob = { };
-        ffxGetPermutationBlobByIndex(effect, pass, FFX_BIND_COMPUTE_SHADER_STAGE, permutationOptions, &shaderBlob);
-        FFX_ASSERT(shaderBlob.data && shaderBlob.size);
+        uint32_t slotIndex = shaderBlob.boundSRVTextures[srvIndex];
+        uint32_t spaceIndex = shaderBlob.boundSRVTextureSpaces[srvIndex];
+        uint32_t bindCount = shaderBlob.boundSRVTextureCounts[srvIndex];
 
-        // Only set the command signature if this is setup as an indirect workload
-        outPipeline->cmdSignature = nullptr;
+        // Skip static resources
+        if (spaceIndex == uint32_t(staticTextureSrvSpace))
+            continue;
 
-        // populate the pass.
-        outPipeline->srvTextureCount = shaderBlob.srvTextureCount;
-        outPipeline->uavTextureCount = shaderBlob.uavTextureCount;
-        outPipeline->srvBufferCount = shaderBlob.srvBufferCount;
-        outPipeline->uavBufferCount = shaderBlob.uavBufferCount;
+        for (uint32_t arrayIndex = 0; arrayIndex < bindCount; arrayIndex++)
+        {
+            uint32_t bindingIndex = flattenedSrvTextureCount++;
 
-        // Todo when needed
-        //outPipeline->samplerCount      = shaderBlob.samplerCount;
-        //outPipeline->rtAccelStructCount= shaderBlob.rtAccelStructCount;
-
-        outPipeline->constCount = shaderBlob.cbvCount;
-        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-        for (uint32_t srvIndex = 0; srvIndex < outPipeline->srvTextureCount; ++srvIndex)
-        {
-            outPipeline->srvTextureBindings[srvIndex].slotIndex = shaderBlob.boundSRVTextures[srvIndex];
-            outPipeline->srvTextureBindings[srvIndex].bindCount = shaderBlob.boundSRVTextureCounts[srvIndex];
-            wcscpy_s(outPipeline->srvTextureBindings[srvIndex].name, converter.from_bytes(shaderBlob.boundSRVTextureNames[srvIndex]).c_str());
+            outPipeline->srvTextureBindings[bindingIndex].slotIndex = slotIndex;
+            outPipeline->srvTextureBindings[bindingIndex].arrayIndex = arrayIndex;
+            MultiByteToWideChar(CP_UTF8,
+                0,
+                shaderBlob.boundSRVTextureNames[srvIndex],
+                -1,
+                outPipeline->srvTextureBindings[bindingIndex].name,
+                int(std::size(outPipeline->srvTextureBindings[bindingIndex].name)));
         }
-        for (uint32_t uavIndex = 0; uavIndex < outPipeline->uavTextureCount; ++uavIndex)
-        {
-            outPipeline->uavTextureBindings[uavIndex].slotIndex = shaderBlob.boundUAVTextures[uavIndex];
-            outPipeline->uavTextureBindings[uavIndex].bindCount = shaderBlob.boundUAVTextureCounts[uavIndex];
-            wcscpy_s(outPipeline->uavTextureBindings[uavIndex].name, converter.from_bytes(shaderBlob.boundUAVTextureNames[uavIndex]).c_str());
-        }
-        for (uint32_t srvIndex = 0; srvIndex < outPipeline->srvBufferCount; ++srvIndex)
-        {
-            outPipeline->srvBufferBindings[srvIndex].slotIndex = shaderBlob.boundSRVBuffers[srvIndex];
-            outPipeline->srvBufferBindings[srvIndex].bindCount = shaderBlob.boundSRVBufferCounts[srvIndex];
-            wcscpy_s(outPipeline->srvBufferBindings[srvIndex].name, converter.from_bytes(shaderBlob.boundSRVBufferNames[srvIndex]).c_str());
-        }
-        for (uint32_t uavIndex = 0; uavIndex < outPipeline->uavBufferCount; ++uavIndex)
-        {
-            outPipeline->uavBufferBindings[uavIndex].slotIndex = shaderBlob.boundUAVBuffers[uavIndex];
-            outPipeline->uavBufferBindings[uavIndex].bindCount = shaderBlob.boundUAVBufferCounts[uavIndex];
-            wcscpy_s(outPipeline->uavBufferBindings[uavIndex].name, converter.from_bytes(shaderBlob.boundUAVBufferNames[uavIndex]).c_str());
-        }
-        for (uint32_t cbIndex = 0; cbIndex < outPipeline->constCount; ++cbIndex)
-        {
-            outPipeline->constantBufferBindings[cbIndex].slotIndex = shaderBlob.boundConstantBuffers[cbIndex];
-            outPipeline->constantBufferBindings[cbIndex].bindCount = shaderBlob.boundConstantBufferCounts[cbIndex];
-            wcscpy_s(outPipeline->constantBufferBindings[cbIndex].name, converter.from_bytes(shaderBlob.boundConstantBufferNames[cbIndex]).c_str());
-        }
-
-        // patch GroupMemoryBarrier to GroupMemoryBarrierWithGroupSync
-        DWORD* data = new DWORD[shaderBlob.size / sizeof(DWORD)];
-        if (data == nullptr)
-            return FFX_ERROR_INSUFFICIENT_MEMORY;
-        memcpy(data, shaderBlob.data, shaderBlob.size);
-        for (uint32_t i = 0; i < shaderBlob.size / sizeof(DWORD); ++i)
-        {
-            if (data[i] == MAKEFOURCC('S','H','E','X'))
-            {
-                DWORD* shex = &data[i];
-                DWORD count = data[i + 1];
-                bool hash = false;
-                for (uint32_t i = 0; i < count / sizeof(DWORD); ++i)
-                {
-                    if (shex[i] == 0x010010BE)
-                    {
-                        shex[i] = 0x010018BE;
-                        hash = true;
-                    }
-                }
-                if (hash)
-                {
-                    CalculateDXBCChecksum(data, shaderBlob.size, &data[1]);
-                }
-                break;
-            }
-        }
-
-        // create the PSO
-        if (FAILED(dx11Device->CreateComputeShader(data, shaderBlob.size, nullptr, (ID3D11ComputeShader**)&outPipeline->pipeline)))
-        {
-            delete[] data;
-            return FFX_ERROR_BACKEND_API_ERROR;
-        }
-        delete[] data;
-
-        // Set the pipeline name
-        SetNameDX11(reinterpret_cast<ID3D11ComputeShader*>(outPipeline->pipeline), pipelineDescription->name);
     }
+
+    outPipeline->srvTextureCount = flattenedSrvTextureCount;
+    FFX_ASSERT(outPipeline->srvTextureCount < FFX_MAX_NUM_SRVS);
+
+    uint32_t flattenedUavTextureCount = 0;
+
+    for (uint32_t uavIndex = 0; uavIndex < shaderBlob.uavTextureCount; ++uavIndex)
+    {
+        uint32_t slotIndex = shaderBlob.boundUAVTextures[uavIndex];
+        uint32_t spaceIndex = shaderBlob.boundUAVTextureSpaces[uavIndex];
+        uint32_t bindCount = shaderBlob.boundUAVTextureCounts[uavIndex];
+
+        // Skip static resources
+        if (spaceIndex == uint32_t(staticTextureUavSpace))
+            continue;
+
+        for (uint32_t arrayIndex = 0; arrayIndex < bindCount; arrayIndex++)
+        {
+            uint32_t bindingIndex = flattenedUavTextureCount++;
+
+            outPipeline->uavTextureBindings[bindingIndex].slotIndex = slotIndex;
+            outPipeline->uavTextureBindings[bindingIndex].arrayIndex = arrayIndex;
+            MultiByteToWideChar(CP_UTF8,
+                0,
+                shaderBlob.boundUAVTextureNames[uavIndex],
+                -1,
+                outPipeline->uavTextureBindings[bindingIndex].name,
+                int(std::size(outPipeline->uavTextureBindings[bindingIndex].name)));
+        }
+    }
+
+    outPipeline->uavTextureCount = flattenedUavTextureCount;
+    FFX_ASSERT(outPipeline->uavTextureCount < FFX_MAX_NUM_UAVS);
+
+    uint32_t flattenedSrvBufferCount = 0;
+
+    for (uint32_t srvIndex = 0; srvIndex < shaderBlob.srvBufferCount; ++srvIndex)
+    {
+        uint32_t slotIndex = shaderBlob.boundSRVBuffers[srvIndex];
+        uint32_t spaceIndex = shaderBlob.boundSRVBufferSpaces[srvIndex];
+        uint32_t bindCount = shaderBlob.boundSRVBufferCounts[srvIndex];
+
+        // Skip static resources
+        if (spaceIndex == uint32_t(staticBufferSrvSpace))
+            continue;
+
+        for (uint32_t arrayIndex = 0; arrayIndex < bindCount; arrayIndex++)
+        {
+            uint32_t bindingIndex = flattenedSrvBufferCount++;
+
+            outPipeline->srvBufferBindings[bindingIndex].slotIndex = slotIndex;
+            outPipeline->srvBufferBindings[bindingIndex].arrayIndex = arrayIndex;
+            MultiByteToWideChar(CP_UTF8,
+                0,
+                shaderBlob.boundSRVBufferNames[srvIndex],
+                -1,
+                outPipeline->srvBufferBindings[bindingIndex].name,
+                int(std::size(outPipeline->srvBufferBindings[bindingIndex].name)));
+        }
+    }
+
+    outPipeline->srvBufferCount = flattenedSrvBufferCount;
+    FFX_ASSERT(outPipeline->srvBufferCount < FFX_MAX_NUM_SRVS);
+
+    uint32_t flattenedUavBufferCount = 0;
+
+    for (uint32_t uavIndex = 0; uavIndex < shaderBlob.uavBufferCount; ++uavIndex)
+    {
+        uint32_t slotIndex = shaderBlob.boundUAVBuffers[uavIndex];
+        uint32_t spaceIndex = shaderBlob.boundUAVBufferSpaces[uavIndex];
+        uint32_t bindCount = shaderBlob.boundUAVBufferCounts[uavIndex];
+
+        // Skip static resources
+        if (spaceIndex == uint32_t(staticBufferUavSpace))
+            continue;
+
+        for (uint32_t arrayIndex = 0; arrayIndex < bindCount; arrayIndex++)
+        {
+            uint32_t bindingIndex = flattenedUavBufferCount++;
+
+            outPipeline->uavBufferBindings[bindingIndex].slotIndex = slotIndex;
+            outPipeline->uavBufferBindings[bindingIndex].arrayIndex = arrayIndex;
+            MultiByteToWideChar(CP_UTF8,
+                0,
+                shaderBlob.boundUAVBufferNames[uavIndex],
+                -1,
+                outPipeline->uavBufferBindings[bindingIndex].name,
+                int(std::size(outPipeline->uavBufferBindings[bindingIndex].name)));
+        }
+    }
+
+    outPipeline->uavBufferCount = flattenedUavBufferCount;
+    FFX_ASSERT(outPipeline->uavBufferCount < FFX_MAX_NUM_UAVS);
+
+    for (uint32_t cbIndex = 0; cbIndex < shaderBlob.cbvCount; ++cbIndex)
+    {
+        outPipeline->constantBufferBindings[cbIndex].slotIndex = shaderBlob.boundConstantBuffers[cbIndex];
+        outPipeline->constantBufferBindings[cbIndex].arrayIndex = 1;
+        MultiByteToWideChar(CP_UTF8,
+            0,
+            shaderBlob.boundConstantBufferNames[cbIndex],
+            -1,
+            outPipeline->constantBufferBindings[cbIndex].name,
+            int(std::size(outPipeline->constantBufferBindings[cbIndex].name)));
+    }
+
+    outPipeline->constCount = shaderBlob.cbvCount;
+    FFX_ASSERT(outPipeline->constCount < FFX_MAX_NUM_CONST_BUFFERS);
+
+    outPipeline->staticTextureSrvCount = staticTextureSrvCount;
+    outPipeline->staticBufferSrvCount = staticBufferSrvCount;
+    outPipeline->staticTextureUavCount = staticTextureUavCount;
+    outPipeline->staticBufferUavCount = staticBufferUavCount;
+
+    // Todo when needed
+    //outPipeline->samplerCount      = shaderBlob.samplerCount;
+    //outPipeline->rtAccelStructCount= shaderBlob.rtAccelStructCount;
+
+    // patch GroupMemoryBarrier to GroupMemoryBarrierWithGroupSync
+    DWORD* data = new DWORD[shaderBlob.size / sizeof(DWORD)];
+    if (data == nullptr)
+        return FFX_ERROR_INSUFFICIENT_MEMORY;
+    memcpy(data, shaderBlob.data, shaderBlob.size);
+    for (uint32_t i = 0; i < shaderBlob.size / sizeof(DWORD); ++i)
+    {
+        if (data[i] == MAKEFOURCC('S','H','E','X'))
+        {
+            DWORD* shex = &data[i];
+            DWORD count = data[i + 1];
+            bool hash = false;
+            for (uint32_t i = 0; i < count / sizeof(DWORD); ++i)
+            {
+                if (shex[i] == 0x010010BE)
+                {
+                    shex[i] = 0x010018BE;
+                    hash = true;
+                }
+            }
+            if (hash)
+            {
+                CalculateDXBCChecksum(data, shaderBlob.size, &data[1]);
+            }
+            break;
+        }
+    }
+
+    // create the PSO
+    if (FAILED(dx11Device->CreateComputeShader(data, shaderBlob.size, nullptr, (ID3D11ComputeShader**)&outPipeline->pipeline)))
+    {
+        delete[] data;
+        return FFX_ERROR_BACKEND_API_ERROR;
+    }
+    delete[] data;
+
+    // Set the pipeline name
+    SetNameDX11(reinterpret_cast<ID3D11ComputeShader*>(outPipeline->pipeline), pipelineDescription->name);
+
     return FFX_OK;
 }
 
@@ -1638,19 +1812,22 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
         // Set a baseline minimal value
         uint32_t maximumUavIndex = job->computeJobDescriptor.pipeline.uavTextureCount + job->computeJobDescriptor.pipeline.uavBufferCount;
 
-        // Textures
-        for (uint32_t currentPipelineUavIndex = 0; currentPipelineUavIndex < job->computeJobDescriptor.pipeline.uavTextureCount; ++currentPipelineUavIndex)
+        for (uint32_t uavTextureBinding = 0; uavTextureBinding < job->computeJobDescriptor.pipeline.uavTextureCount; uavTextureBinding++)
         {
-            uint32_t uavResourceOffset = job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].slotIndex +
-                                            job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].bindCount - 1;
-            maximumUavIndex = uavResourceOffset > maximumUavIndex ? uavResourceOffset : maximumUavIndex;
+            uint32_t slotIndex = job->computeJobDescriptor.pipeline.uavTextureBindings[uavTextureBinding].slotIndex +
+                                 job->computeJobDescriptor.pipeline.uavTextureBindings[uavTextureBinding].arrayIndex;
+
+            if (slotIndex > maximumUavIndex)
+                maximumUavIndex = slotIndex;
         }
 
-        // Buffers
-        for (uint32_t currentPipelineUavIndex = 0; currentPipelineUavIndex < job->computeJobDescriptor.pipeline.uavBufferCount; ++currentPipelineUavIndex)
+        for (uint32_t uavBufferBinding = 0; uavBufferBinding < job->computeJobDescriptor.pipeline.uavBufferCount; uavBufferBinding++)
         {
-            uint32_t uavResourceOffset = job->computeJobDescriptor.pipeline.uavBufferBindings[currentPipelineUavIndex].slotIndex;
-            maximumUavIndex = uavResourceOffset > maximumUavIndex ? uavResourceOffset : maximumUavIndex;
+            uint32_t slotIndex = job->computeJobDescriptor.pipeline.uavBufferBindings[uavBufferBinding].slotIndex +
+                                 job->computeJobDescriptor.pipeline.uavTextureBindings[uavBufferBinding].arrayIndex;
+
+            if (slotIndex > maximumUavIndex)
+                maximumUavIndex = slotIndex;
         }
 
         if (maximumUavIndex)
@@ -1658,7 +1835,7 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
             // Set Texture UAVs
             for (uint32_t currentPipelineUavIndex = 0, currentUAVResource = 0; currentPipelineUavIndex < job->computeJobDescriptor.pipeline.uavTextureCount; ++currentPipelineUavIndex) {
 
-                for (uint32_t uavEntry = 0; uavEntry < job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].bindCount; ++uavEntry, ++currentUAVResource)
+                for (uint32_t uavEntry = 0; uavEntry <= job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].arrayIndex; ++uavEntry, ++currentUAVResource)
                 {
                     // source: UAV of resource to bind
                     const uint32_t resourceIndex = job->computeJobDescriptor.uavTextures[currentUAVResource].resource.internalIndex;
@@ -1677,6 +1854,10 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
 
             // Set Buffer UAVs
             for (uint32_t currentPipelineUavIndex = 0; currentPipelineUavIndex < job->computeJobDescriptor.pipeline.uavBufferCount; ++currentPipelineUavIndex) {
+
+                // continue if this is a null resource.
+                if (job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].resource.internalIndex == 0)
+                    continue;
 
                 // source: UAV of buffer to bind
                 const uint32_t resourceIndex = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].resource.internalIndex;
@@ -1698,26 +1879,31 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
     uint32_t maximumSrv = 0;
     {
         // Set a baseline minimal value
-        // Textures
-        uint32_t maximumSrvIndex = job->computeJobDescriptor.pipeline.srvTextureCount;
-        for (uint32_t currentPipelineSrvIndex = 0; currentPipelineSrvIndex < job->computeJobDescriptor.pipeline.srvTextureCount; ++currentPipelineSrvIndex) {
+        uint32_t maximumSrvIndex = job->computeJobDescriptor.pipeline.srvTextureCount + job->computeJobDescriptor.pipeline.srvBufferCount;
 
-            const uint32_t currentSrvResourceIndex = job->computeJobDescriptor.pipeline.srvTextureBindings[currentPipelineSrvIndex].slotIndex +
-                                                     job->computeJobDescriptor.pipeline.srvTextureBindings[currentPipelineSrvIndex].bindCount - 1;
-            maximumSrvIndex = currentSrvResourceIndex > maximumSrvIndex ? currentSrvResourceIndex : maximumSrvIndex;
-        }
-        // Buffers
-        for (uint32_t currentPipelineSrvIndex = 0; currentPipelineSrvIndex < job->computeJobDescriptor.pipeline.srvBufferCount; ++currentPipelineSrvIndex)
+        for (uint32_t srvTextureBinding = 0; srvTextureBinding < job->computeJobDescriptor.pipeline.srvTextureCount; srvTextureBinding++)
         {
-            uint32_t srvResourceOffset = job->computeJobDescriptor.pipeline.srvBufferBindings[currentPipelineSrvIndex].slotIndex;
-            maximumSrvIndex            = srvResourceOffset > maximumSrvIndex ? srvResourceOffset : maximumSrvIndex;
+            uint32_t slotIndex = job->computeJobDescriptor.pipeline.srvTextureBindings[srvTextureBinding].slotIndex +
+                                 job->computeJobDescriptor.pipeline.srvTextureBindings[srvTextureBinding].arrayIndex;
+
+            if (slotIndex > maximumSrvIndex)
+                maximumSrvIndex = slotIndex;
+        }
+
+        for (uint32_t srvBufferBinding = 0; srvBufferBinding < job->computeJobDescriptor.pipeline.srvBufferCount; srvBufferBinding++)
+        {
+            uint32_t slotIndex = job->computeJobDescriptor.pipeline.srvBufferBindings[srvBufferBinding].slotIndex +
+                                 job->computeJobDescriptor.pipeline.srvTextureBindings[srvBufferBinding].arrayIndex;
+
+            if (slotIndex > maximumSrvIndex)
+                maximumSrvIndex = slotIndex;
         }
 
         if (maximumSrvIndex)
         {
             for (uint32_t currentPipelineSrvIndex = 0; currentPipelineSrvIndex < job->computeJobDescriptor.pipeline.srvTextureCount; ++currentPipelineSrvIndex)
             {
-                for (uint32_t bindNum = 0; bindNum < job->computeJobDescriptor.pipeline.srvTextureBindings[currentPipelineSrvIndex].bindCount; ++bindNum)
+                for (uint32_t bindNum = 0; bindNum <= job->computeJobDescriptor.pipeline.srvTextureBindings[currentPipelineSrvIndex].arrayIndex; ++bindNum)
                 {
                     uint32_t currPipelineSrvIndex = currentPipelineSrvIndex + bindNum;
                     if (job->computeJobDescriptor.srvTextures[currPipelineSrvIndex].resource.internalIndex == 0)
