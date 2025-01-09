@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 
 #include <FidelityFX/host/ffx_util.h>
 #include "ffx_fsr1_shaderblobs.h"
@@ -42,16 +42,20 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
     // ------------------------------ ---------- ------- ----------- -------------- ------
     // r_input_color                     texture  float4          2d             t0      1 
     // rw_upscaled_output                    UAV  float4          2d             u1      1 
+    // rw_internal_upscaled_color            UAV  float4          2d             u0      1 
     // cbFSR1                            cbuffer      NA          NA            cb0      1 
     static const char* boundConstantBufferNames[] = { "cbFSR1" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_input_color" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
-    static const char* boundUAVTextureNames[] = { "rw_upscaled_output" };
-    static const uint32_t boundUAVTextures[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
+    static const char* boundUAVTextureNames[2][2] = { { "rw_upscaled_output" }, { "rw_internal_upscaled_color" } };
+    static const uint32_t boundUAVTextures[2][2] = { { 1 }, { 0 } };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][SRGB_CONVERSIONS].data
@@ -68,15 +72,15 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
-        boundUAVTextureNames,
-        boundUAVTextures,
+        boundSRVTextureSpaces,
+        boundUAVTextureNames[APPLY_RCAS],
+        boundUAVTextures[APPLY_RCAS],
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -96,12 +100,15 @@ static FfxShaderBlob fsr1GetRcasPassPermutationBlobByIndex(uint32_t permutationO
     static const char* boundConstantBufferNames[] = { "cbFSR1" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_internal_upscaled_color" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = { "rw_upscaled_output" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr1_rcas_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][SRGB_CONVERSIONS].data
@@ -118,15 +125,15 @@ static FfxShaderBlob fsr1GetRcasPassPermutationBlobByIndex(uint32_t permutationO
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;

@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 
 #include <FidelityFX/host/ffx_util.h>
 #include "ffx_fsr2_shaderblobs.h"
@@ -73,12 +73,15 @@ static FfxShaderBlob fsr2GetTcrAutogenPassPermutationBlobByIndex(uint32_t permut
     static const char* boundConstantBufferNames[] = { "cbFSR2", "cbGenerateReactive"};
     static const uint32_t boundConstantBuffers[] = { 0, 1 };
     static const uint32_t boundConstantBufferCounts[] = { 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0, 0 };
     static const char* boundSRVTextureNames[] = { "r_input_opaque_only", "r_input_color_jittered", "r_input_motion_vectors", "r_reactive_mask", "r_transparency_and_composition_mask", "r_input_prev_color_pre_alpha", "r_input_prev_color_post_alpha" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 4, 5, 46, 47 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_output_autoreactive", "rw_output_autocomposition", "rw_output_prev_color_pre_alpha", "rw_output_prev_color_post_alpha" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr2_tcr_autogen_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -95,15 +98,15 @@ static FfxShaderBlob fsr2GetTcrAutogenPassPermutationBlobByIndex(uint32_t permut
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -137,12 +140,15 @@ static FfxShaderBlob fsr2GetDepthClipPassPermutationBlobByIndex(uint32_t permuta
     static const char* boundConstantBufferNames[] = { "cbFSR2" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_reconstructed_previous_nearest_depth", "r_dilated_motion_vectors", "r_dilatedDepth", "r_reactive_mask", "r_transparency_and_composition_mask", "r_previous_dilated_motion_vectors", "r_input_motion_vectors", "r_input_color_jittered", "r_input_exposure" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5, 6, 7, 9 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_dilated_reactive_masks", "rw_prepared_input_color" };
     static const uint32_t boundUAVTextures[] = { 0, 1 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr2_depth_clip_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -159,15 +165,15 @@ static FfxShaderBlob fsr2GetDepthClipPassPermutationBlobByIndex(uint32_t permuta
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -198,12 +204,15 @@ static FfxShaderBlob fsr2GetReconstructPreviousDepthPassPermutationBlobByIndex(u
     static const char* boundConstantBufferNames[] = { "cbFSR2" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_input_motion_vectors", "r_input_depth", "r_input_color_jittered","r_input_exposure" };
-    static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3  };
+    static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_reconstructed_previous_nearest_depth", "rw_dilated_motion_vectors", "rw_dilatedDepth", "rw_lock_input_luma" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr2_reconstruct_previous_depth_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -220,15 +229,15 @@ static FfxShaderBlob fsr2GetReconstructPreviousDepthPassPermutationBlobByIndex(u
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -254,12 +263,15 @@ static FfxShaderBlob fsr2GetLockPassPermutationBlobByIndex(uint32_t permutationO
     static const char* boundConstantBufferNames[] = { "cbFSR2" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_lock_input_luma" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = { "rw_new_locks", "rw_reconstructed_previous_nearest_depth" };
     static const uint32_t boundUAVTextures[] = { 0, 1 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr2_lock_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -276,15 +288,15 @@ static FfxShaderBlob fsr2GetLockPassPermutationBlobByIndex(uint32_t permutationO
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -320,12 +332,15 @@ static FfxShaderBlob fsr2GetAccumulatePassPermutationBlobByIndex(uint32_t permut
     static const char* boundConstantBufferNames[] = { "cbFSR2" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_input_exposure", "r_dilated_reactive_masks", "r_input_motion_vectors", "r_internal_upscaled_color", "r_lock_status", "r_prepared_input_color", "r_imgMips", "r_luma_history" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5, 8, 10 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_internal_upscaled_color", "rw_lock_status", "rw_upscaled_output", "rw_new_locks", "rw_luma_history" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3, 4 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr2_accumulate_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -342,15 +357,15 @@ static FfxShaderBlob fsr2GetAccumulatePassPermutationBlobByIndex(uint32_t permut
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -377,12 +392,15 @@ static FfxShaderBlob fsr2GetRCASPassPermutationBlobByIndex(uint32_t permutationO
     static const char* boundConstantBufferNames[] = { "cbFSR2", "cbRCAS" };
     static const uint32_t boundConstantBuffers[] = { 0, 1 };
     static const uint32_t boundConstantBufferCounts[] = { 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0, 0 };
     static const char* boundSRVTextureNames[] = { "r_input_exposure", "r_rcas_input" };
     static const uint32_t boundSRVTextures[] = { 0, 1 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_upscaled_output" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr2_rcas_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -399,15 +417,15 @@ static FfxShaderBlob fsr2GetRCASPassPermutationBlobByIndex(uint32_t permutationO
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -436,12 +454,15 @@ static FfxShaderBlob fsr2GetComputeLuminancePyramidPassPermutationBlobByIndex(ui
     static const char* boundConstantBufferNames[] = { "cbFSR2", "cbSPD" };
     static const uint32_t boundConstantBuffers[] = { 0, 1 };
     static const uint32_t boundConstantBufferCounts[] = { 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0, 0 };
     static const char* boundSRVTextureNames[] = { "r_input_color_jittered" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = {  "rw_spd_global_atomic", "rw_img_mip_shading_change", "rw_img_mip_5", "rw_auto_exposure" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr2_compute_luminance_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -458,15 +479,15 @@ static FfxShaderBlob fsr2GetComputeLuminancePyramidPassPermutationBlobByIndex(ui
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -494,12 +515,15 @@ static FfxShaderBlob fsr2GetAutogenReactivePassPermutationBlobByIndex(
     static const char* boundConstantBufferNames[] = { "cbGenerateReactive" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_input_opaque_only", "r_input_color_jittered" };
     static const uint32_t boundSRVTextures[] = { 0, 1 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_output_autoreactive" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_fsr2_autogen_reactive_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -516,15 +540,15 @@ static FfxShaderBlob fsr2GetAutogenReactivePassPermutationBlobByIndex(
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;

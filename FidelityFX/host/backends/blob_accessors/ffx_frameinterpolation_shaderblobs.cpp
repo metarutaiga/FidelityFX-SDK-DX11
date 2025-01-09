@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 
 #define FFX_CPU
 #include <FidelityFX/host/ffx_util.h>
@@ -68,12 +68,15 @@ static FfxShaderBlob FrameInterpolationGetReconstructAndDilatePermutationBlobByI
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_input_motion_vectors", "r_input_depth" };
     static const uint32_t boundSRVTextures[] = { 0, 1 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_reconstructed_depth_previous_frame", "rw_dilated_motion_vectors", "rw_dilated_depth" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -90,15 +93,15 @@ static FfxShaderBlob FrameInterpolationGetReconstructAndDilatePermutationBlobByI
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -123,12 +126,15 @@ static FfxShaderBlob FrameInterpolationGetSetupPermutationBlobByIndex(uint32_t p
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_optical_flow_scd" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = { "rw_game_motion_vector_field_x", "rw_game_motion_vector_field_y", "rw_optical_flow_motion_vector_field_x", "rw_optical_flow_motion_vector_field_y", "rw_disocclusion_mask", "rw_counters" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3, 4, 5 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -145,15 +151,15 @@ static FfxShaderBlob FrameInterpolationGetSetupPermutationBlobByIndex(uint32_t p
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -170,18 +176,23 @@ static FfxShaderBlob FrameInterpolationGetGameMotionVectorFieldPermutationBlobBy
     // r_dilated_motion_vectors           texture  float2          2d             t0      1 
     // r_dilated_depth                    texture   float          2d             t1      1 
     // r_previous_interpolation_source    texture  float4          2d             t2      1 
+    // r_current_interpolation_source     texture  float4          2d             t3      1 
+    // r_input_distortion_field           texture  float2          2d             t4      1 
     // rw_game_motion_vector_field_x          UAV    uint          2d             u0      1 
     // rw_game_motion_vector_field_y          UAV    uint          2d             u1      1 
     // cbFI                               cbuffer      NA          NA            cb0      1 
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_dilated_motion_vectors", "r_dilated_depth", "r_previous_interpolation_source" };
-    static const uint32_t boundSRVTextures[] = { 0, 1, 2 };
-    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
+    static const char* boundSRVTextureNames[] = { "r_dilated_motion_vectors", "r_dilated_depth", "r_previous_interpolation_source", "r_current_interpolation_source", "r_input_distortion_field" };
+    static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_game_motion_vector_field_x", "rw_game_motion_vector_field_y" };
     static const uint32_t boundUAVTextures[] = { 0, 1 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -198,15 +209,15 @@ static FfxShaderBlob FrameInterpolationGetGameMotionVectorFieldPermutationBlobBy
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -229,12 +240,15 @@ static FfxShaderBlob FrameInterpolationGetOpticalFlowVectorFieldPermutationBlobB
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_optical_flow", "r_previous_interpolation_source", "r_current_interpolation_source" };
     static const uint32_t boundSRVTextures[] = { 0, 3, 4 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_optical_flow_motion_vector_field_x", "rw_optical_flow_motion_vector_field_y" };
     static const uint32_t boundUAVTextures[] = { 0, 1 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -251,15 +265,15 @@ static FfxShaderBlob FrameInterpolationGetOpticalFlowVectorFieldPermutationBlobB
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -275,17 +289,21 @@ static FfxShaderBlob FrameInterpolationGetReconstructPrevDepthPermutationBlobByI
     // ----------------------------------------- ---------- ------- ----------- -------------- ------
     // r_dilated_motion_vectors                     texture  float2          2d             t0      1 
     // r_dilated_depth                              texture   float          2d             t1      1 
+    // r_input_distortion_field                     texture  float2          2d             t3      1 
     // rw_reconstructed_depth_interpolated_frame        UAV    uint          2d             u0      1 
     // cbFI                                         cbuffer      NA          NA            cb0      1 
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_dilated_motion_vectors", "r_dilated_depth" };
-    static const uint32_t boundSRVTextures[] = { 0, 1 };
-    static const uint32_t boundSRVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
+    static const char* boundSRVTextureNames[] = { "r_dilated_motion_vectors", "r_dilated_depth", "r_input_distortion_field" };
+    static const uint32_t boundSRVTextures[] = { 0, 1, 3 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 1 };
     static const char* boundUAVTextureNames[] = { "rw_reconstructed_depth_interpolated_frame" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -302,15 +320,15 @@ static FfxShaderBlob FrameInterpolationGetReconstructPrevDepthPermutationBlobByI
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -330,17 +348,21 @@ static FfxShaderBlob FrameInterpolationGetDisocclusionMaskPermutationBlobByIndex
     // r_dilated_depth                             texture   float          2d             t3      1 
     // r_reconstructed_depth_interpolated_frame    texture    uint          2d             t4      1 
     // r_inpainting_pyramid                        texture  float4          2d             t5      1 
+    // r_input_distortion_field                    texture  float2          2d             t6      1 
     // rw_disocclusion_mask                            UAV  float2          2d             u0      1 
     // cbFI                                        cbuffer      NA          NA            cb0      1 
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_game_motion_vector_field_x", "r_game_motion_vector_field_y", "r_reconstructed_depth_previous_frame", "r_dilated_depth", "r_reconstructed_depth_interpolated_frame", "r_inpainting_pyramid" };
-    static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5 };
-    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
+    static const char* boundSRVTextureNames[] = { "r_game_motion_vector_field_x", "r_game_motion_vector_field_y", "r_reconstructed_depth_previous_frame", "r_dilated_depth", "r_reconstructed_depth_interpolated_frame", "r_inpainting_pyramid", "r_input_distortion_field" };
+    static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5, 6 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_disocclusion_mask" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -357,15 +379,15 @@ static FfxShaderBlob FrameInterpolationGetDisocclusionMaskPermutationBlobByIndex
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -398,12 +420,15 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
     static const char* boundConstantBufferNames[] = { "cbFI", "cbInpaintingPyramid" };
     static const uint32_t boundConstantBuffers[] = { 0, 1 };
     static const uint32_t boundConstantBufferCounts[] = { 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0, 0 };
     static const char* boundSRVTextureNames[] = { "r_output" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = { "rw_counters", "rw_inpainting_pyramid0", "rw_inpainting_pyramid1", "rw_inpainting_pyramid2", "rw_inpainting_pyramid3", "rw_inpainting_pyramid4", "rw_inpainting_pyramid5", "rw_inpainting_pyramid6", "rw_inpainting_pyramid7", "rw_inpainting_pyramid8", "rw_inpainting_pyramid9", "rw_inpainting_pyramid10", "rw_inpainting_pyramid11" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-    static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -420,15 +445,15 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -456,12 +481,15 @@ static FfxShaderBlob FrameInterpolationGetFiPassPermutationBlobByIndex(uint32_t 
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_game_motion_vector_field_x", "r_game_motion_vector_field_y", "r_optical_flow_motion_vector_field_x", "r_optical_flow_motion_vector_field_y", "r_previous_interpolation_source", "r_current_interpolation_source", "r_disocclusion_mask", "r_inpainting_pyramid", "r_counters" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_output" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -478,15 +506,15 @@ static FfxShaderBlob FrameInterpolationGetFiPassPermutationBlobByIndex(uint32_t 
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -520,12 +548,15 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
     static const char* boundConstantBufferNames[] = { "cbFI", "cbInpaintingPyramid" };
     static const uint32_t boundConstantBuffers[] = { 0, 1 };
     static const uint32_t boundConstantBufferCounts[] = { 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0, 0 };
     static const char* boundSRVTextureNames[] = { "r_game_motion_vector_field_x", "r_game_motion_vector_field_y" };
     static const uint32_t boundSRVTextures[] = { 0, 1 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_counters", "rw_inpainting_pyramid0", "rw_inpainting_pyramid1", "rw_inpainting_pyramid2", "rw_inpainting_pyramid3", "rw_inpainting_pyramid4", "rw_inpainting_pyramid5", "rw_inpainting_pyramid6", "rw_inpainting_pyramid7", "rw_inpainting_pyramid8", "rw_inpainting_pyramid9", "rw_inpainting_pyramid10", "rw_inpainting_pyramid11" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-    static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -542,15 +573,15 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -573,12 +604,15 @@ static FfxShaderBlob FrameInterpolationGetInpaintingPassPermutationBlobByIndex(u
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_optical_flow_scd", "r_inpainting_pyramid", "r_present_backbuffer", "r_current_interpolation_source" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_output" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_inpainting_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -595,15 +629,15 @@ static FfxShaderBlob FrameInterpolationGetInpaintingPassPermutationBlobByIndex(u
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -625,17 +659,21 @@ static FfxShaderBlob FrameInterpolationGetDebugViewPassPermutationBlobByIndex(ui
     // r_present_backbuffer                    texture  float4          2d             t5      1 
     // r_inpainting_pyramid                    texture  float4          2d             t6      1 
     // r_current_interpolation_source          texture  float4          2d             t7      1 
+    // r_input_distortion_field                texture  float2          2d             t8      1 
     // rw_output                                   UAV  float4          2d             u0      1 
     // cbFI                                    cbuffer      NA          NA            cb0      1 
     static const char* boundConstantBufferNames[] = { "cbFI" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_game_motion_vector_field_x", "r_game_motion_vector_field_y", "r_optical_flow_motion_vector_field_x", "r_optical_flow_motion_vector_field_y", "r_disocclusion_mask", "r_present_backbuffer", "r_inpainting_pyramid", "r_current_interpolation_source" };
-    static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
+    static const char* boundSRVTextureNames[] = { "r_game_motion_vector_field_x", "r_game_motion_vector_field_y", "r_optical_flow_motion_vector_field_x", "r_optical_flow_motion_vector_field_y", "r_disocclusion_mask", "r_present_backbuffer", "r_inpainting_pyramid", "r_current_interpolation_source", "r_input_distortion_field" };
+    static const uint32_t boundSRVTextures[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+    static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_output" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_frameinterpolation_debug_view_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -652,15 +690,15 @@ static FfxShaderBlob FrameInterpolationGetDebugViewPassPermutationBlobByIndex(ui
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -760,5 +798,11 @@ FfxErrorCode frameInterpolationGetPermutationBlobByIndex(FfxFrameInterpolationPa
 
     // return an empty blob
     memset(outBlob, 0, sizeof(FfxShaderBlob));
+    return FFX_OK;
+}
+
+FfxErrorCode frameInterpolationIsWave64(uint32_t permutationOptions, bool& isWave64)
+{
+    isWave64 = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_FORCE_WAVE64);
     return FFX_OK;
 }

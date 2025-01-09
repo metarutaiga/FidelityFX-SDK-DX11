@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 
 #define INITGUID
 
@@ -62,7 +62,7 @@ typedef struct BackendContext_DX11 {
 #endif
         ID3D11Resource*             resourcePtr;
         FfxResourceDescription      resourceDescription;
-        ID3D11ShaderResourceView*   srvPtr;
+        ID3D11ShaderResourceView*   srvPtr[16];
         ID3D11UnorderedAccessView*  uavPtr[16];
     } Resource;
 
@@ -76,11 +76,11 @@ typedef struct BackendContext_DX11 {
     FfxGpuJobDescription*   pGpuJobs;
     uint32_t                gpuJobCount;
 
-    void*                   constantBufferMem[FFX_MAX_NUM_CONST_BUFFERS];
-    ID3D11Buffer*           constantBufferResource[FFX_MAX_NUM_CONST_BUFFERS];
-    uint32_t                constantBufferSize[FFX_MAX_NUM_CONST_BUFFERS];
-    uint32_t                constantBufferOffset[FFX_MAX_NUM_CONST_BUFFERS];
-    std::mutex              constantBufferMutex;
+    ID3D11ShaderResourceView* srvs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT];
+    ID3D11UnorderedAccessView* uavs[D3D11_1_UAV_SLOT_COUNT];
+
+    uint8_t*                pStagingRingBuffer;
+    uint32_t                stagingRingBufferBase;
 
     typedef struct alignas(32) EffectContext {
 
@@ -100,15 +100,22 @@ typedef struct BackendContext_DX11 {
     Resource*               pResources;
     EffectContext*          pEffectContexts;
 
+    void*                   constantBufferMem[FFX_MAX_NUM_CONST_BUFFERS];
+    ID3D11Buffer*           constantBufferResource[FFX_MAX_NUM_CONST_BUFFERS];
+    uint32_t                constantBufferSize[FFX_MAX_NUM_CONST_BUFFERS];
+    uint32_t                constantBufferOffset[FFX_MAX_NUM_CONST_BUFFERS];
+    std::mutex              constantBufferMutex;
+
 } BackendContext_DX11;
 
 FFX_API size_t ffxGetScratchMemorySizeDX11(size_t maxContexts)
 {
-    uint32_t resourceArraySize   = FFX_ALIGN_UP(maxContexts * FFX_MAX_RESOURCE_COUNT * sizeof(BackendContext_DX11::Resource), sizeof(uint64_t));
-    uint32_t contextArraySize    = FFX_ALIGN_UP(maxContexts * sizeof(BackendContext_DX11::EffectContext), sizeof(uint32_t));
-    uint32_t gpuJobDescArraySize = FFX_ALIGN_UP(maxContexts * FFX_MAX_GPU_JOBS * sizeof(FfxGpuJobDescription), sizeof(uint32_t));
+    uint32_t resourceArraySize          = FFX_ALIGN_UP(maxContexts * FFX_MAX_RESOURCE_COUNT * sizeof(BackendContext_DX11::Resource), sizeof(uint64_t));
+    uint32_t contextArraySize           = FFX_ALIGN_UP(maxContexts * sizeof(BackendContext_DX11::EffectContext), sizeof(uint32_t));
+    uint32_t stagingRingBufferArraySize = FFX_ALIGN_UP(maxContexts * FFX_CONSTANT_BUFFER_RING_BUFFER_SIZE, sizeof(uint32_t));
+    uint32_t gpuJobDescArraySize        = FFX_ALIGN_UP(maxContexts * FFX_MAX_GPU_JOBS * sizeof(FfxGpuJobDescription), sizeof(uint32_t));
 
-    return FFX_ALIGN_UP(sizeof(BackendContext_DX11) + resourceArraySize + contextArraySize + gpuJobDescArraySize, sizeof(uint64_t));
+    return FFX_ALIGN_UP(sizeof(BackendContext_DX11) + resourceArraySize + contextArraySize + stagingRingBufferArraySize + gpuJobDescArraySize, sizeof(uint64_t));
 }
 
 // Create a FfxDevice from a ID3D11Device*
@@ -722,7 +729,9 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect 
         // Map all of our pointers
         uint32_t gpuJobDescArraySize = FFX_ALIGN_UP(backendContext->maxEffectContexts * FFX_MAX_GPU_JOBS * sizeof(FfxGpuJobDescription), sizeof(uint32_t));
         uint32_t resourceArraySize = FFX_ALIGN_UP(backendContext->maxEffectContexts * FFX_MAX_RESOURCE_COUNT * sizeof(BackendContext_DX11::Resource), sizeof(uint64_t));
+        uint32_t stagingRingBufferArraySize = FFX_ALIGN_UP(backendContext->maxEffectContexts * FFX_CONSTANT_BUFFER_RING_BUFFER_SIZE, sizeof(uint32_t));
         uint32_t contextArraySize = FFX_ALIGN_UP(backendContext->maxEffectContexts * sizeof(BackendContext_DX11::EffectContext), sizeof(uint32_t));
+
         uint8_t* pMem = (uint8_t*)((BackendContext_DX11*)(backendContext + 1));
 
         // Map gpu job array
@@ -734,6 +743,11 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect 
         backendContext->pResources = (BackendContext_DX11::Resource*)(pMem);
         memset(backendContext->pResources, 0, resourceArraySize);
         pMem += resourceArraySize;
+
+        // Map the staging buffer
+        backendContext->pStagingRingBuffer = (uint8_t*)(pMem);
+        memset(backendContext->pStagingRingBuffer, 0, stagingRingBufferArraySize);
+        pMem += stagingRingBufferArraySize;
 
         // Map the effect contexts
         backendContext->pEffectContexts = reinterpret_cast<BackendContext_DX11::EffectContext*>(pMem);
@@ -932,6 +946,10 @@ FfxErrorCode CreateResourceDX11(
         dx11BufferDescription.ByteWidth = createResourceDescription->resourceDescription.width;
         dx11BufferDescription.Usage = D3D11_USAGE_DEFAULT;
         dx11BufferDescription.BindFlags = ffxGetDX11BindFlags(backendResource->resourceDescription.usage);
+        if (createResourceDescription->resourceDescription.format == FFX_SURFACE_FORMAT_UNKNOWN) {
+            dx11BufferDescription.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+            dx11BufferDescription.StructureByteStride = createResourceDescription->resourceDescription.stride;
+        }
         break;
 
     case FFX_RESOURCE_TYPE_TEXTURE1D:
@@ -973,6 +991,9 @@ FfxErrorCode CreateResourceDX11(
     ID3D11Resource* dx11Resource = nullptr;
     if (createResourceDescription->heapType == FFX_HEAP_TYPE_UPLOAD) {
 
+#ifdef _DEBUG
+        wcscpy_s(backendResource->resourceName, createResourceDescription->name);
+#endif
         return FFX_OK;
 
     }
@@ -980,11 +1001,11 @@ FfxErrorCode CreateResourceDX11(
 
         D3D11_SUBRESOURCE_DATA dx11SubResourceData = {};
         D3D11_SUBRESOURCE_DATA* pSubResourceData = nullptr;
-        if (createResourceDescription->initData.type != FFX_RESOURCE_INIT_DATA_TYPE_UNINITIALIZED) {
+        if (createResourceDescription->initData.buffer) {
             pSubResourceData = &dx11SubResourceData;
             pSubResourceData->pSysMem = createResourceDescription->initData.buffer;
-            pSubResourceData->SysMemPitch = createResourceDescription->initData.size;
-            pSubResourceData->SysMemSlicePitch = createResourceDescription->initData.size;
+            pSubResourceData->SysMemPitch = static_cast<UINT>(createResourceDescription->initData.size);
+            pSubResourceData->SysMemSlicePitch = static_cast<UINT>(createResourceDescription->initData.size);
         }
 
         switch (createResourceDescription->resourceDescription.type) {
@@ -1127,6 +1148,11 @@ FfxErrorCode CreateResourceDX11(
 
             if (resourceDimension == D3D11_RESOURCE_DIMENSION_BUFFER) {
 
+                dx11SrvDescription.Buffer.FirstElement = 0;
+                dx11SrvDescription.Buffer.NumElements = backendResource->resourceDescription.size / backendResource->resourceDescription.stride;
+
+                TIF(dx11Device->CreateShaderResourceView(dx11Resource, &dx11SrvDescription, &backendResource->srvPtr[0]));
+
                 // UAV
                 if (dx11BufferDescription.BindFlags & D3D11_BIND_UNORDERED_ACCESS) {
 
@@ -1135,17 +1161,11 @@ FfxErrorCode CreateResourceDX11(
 
                     TIF(dx11Device->CreateUnorderedAccessView(dx11Resource, &dx11UavDescription, &backendResource->uavPtr[0]));
                 }
-                else
-                {
-                    dx11SrvDescription.Buffer.FirstElement = 0;
-                    dx11SrvDescription.Buffer.NumElements = backendResource->resourceDescription.size / backendResource->resourceDescription.stride;
-
-                    TIF(dx11Device->CreateShaderResourceView(dx11Resource, &dx11SrvDescription, &backendResource->srvPtr));
-                }
             }
             else {
+
                 // CPU readable
-                TIF(dx11Device->CreateShaderResourceView(dx11Resource, &dx11SrvDescription, &backendResource->srvPtr));
+                TIF(dx11Device->CreateShaderResourceView(dx11Resource, &dx11SrvDescription, &backendResource->srvPtr[0]));
 
                 // UAV
                 if (dx11Texture1DDescription.BindFlags & D3D11_BIND_UNORDERED_ACCESS ||
@@ -1185,11 +1205,11 @@ FfxErrorCode DestroyResourceDX11(
     BackendContext_DX11::EffectContext& effectContext = backendContext->pEffectContexts[effectContextId];
     if ((resource.internalIndex >= int32_t(effectContextId * FFX_MAX_RESOURCE_COUNT)) && (resource.internalIndex < int32_t(effectContextId * FFX_MAX_RESOURCE_COUNT + FFX_MAX_RESOURCE_COUNT))) {
 
-        if (backendContext->pResources[resource.internalIndex].srvPtr) {
-            backendContext->pResources[resource.internalIndex].srvPtr->Release();
-            backendContext->pResources[resource.internalIndex].srvPtr = nullptr;
-        }
         for (int32_t currentMipIndex = 0; currentMipIndex < 16; ++currentMipIndex) {
+            if (backendContext->pResources[resource.internalIndex].srvPtr[currentMipIndex]) {
+                backendContext->pResources[resource.internalIndex].srvPtr[currentMipIndex]->Release();
+                backendContext->pResources[resource.internalIndex].srvPtr[currentMipIndex] = nullptr;
+            }
             if (backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex]) {
                 backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex]->Release();
                 backendContext->pResources[resource.internalIndex].uavPtr[currentMipIndex] = nullptr;
@@ -1398,18 +1418,16 @@ FfxErrorCode RegisterResourceDX11(
 
                 TIF(dx11Device->CreateUnorderedAccessView(dx11Resource, &dx11UavDescription, &backendResource->uavPtr[0]));
             }
-            else
-            {
-                dx11SrvDescription.Buffer.FirstElement        = 0;
-                dx11SrvDescription.Buffer.NumElements         = backendResource->resourceDescription.size / backendResource->resourceDescription.stride;
 
-                TIF(dx11Device->CreateShaderResourceView(dx11Resource, &dx11SrvDescription, &backendResource->srvPtr));
-            }
+            dx11SrvDescription.Buffer.FirstElement = 0;
+            dx11SrvDescription.Buffer.NumElements = backendResource->resourceDescription.size / backendResource->resourceDescription.stride;
+
+            TIF(dx11Device->CreateShaderResourceView(dx11Resource, &dx11SrvDescription, &backendResource->srvPtr[0]));
         }
         else {
 
             // CPU readable
-            TIF(dx11Device->CreateShaderResourceView(dx11Resource, &dx11SrvDescription, &backendResource->srvPtr));
+            TIF(dx11Device->CreateShaderResourceView(dx11Resource, &dx11SrvDescription, &backendResource->srvPtr[0]));
 
             // UAV
             if (dx11Texture1DDesc.BindFlags & D3D11_BIND_UNORDERED_ACCESS ||
@@ -1505,7 +1523,24 @@ FfxErrorCode StageConstantBufferDataDX11(FfxInterface* backendInterface, void* d
     FFX_ASSERT(NULL != backendInterface);
     BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
 
-    return FFX_OK;
+    if (data && constantBuffer)
+    {
+        if ((backendContext->stagingRingBufferBase + FFX_ALIGN_UP(size, 256)) >= FFX_CONSTANT_BUFFER_RING_BUFFER_SIZE)
+            backendContext->stagingRingBufferBase = 0;
+
+        uint32_t* dstPtr = (uint32_t*)(backendContext->pStagingRingBuffer + backendContext->stagingRingBufferBase);
+
+        memcpy(dstPtr, data, size);
+
+        constantBuffer->data            = dstPtr;
+        constantBuffer->num32BitEntries = size / sizeof(uint32_t);
+
+        backendContext->stagingRingBufferBase += FFX_ALIGN_UP(size, 256);
+
+        return FFX_OK;
+    }
+    else
+        return FFX_ERROR_INVALID_POINTER;
 }
 
 D3D11_TEXTURE_ADDRESS_MODE FfxGetAddressModeDX11(const FfxAddressMode& addressMode)
@@ -1543,11 +1578,6 @@ FfxErrorCode CreatePipelineDX11(
 
     BackendContext_DX11* backendContext = (BackendContext_DX11*)backendInterface->scratchBuffer;
     ID3D11Device* dx11Device = backendContext->device;
-
-    if (pipelineDescription->stage == FfxBindStage(FFX_BIND_VERTEX_SHADER_STAGE | FFX_BIND_PIXEL_SHADER_STAGE))
-    {
-        return FFX_ERROR_BACKEND_API_ERROR;
-    }
 
     FfxShaderBlob shaderBlob = { };
     ffxGetPermutationBlobByIndex(effect, pass, FFX_BIND_COMPUTE_SHADER_STAGE, permutationOptions, &shaderBlob);
@@ -1785,19 +1815,6 @@ FfxErrorCode ScheduleGpuJobDX11(
     FFX_ASSERT(backendContext->gpuJobCount < FFX_MAX_GPU_JOBS);
 
     backendContext->pGpuJobs[backendContext->gpuJobCount] = *job;
-
-    if (job->jobType == FFX_GPU_JOB_COMPUTE) {
-
-        // needs to copy SRVs and UAVs in case they are on the stack only
-        FfxComputeJobDescription* computeJob = &backendContext->pGpuJobs[backendContext->gpuJobCount].computeJobDescriptor;
-        const uint32_t numConstBuffers = job->computeJobDescriptor.pipeline.constCount;
-        for (uint32_t currentRootConstantIndex = 0; currentRootConstantIndex< numConstBuffers; ++currentRootConstantIndex)
-        {
-            computeJob->cbs[currentRootConstantIndex].num32BitEntries = job->computeJobDescriptor.cbs[currentRootConstantIndex].num32BitEntries;
-            memcpy(computeJob->cbs[currentRootConstantIndex].data, job->computeJobDescriptor.cbs[currentRootConstantIndex].data, computeJob->cbs[currentRootConstantIndex].num32BitEntries*sizeof(uint32_t));
-        }
-    }
-
     backendContext->gpuJobCount++;
 
     return FFX_OK;
@@ -1805,6 +1822,11 @@ FfxErrorCode ScheduleGpuJobDX11(
 
 static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
 {
+    ID3D11UnorderedAccessView** uavs = backendContext->uavs;
+    ID3D11ShaderResourceView** srvs = backendContext->srvs;
+    memset(uavs, 0, sizeof(backendContext->uavs));
+    memset(srvs, 0, sizeof(backendContext->srvs));
+
     // bind texture & buffer UAVs (note the binding order here MUST match the root signature mapping order from CreatePipeline!)
     uint32_t minimumUav = UINT32_MAX;
     uint32_t maximumUav = 0;
@@ -1833,23 +1855,22 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
         if (maximumUavIndex)
         {
             // Set Texture UAVs
-            for (uint32_t currentPipelineUavIndex = 0, currentUAVResource = 0; currentPipelineUavIndex < job->computeJobDescriptor.pipeline.uavTextureCount; ++currentPipelineUavIndex) {
+            for (uint32_t currentPipelineUavIndex = 0; currentPipelineUavIndex < job->computeJobDescriptor.pipeline.uavTextureCount; ++currentPipelineUavIndex) {
 
-                for (uint32_t uavEntry = 0; uavEntry <= job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].arrayIndex; ++uavEntry, ++currentUAVResource)
-                {
-                    // source: UAV of resource to bind
-                    const uint32_t resourceIndex = job->computeJobDescriptor.uavTextures[currentUAVResource].resource.internalIndex;
-                    const uint32_t uavIndex = job->computeJobDescriptor.uavTextures[currentUAVResource].mip;
-                    ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[uavIndex];
+                const FfxResourceBinding binding = job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex];
 
-                    // where to bind it
-                    const uint32_t currentUavResourceIndex = job->computeJobDescriptor.pipeline.uavTextureBindings[currentPipelineUavIndex].slotIndex + uavEntry;
+                // source: UAV of resource to bind
+                const uint32_t resourceIndex = job->computeJobDescriptor.uavTextures[currentPipelineUavIndex].resource.internalIndex;
+                const uint32_t uavIndex = job->computeJobDescriptor.uavTextures[currentPipelineUavIndex].mip;
+                ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[uavIndex];
 
-                    dx11DeviceContext->CSSetUnorderedAccessViews(currentUavResourceIndex, 1, &uavPtr, nullptr);
+                // where to bind it
+                const uint32_t currentUavResourceIndex = binding.slotIndex + binding.arrayIndex;
 
-                    minimumUav = minimumUav < currentUavResourceIndex ? minimumUav : currentUavResourceIndex;
-                    maximumUav = maximumUav > currentUavResourceIndex ? maximumUav : currentUavResourceIndex;
-                }
+                uavs[currentUavResourceIndex] = uavPtr;
+
+                minimumUav = minimumUav < currentUavResourceIndex ? minimumUav : currentUavResourceIndex;
+                maximumUav = maximumUav > currentUavResourceIndex ? maximumUav : currentUavResourceIndex;
             }
 
             // Set Buffer UAVs
@@ -1859,17 +1880,52 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
                 if (job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].resource.internalIndex == 0)
                     continue;
 
-                // source: UAV of buffer to bind
-                const uint32_t resourceIndex = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].resource.internalIndex;
-                ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[0];
+                const FfxResourceBinding binding = job->computeJobDescriptor.pipeline.uavBufferBindings[currentPipelineUavIndex];
 
                 // where to bind it
-                const uint32_t currentUavResourceIndex = job->computeJobDescriptor.pipeline.uavBufferBindings[currentPipelineUavIndex].slotIndex;
+                const uint32_t currentUavResourceIndex = binding.slotIndex + binding.arrayIndex;
 
-                dx11DeviceContext->CSSetUnorderedAccessViews(currentUavResourceIndex, 1, &uavPtr, nullptr);
+                if (job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].size > 0)
+                {
+                    bool     isStructured = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].stride > 0;
+                    uint32_t stride       = isStructured ? job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].stride : sizeof(uint32_t);
 
-                minimumUav = minimumUav < currentUavResourceIndex ? minimumUav : currentUavResourceIndex;
-                maximumUav = maximumUav > currentUavResourceIndex ? maximumUav : currentUavResourceIndex;
+                    // source: UAV of buffer to bind
+                    const uint32_t resourceIndex = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].resource.internalIndex;
+                    const uint32_t uavIndex = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].offset / stride;
+                    ID3D11UnorderedAccessView* uavPtr = backendContext->pResources[resourceIndex].uavPtr[uavIndex];
+
+                    if (uavPtr == nullptr)
+                    {
+                        // if size is non-zero create a dynamic descriptor directly on the GPU heap
+                        ID3D11Resource* buffer = getDX11ResourcePtr(backendContext, job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].resource.internalIndex);
+                        FFX_ASSERT(buffer != NULL);
+
+                        D3D11_UNORDERED_ACCESS_VIEW_DESC dx11UavDescription = {};
+
+                        bool     isStructured = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].stride > 0;
+                        uint32_t stride       = isStructured ? job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].stride : sizeof(uint32_t);
+
+                        dx11UavDescription.Format                      = isStructured ? DXGI_FORMAT_UNKNOWN : DXGI_FORMAT_R32_TYPELESS;
+                        dx11UavDescription.ViewDimension               = D3D11_UAV_DIMENSION_BUFFER;
+                        dx11UavDescription.Buffer.FirstElement         = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].offset / stride;
+                        dx11UavDescription.Buffer.NumElements          = job->computeJobDescriptor.uavBuffers[currentPipelineUavIndex].size / stride;
+                        dx11UavDescription.Buffer.Flags                = isStructured ? 0 : D3D11_BUFFER_UAV_FLAG_RAW;
+
+                        TIF(dx11Device->CreateUnorderedAccessView(buffer, &dx11UavDescription, &uavPtr));
+
+                        backendContext->pResources[resourceIndex].uavPtr[uavIndex] = uavPtr;
+                    }
+
+                    uavs[currentUavResourceIndex] = uavPtr;
+
+                    minimumUav = minimumUav < currentUavResourceIndex ? minimumUav : currentUavResourceIndex;
+                    maximumUav = maximumUav > currentUavResourceIndex ? maximumUav : currentUavResourceIndex;
+                }
+                else
+                {
+
+                }
             }
         }
     }
@@ -1903,48 +1959,77 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
         {
             for (uint32_t currentPipelineSrvIndex = 0; currentPipelineSrvIndex < job->computeJobDescriptor.pipeline.srvTextureCount; ++currentPipelineSrvIndex)
             {
-                for (uint32_t bindNum = 0; bindNum <= job->computeJobDescriptor.pipeline.srvTextureBindings[currentPipelineSrvIndex].arrayIndex; ++bindNum)
-                {
-                    uint32_t currPipelineSrvIndex = currentPipelineSrvIndex + bindNum;
-                    if (job->computeJobDescriptor.srvTextures[currPipelineSrvIndex].resource.internalIndex == 0)
-                        break;
+                if (job->computeJobDescriptor.srvTextures[currentPipelineSrvIndex].resource.internalIndex == 0)
+                    break;
 
-                    // source: SRV of resource to bind
-                    const uint32_t resourceIndex = job->computeJobDescriptor.srvTextures[currPipelineSrvIndex].resource.internalIndex;
-                    ID3D11ShaderResourceView* srvPtr = backendContext->pResources[resourceIndex].srvPtr;
+                const FfxResourceBinding binding = job->computeJobDescriptor.pipeline.srvTextureBindings[currentPipelineSrvIndex];
 
-                    // Where to bind it
-                    uint32_t currentSrvResourceIndex;
-                    if (bindNum >= 1)
-                    {
-                        currentSrvResourceIndex = job->computeJobDescriptor.pipeline.srvTextureBindings[currentPipelineSrvIndex].slotIndex + bindNum;
-                    }
-                    else
-                    {
-                        currentSrvResourceIndex = job->computeJobDescriptor.pipeline.srvTextureBindings[currPipelineSrvIndex].slotIndex;
-                    }
+                // source: SRV of resource to bind
+                const uint32_t resourceIndex = job->computeJobDescriptor.srvTextures[currentPipelineSrvIndex].resource.internalIndex;
+                ID3D11ShaderResourceView* srvPtr = backendContext->pResources[resourceIndex].srvPtr[0];
 
-                    dx11DeviceContext->CSSetShaderResources(currentSrvResourceIndex, 1, &srvPtr);
+                // Where to bind it
+                uint32_t currentSrvResourceIndex = binding.slotIndex + binding.arrayIndex;
 
-                    minimumSrv = minimumSrv < currentSrvResourceIndex ? minimumSrv : currentSrvResourceIndex;
-                    maximumSrv = maximumSrv > currentSrvResourceIndex ? maximumSrv : currentSrvResourceIndex;
-                }
+                srvs[currentSrvResourceIndex] = srvPtr;
+
+                minimumSrv = minimumSrv < currentSrvResourceIndex ? minimumSrv : currentSrvResourceIndex;
+                maximumSrv = maximumSrv > currentSrvResourceIndex ? maximumSrv : currentSrvResourceIndex;
             }
 
             // Set Buffer SRVs
             for (uint32_t currentPipelineSrvIndex = 0; currentPipelineSrvIndex < job->computeJobDescriptor.pipeline.srvBufferCount; ++currentPipelineSrvIndex)
             {
-                // source: SRV of buffer to bind
-                const uint32_t resourceIndex = job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].resource.internalIndex;
-                ID3D11ShaderResourceView* srvPtr = backendContext->pResources[resourceIndex].srvPtr;
+                // continue if this is a null resource.
+                if (job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].resource.internalIndex == 0)
+                    continue;
+
+                const FfxResourceBinding binding = job->computeJobDescriptor.pipeline.srvBufferBindings[currentPipelineSrvIndex];
 
                 // where to bind it
-                const uint32_t currentSrvResourceIndex = job->computeJobDescriptor.pipeline.srvBufferBindings[currentPipelineSrvIndex].slotIndex;
+                const uint32_t currentSrvResourceIndex = binding.slotIndex + binding.arrayIndex;
 
-                dx11DeviceContext->CSSetShaderResources(currentSrvResourceIndex, 1, &srvPtr);
+                if (job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].size > 0)
+                {
+                    bool     isStructured = job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].stride > 0;
+                    uint32_t stride       = isStructured ? job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].stride : sizeof(uint32_t);
 
-                minimumSrv = minimumSrv < currentSrvResourceIndex ? minimumSrv : currentSrvResourceIndex;
-                maximumSrv = maximumSrv > currentSrvResourceIndex ? maximumSrv : currentSrvResourceIndex;
+                    // source: SRV of buffer to bind
+                    const uint32_t resourceIndex = job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].resource.internalIndex;
+                    const uint32_t srvIndex = job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].offset / stride;
+                    ID3D11ShaderResourceView* srvPtr = backendContext->pResources[resourceIndex].srvPtr[srvIndex];
+
+                    if (srvPtr == nullptr)
+                    {
+                        // if size is non-zero create a dynamic descriptor directly on the GPU heap
+                        ID3D11Resource* buffer = getDX11ResourcePtr(backendContext, job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].resource.internalIndex);
+                        FFX_ASSERT(buffer != NULL);
+
+                        D3D11_SHADER_RESOURCE_VIEW_DESC dx11SrvDescription = {};
+
+                        bool     isStructured = job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].stride > 0;
+                        uint32_t stride       = isStructured ? job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].stride : sizeof(uint32_t);
+
+                        dx11SrvDescription.Format                     = isStructured ? DXGI_FORMAT_UNKNOWN : DXGI_FORMAT_R32_TYPELESS;
+                        dx11SrvDescription.ViewDimension              = D3D11_SRV_DIMENSION_BUFFEREX;
+                        dx11SrvDescription.BufferEx.FirstElement      = job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].offset / stride;
+                        dx11SrvDescription.BufferEx.NumElements       = job->computeJobDescriptor.srvBuffers[currentPipelineSrvIndex].size / stride;
+                        dx11SrvDescription.BufferEx.Flags             = isStructured ? 0 : D3D11_BUFFEREX_SRV_FLAG_RAW;
+
+                        TIF(dx11Device->CreateShaderResourceView(buffer, &dx11SrvDescription, &srvPtr));
+
+                        backendContext->pResources[resourceIndex].srvPtr[srvIndex] = srvPtr;
+                    }
+
+                    srvs[currentSrvResourceIndex] = srvPtr;
+
+                    minimumSrv = minimumSrv < currentSrvResourceIndex ? minimumSrv : currentSrvResourceIndex;
+                    maximumSrv = maximumSrv > currentSrvResourceIndex ? maximumSrv : currentSrvResourceIndex;
+                }
+                else
+                {
+
+                }
             }
         }
     }
@@ -2012,11 +2097,25 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
         }
     }
 
+    // bind UAVs
+    if (minimumUav <= maximumUav) {
+
+        uint32_t count = maximumUav - minimumUav + 1;
+        dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, count, uavs, nullptr);
+    }
+
+    // bind SRVs
+    if (minimumSrv <= maximumSrv) {
+
+        uint32_t count = maximumSrv - minimumSrv + 1;
+        dx11DeviceContext->CSSetShaderResources(minimumSrv, count, srvs);
+    }
+
     // dispatch
     dx11DeviceContext->Dispatch(job->computeJobDescriptor.dimensions[0], job->computeJobDescriptor.dimensions[1], job->computeJobDescriptor.dimensions[2]);
 
     // unbind UAVs
-    static ID3D11UnorderedAccessView* const emptyUAVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
+    static ID3D11UnorderedAccessView* const emptyUAVs[D3D11_1_UAV_SLOT_COUNT] = {};
     if (minimumUav <= maximumUav) {
 
         uint32_t count = maximumUav - minimumUav + 1;
@@ -2059,6 +2158,18 @@ static FfxErrorCode executeGpuJobClearFloat(BackendContext_DX11* backendContext,
     return FFX_OK;
 }
 
+static FfxErrorCode executeGpuJobDiscard(BackendContext_DX11* backendContext, FfxGpuJobDescription* job, ID3D11Device* dx11Device, ID3D11DeviceContext* dx11DeviceContext)
+{
+    uint32_t                            idx = job->discardJobDescriptor.target.internalIndex;
+    BackendContext_DX11::Resource       ffxResource = backendContext->pResources[idx];
+    ID3D11Resource* dx11Resource = reinterpret_cast<ID3D11Resource*>(ffxResource.resourcePtr);
+
+    if (backendContext->deviceContext1)
+        backendContext->deviceContext1->DiscardResource(dx11Resource);
+
+    return FFX_OK;
+}
+
 FfxErrorCode ExecuteGpuJobsDX11(
     FfxInterface* backendInterface,
     FfxCommandList commandList,
@@ -2089,6 +2200,13 @@ FfxErrorCode ExecuteGpuJobsDX11(
 
             case FFX_GPU_JOB_COMPUTE:
                 errorCode = executeGpuJobCompute(backendContext, GpuJob, dx11Device, dx11DeviceContext);
+                break;
+
+            case FFX_GPU_JOB_BARRIER:
+                break;
+
+            case FFX_GPU_JOB_DISCARD:
+                errorCode = executeGpuJobDiscard(backendContext, GpuJob, dx11Device, dx11DeviceContext);
                 break;
 
             default:

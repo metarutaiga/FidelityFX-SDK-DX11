@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 
 #include <FidelityFX/host/ffx_util.h>
 #include "ffx_spd_shaderblobs.h"
@@ -65,9 +65,11 @@ static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permuta
     static const char* boundConstantBufferNames[] = { "cbSPD" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = { "rw_internal_global_atomic", "rw_input_downsample_src_mid_mip", "rw_input_downsample_src_mips" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 13 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_spd_downsample_pass_16bit_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].data
@@ -84,15 +86,15 @@ static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permuta
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         nullptr,
         nullptr,
         nullptr,
-        0,
+        nullptr,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;

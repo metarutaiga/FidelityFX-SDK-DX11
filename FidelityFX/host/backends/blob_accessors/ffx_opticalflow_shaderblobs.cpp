@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 
 #include <FidelityFX/host/ffx_util.h>
 #include "ffx_opticalflow_shaderblobs.h"
@@ -65,6 +65,7 @@ static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByI
     static const char* boundUAVTextureNames[] = { "rw_optical_flow_input", "rw_optical_flow_input_level_1", "rw_optical_flow_input_level_2", "rw_optical_flow_input_level_3", "rw_optical_flow_input_level_4", "rw_optical_flow_input_level_5", "rw_optical_flow_input_level_6" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3, 4, 5, 6 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].data
@@ -81,15 +82,15 @@ static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByI
         nullptr,
         nullptr,
         nullptr,
-        0,
         nullptr,
         nullptr,
         nullptr,
-        0,
+        nullptr,
+        nullptr,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -110,6 +111,7 @@ static FfxShaderBlob opticalflowGetComputeScdDivergencePassPermutationBlobByInde
     static const char* boundUAVTextureNames[] = { "rw_optical_flow_scd_histogram", "rw_optical_flow_scd_previous_histogram", "rw_optical_flow_scd_temp", "rw_optical_flow_scd_output" };
     static const uint32_t boundUAVTextures[] = { 0, 1, 2, 3 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1, 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_opticalflow_compute_scd_divergence_pass_16bit_permutations[HDR_COLOR_INPUT].data
@@ -126,15 +128,15 @@ static FfxShaderBlob opticalflowGetComputeScdDivergencePassPermutationBlobByInde
         nullptr,
         nullptr,
         nullptr,
-        0,
         nullptr,
         nullptr,
         nullptr,
-        0,
+        nullptr,
+        nullptr,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -154,12 +156,15 @@ static FfxShaderBlob opticalflowGetGenerateScdHistogramPassPermutationBlobByInde
     static const char* boundConstantBufferNames[] = { "cbOF" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_optical_flow_input" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = { "rw_optical_flow_scd_histogram" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_opticalflow_generate_scd_histogram_pass_16bit_permutations[HDR_COLOR_INPUT].data
@@ -176,15 +181,15 @@ static FfxShaderBlob opticalflowGetGenerateScdHistogramPassPermutationBlobByInde
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -204,12 +209,15 @@ static FfxShaderBlob opticalflowGetPrepareLumaPassPermutationBlobByIndex(uint32_
     static const char* boundConstantBufferNames[] = { "cbOF" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_input_color" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = { "rw_optical_flow_input" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_opticalflow_prepare_luma_pass_16bit_permutations[HDR_COLOR_INPUT].data
@@ -226,15 +234,15 @@ static FfxShaderBlob opticalflowGetPrepareLumaPassPermutationBlobByIndex(uint32_
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -256,12 +264,15 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
     static const char* boundConstantBufferNames[] = { "cbOF" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_optical_flow_input", "r_optical_flow_previous_input" };
     static const uint32_t boundSRVTextures[] = { 0, 1 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_optical_flow", "rw_optical_flow_scd_output" };
     static const uint32_t boundUAVTextures[] = { 0, 1 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
@@ -278,15 +289,15 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -305,9 +316,11 @@ static FfxShaderBlob opticalflowGetFilterOpticalFlowPassV5PermutationBlobByIndex
     static const char* boundSRVTextureNames[] = { "r_optical_flow_previous" };
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0 };
     static const char* boundUAVTextureNames[] = { "rw_optical_flow" };
     static const uint32_t boundUAVTextures[] = { 0 };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_opticalflow_filter_optical_flow_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
@@ -324,15 +337,15 @@ static FfxShaderBlob opticalflowGetFilterOpticalFlowPassV5PermutationBlobByIndex
         nullptr,
         nullptr,
         nullptr,
-        0,
+        nullptr,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -355,12 +368,15 @@ static FfxShaderBlob opticalflowGetScaleOpticalFlowAdvancedPassV5PermutationBlob
     static const char* boundConstantBufferNames[] = { "cbOF" };
     static const uint32_t boundConstantBuffers[] = { 0 };
     static const uint32_t boundConstantBufferCounts[] = { 1 };
+    static const uint32_t boundConstantBufferSpaces[] = { 0 };
     static const char* boundSRVTextureNames[] = { "r_optical_flow_input", "r_optical_flow_previous_input", "r_optical_flow" };
     static const uint32_t boundSRVTextures[] = { 0, 1, 2 };
     static const uint32_t boundSRVTextureCounts[] = { 1, 1, 1 };
+    static const uint32_t boundSRVTextureSpaces[] = { 0, 0, 0 };
     static const char* boundUAVTextureNames[] = { "rw_optical_flow_next_level", "rw_optical_flow_scd_output" };
     static const uint32_t boundUAVTextures[] = { 0, 1 };
     static const uint32_t boundUAVTextureCounts[] = { 1, 1 };
+    static const uint32_t boundUAVTextureSpaces[] = { 0, 0 };
 
     FfxShaderBlob blob = {
         is16bit ? g_ffx_opticalflow_scale_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
@@ -377,15 +393,15 @@ static FfxShaderBlob opticalflowGetScaleOpticalFlowAdvancedPassV5PermutationBlob
         boundConstantBufferNames,
         boundConstantBuffers,
         boundConstantBufferCounts,
-        0,
+        boundConstantBufferSpaces,
         boundSRVTextureNames,
         boundSRVTextures,
         boundSRVTextureCounts,
-        0,
+        boundSRVTextureSpaces,
         boundUAVTextureNames,
         boundUAVTextures,
         boundUAVTextureCounts,
-        0,
+        boundUAVTextureSpaces,
     };
 
     return blob;
@@ -457,5 +473,11 @@ FfxErrorCode opticalflowGetPermutationBlobByIndex(
 
     // return an empty blob
     memset(outBlob, 0, sizeof(FfxShaderBlob));
+    return FFX_OK;
+}
+
+FfxErrorCode opticalflowIsWave64(uint32_t permutationOptions, bool& isWave64)
+{
+    isWave64 = FFX_CONTAINS_FLAG(permutationOptions, OPTICALFLOW_SHADER_PERMUTATION_FORCE_WAVE64);
     return FFX_OK;
 }
