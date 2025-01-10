@@ -52,8 +52,8 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
     static const uint32_t boundSRVTextures[] = { 0 };
     static const uint32_t boundSRVTextureCounts[] = { 1 };
     static const uint32_t boundSRVTextureSpaces[] = { 0 };
-    static const char* boundUAVTextureNames[2][2] = { { "rw_upscaled_output" }, { "rw_internal_upscaled_color" } };
-    static const uint32_t boundUAVTextures[2][2] = { { 1 }, { 0 } };
+    static const char* boundUAVTextureNames[2][1] = { { "rw_upscaled_output" }, { "rw_internal_upscaled_color" } };
+    static const uint32_t boundUAVTextures[2][1] = { { 1 }, { 0 } };
     static const uint32_t boundUAVTextureCounts[] = { 1 };
     static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
@@ -64,7 +64,7 @@ static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationO
                 : g_ffx_fsr1_easu_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][SRGB_CONVERSIONS].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
-        __crt_countof(boundUAVTextureNames),
+        __crt_countof(boundUAVTextureNames[0]),
         0,
         0,
         0,
@@ -154,13 +154,6 @@ FfxErrorCode fsr1GetPermutationBlobByIndex(
         {
             FfxShaderBlob blob = fsr1GetEasuPassPermutationBlobByIndex(permutationOptions, isWave64, is16bit);
             memcpy(outBlob, &blob, sizeof(FfxShaderBlob));
-
-            if (passId == FFX_FSR1_PASS_EASU_RCAS)
-            {
-                static const char* boundUAVTextureNames[] = { "rw_internal_upscaled_color" };
-                outBlob->boundUAVTextureNames = boundUAVTextureNames;
-            }
-
             return FFX_OK;
         }
 

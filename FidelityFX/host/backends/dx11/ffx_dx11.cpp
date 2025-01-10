@@ -2098,17 +2098,15 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
     }
 
     // bind UAVs
-    if (minimumUav <= maximumUav) {
-
-        uint32_t count = maximumUav - minimumUav + 1;
-        dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, count, uavs, nullptr);
+    uint32_t countUav = maximumUav >= minimumUav ? maximumUav - minimumUav + 1 : 0;
+    if (countUav) {
+        dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, countUav, uavs + minimumUav, nullptr);
     }
 
     // bind SRVs
-    if (minimumSrv <= maximumSrv) {
-
-        uint32_t count = maximumSrv - minimumSrv + 1;
-        dx11DeviceContext->CSSetShaderResources(minimumSrv, count, srvs);
+    uint32_t countSrv = maximumSrv >= minimumSrv ? maximumSrv - minimumSrv + 1 : 0;
+    if (countSrv) {
+        dx11DeviceContext->CSSetShaderResources(minimumSrv, countSrv, srvs + minimumSrv);
     }
 
     // dispatch
@@ -2116,18 +2114,14 @@ static FfxErrorCode executeGpuJobCompute(BackendContext_DX11* backendContext, Ff
 
     // unbind UAVs
     static ID3D11UnorderedAccessView* const emptyUAVs[D3D11_1_UAV_SLOT_COUNT] = {};
-    if (minimumUav <= maximumUav) {
-
-        uint32_t count = maximumUav - minimumUav + 1;
-        dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, count, emptyUAVs, nullptr);
+    if (countUav) {
+        dx11DeviceContext->CSSetUnorderedAccessViews(minimumUav, countUav, emptyUAVs, nullptr);
     }
 
     // unbind SRVs
     static ID3D11ShaderResourceView* const emptySRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
-    if (minimumSrv <= maximumSrv) {
-
-        uint32_t count = maximumSrv - minimumSrv + 1;
-        dx11DeviceContext->CSSetShaderResources(minimumSrv, count, emptySRVs);
+    if (countSrv) {
+        dx11DeviceContext->CSSetShaderResources(minimumSrv, countSrv, emptySRVs);
     }
 
     return FFX_OK;
