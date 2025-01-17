@@ -9,5 +9,7 @@ FidelityFX/host/backends/blob_accessors/permutations/*.h
 FidelityFX/host/backends/blob_accessors/permutations/*.hlsl
 FidelityFX/host/backends/blob_accessors/permutations_amd/*.h
 FidelityFX/host/backends/blob_accessors/permutations_amd/*.hlsl
+FidelityFX/host/backends/blob_accessors/permutations_intel/*.h
+FidelityFX/host/backends/blob_accessors/permutations_intel/*.hlsl
 FidelityFX/host/backends/blob_accessors/permutations_nvidia/*.h
 FidelityFX/host/backends/blob_accessors/permutations_nvidia/*.hlsl

@@ -43,6 +43,9 @@
     <Filter Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia">
       <UniqueIdentifier>{9fb6c959-e9fb-493a-a601-3b63adee462e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FidelityFX\host\backends\blob_accessors\permutations_intel">
+      <UniqueIdentifier>{eb6ccf1a-f38c-40cd-be71-ff1d74e554ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h">
@@ -330,6 +333,30 @@
     </FxCompile>
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

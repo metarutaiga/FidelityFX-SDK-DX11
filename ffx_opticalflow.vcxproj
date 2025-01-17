@@ -122,6 +122,8 @@
 call ffx_opticalflow_pass_permutations.bat
 cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_amd
 call amd_opticalflow_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_intel
+call intel_opticalflow_pass_permutations.bat
 cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_nvidia
 call nv_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
@@ -157,6 +159,8 @@ call nv_opticalflow_pass_permutations.bat</Command>
 call ffx_opticalflow_pass_permutations.bat
 cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_amd
 call amd_opticalflow_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_intel
+call intel_opticalflow_pass_permutations.bat
 cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_nvidia
 call nv_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
@@ -188,6 +192,8 @@ call nv_opticalflow_pass_permutations.bat</Command>
 call ffx_opticalflow_pass_permutations.bat
 cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_amd
 call amd_opticalflow_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_intel
+call intel_opticalflow_pass_permutations.bat
 cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_nvidia
 call nv_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
@@ -223,6 +229,8 @@ call nv_opticalflow_pass_permutations.bat</Command>
 call ffx_opticalflow_pass_permutations.bat
 cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_amd
 call amd_opticalflow_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_intel
+call intel_opticalflow_pass_permutations.bat
 cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_nvidia
 call nv_opticalflow_pass_permutations.bat</Command>
     </PreBuildEvent>
@@ -292,6 +300,14 @@ call nv_opticalflow_pass_permutations.bat</Command>
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_1.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_0.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_opticalflow_compute_luminance_pyramid_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_opticalflow_compute_luminance_pyramid_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_1.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_0.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_1.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_luminance_pyramid_pass_permutations_0.hlsl" />

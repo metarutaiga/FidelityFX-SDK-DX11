@@ -8,7 +8,7 @@ Task
 - [x] 16bit SPD for FSR3 Frame Interpolation
 - [x] 16bit SPD for FSR3 Optical Flow
 - [x] AMD Wave Intrinsics
-- [ ] Intel Wave Intrinsics
+- [x] Intel Wave Intrinsics
 - [x] NVIDIA Wave Intrinsics
 
 Patch
