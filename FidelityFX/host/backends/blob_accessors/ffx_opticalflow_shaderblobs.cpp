@@ -45,6 +45,18 @@
 #include "permutations/ffx_opticalflow_scale_optical_flow_advanced_pass_v5_permutations.h"
 #include "permutations/ffx_opticalflow_scale_optical_flow_advanced_pass_v5_16bit_permutations.h"
 
+#include "permutations_amd/amd_opticalflow_compute_luminance_pyramid_pass_permutations.h"
+#include "permutations_amd/amd_opticalflow_compute_luminance_pyramid_pass_16bit_permutations.h"
+
+#include "permutations_amd/amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations.h"
+#include "permutations_amd/amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations.h"
+
+#include "permutations_nvidia/nv_opticalflow_compute_luminance_pyramid_pass_permutations.h"
+#include "permutations_nvidia/nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations.h"
+
+#include "permutations_nvidia/nv_opticalflow_compute_optical_flow_advanced_pass_v5_permutations.h"
+#include "permutations_nvidia/nv_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations.h"
+
 #include <string.h> // for memset
 
 static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
@@ -92,6 +104,24 @@ static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByI
         boundUAVTextureCounts,
         boundUAVTextureSpaces,
     };
+
+    extern FfxUInt32 ffxDeviceVendor;
+    if (ffxDeviceVendor == '1002') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_amd_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].data
+                    : g_amd_opticalflow_compute_luminance_pyramid_pass_permutations[HDR_COLOR_INPUT].data;
+        const_cast<uint32_t&>(blob.size) =
+            is16bit ? g_amd_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].size
+                    : g_amd_opticalflow_compute_luminance_pyramid_pass_permutations[HDR_COLOR_INPUT].size;
+    }
+    if (ffxDeviceVendor == '10de') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].data
+                    : g_nv_opticalflow_compute_luminance_pyramid_pass_permutations[HDR_COLOR_INPUT].data;
+        const_cast<uint32_t&>(blob.size) =
+            is16bit ? g_nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].size
+                    : g_nv_opticalflow_compute_luminance_pyramid_pass_permutations[HDR_COLOR_INPUT].size;
+    }
 
     return blob;
 }
@@ -299,6 +329,24 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
         boundUAVTextureCounts,
         boundUAVTextureSpaces,
     };
+
+    extern FfxUInt32 ffxDeviceVendor;
+    if (ffxDeviceVendor == '1002') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
+                    : g_amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].data;
+        const_cast<uint32_t&>(blob.size) =
+            is16bit ? g_amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].size
+                    : g_amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].size;
+    }
+    if (ffxDeviceVendor == '10de') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_nv_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
+                    : g_nv_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].data;
+        const_cast<uint32_t&>(blob.size) =
+            is16bit ? g_nv_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].size
+                    : g_nv_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].size;
+    }
 
     return blob;
 }

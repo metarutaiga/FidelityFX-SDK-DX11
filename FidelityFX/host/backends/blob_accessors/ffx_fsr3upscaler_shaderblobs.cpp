@@ -46,6 +46,18 @@
 #include "permutations/ffx_fsr3upscaler_luma_instability_pass_16bit_permutations.h"
 #include "permutations/ffx_fsr3upscaler_debug_view_pass_16bit_permutations.h"
 
+#include "permutations_amd/amd_fsr3upscaler_luma_pyramid_pass_permutations.h"
+#include "permutations_amd/amd_fsr3upscaler_shading_change_pyramid_pass_permutations.h"
+
+#include "permutations_amd/amd_fsr3upscaler_luma_pyramid_pass_16bit_permutations.h"
+#include "permutations_amd/amd_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations.h"
+
+#include "permutations_nvidia/nv_fsr3upscaler_luma_pyramid_pass_permutations.h"
+#include "permutations_nvidia/nv_fsr3upscaler_shading_change_pyramid_pass_permutations.h"
+
+#include "permutations_nvidia/nv_fsr3upscaler_luma_pyramid_pass_16bit_permutations.h"
+#include "permutations_nvidia/nv_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations.h"
+
 #include <string.h> // for memset
 
 static FfxShaderBlob fsr3UpscalerGetPrepareReactivityPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
@@ -423,6 +435,24 @@ static FfxShaderBlob fsr3UpscalerGetLumaPyramidPassPermutationBlobByIndex(uint32
         boundUAVTextureSpaces,
     };
 
+    extern FfxUInt32 ffxDeviceVendor;
+    if (ffxDeviceVendor == '1002') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_amd_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                    : g_amd_fsr3upscaler_luma_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data;
+        const_cast<uint32_t&>(blob.size) =
+            is16bit ? g_amd_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                    : g_amd_fsr3upscaler_luma_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
+    }
+    if (ffxDeviceVendor == '10de') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_nv_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                    : g_nv_fsr3upscaler_luma_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data;
+        const_cast<uint32_t&>(blob.size) =
+            is16bit ? g_nv_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                    : g_nv_fsr3upscaler_luma_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
+    }
+
     return blob;
 }
 
@@ -549,6 +579,24 @@ static FfxShaderBlob fsr3UpscalerGetShadingChangePyramidPassPermutationBlobByInd
         boundUAVTextureCounts,
         boundUAVTextureSpaces,
     };
+
+    extern FfxUInt32 ffxDeviceVendor;
+    if (ffxDeviceVendor == '1002') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_amd_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                    : g_amd_fsr3upscaler_shading_change_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data;
+        const_cast<uint32_t&>(blob.size) =
+            is16bit ? g_amd_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                    : g_amd_fsr3upscaler_shading_change_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
+    }
+    if (ffxDeviceVendor == '10de') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_nv_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
+                    : g_nv_fsr3upscaler_shading_change_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data;
+        const_cast<uint32_t&>(blob.size) =
+            is16bit ? g_nv_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
+                    : g_nv_fsr3upscaler_shading_change_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
+    }
 
     return blob;
 }

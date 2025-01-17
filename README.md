@@ -5,13 +5,11 @@ Task
 ---
 - [x] Support for Shader Model 5.0
 - [x] Patch GroupMemoryBarrier to GroupMemoryBarrierWithGroupSync
-- [x] 16bit RCAS for FSR2
-- [x] 16bit RCAS for FSR3 Upscaler
 - [x] 16bit SPD for FSR3 Frame Interpolation
 - [x] 16bit SPD for FSR3 Optical Flow
-- [ ] AMD Wave Reduction
-- [ ] Intel Wave Reduction
-- [ ] NVIDIA Wave Reduction
+- [x] AMD Wave Intrinsics
+- [ ] Intel Wave Intrinsics
+- [x] NVIDIA Wave Intrinsics
 
 Patch
 ---
@@ -59,7 +57,7 @@ FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_game_motion_vector_fiel
 
 FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_optical_flow_v5.h
 ```diff
-+#if FFX_HLSL_SM < 60
++#if defined(FFX_SPD_NO_WAVE_OPERATIONS)
 +    FfxInt32 waveId = iLocalIndex >> 5u;
 +    FFX_ATOMIC_ADD(sWaveSad[waveId], blockSadSum);
 +    FFX_GROUP_MEMORY_BARRIER();
@@ -80,7 +78,7 @@ FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_optical_flow_v5.h
 +#endif
 ```
 ```diff
-+#if FFX_HLSL_SM < 60
++#if defined(FFX_SPD_NO_WAVE_OPERATIONS)
 +    FfxInt32 waveId = iLocalIndex >> 5u;
 +    FFX_ATOMIC_MIN(sWaveMin[waveId], min0123);
 +    FFX_GROUP_MEMORY_BARRIER();
@@ -103,7 +101,7 @@ FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_optical_flow_v5.h
 ```
 ```diff
      sadMapBuffer[3][iSearchId.y][iSearchId.x] = (qsad.w << 16) | EncodeSearchCoord(FfxInt32x2(iSearchId.x * 4 + 3, iSearchId.y));
-+#if FFX_HLSL_SM < 60
++#if defined(FFX_SPD_NO_WAVE_OPERATIONS)
 +    sWaveSad[0] = 0;
 +    sWaveSad[1] = 0;
 +    sWaveMin[0] = 0xffffffffu;

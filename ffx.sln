@@ -22,6 +22,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffx_opticalflow", "ffx_opticalflow.vcxproj", "{2BBC9378-7879-4562-BFCD-A6D159B1E7E3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffx_fsr3", "ffx_fsr3.vcxproj", "{963ABC71-EFA5-4AF8-8F24-8111BF5F3266}"
+	ProjectSection(ProjectDependencies) = postProject
+		{19482933-95D9-4654-8206-70B9D7E9C593} = {19482933-95D9-4654-8206-70B9D7E9C593}
+		{2BBC9378-7879-4562-BFCD-A6D159B1E7E3} = {2BBC9378-7879-4562-BFCD-A6D159B1E7E3}
+		{6A35A2D6-0D68-47F2-A617-7142FDBF06F7} = {6A35A2D6-0D68-47F2-A617-7142FDBF06F7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

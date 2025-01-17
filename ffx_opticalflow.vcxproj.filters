@@ -37,6 +37,12 @@
     <Filter Include="FidelityFX\host\components\opticalflow">
       <UniqueIdentifier>{b2c8e6a8-3e11-4507-b648-00a5c7492bb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FidelityFX\host\backends\blob_accessors\permutations_amd">
+      <UniqueIdentifier>{6435d4f6-7037-4b0a-8949-ba5446eb1e31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia">
+      <UniqueIdentifier>{d51a03f1-6fb5-4d49-8353-fb704085c5f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h">
@@ -204,6 +210,54 @@
     </FxCompile>
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_opticalflow_scale_optical_flow_advanced_pass_v5_permutations_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_luminance_pyramid_pass_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_luminance_pyramid_pass_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_luminance_pyramid_pass_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_luminance_pyramid_pass_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_opticalflow_compute_optical_flow_advanced_pass_v5_permutations_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

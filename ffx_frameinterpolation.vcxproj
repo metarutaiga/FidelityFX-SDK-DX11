@@ -99,7 +99,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>FFX_FRAMEINTERPOLATION;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FFX_FI;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -119,7 +119,11 @@
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
-call ffx_frameinterpolation_pass_permutations.bat</Command>
+call ffx_frameinterpolation_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_amd
+call amd_frameinterpolation_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_nvidia
+call nv_frameinterpolation_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,7 +132,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>FFX_FRAMEINTERPOLATION;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FFX_FI;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -150,14 +154,18 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
-call ffx_frameinterpolation_pass_permutations.bat</Command>
+call ffx_frameinterpolation_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_amd
+call amd_frameinterpolation_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_nvidia
+call nv_frameinterpolation_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>FFX_FRAMEINTERPOLATION;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FFX_FI;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -177,7 +185,11 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
-call ffx_frameinterpolation_pass_permutations.bat</Command>
+call ffx_frameinterpolation_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_amd
+call amd_frameinterpolation_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_nvidia
+call nv_frameinterpolation_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -186,7 +198,7 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>FFX_FRAMEINTERPOLATION;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FFX_FI;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -208,7 +220,11 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
     </FxCompile>
     <PreBuildEvent>
       <Command>cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations
-call ffx_frameinterpolation_pass_permutations.bat</Command>
+call ffx_frameinterpolation_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_amd
+call amd_frameinterpolation_pass_permutations.bat
+cd $(ProjectDir)FidelityFX\host\backends\blob_accessors\permutations_nvidia
+call nv_frameinterpolation_pass_permutations.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -289,6 +305,22 @@ call ffx_frameinterpolation_pass_permutations.bat</Command>
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_1.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_0.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl" />
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl" />
     <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

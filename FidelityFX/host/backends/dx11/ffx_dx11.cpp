@@ -73,6 +73,8 @@ typedef struct BackendContext_DX11 {
     ID3D11DeviceContext*    deviceContext = nullptr;
     ID3D11DeviceContext1*   deviceContext1 = nullptr;
 
+    HRESULT               (*NvAPI_D3D11_SetNvShaderExtnSlot)(IUnknown*, uint32_t) = nullptr;
+
     FfxGpuJobDescription*   pGpuJobs;
     uint32_t                gpuJobCount;
 
@@ -107,6 +109,8 @@ typedef struct BackendContext_DX11 {
     std::mutex              constantBufferMutex;
 
 } BackendContext_DX11;
+
+FfxUInt32 ffxDeviceVendor = 0;
 
 FFX_API size_t ffxGetScratchMemorySizeDX11(size_t maxContexts)
 {
@@ -724,6 +728,41 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect 
 
             dx11Device->GetImmediateContext(&backendContext->deviceContext);
             backendContext->deviceContext->QueryInterface(IID_PPV_ARGS(&backendContext->deviceContext1));
+        }
+
+        if (ffxDeviceVendor == 0) {
+
+#if defined(_M_IX86)
+            HMODULE ags = GetModuleHandleA("amd_ags_x86.dll");
+#elif defined(_M_AMD64)
+            HMODULE ags = GetModuleHandleA("amd_ags_x64.dll");
+#endif
+            ffxDeviceVendor = ags ? '1002' : 0;
+        }
+
+        if (ffxDeviceVendor == 0) {
+
+#if defined(_M_IX86)
+            HMODULE hNvAPI = LoadLibraryA("nvapi.dll");
+#elif defined(_M_AMD64)
+            HMODULE hNvAPI = LoadLibraryA("nvapi64.dll");
+#endif
+            if (hNvAPI) {
+                FARPROC(*NvAPI_QueryInterface)(uint32_t);
+                (void*&)NvAPI_QueryInterface = GetProcAddress(hNvAPI, "nvapi_QueryInterface");
+                if (NvAPI_QueryInterface) {
+                    HRESULT(*NvAPI_D3D11_IsNvShaderExtnOpCodeSupported)(IUnknown*, uint32_t, bool*) = nullptr;
+                    (void*&)NvAPI_D3D11_IsNvShaderExtnOpCodeSupported = NvAPI_QueryInterface(0x5F68DA40);
+                    if (NvAPI_D3D11_IsNvShaderExtnOpCodeSupported) {
+                        bool bSupported = false;
+                        int NV_EXTN_OP_SHFL_XOR = 4;
+                        if (NvAPI_D3D11_IsNvShaderExtnOpCodeSupported(dx11Device, NV_EXTN_OP_SHFL_XOR, &bSupported) == 0) {
+                            (void*&)backendContext->NvAPI_D3D11_SetNvShaderExtnSlot = NvAPI_QueryInterface(0x8E90BB9F);
+                            ffxDeviceVendor = '10de';
+                        }
+                    }
+                }
+            }
         }
 
         // Map all of our pointers
@@ -1769,11 +1808,17 @@ FfxErrorCode CreatePipelineDX11(
     }
 
     // create the PSO
+    if (backendContext->NvAPI_D3D11_SetNvShaderExtnSlot)
+        backendContext->NvAPI_D3D11_SetNvShaderExtnSlot(backendContext->device, 15);
     if (FAILED(dx11Device->CreateComputeShader(data, shaderBlob.size, nullptr, (ID3D11ComputeShader**)&outPipeline->pipeline)))
     {
+        if (backendContext->NvAPI_D3D11_SetNvShaderExtnSlot)
+            backendContext->NvAPI_D3D11_SetNvShaderExtnSlot(backendContext->device, ~0);
         delete[] data;
         return FFX_ERROR_BACKEND_API_ERROR;
     }
+    if (backendContext->NvAPI_D3D11_SetNvShaderExtnSlot)
+        backendContext->NvAPI_D3D11_SetNvShaderExtnSlot(backendContext->device, ~0);
     delete[] data;
 
     // Set the pipeline name

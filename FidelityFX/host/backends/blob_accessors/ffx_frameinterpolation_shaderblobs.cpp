@@ -31,10 +31,10 @@
 #include "permutations/ffx_frameinterpolation_game_motion_vector_field_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_optical_flow_vector_field_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_pass_permutations.h"
-#include "permutations/ffx_frameinterpolation_Compute_Game_Vector_Field_Inpainting_Pyramid_pass_permutations.h"
+#include "permutations/ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations.h"
-#include "permutations/ffx_frameinterpolation_Compute_Inpainting_Pyramid_pass_permutations.h"
-#include "permutations/ffx_frameinterpolation_Inpainting_pass_permutations.h"
+#include "permutations/ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations.h"
+#include "permutations/ffx_frameinterpolation_inpainting_pass_permutations.h"
 #include "permutations/ffx_frameinterpolation_debug_view_pass_permutations.h"
 
 #include "permutations/ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations.h"
@@ -43,11 +43,23 @@
 #include "permutations/ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_pass_16bit_permutations.h"
-#include "permutations/ffx_frameinterpolation_Compute_Game_Vector_Field_Inpainting_Pyramid_pass_16bit_permutations.h"
+#include "permutations/ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations.h"
-#include "permutations/ffx_frameinterpolation_Compute_Inpainting_Pyramid_pass_16bit_permutations.h"
-#include "permutations/ffx_frameinterpolation_Inpainting_pass_16bit_permutations.h"
+#include "permutations/ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations.h"
+#include "permutations/ffx_frameinterpolation_inpainting_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_debug_view_pass_16bit_permutations.h"
+
+#include "permutations_amd/amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations.h"
+#include "permutations_amd/amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations.h"
+
+#include "permutations_amd/amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations.h"
+#include "permutations_amd/amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations.h"
+
+#include "permutations_nvidia/nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations.h"
+#include "permutations_nvidia/nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations.h"
+
+#include "permutations_nvidia/nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations.h"
+#include "permutations_nvidia/nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations.h"
 
 #include <string.h> // for memset
 
@@ -456,6 +468,24 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
         boundUAVTextureSpaces,
     };
 
+    extern FfxUInt32 ffxDeviceVendor;
+    if (ffxDeviceVendor == '1002') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
+                    : g_amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+        const_cast<uint32_t&>(blob.size) = 
+            is16bit ? g_amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
+                    : g_amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+    }
+    if (ffxDeviceVendor == '10de') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
+                    : g_nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+        const_cast<uint32_t&>(blob.size) = 
+            is16bit ? g_nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
+                    : g_nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+    }
+
     return blob;
 }
 
@@ -583,6 +613,24 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
         boundUAVTextureCounts,
         boundUAVTextureSpaces,
     };
+
+    extern FfxUInt32 ffxDeviceVendor;
+    if (ffxDeviceVendor == '1002') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
+                    : g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+        const_cast<uint32_t&>(blob.size) = 
+            is16bit ? g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
+                    : g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+    }
+    if (ffxDeviceVendor == '10de') {
+        const_cast<const uint8_t*&>(blob.data) =
+            is16bit ? g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
+                    : g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+        const_cast<uint32_t&>(blob.size) = 
+            is16bit ? g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
+                    : g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+    }
 
     return blob;
 }
