@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{AAAA6D27-7D8F-4523-A1BF-D747209193E4}</ProjectGuid>
+    <RootNamespace>ffx_api</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ffx_api</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>amd_fidelityfx_dx11</TargetName>
+    <MultiProcFXC>true</MultiProcFXC>
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>amd_fidelityfx_dx11</TargetName>
+    <MultiProcFXC>true</MultiProcFXC>
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <TargetName>amd_fidelityfx_dx11</TargetName>
+    <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
+    <MultiProcFXC>true</MultiProcFXC>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\$(Configuration)\</OutDir>
+    <TargetName>amd_fidelityfx_dx11</TargetName>
+    <IntDir>temp\$(Configuration)\$(ProjectName)\</IntDir>
+    <MultiProcFXC>true</MultiProcFXC>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>FFX_BACKEND_DX11;FFX_FSR2;FFX_FSR3;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.;ffx-api/include;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EntryPointName>%(Filename)</EntryPointName>
+      <ShaderType>Compute</ShaderType>
+      <ShaderModel>5.0</ShaderModel>
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput />
+      <PreprocessorDefinitions>FFX_HLSL_SM=50;CS=%(Filename);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </FxCompile>
+    <PreBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>FFX_BACKEND_DX11;FFX_FSR2;FFX_FSR3;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.;ffx-api/include;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EntryPointName>%(Filename)</EntryPointName>
+      <ShaderType>Compute</ShaderType>
+      <ShaderModel>5.0</ShaderModel>
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput />
+      <PreprocessorDefinitions>FFX_HLSL_SM=50;CS=%(Filename);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </FxCompile>
+    <PreBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>FFX_BACKEND_DX11;FFX_FSR2;FFX_FSR3;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.;ffx-api/include;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>Compute</ShaderType>
+      <EntryPointName>%(Filename)</EntryPointName>
+      <ObjectFileOutput />
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FFX_HLSL_SM=50;CS=%(Filename);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </FxCompile>
+    <PreBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>FFX_BACKEND_DX11;FFX_FSR2;FFX_FSR3;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.;ffx-api/include;FidelityFX;FidelityFX/host/components;FidelityFX/host/shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>Compute</ShaderType>
+      <EntryPointName>%(Filename)</EntryPointName>
+      <ObjectFileOutput />
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).h</HeaderFileOutput>
+      <AdditionalIncludeDirectories>FidelityFX\gpu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FFX_HLSL_SM=50;CS=%(Filename);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </FxCompile>
+    <PreBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="DXBC\md5.h" />
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_api.h" />
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_api.hpp" />
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_api_loader.h" />
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_api_types.h" />
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_framegeneration.h" />
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_framegeneration.hpp" />
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_upscale.h" />
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_upscale.hpp" />
+    <ClInclude Include="ffx-api\src\backends.h" />
+    <ClInclude Include="ffx-api\src\ffx_provider.h" />
+    <ClInclude Include="ffx-api\src\ffx_provider_external.h" />
+    <ClInclude Include="ffx-api\src\ffx_provider_framegeneration.h" />
+    <ClInclude Include="ffx-api\src\ffx_provider_fsr2.h" />
+    <ClInclude Include="ffx-api\src\ffx_provider_fsr3upscale.h" />
+    <ClInclude Include="ffx-api\src\resource\resource.h" />
+    <ClInclude Include="ffx-api\src\validation.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_callbacks_glsl.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_callbacks_hlsl.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_common.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_compute_inpainting_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_debug_view.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_disocclusion_mask.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_inpainting.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_dilated_velocity_and_previous_depth.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_resources.h" />
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_setup.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_accumulate.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_callbacks_glsl.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_callbacks_hlsl.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_common.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_compute_luminance_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_depth_clip.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_lock.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_postprocess_lock_status.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_rcas.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_reconstruct_dilated_velocity_and_previous_depth.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_reproject.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_resources.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_sample.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_tcr_autogen.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_upsample.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_accumulate.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_callbacks_glsl.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_callbacks_hlsl.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_common.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_debug_view.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_luma_instability.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_luma_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_prepare_inputs.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_prepare_reactivity.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_rcas.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_reproject.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_resources.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_sample.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_shading_change.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_shading_change_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_upsample.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_callbacks_glsl.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_callbacks_hlsl.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_common.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_luminance_pyramid.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_optical_flow_v5.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_scd_divergence.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_filter_optical_flow_v5.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_generate_scd_histogram.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_prepare_luma.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_resources.h" />
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_scale_optical_flow_advanced_v5.h" />
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_frameinterpolation_shaderblobs.h" />
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_fsr2_shaderblobs.h" />
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_fsr3upscaler_shaderblobs.h" />
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_opticalflow_shaderblobs.h" />
+    <ClInclude Include="FidelityFX\host\backends\dx11\ffx_dx11.h" />
+    <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h" />
+    <ClInclude Include="FidelityFX\host\components\frameinterpolation\ffx_frameinterpolation_private.h" />
+    <ClInclude Include="FidelityFX\host\components\fsr2\ffx_fsr2_maximum_bias.h" />
+    <ClInclude Include="FidelityFX\host\components\fsr2\ffx_fsr2_private.h" />
+    <ClInclude Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler_maximum_bias.h" />
+    <ClInclude Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler_private.h" />
+    <ClInclude Include="FidelityFX\host\components\fsr3\ffx_fsr3_maximum_bias.h" />
+    <ClInclude Include="FidelityFX\host\components\fsr3\ffx_fsr3_private.h" />
+    <ClInclude Include="FidelityFX\host\components\opticalflow\ffx_opticalflow_private.h" />
+    <ClInclude Include="FidelityFX\host\ffx_frameinterpolation.h" />
+    <ClInclude Include="FidelityFX\host\ffx_fsr2.h" />
+    <ClInclude Include="FidelityFX\host\ffx_fsr3.h" />
+    <ClInclude Include="FidelityFX\host\ffx_fsr3upscaler.h" />
+    <ClInclude Include="FidelityFX\host\ffx_opticalflow.h" />
+    <ClInclude Include="FidelityFX\host\shared\ffx_object_management.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DXBC\DXBCChecksum.c" />
+    <ClCompile Include="DXBC\md5.c" />
+    <ClCompile Include="ffx-api\src\backends.cpp" />
+    <ClCompile Include="ffx-api\src\ffx_api.cpp" />
+    <ClCompile Include="ffx-api\src\ffx_provider.cpp" />
+    <ClCompile Include="ffx-api\src\ffx_provider_framegeneration.cpp" />
+    <ClCompile Include="ffx-api\src\ffx_provider_fsr2.cpp" />
+    <ClCompile Include="ffx-api\src\ffx_provider_fsr3upscale.cpp" />
+    <ClCompile Include="ffx-api\src\validation.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_frameinterpolation_shaderblobs.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_fsr2_shaderblobs.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_fsr3upscaler_shaderblobs.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_opticalflow_shaderblobs.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\dx11\ffx_dx11.cpp" />
+    <ClCompile Include="FidelityFX\host\backends\ffx_shader_blobs.cpp" />
+    <ClCompile Include="FidelityFX\host\components\frameinterpolation\ffx_frameinterpolation.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FFX_FSR3;FFX_GCC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FFX_FSR3;FFX_GCC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FFX_FSR3;FFX_GCC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FFX_FSR3;FFX_GCC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\components\fsr2\ffx_fsr2.cpp" />
+    <ClCompile Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FFX_FSR3;FFX_GCC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FFX_FSR3;FFX_GCC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FFX_FSR3;FFX_GCC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FFX_FSR3;FFX_GCC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\components\fsr3\ffx_fsr3.cpp" />
+    <ClCompile Include="FidelityFX\host\components\opticalflow\ffx_opticalflow.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FFX_FSR3;FFX_GCC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FFX_FSR3;FFX_GCC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FFX_FSR3;FFX_GCC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FFX_FSR3;FFX_GCC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\shared\ffx_assert.cpp" />
+    <ClCompile Include="FidelityFX\host\shared\ffx_object_management.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_inpainting_pyramid_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_debug_view_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_disocclusion_mask_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_inpainting_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_setup_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_accumulate_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_autogen_reactive_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_compute_luminance_pyramid_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_debug_blit.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_depth_clip_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_lock_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_rcas_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_reconstruct_previous_depth_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_tcr_autogen_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_accumulate_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_autogen_reactive_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_compute_luminance_pyramid_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_depth_clip_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_lock_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_rcas_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_reconstruct_previous_depth_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_luminance_pyramid_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_optical_flow_advanced_pass_v5.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_scd_divergence_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_filter_optical_flow_pass_v5.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_generate_scd_histogram_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_prepare_luma_pass.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_scale_optical_flow_advanced_pass_v5.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ffx-api\src\resource\ffx_api_dll.rc">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FFXDLL_VERSION_API=DX11;FFXDLL_VERSION_MAJOR=1;FFXDLL_VERSION_MINOR=0;FFXDLL_VERSION_PATCH=1;CI_PIPELINE_ID=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FFXDLL_VERSION_API=DX11;FFXDLL_VERSION_MAJOR=1;FFXDLL_VERSION_MINOR=0;FFXDLL_VERSION_PATCH=1;CI_PIPELINE_ID=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FFXDLL_VERSION_API=DX11;FFXDLL_VERSION_MAJOR=1;FFXDLL_VERSION_MINOR=0;FFXDLL_VERSION_PATCH=1;CI_PIPELINE_ID=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FFXDLL_VERSION_API=DX11;FFXDLL_VERSION_MAJOR=1;FFXDLL_VERSION_MINOR=0;FFXDLL_VERSION_PATCH=1;CI_PIPELINE_ID=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
