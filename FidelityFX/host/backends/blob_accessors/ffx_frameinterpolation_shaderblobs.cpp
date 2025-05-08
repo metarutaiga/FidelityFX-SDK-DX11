@@ -49,20 +49,22 @@
 #include "permutations/ffx_frameinterpolation_inpainting_pass_16bit_permutations.h"
 #include "permutations/ffx_frameinterpolation_debug_view_pass_16bit_permutations.h"
 
+#if HAVE_AMD
 #include "permutations_amd/amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations.h"
 #include "permutations_amd/amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations.h"
 #include "permutations_amd/amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations.h"
 #include "permutations_amd/amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations.h"
-
+#elif HAVE_INTEL
 #include "permutations_intel/intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations.h"
 #include "permutations_intel/intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations.h"
 #include "permutations_intel/intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations.h"
 #include "permutations_intel/intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations.h"
-
+#elif HAVE_NVIDIA
 #include "permutations_nvidia/nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations.h"
 #include "permutations_nvidia/nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations.h"
 #include "permutations_nvidia/nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations.h"
 #include "permutations_nvidia/nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations.h"
+#endif
 
 #include <string.h> // for memset
 
@@ -472,6 +474,7 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
     };
 
     extern FfxUInt32 ffxDeviceVendor;
+#if HAVE_AMD
     if (ffxDeviceVendor == '1002') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -480,6 +483,7 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
             is16bit ? g_amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
                     : g_amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
     }
+#elif HAVE_INTEL
     if (ffxDeviceVendor == '8086') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -488,6 +492,7 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
             is16bit ? g_intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
                     : g_intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
     }
+#elif HAVE_NVIDIA
     if (ffxDeviceVendor == '10de') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -496,6 +501,7 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
             is16bit ? g_nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
                     : g_nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
     }
+#endif
 
     return blob;
 }
@@ -626,6 +632,7 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
     };
 
     extern FfxUInt32 ffxDeviceVendor;
+#if HAVE_AMD
     if (ffxDeviceVendor == '1002') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -634,6 +641,7 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
             is16bit ? g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
                     : g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
     }
+#elif HAVE_INTEL
     if (ffxDeviceVendor == '8086') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -642,6 +650,7 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
             is16bit ? g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
                     : g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
     }
+#elif HAVE_NVIDIA
     if (ffxDeviceVendor == '10de') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
@@ -650,6 +659,7 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
             is16bit ? g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
                     : g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
     }
+#endif
 
     return blob;
 }

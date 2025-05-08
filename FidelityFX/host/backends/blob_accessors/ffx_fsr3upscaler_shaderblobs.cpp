@@ -46,20 +46,22 @@
 #include "permutations/ffx_fsr3upscaler_luma_instability_pass_16bit_permutations.h"
 #include "permutations/ffx_fsr3upscaler_debug_view_pass_16bit_permutations.h"
 
+#if HAVE_AMD
 #include "permutations_amd/amd_fsr3upscaler_luma_pyramid_pass_permutations.h"
 #include "permutations_amd/amd_fsr3upscaler_luma_pyramid_pass_16bit_permutations.h"
 #include "permutations_amd/amd_fsr3upscaler_shading_change_pyramid_pass_permutations.h"
 #include "permutations_amd/amd_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations.h"
-
+#elif HAVE_INTEL
 #include "permutations_intel/intel_fsr3upscaler_luma_pyramid_pass_permutations.h"
 #include "permutations_intel/intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations.h"
 #include "permutations_intel/intel_fsr3upscaler_shading_change_pyramid_pass_permutations.h"
 #include "permutations_intel/intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations.h"
-
+#elif HAVE_NVIDIA
 #include "permutations_nvidia/nv_fsr3upscaler_luma_pyramid_pass_permutations.h"
 #include "permutations_nvidia/nv_fsr3upscaler_luma_pyramid_pass_16bit_permutations.h"
 #include "permutations_nvidia/nv_fsr3upscaler_shading_change_pyramid_pass_permutations.h"
 #include "permutations_nvidia/nv_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations.h"
+#endif
 
 #include <string.h> // for memset
 
@@ -439,6 +441,7 @@ static FfxShaderBlob fsr3UpscalerGetLumaPyramidPassPermutationBlobByIndex(uint32
     };
 
     extern FfxUInt32 ffxDeviceVendor;
+#if HAVE_AMD
     if (ffxDeviceVendor == '1002') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_amd_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -447,6 +450,7 @@ static FfxShaderBlob fsr3UpscalerGetLumaPyramidPassPermutationBlobByIndex(uint32
             is16bit ? g_amd_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                     : g_amd_fsr3upscaler_luma_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
     }
+#elif HAVE_INTEL
     if (ffxDeviceVendor == '8086') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -455,6 +459,7 @@ static FfxShaderBlob fsr3UpscalerGetLumaPyramidPassPermutationBlobByIndex(uint32
             is16bit ? g_intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                     : g_intel_fsr3upscaler_luma_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
     }
+#elif HAVE_NVIDIA
     if (ffxDeviceVendor == '10de') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_nv_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -463,6 +468,7 @@ static FfxShaderBlob fsr3UpscalerGetLumaPyramidPassPermutationBlobByIndex(uint32
             is16bit ? g_nv_fsr3upscaler_luma_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                     : g_nv_fsr3upscaler_luma_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
     }
+#endif
 
     return blob;
 }
@@ -592,6 +598,7 @@ static FfxShaderBlob fsr3UpscalerGetShadingChangePyramidPassPermutationBlobByInd
     };
 
     extern FfxUInt32 ffxDeviceVendor;
+#if HAVE_AMD
     if (ffxDeviceVendor == '1002') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_amd_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -600,6 +607,7 @@ static FfxShaderBlob fsr3UpscalerGetShadingChangePyramidPassPermutationBlobByInd
             is16bit ? g_amd_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                     : g_amd_fsr3upscaler_shading_change_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
     }
+#elif HAVE_INTEL
     if (ffxDeviceVendor == '8086') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -608,6 +616,7 @@ static FfxShaderBlob fsr3UpscalerGetShadingChangePyramidPassPermutationBlobByInd
             is16bit ? g_intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                     : g_intel_fsr3upscaler_shading_change_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
     }
+#elif HAVE_NVIDIA
     if (ffxDeviceVendor == '10de') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_nv_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].data
@@ -616,6 +625,7 @@ static FfxShaderBlob fsr3UpscalerGetShadingChangePyramidPassPermutationBlobByInd
             is16bit ? g_nv_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size
                     : g_nv_fsr3upscaler_shading_change_pyramid_pass_permutations[REPROJECT_USE_LANCZOS_TYPE][HDR_COLOR_INPUT][LOW_RESOLUTION_MOTION_VECTORS][JITTERED_MOTION_VECTORS][INVERTED_DEPTH][APPLY_SHARPENING].size;
     }
+#endif
 
     return blob;
 }
