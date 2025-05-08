@@ -66,9 +66,9 @@ static FfxShaderBlob casGetSharpenPassPermutationBlobByIndex(uint32_t permutatio
     static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_cas_sharpen_pass_16bit_permutations[SHARPEN_ONLY][SPACE_CONVERSION].data
+        is16bit ? g_ffx_cas_sharpen_pass_permutations[SHARPEN_ONLY][SPACE_CONVERSION].data
                 : g_ffx_cas_sharpen_pass_permutations[SHARPEN_ONLY][SPACE_CONVERSION].data,
-        is16bit ? g_ffx_cas_sharpen_pass_16bit_permutations[SHARPEN_ONLY][SPACE_CONVERSION].size
+        is16bit ? g_ffx_cas_sharpen_pass_permutations[SHARPEN_ONLY][SPACE_CONVERSION].size
                 : g_ffx_cas_sharpen_pass_permutations[SHARPEN_ONLY][SPACE_CONVERSION].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),

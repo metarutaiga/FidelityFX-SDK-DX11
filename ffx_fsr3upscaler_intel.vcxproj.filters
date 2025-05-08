@@ -1,0 +1,914 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="FidelityFX">
+      <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu">
+      <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host">
+      <UniqueIdentifier>{57149e49-524a-4f7c-88cb-7f21c050a28b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends">
+      <UniqueIdentifier>{92ebecfe-210a-4b62-8211-4eb92d024d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\blob_accessors">
+      <UniqueIdentifier>{31f5323f-92f3-44d2-bda9-7d29933ffffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\hlsl">
+      <UniqueIdentifier>{e72a8aa7-a1fd-48df-abad-ed0bde3d2148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\hlsl\fsr3scaler">
+      <UniqueIdentifier>{463a3225-28fb-46a1-b7a9-a74b7a759c37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\components">
+      <UniqueIdentifier>{fea07f60-e530-4173-b1e7-d76dff7298be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\dx11">
+      <UniqueIdentifier>{b18297d3-41f8-4019-a27b-ddf574e7189d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\components\fsr3upscaler">
+      <UniqueIdentifier>{f5c12593-bfc7-4aaa-9d1f-5c6116931a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu\fsr3upscaler">
+      <UniqueIdentifier>{83de9604-b57f-4f78-8a3a-0e8d3b748a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\blob_accessors\permutations_intel">
+      <UniqueIdentifier>{d1c9cb21-d7da-4fc4-9e6d-0c073c48437b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h">
+      <Filter>FidelityFX\host\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\backends\dx11\ffx_dx11.h">
+      <Filter>FidelityFX\host\backends\dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler_maximum_bias.h">
+      <Filter>FidelityFX\host\components\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler_private.h">
+      <Filter>FidelityFX\host\components\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_fsr3upscaler_shaderblobs.h">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\ffx_fsr3upscaler.h">
+      <Filter>FidelityFX\host</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_accumulate.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_callbacks_glsl.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_callbacks_hlsl.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_common.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_debug_view.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_luma_instability.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_luma_pyramid.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_prepare_inputs.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_prepare_reactivity.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_rcas.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_reproject.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_resources.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_sample.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_shading_change.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_shading_change_pyramid.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_upsample.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FidelityFX\host\backends\ffx_shader_blobs.cpp">
+      <Filter>FidelityFX\host\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\backends\dx11\ffx_dx11.cpp">
+      <Filter>FidelityFX\host\backends\dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler.cpp">
+      <Filter>FidelityFX\host\components\fsr3upscaler</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_fsr3upscaler_shaderblobs.cpp">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_accumulate_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_autogen_reactive_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_compute_luminance_pyramid_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_depth_clip_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_lock_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_rcas_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_reconstruct_previous_depth_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_0_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_0_1_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_0_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_16bit_permutations_1_1_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_0_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_0_1_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_0_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_luma_pyramid_pass_permutations_1_1_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_0_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_0_1_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_0_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_16bit_permutations_1_1_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_0_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_0_1_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_0_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_0_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_0_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_0_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_0_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_0_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_0_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_0_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_0_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_1_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_1_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_1_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_1_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_1_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_1_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_1_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_fsr3upscaler_shading_change_pyramid_pass_permutations_1_1_1_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

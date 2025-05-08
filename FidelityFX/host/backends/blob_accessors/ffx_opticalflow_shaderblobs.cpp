@@ -45,20 +45,22 @@
 #include "permutations/ffx_opticalflow_scale_optical_flow_advanced_pass_v5_permutations.h"
 #include "permutations/ffx_opticalflow_scale_optical_flow_advanced_pass_v5_16bit_permutations.h"
 
+#if HAVE_AMD
 #include "permutations_amd/amd_opticalflow_compute_luminance_pyramid_pass_permutations.h"
 #include "permutations_amd/amd_opticalflow_compute_luminance_pyramid_pass_16bit_permutations.h"
 #include "permutations_amd/amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations.h"
 #include "permutations_amd/amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations.h"
-
+#elif HAVE_INTEL
 #include "permutations_intel/intel_opticalflow_compute_luminance_pyramid_pass_permutations.h"
 #include "permutations_intel/intel_opticalflow_compute_luminance_pyramid_pass_16bit_permutations.h"
 #include "permutations_intel/intel_opticalflow_compute_optical_flow_advanced_pass_v5_permutations.h"
 #include "permutations_intel/intel_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations.h"
-
+#elif HAVE_NVIDIA
 #include "permutations_nvidia/nv_opticalflow_compute_luminance_pyramid_pass_permutations.h"
 #include "permutations_nvidia/nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations.h"
 #include "permutations_nvidia/nv_opticalflow_compute_optical_flow_advanced_pass_v5_permutations.h"
 #include "permutations_nvidia/nv_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations.h"
+#endif
 
 #include <string.h> // for memset
 
@@ -109,6 +111,7 @@ static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByI
     };
 
     extern FfxUInt32 ffxDeviceVendor;
+#if HAVE_AMD
     if (ffxDeviceVendor == '1002') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_amd_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].data
@@ -117,6 +120,7 @@ static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByI
             is16bit ? g_amd_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].size
                     : g_amd_opticalflow_compute_luminance_pyramid_pass_permutations[HDR_COLOR_INPUT].size;
     }
+#elif HAVE_INTEL
     if (ffxDeviceVendor == '8086') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_intel_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].data
@@ -125,6 +129,7 @@ static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByI
             is16bit ? g_intel_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].size
                     : g_intel_opticalflow_compute_luminance_pyramid_pass_permutations[HDR_COLOR_INPUT].size;
     }
+#elif HAVE_NVIDIA
     if (ffxDeviceVendor == '10de') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].data
@@ -133,6 +138,7 @@ static FfxShaderBlob opticalflowGetComputeLuminancePyramidPassPermutationBlobByI
             is16bit ? g_nv_opticalflow_compute_luminance_pyramid_pass_16bit_permutations[HDR_COLOR_INPUT].size
                     : g_nv_opticalflow_compute_luminance_pyramid_pass_permutations[HDR_COLOR_INPUT].size;
     }
+#endif
 
     return blob;
 }
@@ -342,6 +348,7 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
     };
 
     extern FfxUInt32 ffxDeviceVendor;
+#if HAVE_AMD
     if (ffxDeviceVendor == '1002') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
@@ -350,6 +357,7 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
             is16bit ? g_amd_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].size
                     : g_amd_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].size;
     }
+#elif HAVE_INTEL
     if (ffxDeviceVendor == '8086') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_intel_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
@@ -358,6 +366,7 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
             is16bit ? g_intel_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].size
                     : g_intel_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].size;
     }
+#elif HAVE_NVIDIA
     if (ffxDeviceVendor == '10de') {
         const_cast<const uint8_t*&>(blob.data) =
             is16bit ? g_nv_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].data
@@ -366,6 +375,7 @@ static FfxShaderBlob opticalflowGetComputeOpticalFlowAdvancedPassV5PermutationBl
             is16bit ? g_nv_opticalflow_compute_optical_flow_advanced_pass_v5_16bit_permutations[HDR_COLOR_INPUT].size
                     : g_nv_opticalflow_compute_optical_flow_advanced_pass_v5_permutations[HDR_COLOR_INPUT].size;
     }
+#endif
 
     return blob;
 }
