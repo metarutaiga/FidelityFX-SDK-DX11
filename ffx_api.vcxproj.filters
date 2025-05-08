@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="FidelityFX">
+      <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu">
+      <UniqueIdentifier>{c0c6204d-d2f3-4054-9f61-43298beb9e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host">
+      <UniqueIdentifier>{57149e49-524a-4f7c-88cb-7f21c050a28b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends">
+      <UniqueIdentifier>{92ebecfe-210a-4b62-8211-4eb92d024d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\blob_accessors">
+      <UniqueIdentifier>{31f5323f-92f3-44d2-bda9-7d29933ffffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\hlsl">
+      <UniqueIdentifier>{e72a8aa7-a1fd-48df-abad-ed0bde3d2148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\hlsl\fsr3scaler">
+      <UniqueIdentifier>{463a3225-28fb-46a1-b7a9-a74b7a759c37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\components">
+      <UniqueIdentifier>{fea07f60-e530-4173-b1e7-d76dff7298be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\dx11">
+      <UniqueIdentifier>{b18297d3-41f8-4019-a27b-ddf574e7189d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu\fsr3upscaler">
+      <UniqueIdentifier>{83de9604-b57f-4f78-8a3a-0e8d3b748a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\components\fsr3">
+      <UniqueIdentifier>{f5c12593-bfc7-4aaa-9d1f-5c6116931a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\hlsl\opticalflow">
+      <UniqueIdentifier>{05d3b09b-c4a9-4c03-bfee-bec24340ded0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\hlsl\frameinterpolation">
+      <UniqueIdentifier>{fe32b867-3701-49d0-88f9-e540c11457d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu\frameinterpolation">
+      <UniqueIdentifier>{0e9818f5-9427-462d-a153-f596f0f0f92f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu\opticalflow">
+      <UniqueIdentifier>{2fb05971-1f42-4dc6-aed8-b31ae4cdbf15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\components\fsr3upscaler">
+      <UniqueIdentifier>{6a2539ed-fb70-45d0-a8f3-d58650d30eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\components\opticalflow">
+      <UniqueIdentifier>{231822b0-1c12-4713-92e9-c60fb193149d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\components\frameinterpolation">
+      <UniqueIdentifier>{a757c8d9-21a2-41bf-9c02-376684d4ba48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\backends\hlsl\fsr2">
+      <UniqueIdentifier>{24676385-74de-4b91-b0f6-566742d2b5f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\gpu\fsr2">
+      <UniqueIdentifier>{e0f906bc-5379-4fca-876e-23ec6768071d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\components\fsr2">
+      <UniqueIdentifier>{b1c41458-3f81-4ec0-a633-76b8a905ed8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FidelityFX\host\shared">
+      <UniqueIdentifier>{5dae173e-dab4-4930-bb24-d16841428ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXBC">
+      <UniqueIdentifier>{b7b3c290-8e8c-4771-b98c-c6f490751014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ffx-api">
+      <UniqueIdentifier>{dd6e702b-e7f8-49bf-a167-d31f51f6ad1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ffx-api\include">
+      <UniqueIdentifier>{cf19a49c-cb51-4ea3-9f80-a44133791a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ffx-api\src">
+      <UniqueIdentifier>{ed01203c-70a9-4e81-8ad2-d766639ca0ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ffx-api\src\resource">
+      <UniqueIdentifier>{9590d7af-6133-44be-8dc9-ca0d5503f673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ffx-api\include\ffx_api">
+      <UniqueIdentifier>{5a6a14d1-74ad-4668-9546-24d896734187}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FidelityFX\host\backends\ffx_shader_blobs.h">
+      <Filter>FidelityFX\host\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\backends\dx11\ffx_dx11.h">
+      <Filter>FidelityFX\host\backends\dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_fsr3upscaler_shaderblobs.h">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\fsr3\ffx_fsr3_maximum_bias.h">
+      <Filter>FidelityFX\host\components\fsr3</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\fsr3\ffx_fsr3_private.h">
+      <Filter>FidelityFX\host\components\fsr3</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_frameinterpolation_shaderblobs.h">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_opticalflow_shaderblobs.h">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_callbacks_hlsl.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_common.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_compute_inpainting_pyramid.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_debug_view.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_disocclusion_mask.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_inpainting.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_resources.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_setup.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_callbacks_hlsl.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_common.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_luminance_pyramid.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_optical_flow_v5.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_compute_scd_divergence.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_filter_optical_flow_v5.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_generate_scd_histogram.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_prepare_luma.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_resources.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_scale_optical_flow_advanced_v5.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler_maximum_bias.h">
+      <Filter>FidelityFX\host\components\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler_private.h">
+      <Filter>FidelityFX\host\components\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\opticalflow\ffx_opticalflow_private.h">
+      <Filter>FidelityFX\host\components\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\frameinterpolation\ffx_frameinterpolation_private.h">
+      <Filter>FidelityFX\host\components\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\ffx_fsr3.h">
+      <Filter>FidelityFX\host</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\ffx_frameinterpolation.h">
+      <Filter>FidelityFX\host</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\ffx_fsr3upscaler.h">
+      <Filter>FidelityFX\host</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\ffx_opticalflow.h">
+      <Filter>FidelityFX\host</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_callbacks_glsl.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\frameinterpolation\ffx_frameinterpolation_reconstruct_dilated_velocity_and_previous_depth.h">
+      <Filter>FidelityFX\gpu\frameinterpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\opticalflow\ffx_opticalflow_callbacks_glsl.h">
+      <Filter>FidelityFX\gpu\opticalflow</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_accumulate.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_callbacks_glsl.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_callbacks_hlsl.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_common.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_debug_view.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_luma_instability.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_luma_pyramid.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_prepare_inputs.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_prepare_reactivity.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_rcas.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_reproject.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_resources.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_sample.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_shading_change.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_shading_change_pyramid.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr3upscaler\ffx_fsr3upscaler_upsample.h">
+      <Filter>FidelityFX\gpu\fsr3upscaler</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\backends\blob_accessors\ffx_fsr2_shaderblobs.h">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_accumulate.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_callbacks_glsl.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_callbacks_hlsl.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_common.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_compute_luminance_pyramid.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_depth_clip.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_lock.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_postprocess_lock_status.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_rcas.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_reconstruct_dilated_velocity_and_previous_depth.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_reproject.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_resources.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_sample.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_tcr_autogen.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\gpu\fsr2\ffx_fsr2_upsample.h">
+      <Filter>FidelityFX\gpu\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\fsr2\ffx_fsr2_maximum_bias.h">
+      <Filter>FidelityFX\host\components\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\components\fsr2\ffx_fsr2_private.h">
+      <Filter>FidelityFX\host\components\fsr2</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\ffx_fsr2.h">
+      <Filter>FidelityFX\host</Filter>
+    </ClInclude>
+    <ClInclude Include="FidelityFX\host\shared\ffx_object_management.h">
+      <Filter>FidelityFX\host\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DXBC\md5.h">
+      <Filter>DXBC</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\src\backends.h">
+      <Filter>ffx-api\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\src\ffx_provider.h">
+      <Filter>ffx-api\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\src\ffx_provider_external.h">
+      <Filter>ffx-api\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\src\ffx_provider_framegeneration.h">
+      <Filter>ffx-api\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\src\ffx_provider_fsr2.h">
+      <Filter>ffx-api\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\src\ffx_provider_fsr3upscale.h">
+      <Filter>ffx-api\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\src\validation.h">
+      <Filter>ffx-api\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\src\resource\resource.h">
+      <Filter>ffx-api\src\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_api.h">
+      <Filter>ffx-api\include\ffx_api</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_api.hpp">
+      <Filter>ffx-api\include\ffx_api</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_api_loader.h">
+      <Filter>ffx-api\include\ffx_api</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_api_types.h">
+      <Filter>ffx-api\include\ffx_api</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_framegeneration.h">
+      <Filter>ffx-api\include\ffx_api</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_framegeneration.hpp">
+      <Filter>ffx-api\include\ffx_api</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_upscale.h">
+      <Filter>ffx-api\include\ffx_api</Filter>
+    </ClInclude>
+    <ClInclude Include="ffx-api\include\ffx_api\ffx_upscale.hpp">
+      <Filter>ffx-api\include\ffx_api</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FidelityFX\host\backends\ffx_shader_blobs.cpp">
+      <Filter>FidelityFX\host\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\backends\dx11\ffx_dx11.cpp">
+      <Filter>FidelityFX\host\backends\dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_fsr3upscaler_shaderblobs.cpp">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\components\fsr3\ffx_fsr3.cpp">
+      <Filter>FidelityFX\host\components\fsr3</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_frameinterpolation_shaderblobs.cpp">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_opticalflow_shaderblobs.cpp">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\components\fsr3upscaler\ffx_fsr3upscaler.cpp">
+      <Filter>FidelityFX\host\components\fsr3upscaler</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\components\opticalflow\ffx_opticalflow.cpp">
+      <Filter>FidelityFX\host\components\opticalflow</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\components\frameinterpolation\ffx_frameinterpolation.cpp">
+      <Filter>FidelityFX\host\components\frameinterpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\backends\blob_accessors\ffx_fsr2_shaderblobs.cpp">
+      <Filter>FidelityFX\host\backends\blob_accessors</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\components\fsr2\ffx_fsr2.cpp">
+      <Filter>FidelityFX\host\components\fsr2</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\shared\ffx_assert.cpp">
+      <Filter>FidelityFX\host\shared</Filter>
+    </ClCompile>
+    <ClCompile Include="FidelityFX\host\shared\ffx_object_management.cpp">
+      <Filter>FidelityFX\host\shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DXBC\DXBCChecksum.c">
+      <Filter>DXBC</Filter>
+    </ClCompile>
+    <ClCompile Include="DXBC\md5.c">
+      <Filter>DXBC</Filter>
+    </ClCompile>
+    <ClCompile Include="ffx-api\src\backends.cpp">
+      <Filter>ffx-api\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ffx-api\src\ffx_api.cpp">
+      <Filter>ffx-api\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ffx-api\src\ffx_provider.cpp">
+      <Filter>ffx-api\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ffx-api\src\ffx_provider_framegeneration.cpp">
+      <Filter>ffx-api\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ffx-api\src\ffx_provider_fsr2.cpp">
+      <Filter>ffx-api\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ffx-api\src\ffx_provider_fsr3upscale.cpp">
+      <Filter>ffx-api\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ffx-api\src\validation.cpp">
+      <Filter>ffx-api\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_accumulate_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_autogen_reactive_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_compute_luminance_pyramid_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_depth_clip_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_lock_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_rcas_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_reconstruct_previous_depth_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr3scaler</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_compute_inpainting_pyramid_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_debug_view_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_disocclusion_mask_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_game_motion_vector_field_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_inpainting_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_optical_flow_vector_field_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_reconstruct_previous_depth_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_setup_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_luminance_pyramid_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\opticalflow</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_optical_flow_advanced_pass_v5.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\opticalflow</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_compute_scd_divergence_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\opticalflow</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_filter_optical_flow_pass_v5.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\opticalflow</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_generate_scd_histogram_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\opticalflow</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_prepare_luma_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\opticalflow</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\opticalflow\ffx_opticalflow_scale_optical_flow_advanced_pass_v5.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\opticalflow</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_accumulate_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_autogen_reactive_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_compute_luminance_pyramid_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_debug_blit.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_depth_clip_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_lock_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_rcas_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_reconstruct_previous_depth_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\hlsl\fsr2\ffx_fsr2_tcr_autogen_pass.hlsl">
+      <Filter>FidelityFX\host\backends\hlsl\fsr2</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ffx-api\src\resource\ffx_api_dll.rc">
+      <Filter>ffx-api\src\resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
