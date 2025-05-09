@@ -72,9 +72,9 @@ typedef struct BackendContext_DX11 {
     ID3D11Device*           device = nullptr;
     ID3D11DeviceContext*    deviceContext = nullptr;
     ID3D11DeviceContext1*   deviceContext1 = nullptr;
-
+#if HAVE_NVIDIA
     HRESULT               (*NvAPI_D3D11_SetNvShaderExtnSlot)(IUnknown*, uint32_t) = nullptr;
-
+#endif
     FfxGpuJobDescription*   pGpuJobs;
     uint32_t                gpuJobCount;
 
@@ -743,6 +743,7 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect 
             backendContext->deviceContext->QueryInterface(IID_PPV_ARGS(&backendContext->deviceContext1));
         }
 
+#if HAVE_AMD
         if (ffxDeviceVendor == 0) {
 
 #if defined(_M_IX86)
@@ -752,7 +753,7 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect 
 #endif
             ffxDeviceVendor = ags ? '1002' : 0;
         }
-
+#elif HAVE_NVIDIA
         if (ffxDeviceVendor == 0) {
 
 #if defined(_M_IX86)
@@ -777,6 +778,7 @@ FfxErrorCode CreateBackendContextDX11(FfxInterface* backendInterface, FfxEffect 
                 }
             }
         }
+#endif
 
         // Map all of our pointers
         uint32_t gpuJobDescArraySize = FFX_ALIGN_UP(backendContext->maxEffectContexts * FFX_MAX_GPU_JOBS * sizeof(FfxGpuJobDescription), sizeof(uint32_t));
@@ -1821,17 +1823,23 @@ FfxErrorCode CreatePipelineDX11(
     }
 
     // create the PSO
+#if HAVE_NVIDIA
     if (backendContext->NvAPI_D3D11_SetNvShaderExtnSlot)
         backendContext->NvAPI_D3D11_SetNvShaderExtnSlot(backendContext->device, 15);
+#endif
     if (FAILED(dx11Device->CreateComputeShader(data, shaderBlob.size, nullptr, (ID3D11ComputeShader**)&outPipeline->pipeline)))
     {
+#if HAVE_NVIDIA
         if (backendContext->NvAPI_D3D11_SetNvShaderExtnSlot)
             backendContext->NvAPI_D3D11_SetNvShaderExtnSlot(backendContext->device, ~0);
+#endif
         delete[] data;
         return FFX_ERROR_BACKEND_API_ERROR;
     }
+#if HAVE_NVIDIA
     if (backendContext->NvAPI_D3D11_SetNvShaderExtnSlot)
         backendContext->NvAPI_D3D11_SetNvShaderExtnSlot(backendContext->device, ~0);
+#endif
     delete[] data;
 
     // Set the pipeline name
