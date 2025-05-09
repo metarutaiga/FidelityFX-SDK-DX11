@@ -27,16 +27,16 @@
 #include <dxgi.h>
 #include <dxgi1_2.h>
 
-#define FFX_API_CREATE_CONTEXT_DESC_TYPE_BACKEND_DX11 0x0000001u
+#define FFX_API_CREATE_CONTEXT_DESC_TYPE_BACKEND_DX11 0x0000002u
 struct ffxCreateBackendDX11Desc
 {
     ffxCreateContextDescHeader header;
     ID3D11Device              *device;  ///< Device on which the backend will run.
 };
 
-#define FFX_API_EFFECT_ID_FRAMEGENERATIONSWAPCHAIN_DX11 0x00020000u
+#define FFX_API_EFFECT_ID_FRAMEGENERATIONSWAPCHAIN_DX11 0x00030000u
 
-#define FFX_API_CREATE_CONTEXT_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_WRAP_DX11 0x20001u
+#define FFX_API_CREATE_CONTEXT_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_WRAP_DX11 0x30001u
 struct ffxCreateContextDescFrameGenerationSwapChainWrapDX11
 {
     ffxCreateContextDescHeader header;
@@ -44,7 +44,7 @@ struct ffxCreateContextDescFrameGenerationSwapChainWrapDX11
     ID3D11DeviceContext* gameQueue;     ///< Input command queue to be used for presentation.
 };
 
-#define FFX_API_CREATE_CONTEXT_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_NEW_DX11 0x20005u
+#define FFX_API_CREATE_CONTEXT_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_NEW_DX11 0x30005u
 struct ffxCreateContextDescFrameGenerationSwapChainNewDX11
 {
     ffxCreateContextDescHeader header;
@@ -54,7 +54,7 @@ struct ffxCreateContextDescFrameGenerationSwapChainNewDX11
     ID3D11DeviceContext* gameQueue;     ///< Input command queue to be used for presentation.
 };
 
-#define FFX_API_CREATE_CONTEXT_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_FOR_HWND_DX11 0x20006u
+#define FFX_API_CREATE_CONTEXT_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_FOR_HWND_DX11 0x30006u
 struct ffxCreateContextDescFrameGenerationSwapChainForHwndDX11
 {
     ffxCreateContextDescHeader header;
@@ -66,7 +66,7 @@ struct ffxCreateContextDescFrameGenerationSwapChainForHwndDX11
     ID3D11DeviceContext* gameQueue;                  ///< Input command queue to be used for presentation.
 };
 
-#define FFX_API_CONFIGURE_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_REGISTERUIRESOURCE_DX11 0x20002u
+#define FFX_API_CONFIGURE_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_REGISTERUIRESOURCE_DX11 0x30002u
 struct ffxConfigureDescFrameGenerationSwapChainRegisterUiResourceDX11
 {
     ffxConfigureDescHeader header;
@@ -74,27 +74,27 @@ struct ffxConfigureDescFrameGenerationSwapChainRegisterUiResourceDX11
     uint32_t               flags;        ///< Zero or combination of values from FfxApiUiCompositionFlags.
 };
 
-#define FFX_API_QUERY_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_INTERPOLATIONCOMMANDLIST_DX11 0x20003u
+#define FFX_API_QUERY_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_INTERPOLATIONCOMMANDLIST_DX11 0x30003u
 struct ffxQueryDescFrameGenerationSwapChainInterpolationCommandListDX11
 {
     ffxQueryDescHeader header;
     void** pOutCommandList;             ///< Output command list (ID3D12GraphicsCommandList) to be used for frame generation dispatch.
 };
 
-#define FFX_API_QUERY_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_INTERPOLATIONTEXTURE_DX11 0x20004u
+#define FFX_API_QUERY_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_INTERPOLATIONTEXTURE_DX11 0x30004u
 struct ffxQueryDescFrameGenerationSwapChainInterpolationTextureDX11
 {
     ffxQueryDescHeader header;
     struct FfxApiResource *pOutTexture; ///< Output resource in which the frame interpolation result should be placed.
 };
 
-#define FFX_API_DISPATCH_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_WAIT_FOR_PRESENTS_DX11 0x20007u
+#define FFX_API_DISPATCH_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_WAIT_FOR_PRESENTS_DX11 0x30007u
 struct ffxDispatchDescFrameGenerationSwapChainWaitForPresentsDX11
 {
     ffxDispatchDescHeader header;
 };
 
-#define FFX_API_CONFIGURE_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_KEYVALUE_DX11 0x20008u
+#define FFX_API_CONFIGURE_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_KEYVALUE_DX11 0x30008u
 struct ffxConfigureDescFrameGenerationSwapChainKeyValueDX11
 {
     ffxConfigureDescHeader  header;
@@ -110,7 +110,7 @@ enum FfxApiConfigureFrameGenerationSwapChainKeyDX11
     FFX_API_CONFIGURE_FG_SWAPCHAIN_KEY_FRAMEPACINGTUNING = 2,                ///< Sets FfxApiSwapchainFramePacingTuning
 };
 
-#define FFX_API_QUERY_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_GPU_MEMORY_USAGE_DX11 0x00020009u
+#define FFX_API_QUERY_DESC_TYPE_FRAMEGENERATIONSWAPCHAIN_GPU_MEMORY_USAGE_DX11 0x00030009u
 struct ffxQueryFrameGenerationSwapChainGetGPUMemoryUsageDX11
 {
     ffxQueryDescHeader header;

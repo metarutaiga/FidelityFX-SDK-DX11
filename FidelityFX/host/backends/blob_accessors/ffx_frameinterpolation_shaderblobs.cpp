@@ -96,10 +96,10 @@ static FfxShaderBlob FrameInterpolationGetReconstructAndDilatePermutationBlobByI
     static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_setup_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_setup_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations[INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations[INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations[INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations[INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),

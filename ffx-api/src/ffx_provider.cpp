@@ -73,6 +73,7 @@ struct ExternalProviderData
 
 void GetExternalProviders(ID3D12Device* device, uint64_t descType)
 {
+#ifdef FFX_BACKEND_DX12
     static IAmdExtFfxApi* apiExtension = nullptr;
 
     if (nullptr != device)
@@ -128,7 +129,7 @@ void GetExternalProviders(ID3D12Device* device, uint64_t descType)
             }
         }
     }
-    
+#endif
 }
 
 const ffxProvider* GetffxProvider(ffxStructType_t descType, uint64_t overrideId, void* device)
