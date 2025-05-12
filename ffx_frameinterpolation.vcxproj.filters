@@ -154,209 +154,821 @@
     <FxCompile Include="FidelityFX\host\backends\hlsl\frameinterpolation\ffx_frameinterpolation_setup_pass.hlsl">
       <Filter>FidelityFX\host\backends\hlsl\frameinterpolation</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_0_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_0_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_0_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_0_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_1_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_1_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_1_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_16bit_permutations_1_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_0_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_0_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_0_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_0_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_debug_view_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_disocclusion_mask_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_game_motion_vector_field_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_inpainting_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_optical_flow_vector_field_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations\ffx_frameinterpolation_setup_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
-      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
-      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl">
-      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl">
-      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
-      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
-      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl">
-      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl">
-      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_amd\amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_amd</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_0_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_0_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_1_0.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
     </FxCompile>
-    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1.hlsl">
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_1_1.hlsl">
       <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_intel\intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_intel</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_0_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_0_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_0_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_1_0.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
+    </FxCompile>
+    <FxCompile Include="FidelityFX\host\backends\blob_accessors\permutations_nvidia\nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations_1_1_1.hlsl">
+      <Filter>FidelityFX\host\backends\blob_accessors\permutations_nvidia</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

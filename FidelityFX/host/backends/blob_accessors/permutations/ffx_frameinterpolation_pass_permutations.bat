@@ -25,7 +25,11 @@ for %%a in (_compute_game_vector_field_inpainting_pyramid_,_compute_inpainting_p
   for %%b in (_,_16bit_) do (
     call :header %%a %%b
     for %%c in (0,1) do (
-      call :hlsl %%a %%b %%c
+      for %%d in (0,1) do (
+        for %%e in (0,1) do (
+          call :hlsl %%a %%b %%c %%d %%e
+        )
+      )
     )
   )
 )
@@ -33,7 +37,7 @@ goto :eof
 
 :hlsl
 setlocal
-set file=ffx_frameinterpolation%1pass%2permutations_%3.hlsl
+set file=ffx_frameinterpolation%1pass%2permutations_%3_%4_%5.hlsl
 if exist %file% goto :eof
 echo %file%
 
@@ -51,7 +55,9 @@ echo #define FFX_FRAMEINTERPOLATION_OPTION_REPROJECT_SAMPLERS_USE_DATA_HALF 1 >>
 echo #define FFX_FRAMEINTERPOLATION_OPTION_POSTPROCESSLOCKSTATUS_SAMPLERS_USE_DATA_HALF 0 >>%file%
 echo #define FFX_FRAMEINTERPOLATION_OPTION_UPSAMPLE_USE_LANCZOS_TYPE 2 >>%file%
 echo.>>%file%
-echo #define FFX_FRAMEINTERPOLATION_OPTION_INVERTED_DEPTH %3 >>%file%
+echo #define FFX_FRAMEINTERPOLATION_OPTION_LOW_RES_MOTION_VECTORS %3 >>%file%
+echo #define FFX_FRAMEINTERPOLATION_OPTION_JITTER_MOTION_VECTORS %4 >>%file%
+echo #define FFX_FRAMEINTERPOLATION_OPTION_INVERTED_DEPTH %5 >>%file%
 echo.>>%file%
 echo #include "../../hlsl/frameinterpolation/ffx_frameinterpolation%1pass.hlsl">>%file%
 goto :eof
@@ -66,13 +72,25 @@ call ffx_license.bat %file%
 echo typedef unsigned char BYTE;>>%file%
 echo.>>%file%
 for %%c in (0,1) do (
-  echo #include "ffx_frameinterpolation%1pass%2permutations_%%c.h">>%file%
+  for %%d in (0,1) do (
+    for %%e in (0,1) do (
+      echo #include "ffx_frameinterpolation%1pass%2permutations_%%c_%%d_%%e.h">>%file%
+    )
+  )
 )
 echo.>>%file%
-echo static const struct { const uint8_t* data; uint32_t size; } g_ffx_frameinterpolation%1pass%2permutations[2] = {>>%file%
+echo static const struct { const uint8_t* data; uint32_t size; } g_ffx_frameinterpolation%1pass%2permutations[2][2][2] = {>>%file%
 for %%c in (0,1) do (
   echo     {>>%file%
-  echo         g_ffx_frameinterpolation%1pass%2permutations_%%c, sizeof^(g_ffx_frameinterpolation%1pass%2permutations_%%c^)>>%file%
+  for %%d in (0,1) do (
+    echo         {>>%file%
+    for %%e in (0,1) do (
+      echo             {>>%file%
+      echo                 g_ffx_frameinterpolation%1pass%2permutations_%%c_%%d_%%e, sizeof^(g_ffx_frameinterpolation%1pass%2permutations_%%c_%%d_%%e^)>>%file%
+      echo             },>>%file%
+    )
+    echo         },>>%file%
+  )
   echo     },>>%file%
 )
 echo };>>%file%
