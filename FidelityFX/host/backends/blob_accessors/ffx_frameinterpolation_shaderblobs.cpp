@@ -70,6 +70,8 @@
 
 static FfxShaderBlob FrameInterpolationGetReconstructAndDilatePermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -96,10 +98,10 @@ static FfxShaderBlob FrameInterpolationGetReconstructAndDilatePermutationBlobByI
     static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_reconstruct_and_dilate_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_reconstruct_and_dilate_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -126,6 +128,8 @@ static FfxShaderBlob FrameInterpolationGetReconstructAndDilatePermutationBlobByI
 
 static FfxShaderBlob FrameInterpolationGetSetupPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -154,10 +158,10 @@ static FfxShaderBlob FrameInterpolationGetSetupPermutationBlobByIndex(uint32_t p
     static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_setup_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_setup_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_setup_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_setup_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_setup_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -184,6 +188,8 @@ static FfxShaderBlob FrameInterpolationGetSetupPermutationBlobByIndex(uint32_t p
 
 static FfxShaderBlob FrameInterpolationGetGameMotionVectorFieldPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -212,10 +218,10 @@ static FfxShaderBlob FrameInterpolationGetGameMotionVectorFieldPermutationBlobBy
     static const uint32_t boundUAVTextureSpaces[] = { 0, 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_game_motion_vector_field_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_game_motion_vector_field_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_game_motion_vector_field_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_game_motion_vector_field_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_game_motion_vector_field_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -242,6 +248,8 @@ static FfxShaderBlob FrameInterpolationGetGameMotionVectorFieldPermutationBlobBy
 
 static FfxShaderBlob FrameInterpolationGetOpticalFlowVectorFieldPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -268,10 +276,10 @@ static FfxShaderBlob FrameInterpolationGetOpticalFlowVectorFieldPermutationBlobB
     static const uint32_t boundUAVTextureSpaces[] = { 0, 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_optical_flow_vector_field_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_optical_flow_vector_field_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_optical_flow_vector_field_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_optical_flow_vector_field_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_optical_flow_vector_field_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -298,6 +306,8 @@ static FfxShaderBlob FrameInterpolationGetOpticalFlowVectorFieldPermutationBlobB
 
 static FfxShaderBlob FrameInterpolationGetReconstructPrevDepthPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -323,10 +333,10 @@ static FfxShaderBlob FrameInterpolationGetReconstructPrevDepthPermutationBlobByI
     static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_reconstruct_previous_depth_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_reconstruct_previous_depth_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -353,6 +363,8 @@ static FfxShaderBlob FrameInterpolationGetReconstructPrevDepthPermutationBlobByI
 
 static FfxShaderBlob FrameInterpolationGetDisocclusionMaskPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -382,10 +394,10 @@ static FfxShaderBlob FrameInterpolationGetDisocclusionMaskPermutationBlobByIndex
     static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_disocclusion_mask_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_disocclusion_mask_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_disocclusion_mask_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_disocclusion_mask_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_disocclusion_mask_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -412,6 +424,8 @@ static FfxShaderBlob FrameInterpolationGetDisocclusionMaskPermutationBlobByIndex
 
 static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -448,10 +462,10 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
     static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_compute_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -477,29 +491,29 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
 #if HAVE_AMD
     if (ffxDeviceVendor == '1002') {
         const_cast<const uint8_t*&>(blob.data) =
-            is16bit ? g_amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
-                    : g_amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+            is16bit ? g_amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                    : g_amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data;
         const_cast<uint32_t&>(blob.size) = 
-            is16bit ? g_amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
-                    : g_amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+            is16bit ? g_amd_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                    : g_amd_frameinterpolation_compute_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size;
     }
 #elif HAVE_INTEL
     if (ffxDeviceVendor == '8086') {
         const_cast<const uint8_t*&>(blob.data) =
-            is16bit ? g_intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
-                    : g_intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+            is16bit ? g_intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                    : g_intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data;
         const_cast<uint32_t&>(blob.size) = 
-            is16bit ? g_intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
-                    : g_intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+            is16bit ? g_intel_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                    : g_intel_frameinterpolation_compute_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size;
     }
 #elif HAVE_NVIDIA
     if (ffxDeviceVendor == '10de') {
         const_cast<const uint8_t*&>(blob.data) =
-            is16bit ? g_nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
-                    : g_nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+            is16bit ? g_nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                    : g_nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data;
         const_cast<uint32_t&>(blob.size) = 
-            is16bit ? g_nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
-                    : g_nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+            is16bit ? g_nv_frameinterpolation_compute_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                    : g_nv_frameinterpolation_compute_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size;
     }
 #endif
 
@@ -508,6 +522,8 @@ static FfxShaderBlob FrameInterpolationGetComputeInpaintingPyramidPassPermutatio
 
 static FfxShaderBlob FrameInterpolationGetFiPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -539,10 +555,10 @@ static FfxShaderBlob FrameInterpolationGetFiPassPermutationBlobByIndex(uint32_t 
     static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -569,6 +585,8 @@ static FfxShaderBlob FrameInterpolationGetFiPassPermutationBlobByIndex(uint32_t 
 
 static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyramidPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -606,10 +624,10 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
     static const uint32_t boundUAVTextureSpaces[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -635,29 +653,29 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
 #if HAVE_AMD
     if (ffxDeviceVendor == '1002') {
         const_cast<const uint8_t*&>(blob.data) =
-            is16bit ? g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
-                    : g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+            is16bit ? g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                    : g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data;
         const_cast<uint32_t&>(blob.size) = 
-            is16bit ? g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
-                    : g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+            is16bit ? g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                    : g_amd_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size;
     }
 #elif HAVE_INTEL
     if (ffxDeviceVendor == '8086') {
         const_cast<const uint8_t*&>(blob.data) =
-            is16bit ? g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
-                    : g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+            is16bit ? g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                    : g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data;
         const_cast<uint32_t&>(blob.size) = 
-            is16bit ? g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
-                    : g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+            is16bit ? g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                    : g_intel_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size;
     }
 #elif HAVE_NVIDIA
     if (ffxDeviceVendor == '10de') {
         const_cast<const uint8_t*&>(blob.data) =
-            is16bit ? g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].data
-                    : g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].data;
+            is16bit ? g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                    : g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data;
         const_cast<uint32_t&>(blob.size) = 
-            is16bit ? g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[INVERTED_DEPTH].size
-                    : g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[INVERTED_DEPTH].size;
+            is16bit ? g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                    : g_nv_frameinterpolation_compute_game_vector_field_inpainting_pyramid_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size;
     }
 #endif
 
@@ -666,6 +684,8 @@ static FfxShaderBlob FrameInterpolationGetComputeGameVectorFieldInpaintingPyrami
 
 static FfxShaderBlob FrameInterpolationGetInpaintingPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -692,10 +712,10 @@ static FfxShaderBlob FrameInterpolationGetInpaintingPassPermutationBlobByIndex(u
     static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_inpainting_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_inpainting_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_inpainting_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_inpainting_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_inpainting_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_inpainting_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_inpainting_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_inpainting_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
@@ -722,6 +742,8 @@ static FfxShaderBlob FrameInterpolationGetInpaintingPassPermutationBlobByIndex(u
 
 static FfxShaderBlob FrameInterpolationGetDebugViewPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
+    bool LOW_RES_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_LOW_RES_MOTION_VECTORS);
+    bool JITTER_MOTION_VECTORS = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_JITTER_MOTION_VECTORS);
     bool INVERTED_DEPTH = FFX_CONTAINS_FLAG(permutationOptions, FRAMEINTERPOLATION_SHADER_PERMUTATION_DEPTH_INVERTED);
 
     // Resource Bindings:
@@ -753,10 +775,10 @@ static FfxShaderBlob FrameInterpolationGetDebugViewPassPermutationBlobByIndex(ui
     static const uint32_t boundUAVTextureSpaces[] = { 0 };
 
     FfxShaderBlob blob = {
-        is16bit ? g_ffx_frameinterpolation_debug_view_pass_16bit_permutations[INVERTED_DEPTH].data
-                : g_ffx_frameinterpolation_debug_view_pass_permutations[INVERTED_DEPTH].data,
-        is16bit ? g_ffx_frameinterpolation_debug_view_pass_16bit_permutations[INVERTED_DEPTH].size
-                : g_ffx_frameinterpolation_debug_view_pass_permutations[INVERTED_DEPTH].size,
+        is16bit ? g_ffx_frameinterpolation_debug_view_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data
+                : g_ffx_frameinterpolation_debug_view_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].data,
+        is16bit ? g_ffx_frameinterpolation_debug_view_pass_16bit_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size
+                : g_ffx_frameinterpolation_debug_view_pass_permutations[LOW_RES_MOTION_VECTORS][JITTER_MOTION_VECTORS][INVERTED_DEPTH].size,
         __crt_countof(boundConstantBufferNames),
         __crt_countof(boundSRVTextureNames),
         __crt_countof(boundUAVTextureNames),
