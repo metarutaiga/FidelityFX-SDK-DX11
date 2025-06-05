@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,113 +20,94 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 #include <FidelityFX/host/ffx_util.h>
 #include "ffx_fsr1_shaderblobs.h"
 #include "fsr1/ffx_fsr1_private.h"
 
-#include "permutations/ffx_fsr1_easu_pass_permutations.h"
-#include "permutations/ffx_fsr1_rcas_pass_permutations.h"
+#include <ffx_fsr1_easu_pass_permutations.h>
+#include <ffx_fsr1_rcas_pass_permutations.h>
 
-#include "permutations/ffx_fsr1_easu_pass_16bit_permutations.h"
-#include "permutations/ffx_fsr1_rcas_pass_16bit_permutations.h"
+#include <ffx_fsr1_easu_pass_wave64_permutations.h>
+#include <ffx_fsr1_rcas_pass_wave64_permutations.h>
+
+#include <ffx_fsr1_easu_pass_16bit_permutations.h>
+#include <ffx_fsr1_rcas_pass_16bit_permutations.h>
+
+#include <ffx_fsr1_easu_pass_wave64_16bit_permutations.h>
+#include <ffx_fsr1_rcas_pass_wave64_16bit_permutations.h>
 
 #include <string.h> // for memset
 
+#if defined(POPULATE_PERMUTATION_KEY)
+#undef POPULATE_PERMUTATION_KEY
+#endif // #if defined(POPULATE_PERMUTATION_KEY)
+#define POPULATE_PERMUTATION_KEY(options, key)                                                                              \
+key.index = 0;                                                                                                              \
+key.FFX_FSR1_OPTION_APPLY_RCAS = FFX_CONTAINS_FLAG(options, FSR1_SHADER_PERMUTATION_APPLY_RCAS);                            \
+key.FFX_FSR1_OPTION_RCAS_PASSTHROUGH_ALPHA = FFX_CONTAINS_FLAG(options, FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA);    \
+key.FFX_FSR1_OPTION_SRGB_CONVERSIONS = FFX_CONTAINS_FLAG(options, FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS);
+
 static FfxShaderBlob fsr1GetEasuPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
-    int APPLY_RCAS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_APPLY_RCAS);
-    int RCAS_PASSTHROUGH_ALPHA = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA);
-    int RCAS_DENOISE = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_DENOISE);    
-    int SRGB_CONVERSIONS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS);
 
-    // Name                                 Type  Format         Dim      HLSL Bind  Count
-    // ------------------------------ ---------- ------- ----------- -------------- ------
-    // r_input_color                     texture  float4          2d             t0      1 
-    // rw_upscaled_output                    UAV  float4          2d             u1      1 
-    // cbFSR1                            cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbFSR1" };
-    static const uint32_t boundConstantBuffers[] = { 0 };
-    static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_input_color" };
-    static const uint32_t boundSRVTextures[] = { 0 };
-    static const uint32_t boundSRVTextureCounts[] = { 1 };
-    static const char* boundUAVTextureNames[] = { "rw_upscaled_output" };
-    static const uint32_t boundUAVTextures[] = { 1 };
-    static const uint32_t boundUAVTextureCounts[] = { 1 };
+    ffx_fsr1_easu_pass_PermutationKey key;
+    POPULATE_PERMUTATION_KEY(permutationOptions, key);
 
-    FfxShaderBlob blob = {
-        is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data
-                : g_ffx_fsr1_easu_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data,
-        is16bit ? g_ffx_fsr1_easu_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size
-                : g_ffx_fsr1_easu_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size,
-        __crt_countof(boundConstantBufferNames),
-        __crt_countof(boundSRVTextureNames),
-        __crt_countof(boundUAVTextureNames),
-        0,
-        0,
-        0,
-        0,
-        boundConstantBufferNames,
-        boundConstantBuffers,
-        boundConstantBufferCounts,
-        boundSRVTextureNames,
-        boundSRVTextures,
-        boundSRVTextureCounts,
-        boundUAVTextureNames,
-        boundUAVTextures,
-        boundUAVTextureCounts,
-    };
+    if (isWave64) {
 
-    return blob;
+        if (is16bit) {
+
+            const int32_t tableIndex = g_ffx_fsr1_easu_pass_wave64_16bit_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_fsr1_easu_pass_wave64_16bit_PermutationInfo, tableIndex);
+        } else {
+
+            const int32_t tableIndex = g_ffx_fsr1_easu_pass_wave64_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_fsr1_easu_pass_wave64_PermutationInfo, tableIndex);
+        }
+    } else {
+
+        if (is16bit) {
+
+            const int32_t tableIndex = g_ffx_fsr1_easu_pass_16bit_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_fsr1_easu_pass_16bit_PermutationInfo, tableIndex);
+        } else {
+
+            const int32_t tableIndex = g_ffx_fsr1_easu_pass_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_fsr1_easu_pass_PermutationInfo, tableIndex);
+        }
+    }
 }
 
 static FfxShaderBlob fsr1GetRcasPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
-    int APPLY_RCAS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_APPLY_RCAS);
-    int RCAS_PASSTHROUGH_ALPHA = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_PASSTHROUGH_ALPHA);
-    int RCAS_DENOISE = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_RCAS_DENOISE);
-    int SRGB_CONVERSIONS = FFX_CONTAINS_FLAG(permutationOptions, FSR1_SHADER_PERMUTATION_SRGB_CONVERSIONS);
 
-    // Name                                 Type  Format         Dim      HLSL Bind  Count
-    // ------------------------------ ---------- ------- ----------- -------------- ------
-    // r_internal_upscaled_color         texture  float4          2d             t0      1 
-    // rw_upscaled_output                    UAV  float4          2d             u0      1 
-    // cbFSR1                            cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbFSR1" };
-    static const uint32_t boundConstantBuffers[] = { 0 };
-    static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_internal_upscaled_color" };
-    static const uint32_t boundSRVTextures[] = { 0 };
-    static const uint32_t boundSRVTextureCounts[] = { 1 };
-    static const char* boundUAVTextureNames[] = { "rw_upscaled_output" };
-    static const uint32_t boundUAVTextures[] = { 0 };
-    static const uint32_t boundUAVTextureCounts[] = { 1 };
+    ffx_fsr1_rcas_pass_PermutationKey key;
 
-    FfxShaderBlob blob = {
-        is16bit ? g_ffx_fsr1_rcas_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data
-                : g_ffx_fsr1_rcas_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].data,
-        is16bit ? g_ffx_fsr1_rcas_pass_16bit_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size
-                : g_ffx_fsr1_rcas_pass_permutations[APPLY_RCAS][RCAS_PASSTHROUGH_ALPHA][RCAS_DENOISE][SRGB_CONVERSIONS].size,
-        __crt_countof(boundConstantBufferNames),
-        __crt_countof(boundSRVTextureNames),
-        __crt_countof(boundUAVTextureNames),
-        0,
-        0,
-        0,
-        0,
-        boundConstantBufferNames,
-        boundConstantBuffers,
-        boundConstantBufferCounts,
-        boundSRVTextureNames,
-        boundSRVTextures,
-        boundSRVTextureCounts,
-        boundUAVTextureNames,
-        boundUAVTextures,
-        boundUAVTextureCounts,
-    };
+    POPULATE_PERMUTATION_KEY(permutationOptions, key);
 
-    return blob;
+    if (isWave64) {
+
+        if (is16bit) {
+
+            const int32_t tableIndex = g_ffx_fsr1_rcas_pass_wave64_16bit_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_fsr1_rcas_pass_wave64_16bit_PermutationInfo, tableIndex);
+        } else {
+
+            const int32_t tableIndex = g_ffx_fsr1_rcas_pass_wave64_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_fsr1_rcas_pass_wave64_PermutationInfo, tableIndex);
+        }
+    } else {
+
+        if (is16bit) {
+
+            const int32_t tableIndex = g_ffx_fsr1_rcas_pass_16bit_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_fsr1_rcas_pass_16bit_PermutationInfo, tableIndex);
+        } else {
+
+            const int32_t tableIndex = g_ffx_fsr1_rcas_pass_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_fsr1_rcas_pass_PermutationInfo, tableIndex);
+        }
+    }
 }
 
 FfxErrorCode fsr1GetPermutationBlobByIndex(
@@ -143,13 +125,6 @@ FfxErrorCode fsr1GetPermutationBlobByIndex(
         {
             FfxShaderBlob blob = fsr1GetEasuPassPermutationBlobByIndex(permutationOptions, isWave64, is16bit);
             memcpy(outBlob, &blob, sizeof(FfxShaderBlob));
-
-            if (passId == FFX_FSR1_PASS_EASU_RCAS)
-            {
-                static const char* boundUAVTextureNames[] = { "rw_internal_upscaled_color" };
-                outBlob->boundUAVTextureNames = boundUAVTextureNames;
-            }
-
             return FFX_OK;
         }
 
@@ -166,7 +141,7 @@ FfxErrorCode fsr1GetPermutationBlobByIndex(
     }
 
     // return an empty blob
-    memset(&outBlob, 0, sizeof(FfxShaderBlob));
+    memset(outBlob, 0, sizeof(FfxShaderBlob));
     return FFX_OK;
 }
 

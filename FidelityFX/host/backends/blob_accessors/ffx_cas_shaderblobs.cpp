@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,73 +20,68 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 #include <FidelityFX/host/ffx_util.h>
 #include "ffx_cas_shaderblobs.h"
 #include "cas/ffx_cas_private.h"
 
-#include "permutations/ffx_cas_sharpen_pass_permutations.h"
+#include <ffx_cas_sharpen_pass_permutations.h>
 
-#include "permutations/ffx_cas_sharpen_pass_16bit_permutations.h"
+#include <ffx_cas_sharpen_pass_wave64_permutations.h>
+
+#include <ffx_cas_sharpen_pass_16bit_permutations.h>
+
+#include <ffx_cas_sharpen_pass_wave64_16bit_permutations.h>
 
 #include <string.h>  // for memset
 
+#if defined(POPULATE_PERMUTATION_KEY)
+#undef POPULATE_PERMUTATION_KEY
+#endif  // #if defined(POPULATE_PERMUTATION_KEY)
+#define POPULATE_PERMUTATION_KEY(options, key)                                                     \
+key.index = 0;                                                                                     \
+key.FFX_CAS_OPTION_SHARPEN_ONLY = FFX_CONTAINS_FLAG(options, CAS_SHADER_PERMUTATION_SHARPEN_ONLY); \
+if (FFX_CONTAINS_FLAG(options, CAS_SHADER_PERMUTATION_COLOR_SPACE_LINEAR))                         \
+    key.FFX_CAS_COLOR_SPACE_CONVERSION = 0;                                                        \
+else if (FFX_CONTAINS_FLAG(options, CAS_SHADER_PERMUTATION_COLOR_SPACE_GAMMA20))                   \
+    key.FFX_CAS_COLOR_SPACE_CONVERSION = 1;                                                        \
+else if (FFX_CONTAINS_FLAG(options, CAS_SHADER_PERMUTATION_COLOR_SPACE_GAMMA22))                   \
+    key.FFX_CAS_COLOR_SPACE_CONVERSION = 2;                                                        \
+else if (FFX_CONTAINS_FLAG(options, CAS_SHADER_PERMUTATION_COLOR_SPACE_SRGB_OUTPUT))               \
+    key.FFX_CAS_COLOR_SPACE_CONVERSION = 3;                                                        \
+else if (FFX_CONTAINS_FLAG(options, CAS_SHADER_PERMUTATION_COLOR_SPACE_SRGB_INPUT_OUTPUT))         \
+    key.FFX_CAS_COLOR_SPACE_CONVERSION = 4;
+
 static FfxShaderBlob casGetSharpenPassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
-    int SHARPEN_ONLY = FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_SHARPEN_ONLY);
-    int SPACE_CONVERSION = 0;
-    if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_LINEAR))
-        SPACE_CONVERSION = 0;
-    else if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_GAMMA20))
-        SPACE_CONVERSION = 1;
-    else if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_GAMMA22))
-        SPACE_CONVERSION = 2;
-    else if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_SRGB_OUTPUT))
-        SPACE_CONVERSION = 3;
-    else if (FFX_CONTAINS_FLAG(permutationOptions, CAS_SHADER_PERMUTATION_COLOR_SPACE_SRGB_INPUT_OUTPUT))
-        SPACE_CONVERSION = 4;
+    ffx_cas_sharpen_pass_PermutationKey key;
+    POPULATE_PERMUTATION_KEY(permutationOptions, key);
+
+    if (isWave64)
+    {
+        if (is16bit)
+        {
+            const int32_t tableIndex = g_ffx_cas_sharpen_pass_wave64_16bit_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_cas_sharpen_pass_wave64_16bit_PermutationInfo, tableIndex);
+        }
+        else
+        {
+            const int32_t tableIndex = g_ffx_cas_sharpen_pass_wave64_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_cas_sharpen_pass_wave64_PermutationInfo, tableIndex);
+        }
+    }
     else
-        FFX_ASSERT_FAIL("Unknown color-space permutation.");
-
-    // Name                                 Type  Format         Dim      HLSL Bind  Count
-    // ------------------------------ ---------- ------- ----------- -------------- ------
-    // r_input_color                     texture  float4          2d             t0      1 
-    // rw_output_color                       UAV  float4          2d             u0      1 
-    // cbCAS                             cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbCAS" };
-    static const uint32_t boundConstantBuffers[] = { 0 };
-    static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundSRVTextureNames[] = { "r_input_color" };
-    static const uint32_t boundSRVTextures[] = { 0 };
-    static const uint32_t boundSRVTextureCounts[] = { 1 };
-    static const char* boundUAVTextureNames[] = { "rw_output_color" };
-    static const uint32_t boundUAVTextures[] = { 0 };
-    static const uint32_t boundUAVTextureCounts[] = { 1 };
-
-    FfxShaderBlob blob = {
-        is16bit ? g_ffx_cas_sharpen_pass_16bit_permutations[SHARPEN_ONLY][SPACE_CONVERSION].data
-                : g_ffx_cas_sharpen_pass_permutations[SHARPEN_ONLY][SPACE_CONVERSION].data,
-        is16bit ? g_ffx_cas_sharpen_pass_16bit_permutations[SHARPEN_ONLY][SPACE_CONVERSION].size
-                : g_ffx_cas_sharpen_pass_permutations[SHARPEN_ONLY][SPACE_CONVERSION].size,
-        __crt_countof(boundConstantBufferNames),
-        __crt_countof(boundSRVTextureNames),
-        __crt_countof(boundUAVTextureNames),
-        0,
-        0,
-        0,
-        0,
-        boundConstantBufferNames,
-        boundConstantBuffers,
-        boundConstantBufferCounts,
-        boundSRVTextureNames,
-        boundSRVTextures,
-        boundSRVTextureCounts,
-        boundUAVTextureNames,
-        boundUAVTextures,
-        boundUAVTextureCounts,
-    };
-
-    return blob;
+    {
+        if (is16bit)
+        {
+            const int32_t tableIndex = g_ffx_cas_sharpen_pass_16bit_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_cas_sharpen_pass_16bit_PermutationInfo, tableIndex);
+        }
+        else
+        {
+            const int32_t tableIndex = g_ffx_cas_sharpen_pass_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_cas_sharpen_pass_PermutationInfo, tableIndex);
+        }
+    }
 }
 
 FfxErrorCode casGetPermutationBlobByIndex(FfxCasPass passId, uint32_t permutationOptions, FfxShaderBlob* outBlob)
