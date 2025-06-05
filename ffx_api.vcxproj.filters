@@ -437,6 +437,9 @@
     <ClCompile Include="ffx-api\src\validation.cpp">
       <Filter>ffx-api\src</Filter>
     </ClCompile>
+    <ClCompile Include="FidelityFX\host\shared\ffx_message.cpp">
+      <Filter>FidelityFX\host\shared</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FidelityFX\host\backends\hlsl\fsr3upscaler\ffx_fsr3upscaler_accumulate_pass.hlsl">

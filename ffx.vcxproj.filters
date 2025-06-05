@@ -71,5 +71,8 @@
     <ClCompile Include="DXBC\md5.c">
       <Filter>DXBC</Filter>
     </ClCompile>
+    <ClCompile Include="FidelityFX\host\shared\ffx_message.cpp">
+      <Filter>FidelityFX\host\shared</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
