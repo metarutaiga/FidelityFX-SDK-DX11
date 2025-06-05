@@ -336,6 +336,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FFX_FSR3;FFX_GCC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="FidelityFX\host\shared\ffx_assert.cpp" />
+    <ClCompile Include="FidelityFX\host\shared\ffx_message.cpp" />
     <ClCompile Include="FidelityFX\host\shared\ffx_object_management.cpp" />
   </ItemGroup>
   <ItemGroup>

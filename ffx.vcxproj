@@ -160,6 +160,7 @@
     <ClCompile Include="DXBC\DXBCChecksum.c" />
     <ClCompile Include="DXBC\md5.c" />
     <ClCompile Include="FidelityFX\host\shared\ffx_assert.cpp" />
+    <ClCompile Include="FidelityFX\host\shared\ffx_message.cpp" />
     <ClCompile Include="FidelityFX\host\shared\ffx_object_management.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
