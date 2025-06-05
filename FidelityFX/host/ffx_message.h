@@ -22,23 +22,42 @@
 
 #pragma once
 
-#include "../ffx_shader_blobs.h"
-#include <FidelityFX/host/ffx_fsr2.h>
-#include <stdint.h>
+#include <FidelityFX/host/ffx_types.h>
 
-#if defined(__cplusplus)
+#ifdef __cplusplus
 extern "C" {
-#endif // #if defined(__cplusplus)
+#endif  // #ifdef __cplusplus
 
-// Get a DX12 shader blob for the specified pass and permutation index.
-FfxErrorCode fsr2GetPermutationBlobByIndex(
-    FfxFsr2Pass passId,
-    uint32_t permutationOptions,
-    FfxShaderBlob* outBlob);
+/// @defgroup Messages Messages
+/// Messages used by FidelityFX SDK functions
+/// 
+/// @ingroup ffxHost
 
-// Check is Wave64 is requested on this permutation
-FfxErrorCode fsr2IsWave64(uint32_t permutationOptions, bool& isWave64);
+/// Provides the ability to set a callback for print messages.
+///
+/// @param [in] callback                The callback function that will receive assert messages.
+/// 
+/// @ingroup Messages
+FFX_API void ffxSetPrintMessageCallback(ffxMessageCallback callback, uint32_t debugLevel);
 
-#if defined(__cplusplus)
+/// Function to print a message.
+///
+/// @param [in] type                    See FfxMsgType
+/// @param [in] message                 The message to print.
+///
+/// @ingroup Messages
+FFX_API void ffxPrintMessage(uint32_t type, const wchar_t* message);
+
+/// Macro to print message
+/// by calling application registered callback,
+/// otherwise to debugger's TTY
+/// 
+/// @ingroup Messages
+#define FFX_PRINT_MESSAGE( type, msg) \
+    do                                \
+    {                                 \
+        ffxPrintMessage( type, msg);  \
+    } while (0)
+#ifdef __cplusplus
 }
-#endif // #if defined(__cplusplus)
+#endif  // #ifdef __cplusplus

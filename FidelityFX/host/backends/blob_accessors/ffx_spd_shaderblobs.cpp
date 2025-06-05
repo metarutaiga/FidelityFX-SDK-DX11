@@ -1,16 +1,17 @@
 // This file is part of the FidelityFX SDK.
-// 
-// Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+//
+// Copyright (C) 2024 Advanced Micro Devices, Inc.
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation files(the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions :
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,80 +20,68 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 #include <FidelityFX/host/ffx_util.h>
 #include "ffx_spd_shaderblobs.h"
 #include "spd/ffx_spd_private.h"
 
-#include "permutations/ffx_spd_downsample_pass_permutations.h"
-#include "permutations/ffx_spd_downsample_pass_16bit_permutations.h"
+#include <ffx_spd_downsample_pass_permutations.h>
+#include <ffx_spd_downsample_pass_wave64_permutations.h>
+#include <ffx_spd_downsample_pass_16bit_permutations.h>
+#include <ffx_spd_downsample_pass_wave64_16bit_permutations.h>
 
 #include <string.h> // for memset
 
+#if defined(POPULATE_PERMUTATION_KEY)
+#undef POPULATE_PERMUTATION_KEY
+#endif // #if defined(POPULATE_PERMUTATION_KEY)
+
+#define POPULATE_PERMUTATION_KEY(options, key)                                                                              \
+key.index = 0;                                                                                                              \
+key.FFX_SPD_OPTION_LINEAR_SAMPLE = FFX_CONTAINS_FLAG(options, SPD_SHADER_PERMUTATION_LINEAR_SAMPLE);                            \
+key.FFX_SPD_OPTION_WAVE_INTEROP_LDS = FFX_CONTAINS_FLAG(options, SPD_SHADER_PERMUTATION_WAVE_INTEROP_LDS);
+
 static FfxShaderBlob spdGetDownsamplePassPermutationBlobByIndex(uint32_t permutationOptions, bool isWave64, bool is16bit)
 {
-    int LINEAR_SAMPLE = FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_LINEAR_SAMPLE);
-    int WAVE_INTEROP_LDS = FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_WAVE_INTEROP_LDS);
-    int DOWNSAMPLE_FILTER = 0;
+
+    ffx_spd_downsample_pass_PermutationKey key;
+    POPULATE_PERMUTATION_KEY(permutationOptions, key);
+
     if (FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_DOWNSAMPLE_FILTER_MEAN))
-        DOWNSAMPLE_FILTER = 0;
+    {
+        key.FFX_SPD_OPTION_DOWNSAMPLE_FILTER = 0;
+    }
     else if (FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_DOWNSAMPLE_FILTER_MIN))
-        DOWNSAMPLE_FILTER = 1;
+    {
+        key.FFX_SPD_OPTION_DOWNSAMPLE_FILTER = 1;
+    }
     else if (FFX_CONTAINS_FLAG(permutationOptions, SPD_SHADER_PERMUTATION_DOWNSAMPLE_FILTER_MAX))
-        DOWNSAMPLE_FILTER = 2;
-    else
-        FFX_ASSERT_FAIL("Unknown filter.");
+    {
+        key.FFX_SPD_OPTION_DOWNSAMPLE_FILTER = 2;
+    }
 
-    // Resource Bindings:
-    //
-    // Name                                   Type  Format         Dim      HLSL Bind  Count
-    // -------------------------------- ---------- ------- ----------- -------------- ------
-    // rw_internal_global_atomic               UAV  struct         r/w             u0      1 
-    // rw_input_downsample_src_mid_mip         UAV  float4     2darray             u1      1 
-    // rw_input_downsample_src_mips[0]         UAV  float4     2darray             u2      1 
-    // rw_input_downsample_src_mips[1]         UAV  float4     2darray             u3      1 
-    // rw_input_downsample_src_mips[2]         UAV  float4     2darray             u4      1 
-    // rw_input_downsample_src_mips[3]         UAV  float4     2darray             u5      1 
-    // rw_input_downsample_src_mips[4]         UAV  float4     2darray             u6      1 
-    // rw_input_downsample_src_mips[5]         UAV  float4     2darray             u7      1 
-    // rw_input_downsample_src_mips[7]         UAV  float4     2darray             u9      1 
-    // rw_input_downsample_src_mips[8]         UAV  float4     2darray            u10      1 
-    // rw_input_downsample_src_mips[9]         UAV  float4     2darray            u11      1 
-    // rw_input_downsample_src_mips[10]        UAV  float4     2darray            u12      1 
-    // rw_input_downsample_src_mips[11]        UAV  float4     2darray            u13      1 
-    // rw_input_downsample_src_mips[12]        UAV  float4     2darray            u14      1 
-    // cbSPD                               cbuffer      NA          NA            cb0      1 
-    static const char* boundConstantBufferNames[] = { "cbSPD" };
-    static const uint32_t boundConstantBuffers[] = { 0 };
-    static const uint32_t boundConstantBufferCounts[] = { 1 };
-    static const char* boundUAVTextureNames[] = { "rw_internal_global_atomic", "rw_input_downsample_src_mid_mip", "rw_input_downsample_src_mips" };
-    static const uint32_t boundUAVTextures[] = { 0, 1, 2 };
-    static const uint32_t boundUAVTextureCounts[] = { 1, 1, 13 };
+    if (isWave64) {
 
-    FfxShaderBlob blob = {
-        is16bit ? g_ffx_spd_downsample_pass_16bit_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].data
-                : g_ffx_spd_downsample_pass_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].data,
-        is16bit ? g_ffx_spd_downsample_pass_16bit_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].size
-                : g_ffx_spd_downsample_pass_permutations[LINEAR_SAMPLE][WAVE_INTEROP_LDS][DOWNSAMPLE_FILTER].size,
-        __crt_countof(boundConstantBufferNames),
-        0,
-        __crt_countof(boundUAVTextureNames),
-        0,
-        0,
-        0,
-        0,
-        boundConstantBufferNames,
-        boundConstantBuffers,
-        boundConstantBufferCounts,
-        nullptr,
-        nullptr,
-        nullptr,
-        boundUAVTextureNames,
-        boundUAVTextures,
-        boundUAVTextureCounts,
-    };
+        if (is16bit) {
 
-    return blob;
+            const int32_t tableIndex = g_ffx_spd_downsample_pass_wave64_16bit_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_spd_downsample_pass_wave64_16bit_PermutationInfo, tableIndex);
+        } else {
+
+            const int32_t tableIndex = g_ffx_spd_downsample_pass_wave64_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_spd_downsample_pass_wave64_PermutationInfo, tableIndex);
+        }
+    } else {
+
+        if (is16bit) {
+
+            const int32_t tableIndex = g_ffx_spd_downsample_pass_16bit_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_spd_downsample_pass_16bit_PermutationInfo, tableIndex);
+        } else {
+
+            const int32_t tableIndex = g_ffx_spd_downsample_pass_IndirectionTable[key.index];
+            return POPULATE_SHADER_BLOB_FFX(g_ffx_spd_downsample_pass_PermutationInfo, tableIndex);
+        }
+    }
 }
 
 FfxErrorCode spdGetPermutationBlobByIndex(
